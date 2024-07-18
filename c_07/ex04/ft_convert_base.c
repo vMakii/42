@@ -6,7 +6,7 @@
 /*   By: mivogel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 19:04:12 by mivogel           #+#    #+#             */
-/*   Updated: 2024/07/09 19:26:06 by mivogel          ###   ########.fr       */
+/*   Updated: 2024/07/16 15:58:52 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ int	ft_check_base(char *base)
 				return (0);
 			j++;
 		}
-		if (base[i] == '+' || base[i] == '-')
+		if ((base[i] == '+' || base[i] == '-') || base[i] == 32
+			|| (base[i] >= 9 && base[i] <= 13))
 			return (0);
 		i++;
 	}

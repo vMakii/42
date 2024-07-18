@@ -6,7 +6,7 @@
 /*   By: mivogel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 19:26:30 by mivogel           #+#    #+#             */
-/*   Updated: 2024/07/14 14:37:47 by mivogel          ###   ########.fr       */
+/*   Updated: 2024/07/18 16:42:01 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ int	ft_strlen_b(int nb, char *base)
 	}
 	else
 		n = nb;
+	if (nb == 0)
+		return (1);
 	while (n > 0)
 	{
 		count++;
@@ -83,8 +85,9 @@ char	*ft_convert_base(char *nbr, char *base_from, char *base_to)
 }
 /*
 #include <stdio.h>
-int main(void)
+int main(int ac, char *av[])
 {
-	char *s = ft_convert_base("   \t -42", "0123456789", "01");
+	(void)ac;
+	char *s = ft_convert_base(av[1], av[2], av[3]);
 	printf("%s", s);
 }*/

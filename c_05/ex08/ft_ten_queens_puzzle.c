@@ -75,3 +75,11 @@ int	ft_ten_queens_puzzle(void)
 	solve(grid, 0, &sol);
 	return (sol);
 }
+/*
+#include <stdio.h>
+
+int main() {
+	int num_solutions = ft_ten_queens_puzzle();
+	printf("Number of solutions to the Ten Queens Puzzle: %d\n", num_solutions);
+	return 0;
+}*/

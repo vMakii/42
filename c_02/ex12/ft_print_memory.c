@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_print_memory.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/01 20:22:50 by mivogel           #+#    #+#             */
+/*   Updated: 2024/08/01 20:24:26 by mivogel          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <unistd.h>
 
 void	ft_putchar(char c, int size)
@@ -97,8 +109,8 @@ void	*ft_print_memory(void *addr, unsigned int size)
 /*
 int	main(void)
 {
-	char data[] = "Bonjour les aminches\t\n\tc\t est fou.tout.ce qu on peut faire avec\t\n\tprint_memory\n\n\n\tlol.lol\n ";
+	char data[] = "Bonjour les aminches\t\n\tc\t est fou.tout.ce qu on peut
+	faire avec\t\n\tprint_memory\n\n\n\tlol.lol\n ";
 	ft_print_memory(data, sizeof(data));
 	return (0);
-}
-*/
+}*/

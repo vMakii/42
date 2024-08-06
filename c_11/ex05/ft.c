@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 13:50:01 by mivogel           #+#    #+#             */
-/*   Updated: 2024/08/06 15:52:52 by mivogel          ###   ########.fr       */
+/*   Updated: 2024/08/06 16:12:06 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	ft_putnbr(int nb)
 
 	n = nb;
 	if (n < 0)
-	{	
+	{
 		write(1, "-", 1);
 		n = -n;
 	}
@@ -62,7 +62,7 @@ int	ft_putnbr(int nb)
 		ft_putnbr(nb / 10);
 		ft_putnbr(nb % 10);
 	}
-	else if (n < 10) 
+	else if (n < 10)
 	{
 		c = n + '0';
 		write(1, &c, 1);

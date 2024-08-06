@@ -6,11 +6,12 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 13:49:18 by mivogel           #+#    #+#             */
-/*   Updated: 2024/08/06 16:07:41 by mivogel          ###   ########.fr       */
+/*   Updated: 2024/08/06 16:11:31 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
+
 int	ft_error(char *op);
 int	ft_putnbr(int nb);
 int	ft_atoi(char *str);
@@ -37,7 +38,7 @@ int	calc(char *nb1, char *op, char *nb2)
 	return (ft_putnbr(0));
 }
 
-int main(int ac, char *av[])
+int	main(int ac, char *av[])
 {
 	if (ac == 4)
 	{

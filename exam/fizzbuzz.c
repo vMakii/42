@@ -6,7 +6,7 @@
 /*   By: mivogel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 11:46:53 by mivogel           #+#    #+#             */
-/*   Updated: 2024/07/05 12:09:11 by mivogel          ###   ########.fr       */
+/*   Updated: 2024/10/03 18:00:50 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,10 @@
 void	putnbr(int n)
 {
 	char	r;
+
 	if (n < 10)
 	{
-		r = n+'0';
+		r = n + '0';
 		write(1, &r, 1);
 	}
 	else
@@ -27,7 +28,7 @@ void	putnbr(int n)
 	}
 }
 
-int	main()
+int	main(void)
 {
 	int	i;
 
@@ -36,11 +37,11 @@ int	main()
 	{
 		if (i % 3 == 0)
 		{
-			if(i % 5 == 0)
+			if (i % 5 == 0)
 			{
 				write(1, "fizzbuzz", 8);
 				write(1, "\n", 1);
-			}	
+			}
 			else
 			{
 				write(1, "fizz", 4);
@@ -59,5 +60,5 @@ int	main()
 		}
 		i++;
 	}
-	return 0;
+	return (0);
 }

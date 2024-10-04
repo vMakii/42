@@ -1,21 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_list_foreach.c                                  :+:      :+:    :+:   */
+/*   ft_list_merge.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/21 14:33:59 by mivogel           #+#    #+#             */
-/*   Updated: 2024/10/04 12:34:56 by mivogel          ###   ########.fr       */
+/*   Created: 2024/10/04 15:07:33 by mivogel           #+#    #+#             */
+/*   Updated: 2024/10/04 15:10:25 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_list.h"
 
-void	ft_list_foreach(t_list *begin_list, void (*f)(void *))
+void	ft_list_merge(t_list **begin_list, t_list *begin_list2)
 {
-	if (begin_list)
-		return ;
-	f(begin_list->data);
-	ft_list_foreach(begin_list->next, f);
+	t_list	*t_list;
+
+	if (begin_list == 0 || *begin_list == 0)
+		*begin_list = begin_list2;
+	else
+	{
+		list = *begin_list;
+		while (list->next)
+			list = list->next;
+		list->next = begin_list2;
+	}
 }

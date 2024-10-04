@@ -1,21 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_list_foreach.c                                  :+:      :+:    :+:   */
+/*   ft_sorted_list_insert.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/21 14:33:59 by mivogel           #+#    #+#             */
-/*   Updated: 2024/10/04 12:34:56 by mivogel          ###   ########.fr       */
+/*   Created: 2024/10/04 16:25:49 by mivogel           #+#    #+#             */
+/*   Updated: 2024/10/04 18:40:41 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_list.h"
 
-void	ft_list_foreach(t_list *begin_list, void (*f)(void *))
+t_list	*ft_create_elem(void *data)
 {
-	if (begin_list)
-		return ;
-	f(begin_list->data);
-	ft_list_foreach(begin_list->next, f);
+	t_list	*elem;
+
+	elem = malloc(sizeof(t_list));
+	if (elem)
+	{
+		elem->data = data;
+		elem->next = NULL;
+	}
+	return (elem);
+}
+
+void	ft_sorted_list_insert(t_list **begin_list, void *data)
+{
 }

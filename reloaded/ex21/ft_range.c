@@ -1,17 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_div_mod.c                                       :+:      :+:    :+:   */
+/*   ft_range.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/04 21:50:13 by mivogel           #+#    #+#             */
-/*   Updated: 2024/11/06 10:31:56 by mivogel          ###   ########.fr       */
+/*   Created: 2024/11/05 13:43:34 by mivogel           #+#    #+#             */
+/*   Updated: 2024/11/05 14:19:09 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	ft_div_mod(int a, int b, int *div, int *mod)
+#include <stdlib.h>
+
+int	*ft_range(int min, int max)
 {
-	*div = a / b;
-	*mod = a % b;
+	int	i;
+	int	*tab;
+
+	i = 0;
+	if (min >= max)
+	{
+		tab = NULL;
+		return (0);
+	}
+	tab = malloc(sizeof(int) * (max - min));
+	if (!tab)
+		return (0);
+	while (min < max)
+	{
+		tab[i] = min;
+		i++;
+		min++;
+	}
+	return (tab);
 }

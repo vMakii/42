@@ -6,25 +6,28 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 22:14:22 by mivogel           #+#    #+#             */
-/*   Updated: 2024/11/04 22:15:11 by mivogel          ###   ########.fr       */
+/*   Updated: 2024/11/06 12:56:22 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	ft_iterative_factorial(int nb)
 {
-	int	i;
 	int	res;
 
-	i = 1;
 	res = 1;
-	if (nb == 0)
-		return (res);
-	if (nb < 0)
+	if (nb < 0 || nb > 12)
 		return (0);
-	while (i <= nb)
+	while (nb > 1)
 	{
-		res *= i;
-		i++;
+		res *= nb;
+		nb--;
 	}
 	return (res);
 }
+// #include <stdio.h>
+//
+// int main(){
+// 	int n;
+// 	n = ft_iterative_factorial(13);
+// 	printf("%d", n);
+// }

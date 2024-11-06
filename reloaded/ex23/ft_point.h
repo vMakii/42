@@ -1,17 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_div_mod.c                                       :+:      :+:    :+:   */
+/*   ft_point.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/04 21:50:13 by mivogel           #+#    #+#             */
-/*   Updated: 2024/11/06 10:31:56 by mivogel          ###   ########.fr       */
+/*   Created: 2024/11/05 14:42:23 by mivogel           #+#    #+#             */
+/*   Updated: 2024/11/05 14:43:15 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	ft_div_mod(int a, int b, int *div, int *mod)
-{
-	*div = a / b;
-	*mod = a % b;
-}
+#ifndef FT_POINT_H
+# define FT_POINT_H
+
+typedef struct s_point {
+	int	x;
+	int	y;
+}	t_point;
+
+#endif

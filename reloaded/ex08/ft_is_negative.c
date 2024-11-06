@@ -1,17 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_div_mod.c                                       :+:      :+:    :+:   */
+/*   ft_is_negative.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/04 21:50:13 by mivogel           #+#    #+#             */
-/*   Updated: 2024/11/06 10:31:56 by mivogel          ###   ########.fr       */
+/*   Created: 2024/11/04 19:08:59 by mivogel           #+#    #+#             */
+/*   Updated: 2024/11/06 11:34:38 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	ft_div_mod(int a, int b, int *div, int *mod)
+void	ft_putchar(char c);
+
+void	ft_is_negative(int n)
 {
-	*div = a / b;
-	*mod = a % b;
+	if (n >= 0)
+		ft_putchar('P');
+	else
+		ft_putchar('N');
 }

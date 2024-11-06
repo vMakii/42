@@ -1,17 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_div_mod.c                                       :+:      :+:    :+:   */
+/*   ft_print_numbers.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/04 21:50:13 by mivogel           #+#    #+#             */
-/*   Updated: 2024/11/06 10:31:56 by mivogel          ###   ########.fr       */
+/*   Created: 2024/11/04 18:55:01 by mivogel           #+#    #+#             */
+/*   Updated: 2024/11/05 12:56:34 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	ft_div_mod(int a, int b, int *div, int *mod)
+void	ft_putchar(char c);
+
+void	ft_print_numbers(void)
 {
-	*div = a / b;
-	*mod = a % b;
+	char	c;
+
+	c = '0';
+	while (c <= '9')
+	{
+		ft_putchar(c);
+		c++;
+	}
 }

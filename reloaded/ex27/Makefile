@@ -6,7 +6,7 @@
 #    By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/05 17:40:24 by mivogel           #+#    #+#              #
-#    Updated: 2024/11/05 18:53:17 by mivogel          ###   ########.fr        #
+#    Updated: 2024/11/06 10:14:38 by mivogel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,8 +20,8 @@ CC = gcc
 all: ${NAME}
 
 ${NAME}:	${OBJS}
-	${GCC} ${FLAGS)} $^ -o $@
-
+	${CC} ${FLAGS)} $^ -o $@
+ 
 clean:
 	rm -f ${OBJS}
 

@@ -1,17 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_div_mod.c                                       :+:      :+:    :+:   */
+/*   ft_recursive_factorial.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/04 21:50:13 by mivogel           #+#    #+#             */
-/*   Updated: 2024/11/06 10:31:56 by mivogel          ###   ########.fr       */
+/*   Created: 2024/11/05 10:02:15 by mivogel           #+#    #+#             */
+/*   Updated: 2024/11/06 12:56:06 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	ft_div_mod(int a, int b, int *div, int *mod)
+int	ft_recursive_factorial(int nb)
 {
-	*div = a / b;
-	*mod = a % b;
+	if (nb < 0 || nb > 12)
+		return (0);
+	else if (nb == 0 || nb == 1)
+		return (1);
+	else
+	{
+		return (nb * ft_recursive_factorial(nb - 1));
+	}
 }
+//
+// #include <stdio.h>
+//
+// int main(){
+// 	int n;
+// 	n = ft_recursive_factorial(14);
+// 	printf("%d", n);
+// }

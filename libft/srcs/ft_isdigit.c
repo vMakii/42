@@ -6,21 +6,13 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 15:01:16 by mivogel           #+#    #+#             */
-/*   Updated: 2024/11/06 16:18:04 by mivogel          ###   ########.fr       */
+/*   Updated: 2024/11/06 17:47:02 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_isdigit(char c)
+#include "libft.h"
+
+int	ft_isdigit(int c)
 {
 	return (c >= '0' && c <= '9');
-}
-
-#include <stdio.h>
-
-int	main(void)
-{
-	char	c;
-
-	c = '9';
-	printf("%d", ft_isdigit(c));
 }

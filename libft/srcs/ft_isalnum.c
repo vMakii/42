@@ -6,22 +6,14 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 15:17:42 by mivogel           #+#    #+#             */
-/*   Updated: 2024/11/06 16:26:19 by mivogel          ###   ########.fr       */
+/*   Updated: 2024/11/06 17:46:52 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_isalnum(char c)
+#include "libft.h"
+
+int	ft_isalnum(int c)
 {
 	return ((c >= '0' && c <= '9') || (c >= 'a' && c <= 'z') || (c >= 'A'
 			&& c <= 'Z'));
-}
-
-#include <stdio.h>
-
-int	main(void)
-{
-	char	c;
-
-	c = 'a';
-	printf("%d", ft_isalnum(c));
 }

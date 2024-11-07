@@ -6,21 +6,13 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 16:47:35 by mivogel           #+#    #+#             */
-/*   Updated: 2024/11/06 16:56:08 by mivogel          ###   ########.fr       */
+/*   Updated: 2024/11/06 17:38:43 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 int	ft_isprint(int c)
 {
 	return (c > 31 && c <= 127);
-}
-
-#include <stdio.h>
-
-int	main(void)
-{
-	char	c;
-
-	c = 'Q';
-	printf("%d", ft_isprint(c));
 }

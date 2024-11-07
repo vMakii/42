@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 17:40:58 by mivogel           #+#    #+#             */
-/*   Updated: 2024/11/07 10:50:42 by mivogel          ###   ########.fr       */
+/*   Updated: 2024/11/07 11:57:55 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ char	*ft_strchr(const char *str, int c);
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
 char	*ft_strrchr(const char *str, int c);
 size_t	ft_strlen(const char *str);
+void	*memchr(const void *block, int c, size_t n);
 void	*memset(void *pointer, int value, size_t count);
 
 #endif

@@ -1,29 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/07 09:23:48 by mivogel           #+#    #+#             */
-/*   Updated: 2024/11/08 09:32:53 by mivogel          ###   ########.fr       */
+/*   Created: 2024/11/08 10:35:06 by mivogel           #+#    #+#             */
+/*   Updated: 2024/11/08 10:41:47 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strrchr(const char *str, int c)
+void	*ft_calloc(size_t n, size_t size)
 {
-	int	i;
+	void	*ptr;
+	size_t	len;
 
-	if (!str)
+	len = n * size;
+	ptr = (void *)malloc(len);
+	if (!ptr)
 		return (NULL);
-	i = ft_strlen(str);
-	while (i >= 0)
-	{
-		if (str[i] == (char)c)
-			return ((char *)s + i);
-		i--;
-	}
-	return (NULL);
+	ft_memset(ptr, 0, len);
+	return (ptr);
 }

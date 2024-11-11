@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 10:45:59 by mivogel           #+#    #+#             */
-/*   Updated: 2024/11/11 11:20:46 by mivogel          ###   ########.fr       */
+/*   Updated: 2024/11/11 11:27:02 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@ static int	ft_get_size(int n)
 	return (i);
 }
 
-static void	ft_fill(int size, int sign, int n, char *str)
+static void	ft_fill(int size, int sign, long nb, char *str)
 {
 	while (size > sign)
 	{
-		str[size - 1] = n % 10 - '0';
-		n /= 10;
+		str[size - 1] = nb % 10 + '0';
+		nb /= 10;
 		size--;
 	}
 }
@@ -57,19 +57,7 @@ char	*ft_itoa(int n)
 	}
 	else
 		nb = n;
-	str[size + 1] = '\0';
-	ft_fill(size, sign, n, str);
+	str[size] = '\0';
+	ft_fill(size, sign, nb, str);
 	return (str);
-}
-
-#include <stdio.h>
-
-int	main(void)
-{
-	int		n;
-	char	*s;
-
-	n = 2;
-	s = ft_itoa(n);
-	printf("%s", s);
 }

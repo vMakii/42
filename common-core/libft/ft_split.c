@@ -6,13 +6,13 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 09:08:24 by mivogel           #+#    #+#             */
-/*   Updated: 2024/11/11 10:45:13 by mivogel          ###   ########.fr       */
+/*   Updated: 2024/11/11 11:44:38 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_count_word(char const *s, char sep)
+static int	ft_count_word(char const *s, char sep)
 {
 	int	i;
 
@@ -29,7 +29,7 @@ int	ft_count_word(char const *s, char sep)
 	return (i);
 }
 
-void	ft_set(char **tab, char const *s, char sep)
+static void	ft_set(char **tab, char const *s, char sep)
 {
 	char		**tmp_tab;
 	char const	*tmp_s;

@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 10:45:59 by mivogel           #+#    #+#             */
-/*   Updated: 2024/11/11 11:27:02 by mivogel          ###   ########.fr       */
+/*   Updated: 2024/11/11 16:38:00 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,37 +27,34 @@ static int	ft_get_size(int n)
 	return (i);
 }
 
-static void	ft_fill(int size, int sign, long nb, char *str)
+static void	ft_fill(char *str, long nb, int len)
 {
-	while (size > sign)
+	while (nb > 0)
 	{
-		str[size - 1] = nb % 10 + '0';
+		str[len--] = nb % 10 + '0';
 		nb /= 10;
-		size--;
 	}
 }
 
 char	*ft_itoa(int n)
 {
-	int		size;
-	int		sign;
+	int		len;
 	char	*str;
 	long	nb;
 
-	size = ft_get_size(n);
-	sign = 0;
-	str = (char *)malloc(sizeof(char) * (size + 1));
+	nb = (long)n;
+	len = ft_get_size(n);
+	str = (char *)malloc(sizeof(char) * (len + 1));
 	if (!str)
 		return (NULL);
-	if (n < 0)
+	str[len--] = '\0';
+	if (nb == 0)
+		str[0] = '0';
+	if (nb < 0)
 	{
-		nb = -n;
-		sign++;
 		str[0] = '-';
+		nb = -nb;
 	}
-	else
-		nb = n;
-	str[size] = '\0';
-	ft_fill(size, sign, nb, str);
+	ft_fill(str, nb, len);
 	return (str);
 }

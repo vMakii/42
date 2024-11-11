@@ -6,17 +6,20 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 10:35:06 by mivogel           #+#    #+#             */
-/*   Updated: 2024/11/08 10:41:47 by mivogel          ###   ########.fr       */
+/*   Updated: 2024/11/11 15:25:59 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <limits.h>
 
 void	*ft_calloc(size_t n, size_t size)
 {
 	void	*ptr;
 	size_t	len;
 
+	if (n && size > (size_t)-1 / n)
+		return (NULL);
 	len = n * size;
 	ptr = (void *)malloc(len);
 	if (!ptr)

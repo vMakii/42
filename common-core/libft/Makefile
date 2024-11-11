@@ -13,7 +13,7 @@ CFLAGS = -Wall -Wextra -Werror -I.
 
 all: ${NAME}
 
-${NAME}: ${OBJS}
+$(NAME): ${OBJS}
 	ar rcs $@ $^
 
 clean:

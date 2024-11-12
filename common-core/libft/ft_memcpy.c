@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 14:32:57 by mivogel           #+#    #+#             */
-/*   Updated: 2024/11/12 11:07:36 by mivogel          ###   ########.fr       */
+/*   Updated: 2024/11/12 15:40:11 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 	size_t	i;
 
 	i = 0;
+	if (!dst && !src)
+		return (NULL);
 	while (i < n)
 	{
 		*(unsigned char *)(dst + i) = *(unsigned char *)(src + i);

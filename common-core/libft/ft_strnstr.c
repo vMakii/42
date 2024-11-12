@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 09:57:30 by mivogel           #+#    #+#             */
-/*   Updated: 2024/11/08 10:45:55 by mivogel          ###   ########.fr       */
+/*   Updated: 2024/11/12 15:38:17 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ char	*ft_strnstr(const char *str, const char *to_find, size_t n)
 	size_t	i;
 	size_t	j;
 
-	if (!str || !to_find)
-		return (NULL);
-	if (!to_find || !to_find[0])
+	if (!to_find[0])
 		return ((char *)str);
+	if (!n)
+		return (0);
 	i = 0;
 	while (str[i] && i < n)
 	{

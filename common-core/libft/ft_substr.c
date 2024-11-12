@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 12:37:33 by mivogel           #+#    #+#             */
-/*   Updated: 2024/11/12 13:46:06 by mivogel          ###   ########.fr       */
+/*   Updated: 2024/11/12 14:56:55 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	size_t	lsrc;
 	char	*sub;
 
+	if (!s)
+		return (NULL);
 	lsrc = ft_strlen(s);
 	if (start >= lsrc)
 		return (ft_strdup(""));

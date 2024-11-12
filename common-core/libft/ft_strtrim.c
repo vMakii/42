@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 13:56:22 by mivogel           #+#    #+#             */
-/*   Updated: 2024/11/12 14:22:14 by mivogel          ###   ########.fr       */
+/*   Updated: 2024/11/12 14:24:35 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 char	*ft_strtrim(char const *s1, char const *set)
 {
 	char	*str;
-	size_t	i;
 	size_t	start;
 	size_t	end;
 
@@ -28,10 +27,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 	str = (char *)malloc(sizeof(char) * (end - start + 1));
 	if (!str)
 		return (NULL);
-	i = 0;
 	ft_memcpy(str, s1 + start, end - start + 1);
-	// while (start < end)
-	// 	str[i++] = s1[start++];
-	// str[i] = '\0';
+	str[end - start] = '\0';
 	return (str);
 }

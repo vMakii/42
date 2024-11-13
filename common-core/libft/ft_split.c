@@ -6,11 +6,24 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 09:08:24 by mivogel           #+#    #+#             */
-/*   Updated: 2024/11/13 13:02:37 by mivogel          ###   ########.fr       */
+/*   Updated: 2024/11/13 15:10:34 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+static void	ft_free(char **tab, int count)
+{
+	int	i;
+
+	i = 0;
+	while (i < count)
+	{
+		free(tab[i]);
+		i++;
+	}
+	free(tab);
+}
 
 static int	ft_count_word(char const *s, char sep)
 {
@@ -29,30 +42,32 @@ static int	ft_count_word(char const *s, char sep)
 	return (i);
 }
 
-static void	ft_set(char **tab, char const *s, char sep)
+static int	ft_set(char **tab, char const *s, char sep)
 {
-	char		**tmp_tab;
-	char const	*tmp_s;
+	const char	*tmp;
+	int			i;
 
-	tmp_s = s;
-	tmp_tab = tab;
-	while (*tmp_s)
+	i = 0;
+	while (*s)
 	{
 		while (*s == sep)
-			++s;
-		tmp_s = s;
-		while (*tmp_s && *tmp_s != sep)
-			++tmp_s;
-		if (*tmp_s == sep || tmp_s > s)
+			s++;
+		tmp = s;
+		while (*s && *s != sep)
+			s++;
+		if (s > tmp)
 		{
-			*tmp_tab = ft_substr(s, 0, tmp_s - s);
-			if (!tmp_tab)
-				return ;
-			s = tmp_s;
-			++tmp_tab;
+			tab[i] = ft_substr(s, 0, s - tmp);
+			if (!tab[i])
+			{
+				ft_free(tab, i);
+				return (0);
+			}
+			i++;
 		}
 	}
-	*tmp_tab = NULL;
+	tab[i] = NULL;
+	return (1);
 }
 
 char	**ft_split(char const *s, char c)
@@ -66,6 +81,7 @@ char	**ft_split(char const *s, char c)
 	tab = (char **)malloc(sizeof(char *) * (size + 1));
 	if (!tab)
 		return (NULL);
-	ft_set(tab, s, c);
+	if (!ft_set(tab, s, c))
+		return (NULL);
 	return (tab);
 }

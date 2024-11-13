@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 09:08:24 by mivogel           #+#    #+#             */
-/*   Updated: 2024/11/11 11:44:38 by mivogel          ###   ########.fr       */
+/*   Updated: 2024/11/13 13:02:37 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ static void	ft_set(char **tab, char const *s, char sep)
 		if (*tmp_s == sep || tmp_s > s)
 		{
 			*tmp_tab = ft_substr(s, 0, tmp_s - s);
+			if (!tmp_tab)
+				return ;
 			s = tmp_s;
 			++tmp_tab;
 		}

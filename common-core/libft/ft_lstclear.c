@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 17:52:05 by mivogel           #+#    #+#             */
-/*   Updated: 2024/11/13 09:53:48 by mivogel          ###   ########.fr       */
+/*   Updated: 2024/11/14 09:40:13 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	ft_lstclear(t_list **lst, void (*del)(void *))
 	while (head)
 	{
 		tmp = head->next;
-		(*del)(head->content);
+		del(head->content);
 		free(head);
 		head = tmp;
 	}

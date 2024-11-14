@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 18:01:46 by mivogel           #+#    #+#             */
-/*   Updated: 2024/11/12 12:07:32 by mivogel          ###   ########.fr       */
+/*   Updated: 2024/11/14 12:51:59 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,3 @@ char	*ft_strchr(const char *str, int c)
 		return ((char *)str + i);
 	return (NULL);
 }
-// char	*ft_strchr(const char *str, int c)
-// {
-// 	size_t	i;
-//
-// 	i = 0;
-// 	while (str[i])
-// 	{
-// 		if (str[i] == (char)c)
-// 			return ((char *)str + i);
-// 		i++;
-// 	}
-// 	if (c == 0)
-// 		return ((char *)str + i);
-// 	return (NULL);
-// }

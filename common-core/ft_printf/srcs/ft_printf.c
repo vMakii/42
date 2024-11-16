@@ -6,11 +6,11 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 10:34:04 by mivogel           #+#    #+#             */
-/*   Updated: 2024/11/14 15:06:54 by mivogel          ###   ########.fr       */
+/*   Updated: 2024/11/16 21:48:43 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../ft_printf.h"
 
 int	ft_args(va_list args, const char format)
 {

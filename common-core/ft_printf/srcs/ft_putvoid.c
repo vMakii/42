@@ -1,57 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_fun.c                                    :+:      :+:    :+:   */
+/*   ft_putvoid.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/14 11:23:50 by mivogel           #+#    #+#             */
-/*   Updated: 2024/11/16 23:09:44 by mivogel          ###   ########.fr       */
+/*   Created: 2024/11/16 21:57:02 by mivogel           #+#    #+#             */
+/*   Updated: 2024/11/16 23:13:50 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_printf.h"
 
-int	ft_putchar(char c)
-{
-	return (write(1, &c, 1));
-}
-
-int	ft_putstr(char *s)
-{
-	size_t	i;
-
-	i = 0;
-	while (s[i])
-		ft_putchar(s[i++]);
-	return (i);
-}
-
-int	ft_putnbr(int n)
+static int	ft_print_addr(unsigned long n)
 {
 	int	len;
 
 	len = 0;
-	if (n == -2147483648)
-		return (write(1, "-2147483648", 11));
-	if (n < 0)
-	{
-		len += ft_putchar('-');
-		n = -n;
-	}
-	if (n >= 10)
-		len += ft_putnbr(n / 10);
-	len += ft_putchar(n % 10 + '0');
+	if (n >= 16)
+		len += ft_print_addr(n / 16);
+	if (n > 9)
+		len += ft_putchar(n + '0');
+	else
+		len += ft_putchar(n - 10 + '0');
 	return (len);
 }
 
-int	ft_putunbr(unsigned int n)
+int	ft_putvoid(void *ptr)
 {
 	int	len;
 
 	len = 0;
-	if (n >= 10)
-		len += ft_putunbr(n / 10);
-	len += ft_putchar(n % 10 + '0');
+	if (!ptr)
+		return (putstr("(nil)"));
+	len += ft_putstr("0x");
+	len += ft_print_addr((unsigned long)ptr);
 	return (len);
 }

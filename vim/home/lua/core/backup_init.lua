@@ -7,11 +7,6 @@ g.nvchad_theme = config.ui.theme
 g.base46_cache = vim.fn.stdpath "data" .. "/nvchad/base46/"
 g.toggle_theme_icon = "   "
 g.transparency = config.ui.transparency
--- Custom
-g.user42 = "mivogel"
-g.mail42 = "mivogel@student.42.fr"
-g.c_formatter_42_set_equalprg=1
-g.c_formatter_42_format_on_save=1
 
 -------------------------------------- options ------------------------------------------
 opt.laststatus = 3 -- global statusline
@@ -21,10 +16,11 @@ opt.clipboard = "unnamedplus"
 opt.cursorline = true
 
 -- Indenting
-opt.shiftwidth = 4
+opt.expandtab = true
+opt.shiftwidth = 2
 opt.smartindent = true
-opt.tabstop = 4
-opt.softtabstop = 4
+opt.tabstop = 2
+opt.softtabstop = 2
 
 opt.fillchars = { eob = " " }
 opt.ignorecase = true
@@ -33,7 +29,6 @@ opt.mouse = "a"
 
 -- Numbers
 opt.number = true
-opt.relativenumber = true
 opt.numberwidth = 2
 opt.ruler = false
 
@@ -134,21 +129,6 @@ vim.api.nvim_create_autocmd({ "UIEnter", "BufReadPost", "BufNewFile" }, {
           require("editorconfig").config(args.buf)
         end
       end, 0)
-    end
-  end,
-})
-
-autocmd("BufReadPost", {
-  pattern = "*",
-  callback = function()
-    local line = vim.fn.line "'\""
-    if
-      line > 1
-      and line <= vim.fn.line "$"
-      and vim.bo.filetype ~= "commit"
-      and vim.fn.index({ "xxd", "gitrebase" }, vim.bo.filetype) == -1
-    then
-      vim.cmd 'normal! g`"'
     end
   end,
 })

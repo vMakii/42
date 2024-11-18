@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 21:57:02 by mivogel           #+#    #+#             */
-/*   Updated: 2024/11/16 23:13:50 by mivogel          ###   ########.fr       */
+/*   Updated: 2024/11/18 10:37:31 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	ft_putvoid(void *ptr)
 
 	len = 0;
 	if (!ptr)
-		return (putstr("(nil)"));
+		return (ft_putstr("(nil)"));
 	len += ft_putstr("0x");
 	len += ft_print_addr((unsigned long)ptr);
 	return (len);

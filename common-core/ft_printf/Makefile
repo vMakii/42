@@ -6,7 +6,7 @@
 #    By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/14 10:30:07 by mivogel           #+#    #+#              #
-#    Updated: 2024/11/18 10:05:52 by mivogel          ###   ########.fr        #
+#    Updated: 2024/11/18 10:56:01 by mivogel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,8 +26,6 @@ all: ${NAME}
 
 $(NAME): ${OBJS}
 	ar rcs $@ $^
-
-$(LIBFT): 
 
 clean:
 	rm -f ${OBJS}

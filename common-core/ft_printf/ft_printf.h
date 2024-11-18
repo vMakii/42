@@ -6,15 +6,16 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 10:30:22 by mivogel           #+#    #+#             */
-/*   Updated: 2024/11/14 15:05:51 by mivogel          ###   ########.fr       */
+/*   Updated: 2024/11/18 14:56:39 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
-# include "libft/libft.h"
+# include <limits.h>
 # include <stdarg.h>
+# include <unistd.h>
 
 int	ft_printf(const char *format, ...);
 int	ft_putchar(char c);

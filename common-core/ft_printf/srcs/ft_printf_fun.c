@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 11:23:50 by mivogel           #+#    #+#             */
-/*   Updated: 2024/11/16 23:09:44 by mivogel          ###   ########.fr       */
+/*   Updated: 2024/11/18 14:03:57 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,22 @@
 
 int	ft_putchar(char c)
 {
-	return (write(1, &c, 1));
+	write(1, &c, 1);
+	return (1);
 }
 
 int	ft_putstr(char *s)
 {
-	size_t	i;
+	int	i;
 
+	if (!s)
+		return (write(1, "(null)", 6));
 	i = 0;
 	while (s[i])
-		ft_putchar(s[i++]);
+	{
+		ft_putchar(s[i]);
+		i++;
+	}
 	return (i);
 }
 

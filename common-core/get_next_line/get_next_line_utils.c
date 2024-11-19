@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 15:14:42 by mivogel           #+#    #+#             */
-/*   Updated: 2024/11/19 15:27:23 by mivogel          ###   ########.fr       */
+/*   Updated: 2024/11/19 16:47:23 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ char	*ft_strchr(const char *str, int c)
 {
 	size_t	i;
 
+	if (!str)
+		return (NULL);
 	i = 0;
 	while (str[i] && str[i] != (char)c)
 		i++;

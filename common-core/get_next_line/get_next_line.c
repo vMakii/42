@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 13:02:34 by mivogel           #+#    #+#             */
-/*   Updated: 2024/11/19 16:49:29 by mivogel          ###   ########.fr       */
+/*   Updated: 2024/11/19 17:06:20 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*ft_fill_buffer(int fd, char *buffer)
 	if (!tmp)
 		return (NULL);
 	bytes_read = 1;
-	while (bytes_read > 0 && !ft_strchr(buffer, '\n'))
+	while (bytes_read > 0)
 	{
 		bytes_read = read(fd, tmp, BUFFER_SIZE);
 		if (bytes_read == -1)
@@ -31,6 +31,8 @@ char	*ft_fill_buffer(int fd, char *buffer)
 		}
 		tmp[bytes_read] = '\0';
 		buffer = ft_strjoin(buffer, tmp);
+		if (ft_strchr(buffer, '\n'))
+			break ;
 	}
 	free(tmp);
 	return (buffer);

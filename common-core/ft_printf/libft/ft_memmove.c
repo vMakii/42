@@ -1,28 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/14 10:30:22 by mivogel           #+#    #+#             */
-/*   Updated: 2024/11/19 09:52:02 by mivogel          ###   ########.fr       */
+/*   Created: 2024/11/07 14:51:08 by mivogel           #+#    #+#             */
+/*   Updated: 2024/11/11 16:26:22 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "libft.h"
 
-# include "libft/libft.h"
-# include <stdarg.h>
-# include <unistd.h>
+void	*ft_memmove(void *dst, const void *src, size_t n)
+{
+	unsigned char		*cdst;
+	const unsigned char	*csrc;
 
-int	ft_printf(const char *format, ...);
-int	ft_putchar(char c);
-int	ft_putstr(char *s);
-int	ft_putnbr(int n);
-int	ft_putvoid(void *ptr);
-int	ft_putunbr(unsigned int n);
-int	ft_puthexa(unsigned int n, const char type);
-
-#endif
+	if (!dst && !src)
+		return (dst);
+	if (dst < src)
+		ft_memcpy(dst, src, n);
+	else
+	{
+		cdst = dst;
+		csrc = src;
+		while (n--)
+			cdst[n] = csrc[n];
+	}
+	return (dst);
+}

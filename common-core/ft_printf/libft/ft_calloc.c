@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/14 10:30:22 by mivogel           #+#    #+#             */
-/*   Updated: 2024/11/19 09:52:02 by mivogel          ###   ########.fr       */
+/*   Created: 2024/11/08 10:35:06 by mivogel           #+#    #+#             */
+/*   Updated: 2024/11/13 11:12:50 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "libft.h"
+#include <limits.h>
 
-# include "libft/libft.h"
-# include <stdarg.h>
-# include <unistd.h>
+void	*ft_calloc(size_t n, size_t size)
+{
+	void	*ptr;
+	size_t	len;
 
-int	ft_printf(const char *format, ...);
-int	ft_putchar(char c);
-int	ft_putstr(char *s);
-int	ft_putnbr(int n);
-int	ft_putvoid(void *ptr);
-int	ft_putunbr(unsigned int n);
-int	ft_puthexa(unsigned int n, const char type);
-
-#endif
+	if (n && size > (size_t)-1 / n)
+		return (NULL);
+	len = n * size;
+	ptr = (void *)malloc(len);
+	if (!ptr)
+		return (NULL);
+	ft_memset(ptr, 0, len);
+	return (ptr);
+}

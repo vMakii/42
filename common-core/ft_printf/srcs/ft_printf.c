@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 10:34:04 by mivogel           #+#    #+#             */
-/*   Updated: 2024/11/19 09:39:57 by mivogel          ###   ########.fr       */
+/*   Updated: 2024/11/20 11:51:33 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,3 +56,30 @@ int	ft_printf(const char *format, ...)
 	va_end(args);
 	return (len);
 }
+//
+// #include <stdio.h>
+//
+// int	main(void)
+// {
+// 	int	d;
+//
+// 	d = 42;
+// 	printf("printf:\n");
+// 	printf("char: %c\n", 'a');
+// 	printf("str : %s\n", "bonjour");
+// 	printf("ptr : %p\n", &d);
+// 	printf("nbr : %d\n", d);
+// 	printf("unb : %u\n", d);
+// 	printf("hex : %x\n", d);
+// 	printf("heX : %X\n", d);
+// 	printf("per : %%\n\n");
+// 	ft_printf("ft_printf:\n");
+// 	ft_printf("char: %c\n", 'a');
+// 	ft_printf("str : %s\n", "bonjour");
+// 	ft_printf("ptr : %p\n", &d);
+// 	ft_printf("nbr : %d\n", d);
+// 	ft_printf("unb : %u\n", d);
+// 	ft_printf("hex : %x\n", d);
+// 	ft_printf("heX : %X\n", d);
+// 	ft_printf("per : %%\n");
+// }

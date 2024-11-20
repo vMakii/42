@@ -6,12 +6,11 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 10:35:06 by mivogel           #+#    #+#             */
-/*   Updated: 2024/11/13 11:12:50 by mivogel          ###   ########.fr       */
+/*   Updated: 2024/11/20 13:30:28 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <limits.h>
 
 void	*ft_calloc(size_t n, size_t size)
 {

@@ -6,15 +6,15 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 15:14:42 by mivogel           #+#    #+#             */
-/*   Updated: 2024/11/19 17:04:16 by mivogel          ###   ########.fr       */
+/*   Updated: 2024/11/20 13:39:25 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int	ft_strlen(const char *str)
+size_t	ft_strlen(const char *str)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
 	while (str[i])
@@ -26,8 +26,6 @@ char	*ft_strchr(const char *str, int c)
 {
 	size_t	i;
 
-	if (!str)
-		return (NULL);
 	i = 0;
 	while (str[i] && str[i] != (char)c)
 		i++;
@@ -36,30 +34,10 @@ char	*ft_strchr(const char *str, int c)
 	return (NULL);
 }
 
-char	*ft_strdup(const char *src)
-{
-	int		i;
-	size_t	len;
-	char	*dst;
-
-	len = ft_strlen(src) + 1;
-	dst = (char *)malloc(len);
-	if (!dst)
-		return (NULL);
-	i = 0;
-	while (src[i])
-	{
-		dst[i] = src[i];
-		i++;
-	}
-	dst[i] = '\0';
-	return (dst);
-}
-
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	int		i;
-	int		j;
+	size_t	i;
+	size_t	j;
 	char	*dst;
 
 	if (!s1 || !s2)
@@ -75,7 +53,39 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	}
 	j = 0;
 	while (s2[j])
-		dst[i++] = s2[j++];
-	dst[i] = '\0';
+	{
+		dst[i + j] = s2[j];
+		j++;
+	}
+	dst[i + j] = '\0';
 	return (dst);
+}
+
+void	ft_bzero(void *s, size_t n)
+{
+	size_t			i;
+	unsigned char	*str;
+
+	i = 0;
+	str = s;
+	while (i < n)
+	{
+		str[i] = 0;
+		i++;
+	}
+}
+
+void	*ft_calloc(size_t n, size_t size)
+{
+	void	*ptr;
+	size_t	len;
+
+	if (n && size > (size_t)-1 / n)
+		return (NULL);
+	len = n * size;
+	ptr = (void *)malloc(len);
+	if (!ptr)
+		return (NULL);
+	ft_bzero(ptr, len);
+	return (ptr);
 }

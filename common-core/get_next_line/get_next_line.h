@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 12:05:08 by mivogel           #+#    #+#             */
-/*   Updated: 2024/11/19 17:02:03 by mivogel          ###   ########.fr       */
+/*   Updated: 2024/11/20 13:33:16 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@
 
 char	*get_next_line(int fd);
 int		ft_strlen(const char *str);
-char	*ft_strdup(const char *src);
-char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strchr(const char *str, int c);
+char	*ft_strjoin(char const *s1, char const *s2);
+void	ftbzero(void *s, size_t n);
+void	*ft_calloc(size_t n, size_t size);
 #endif

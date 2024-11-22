@@ -6,7 +6,7 @@
 #    By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/14 10:30:07 by mivogel           #+#    #+#              #
-#    Updated: 2024/11/19 10:59:43 by mivogel          ###   ########.fr        #
+#    Updated: 2024/11/22 13:30:36 by mivogel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,9 +40,6 @@ clean:
 fclean: clean
 	$(MAKE) fclean -C $(LIBFTDIR)
 	rm -f ${NAME}
-
-bonus: ${OBJS}
-	ar rcs ${NAME} ${OBJS}
 
 re: fclean all
 

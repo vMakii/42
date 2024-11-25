@@ -6,13 +6,13 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 11:25:20 by mivogel           #+#    #+#             */
-/*   Updated: 2024/11/25 13:08:55 by mivogel          ###   ########.fr       */
+/*   Updated: 2024/11/25 15:26:57 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_join_free(char *buffer, char *tmp)
+static char	*ft_join_free(char *buffer, char *tmp)
 {
 	char	*dst;
 
@@ -135,8 +135,8 @@ char	*get_next_line(int fd)
 // 	line2 = get_next_line(fd2);
 // 	while (line && line2)
 // 	{
-// 		printf("%s", line);
-// 		printf("%s", line2);
+// 		printf("fd1 :%s", line);
+// 		printf("fd2 :%s", line2);
 // 		line = get_next_line(fd);
 // 		line2 = get_next_line(fd2);
 // 	}

@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 10:34:04 by mivogel           #+#    #+#             */
-/*   Updated: 2024/11/22 14:07:50 by mivogel          ###   ########.fr       */
+/*   Updated: 2024/11/25 13:43:10 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	ft_printf(const char *format, ...)
 // 	printf("char: %c\n", 'a');
 // 	printf("str : %s\n", "bonjour");
 // 	printf("ptr : %p\n", (void *)0);
-// 	printf("nbr : %d\n", d);
+// 	printf("nbr : %d\n", printf(0));
 // 	printf("unb : %u\n", d);
 // 	printf("hex : %x\n", d);
 // 	printf("heX : %X\n", d);
@@ -77,7 +77,7 @@ int	ft_printf(const char *format, ...)
 // 	ft_printf("char: %c\n", 'a');
 // 	ft_printf("str : %s\n", "bonjour");
 // 	ft_printf("ptr : %p\n", 0);
-// 	ft_printf("nbr : %d\n", d);
+// 	ft_printf("nbr : %d\n", ft_printf(0));
 // 	ft_printf("unb : %u\n", d);
 // 	ft_printf("hex : %x\n", d);
 // 	ft_printf("heX : %X\n", d);

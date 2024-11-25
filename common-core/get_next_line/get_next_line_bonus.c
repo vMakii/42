@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 11:25:20 by mivogel           #+#    #+#             */
-/*   Updated: 2024/11/21 14:56:01 by mivogel          ###   ########.fr       */
+/*   Updated: 2024/11/25 13:08:55 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ static char	*ft_next(char *buffer)
 
 char	*get_next_line(int fd)
 {
-	static char	*buffer[999];
+	static char	*buffer[1024];
 	char		*line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)

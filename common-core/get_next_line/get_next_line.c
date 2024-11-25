@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 13:02:34 by mivogel           #+#    #+#             */
-/*   Updated: 2024/11/21 14:55:59 by mivogel          ###   ########.fr       */
+/*   Updated: 2024/11/25 13:06:00 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ static char	*ft_next(char *buffer)
 {
 	int		i;
 	int		j;
-	char	*line;
+	char	*next;
 
 	i = 0;
 	while (buffer[i] && buffer[i] != '\n')
@@ -88,16 +88,18 @@ static char	*ft_next(char *buffer)
 		free(buffer);
 		return (NULL);
 	}
-	line = ft_calloc(ft_strlen(buffer) - i + 1, sizeof(*buffer));
-	if (!line)
+	next = ft_calloc(ft_strlen(buffer) - i + 1, sizeof(*buffer));
+	if (!next)
 		return (NULL);
 	i++;
 	j = 0;
 	while (buffer[i])
-		line[j++] = buffer[i++];
+		next[j++] = buffer[i++];
 	free(buffer);
-	return (line);
+	return (next);
 }
+
+#include <stdio.h>
 
 char	*get_next_line(int fd)
 {
@@ -115,14 +117,13 @@ char	*get_next_line(int fd)
 }
 //
 // #include <fcntl.h>
-// #include <stdio.h>
 //
 // int	main(void)
 // {
 // 	int		fd;
 // 	char	*line;
 //
-// 	fd = open("test.txt", O_RDONLY);
+// 	fd = open("text.txt", O_RDONLY);
 // 	if (fd < 0)
 // 	{
 // 		perror("Error opening file");

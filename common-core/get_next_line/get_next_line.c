@@ -6,13 +6,13 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 13:02:34 by mivogel           #+#    #+#             */
-/*   Updated: 2024/11/25 15:39:28 by mivogel          ###   ########.fr       */
+/*   Updated: 2024/11/26 14:10:47 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_join_free(char *buffer, char *tmp)
+static char	*ft_join_free(char *buffer, char *tmp)
 {
 	char	*dst;
 

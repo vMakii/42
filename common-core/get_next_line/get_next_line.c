@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 13:02:34 by mivogel           #+#    #+#             */
-/*   Updated: 2024/11/26 14:10:47 by mivogel          ###   ########.fr       */
+/*   Updated: 2024/11/27 12:48:13 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,13 +115,14 @@ char	*get_next_line(int fd)
 }
 //
 // #include <fcntl.h>
+// #include <stdio.h>
 //
 // int	main(void)
 // {
 // 	int		fd;
 // 	char	*line;
 //
-// 	fd = open("text.txt", O_RDONLY);
+// 	fd = open("test.txt", O_RDONLY);
 // 	if (fd < 0)
 // 	{
 // 		perror("Error opening file");

@@ -102,7 +102,16 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias nvim="~/./nvim.appimage"
 alias cc="cc -Wall -Werror -Wextra"
 alias nrc="norminette -R CheckDefine"
+
+now=$(date +%F)
+alias gp="git commit -m '${now}' && git push"
+
 alias vim=nvim
+alias nvim="~/./nvim.appimage"
+
+alias francinette=/mnt/nfs/homes/mivogel/francinette/tester.sh
+alias paco=/mnt/nfs/homes/mivogel/francinette/tester.sh
+alias ps="paco --strict"
+alias pm="paco -m"

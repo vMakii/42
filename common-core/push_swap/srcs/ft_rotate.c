@@ -6,14 +6,26 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 16:48:16 by mivogel           #+#    #+#             */
-/*   Updated: 2024/11/28 16:51:01 by mivogel          ###   ########.fr       */
+/*   Updated: 2024/11/28 17:02:23 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../push_swap.c"
+#include "../push_swap.h"
 
 static void	ft_rotate(t_stack **stack)
 {
+	t_stack	*first;
+	t_stack	*last;
+
+	if (!stack || !(*stack) || !(*stack)->next)
+		return ;
+	first = *stack;
+	last = *stack;
+	while (last)
+		last = last->next;
+	*stack = first->next;
+	first->next = NULL;
+	last->next = first;
 }
 
 void	ft_ra(t_stack **stack)

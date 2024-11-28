@@ -105,8 +105,17 @@ source $ZSH/oh-my-zsh.sh
 alias cc="cc -Wall -Werror -Wextra"
 alias nrc="norminette -R CheckDefine"
 
-now=$(date +%F)
-alias gp="git commit -m '${now}' && git push"
+gitall() {
+    git add .
+    if [ -n "$1" ] # or better, if [ "$1" != "" ]
+    then
+        git commit -m "$1"
+    else
+        git commit -m update
+    fi
+    git push
+}
+alias gp="git commit -m update && git push"
 
 alias vim=nvim
 alias nvim="~/./nvim.appimage"

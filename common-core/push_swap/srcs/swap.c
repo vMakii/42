@@ -1,23 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   swap.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/27 13:19:08 by mivogel           #+#    #+#             */
-/*   Updated: 2024/11/28 14:40:59 by mivogel          ###   ########.fr       */
+/*   Created: 2024/11/28 14:40:00 by mivogel           #+#    #+#             */
+/*   Updated: 2024/11/28 15:05:06 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include "../push_swap.h"
 
-typedef struct s_stack
+static void	swap(t_stack *stack)
 {
-	int				nb;
-	int				index;
-	struct s_stack	*next;
-}					t_stack;
+	t_stack	*first;
+	t_stack	*second;
 
-#endif
+	if (!stack || !stack->next)
+		return ;
+	first = stack;
+	second = first->next;
+	first->next = second->next;
+	second->next = first;
+	stack = second;
+}
+
+// void	sa(t_stack **stack)
+// {
+// }
+//
+// void	sb(t_stack **stack)
+// {
+// }
+//
+// void	ss(t_stack **stack_a, t_stack **stack_b)
+// {
+// }

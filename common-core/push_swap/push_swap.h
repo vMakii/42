@@ -6,12 +6,14 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 13:19:08 by mivogel           #+#    #+#             */
-/*   Updated: 2024/11/29 09:35:36 by mivogel          ###   ########.fr       */
+/*   Updated: 2024/11/29 12:02:59 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
+
+# include "libft/includes/libft.h"
 
 typedef struct s_stack
 {
@@ -24,8 +26,8 @@ typedef struct s_stack
 void				ft_sa(t_stack **stack);
 void				ft_sb(t_stack **stack);
 void				ft_ss(t_stack **stack_a, t_stack **stack_b);
-void				ft_pa(t_stack **stack);
-void				ft_pb(t_stack **stack);
+void				ft_pa(t_stack **stack_a, t_stack **stack_b);
+void				ft_pb(t_stack **stack_b, t_stack **stack_a);
 void				ft_ra(t_stack **stack);
 void				ft_rb(t_stack **stack);
 void				ft_rr(t_stack **stack_a, t_stack **stack_b);

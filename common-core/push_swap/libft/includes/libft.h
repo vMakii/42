@@ -6,12 +6,15 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 17:40:58 by mivogel           #+#    #+#             */
-/*   Updated: 2024/11/29 10:54:50 by mivogel          ###   ########.fr       */
+/*   Updated: 2024/11/29 11:11:02 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 1024
+# endif
 
 # include <stdarg.h>
 # include <stdlib.h>
@@ -80,4 +83,13 @@ int					ft_putvoid(void *ptr);
 int					ft_putunbr(unsigned int n);
 int					ft_puthexa(unsigned int n, const char type);
 
+// get_next_line
+char				*get_next_line(int fd);
+size_t				ft_strlen(const char *str);
+char				*ft_strchr(const char *str, int c);
+char				*ft_strjoin(char const *s1, char const *s2);
+void				ftbzero(void *s, size_t n);
+void				*ft_calloc(size_t n, size_t size);
+// bonus
+char				*get_next_line_bonus(int fd);
 #endif

@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 17:40:58 by mivogel           #+#    #+#             */
-/*   Updated: 2024/11/29 11:11:02 by mivogel          ###   ########.fr       */
+/*   Updated: 2024/11/29 14:47:15 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
 #  define BUFFER_SIZE 1024
 # endif
 
+# include <limits.h>
 # include <stdarg.h>
 # include <stdlib.h>
 # include <unistd.h>
-
 // struct
 typedef struct s_list
 {

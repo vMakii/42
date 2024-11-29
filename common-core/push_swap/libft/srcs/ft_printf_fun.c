@@ -6,11 +6,11 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 11:23:50 by mivogel           #+#    #+#             */
-/*   Updated: 2024/11/18 14:03:57 by mivogel          ###   ########.fr       */
+/*   Updated: 2024/11/29 10:53:43 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ft_printf.h"
+#include "libft.h"
 
 int	ft_putchar(char c)
 {

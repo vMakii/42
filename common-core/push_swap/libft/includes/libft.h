@@ -6,15 +6,17 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 17:40:58 by mivogel           #+#    #+#             */
-/*   Updated: 2024/11/13 10:13:43 by mivogel          ###   ########.fr       */
+/*   Updated: 2024/11/29 10:54:50 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
+# include <stdarg.h>
 # include <stdlib.h>
 # include <unistd.h>
+
 // struct
 typedef struct s_list
 {
@@ -22,7 +24,7 @@ typedef struct s_list
 	struct s_list	*next;
 }					t_list;
 
-// libc
+// libft
 int					ft_atoi(const char *str);
 void				ft_bzero(void *s, size_t n);
 void				*ft_calloc(size_t n, size_t size);
@@ -46,7 +48,6 @@ void				*ft_memset(void *ptr, int value, size_t n);
 void				*ft_memcpy(void *dst, const void *src, size_t n);
 void				*ft_memmove(void *dst, const void *src, size_t n);
 int					ft_memcmp(const void *ptr1, const void *ptr2, size_t n);
-// fonctions supplementaires
 char				*ft_substr(char const *s, unsigned int start, size_t len);
 char				*ft_strjoin(char const *s1, char const *s2);
 char				*ft_strtrim(char const *s1, char const *set);
@@ -69,4 +70,14 @@ void				ft_lstclear(t_list **lst, void (*del)(void *));
 void				ft_lstiter(t_list *lst, void (*f)(void *));
 t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 						void (*del)(void *));
+
+// ft_printf
+int					ft_printf(const char *format, ...);
+int					ft_putchar(char c);
+int					ft_putstr(char *s);
+int					ft_putnbr(int n);
+int					ft_putvoid(void *ptr);
+int					ft_putunbr(unsigned int n);
+int					ft_puthexa(unsigned int n, const char type);
+
 #endif

@@ -1,47 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_puthexa.c                                       :+:      :+:    :+:   */
+/*   ft_putvoid.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/16 23:15:02 by mivogel           #+#    #+#             */
-/*   Updated: 2024/11/21 09:56:59 by mivogel          ###   ########.fr       */
+/*   Created: 2024/11/16 21:57:02 by mivogel           #+#    #+#             */
+/*   Updated: 2024/11/29 10:54:11 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ft_printf.h"
+#include "libft.h"
 
-static int	ft_print_hex(unsigned int n, char c)
+static int	ft_print_addr(unsigned long long n)
 {
 	int	len;
 
 	len = 0;
 	if (n >= 16)
 	{
-		len += ft_print_hex(n / 16, c);
-		len += ft_print_hex(n % 16, c);
+		len += ft_print_addr(n / 16);
+		len += ft_print_addr(n % 16);
 	}
 	else
 	{
 		if (n < 10)
 			len += ft_putchar(n + '0');
 		else
-		{
-			if (c == 'x')
-				len += ft_putchar(n - 10 + 'a');
-			if (c == 'X')
-				len += ft_putchar(n - 10 + 'A');
-		}
+			len += ft_putchar(n - 10 + 'a');
 	}
 	return (len);
 }
 
-int	ft_puthexa(unsigned int n, char c)
+int	ft_putvoid(void *ptr)
 {
 	int	len;
 
 	len = 0;
-	len += ft_print_hex(n, c);
+	if (!ptr)
+		return (ft_putstr("(nil)"));
+	len += ft_putstr("0x");
+	len += ft_print_addr((unsigned long long)ptr);
 	return (len);
 }

@@ -6,7 +6,7 @@
 #    By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/27 13:05:51 by mivogel           #+#    #+#              #
-#    Updated: 2024/11/29 11:16:17 by mivogel          ###   ########.fr        #
+#    Updated: 2024/12/02 12:53:23 by mivogel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ BONUS_OBJS = $(addprefix srcs/, ${BONUS_SRCS:.c=.o})
 
 NAME = libft.a
 
-GCC = gcc
+CC = cc
 
 CFLAGS = -Wall -Wextra -Werror -Iincludes
 

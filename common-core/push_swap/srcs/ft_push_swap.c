@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 13:38:55 by mivogel           #+#    #+#             */
-/*   Updated: 2024/11/29 16:44:20 by mivogel          ###   ########.fr       */
+/*   Updated: 2024/12/02 13:54:01 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,29 +44,31 @@ static int	check_args(char **av)
 	return (1);
 }
 
-static void	ft_init(t_stack **stack, char **av)
+static void	ft_init(t_list **stack, char **av)
 {
-	t_stack	*new;
+	t_list	*new;
 	int		content;
 	int		i;
 
 	i = 1;
-	stack = (t_stack **)malloc(sizeof(t_stack));
+	stack = (t_list **)malloc(sizeof(t_list));
+	if (!av)
+		new = NULL;
 	while (av[i])
 	{
 		content = ft_atoi(av[i]);
 		new = ft_lstnew(&content);
 		ft_lstadd_back(stack, new);
+		*stack = (*stack)->next;
 		i++;
 	}
 }
 
 int	main(int ac, char **av)
 {
-	t_stack	**a;
-	t_stack	**b;
+	t_list	**a;
+	t_list	**b;
 
-	a = NULL;
 	b = NULL;
 	if (ac < 2)
 		exit(EXIT_FAILURE);
@@ -75,7 +77,14 @@ int	main(int ac, char **av)
 		ft_putstr_fd("Error\n", 2);
 		exit(EXIT_FAILURE);
 	}
+	a = (t_list **)malloc(sizeof(t_list *));
+	*a = NULL;
 	ft_init(a, av);
-	ft_init(b, 0);
+	while (a)
+	{
+		ft_printf("%d\n", 1);
+		*a = (*a)->next;
+	}
+	// ft_init(b, 0);
 	exit(EXIT_SUCCESS);
 }

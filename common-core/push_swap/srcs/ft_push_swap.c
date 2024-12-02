@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 13:38:55 by mivogel           #+#    #+#             */
-/*   Updated: 2024/12/02 13:54:01 by mivogel          ###   ########.fr       */
+/*   Updated: 2024/12/02 14:15:12 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,20 +46,21 @@ static int	check_args(char **av)
 
 static void	ft_init(t_list **stack, char **av)
 {
-	t_list	*new;
-	int		content;
-	int		i;
+	t_list				*new;
+	unsigned long long	content;
+	int					i;
 
 	i = 1;
-	stack = (t_list **)malloc(sizeof(t_list));
-	if (!av)
-		new = NULL;
 	while (av[i])
 	{
 		content = ft_atoi(av[i]);
-		new = ft_lstnew(&content);
+		new = ft_lstnew((void *)content);
+		if (!new)
+		{
+			ft_lstclear(stack, NULL);
+			exit(EXIT_FAILURE);
+		}
 		ft_lstadd_back(stack, new);
-		*stack = (*stack)->next;
 		i++;
 	}
 }
@@ -80,11 +81,10 @@ int	main(int ac, char **av)
 	a = (t_list **)malloc(sizeof(t_list *));
 	*a = NULL;
 	ft_init(a, av);
-	while (a)
+	while (*a)
 	{
-		ft_printf("%d\n", 1);
+		ft_printf("%d\n", (*a)->content);
 		*a = (*a)->next;
 	}
-	// ft_init(b, 0);
 	exit(EXIT_SUCCESS);
 }

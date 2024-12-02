@@ -1,32 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear.c                                      :+:      :+:    :+:   */
+/*   ft_lstfree_content.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/12 17:52:05 by mivogel           #+#    #+#             */
-/*   Updated: 2024/12/02 14:22:38 by mivogel          ###   ########.fr       */
+/*   Created: 2024/12/02 14:22:56 by mivogel           #+#    #+#             */
+/*   Updated: 2024/12/02 14:23:24 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstclear(t_list **lst, void (*del)(void *))
+void	ft_lstfree_content(void *content)
 {
-	t_list	*head;
-	t_list	*tmp;
-
-	if (!lst || !del)
-		return ;
-	head = *lst;
-	while (head)
-	{
-		tmp = head->next;
-		if (del)
-			del(head->content);
-		free(head);
-		head = tmp;
-	}
-	*lst = NULL;
+	free(content);
 }

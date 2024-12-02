@@ -6,7 +6,7 @@
 #    By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/02 11:36:11 by mivogel           #+#    #+#              #
-#    Updated: 2024/12/02 13:11:18 by mivogel          ###   ########.fr        #
+#    Updated: 2024/12/02 14:39:38 by mivogel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,16 +24,20 @@ CC = cc
 
 CFLAGS = -Wall -Wextra -Werror -Iincludes
 
+GREEN = '\033[0;32m'
+NC = '\033[0m'
+
 all: ${NAME}
 
 $(NAME): ${OBJS} ${LIBFT}
-	${CC} ${CFLAGS} -o $@ $^ ${LIBFT}
+	@${CC} ${CFLAGS} -o $@ $^ ${LIBFT}
+	@echo $(GREEN) test! $(NC)
 
 $(LIBFT): $(LIBFTDIR)
 	$(MAKE) -C ${LIBFTDIR}
 
-bonus: ${OBJS}
-	$(MAKE) bonus -C $(LIBFTDIR)
+bonus: ${OBJS} ${LIBFT}
+	${CC} ${CFLAGS} -o $@ $^ ${LIBFT}
 
 clean:
 	$(MAKE) clean -C $(LIBFTDIR)

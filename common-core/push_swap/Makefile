@@ -6,7 +6,7 @@
 #    By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/02 11:36:11 by mivogel           #+#    #+#              #
-#    Updated: 2024/12/02 14:39:38 by mivogel          ###   ########.fr        #
+#    Updated: 2024/12/02 14:43:39 by mivogel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ $(NAME): ${OBJS} ${LIBFT}
 	@echo $(GREEN) test! $(NC)
 
 $(LIBFT): $(LIBFTDIR)
-	$(MAKE) -C ${LIBFTDIR}
+	@$(MAKE) -C ${LIBFTDIR}
 
 bonus: ${OBJS} ${LIBFT}
 	${CC} ${CFLAGS} -o $@ $^ ${LIBFT}

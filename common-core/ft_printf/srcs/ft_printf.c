@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 10:34:04 by mivogel           #+#    #+#             */
-/*   Updated: 2024/11/25 13:43:10 by mivogel          ###   ########.fr       */
+/*   Updated: 2024/12/03 15:09:29 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	ft_printf(const char *format, ...)
 // 	d = 42;
 // 	printf("printf:\n");
 // 	printf("char: %c\n", 'a');
-// 	printf("str : %s\n", "bonjour");
+// 	printf("str : %s\n", (char *)NULL);
 // 	printf("ptr : %p\n", (void *)0);
 // 	printf("nbr : %d\n", printf(0));
 // 	printf("unb : %u\n", d);
@@ -75,7 +75,7 @@ int	ft_printf(const char *format, ...)
 // 	printf("per : %%\n\n");
 // 	ft_printf("ft_printf:\n");
 // 	ft_printf("char: %c\n", 'a');
-// 	ft_printf("str : %s\n", "bonjour");
+// 	ft_printf("str : %s\n", NULL);
 // 	ft_printf("ptr : %p\n", 0);
 // 	ft_printf("nbr : %d\n", ft_printf(0));
 // 	ft_printf("unb : %u\n", d);

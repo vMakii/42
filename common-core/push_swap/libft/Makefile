@@ -6,7 +6,7 @@
 #    By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/27 13:05:51 by mivogel           #+#    #+#              #
-#    Updated: 2024/12/02 12:53:23 by mivogel          ###   ########.fr        #
+#    Updated: 2024/12/03 14:45:35 by mivogel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,19 +29,29 @@ CC = cc
 
 CFLAGS = -Wall -Wextra -Werror -Iincludes
 
+RED = '\033[0;31m'
+GREEN = '\033[0;32m'
+NC = '\033[0m'
+
 all: ${NAME}
 
 $(NAME): ${OBJS}
-	ar rcs $@ $^
+	@ar rcs $@ $^
+	@echo $(GREEN)✅$@ compiled! $(NC)
+
+%.o : %.c 
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 bonus: ${OBJS} ${BONUS_OBJS}
-	ar rcs ${NAME} ${BONUS_OBJS} ${OBJS}
-
+	@ar rcs ${NAME} ${BONUS_OBJS} ${OBJS}
+	@echo $(GREEN)✅$(NAME) with bonus compiled! $(NC)
 clean:
-	rm -f ${OBJS} ${BONUS_OBJS}
+	@rm -f ${OBJS} ${BONUS_OBJS}
+	@echo $(RED)🗑️ *.o deleted! $(NC)
 
 fclean: clean
-	rm -f ${NAME}
+	@rm -f ${NAME}
+	@echo $(RED)🗑️ $(NAME) deleted! $(NC)
 
 re: fclean all
 

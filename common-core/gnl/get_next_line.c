@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 13:59:11 by mivogel           #+#    #+#             */
-/*   Updated: 2024/12/03 17:16:47 by mivogel          ###   ########.fr       */
+/*   Updated: 2024/12/03 17:30:50 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,13 +77,12 @@ char	*get_next_line(int fd)
 // #include <fcntl.h>
 // #include <stdio.h>
 //
-// int	main(int ac, char **av)
+// int	main(void)
 // {
 // 	int		fd;
 // 	char	*line;
 //
-// 	(void)ac;
-// 	fd = open(av[1], O_RDONLY);
+// 	fd = open("test.txt", O_RDONLY);
 // 	if (fd < 0)
 // 		return (1);
 // 	line = get_next_line(fd);

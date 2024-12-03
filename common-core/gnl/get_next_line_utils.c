@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 13:43:07 by mivogel           #+#    #+#             */
-/*   Updated: 2024/12/03 13:51:09 by mivogel          ###   ########.fr       */
+/*   Updated: 2024/12/03 17:18:42 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ char	*ft_strchr(const char *str, int c)
 	size_t	i;
 
 	i = 0;
+	if (!str)
+		return (NULL);
 	while (str[i] && str[i] != (char)c)
 		i++;
 	if (str[i] == (char)c)
@@ -36,13 +38,14 @@ char	*ft_strchr(const char *str, int c)
 
 char	*ft_strdup(const char *src)
 {
+	size_t	i;
 	size_t	len;
 	char	*dst;
 
 	len = ft_strlen(src);
 	dst = (char *)malloc(len + 1);
 	if (!dst)
-		return (null);
+		return (NULL);
 	i = 0;
 	while (i < len)
 	{
@@ -53,7 +56,7 @@ char	*ft_strdup(const char *src)
 	return (dst);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char *s1, char const *s2)
 {
 	size_t	i;
 	size_t	j;

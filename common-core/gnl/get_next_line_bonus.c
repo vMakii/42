@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 13:02:34 by mivogel           #+#    #+#             */
-/*   Updated: 2024/12/06 15:24:37 by mivogel          ###   ########.fr       */
+/*   Updated: 2024/12/06 15:28:12 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 static char	*ft_read(int fd, char *buffer)
 {
@@ -92,20 +92,20 @@ static char	*ft_next(char *buffer)
 
 char	*get_next_line(int fd)
 {
-	static char	*buffer;
+	static char	*buffer[1024];
 	char		*line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	buffer = ft_read(fd, buffer);
-	if (!buffer)
+	buffer[fd] = ft_read(fd, buffer[fd]);
+	if (!buffer[fd])
 		return (NULL);
-	line = ft_line(buffer);
-	buffer = ft_next(buffer);
-	if (!line && buffer)
+	line = ft_line(buffer[fd]);
+	buffer[fd] = ft_next(buffer[fd]);
+	if (!line && buffer[fd])
 	{
-		free(buffer);
-		buffer = NULL;
+		free(buffer[fd]);
+		buffer[fd] = NULL;
 	}
 	return (line);
 }
@@ -116,35 +116,28 @@ char	*get_next_line(int fd)
 // int	main(void)
 // {
 // 	int		fd;
+// 	int fd2;
 // 	char	*line;
 //
 // 	fd = open("test.txt", O_RDONLY);
-// 	if (fd < 0)
+// 	fd2 = open("test2.txt", O_RDONLY);
+// 	if (fd < 0 || fd2 < 0)
 // 	{
 // 		perror("Error opening file");
 // 		return (1);
 // 	}
-// 	line = get_next_line(fd);
-// 	while (line)
+// 	line = get_next_line_bonus(fd);
+// 	line2 = get_next_line_bonus(fd2);
+// 	while (line && line2)
 // 	{
-// 		printf("ligne : %s", line);
+// 		printf("fd1 : %s", line);
+// 		printf("fd2 : %s", line);
 // 		free(line);
-// 		line = get_next_line(fd);
+// 		free(line2);
+// 		line = get_next_line_bonus(fd);
+// 		line2 = get_next_line_bonus(fd2);
 // 	}
 // 	close(fd);
-// 	fd = open("test.txt", O_RDONLY);
-// 	if (fd < 0)
-// 	{
-// 		perror("Error opening file");
-// 		return (1);
-// 	}
-// 	line = get_next_line(fd);
-// 	while (line)
-// 	{
-// 		printf("ligne : %s", line);
-// 		free(line);
-// 		line = get_next_line(fd);
-// 	}
-// 	close(fd);
+// 	close(fd2);
 // 	return (0);
 // }

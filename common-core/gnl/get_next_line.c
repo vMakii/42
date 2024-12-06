@@ -12,66 +12,77 @@
 
 #include "get_next_line.h"
 
-static char	*ft_read(int fd, char *buffer)
+static char *read_and_store(int fd, char *remainder)
 {
-	char	*tmp;
-	int		i;
+    char *buffer;
+    ssize_t bytes_read;
 
-	tmp = (char *)malloc(BUFFER_SIZE + 1);
-	if (!tmp)
-		return (NULL);
-	while (!ft_strchr(buffer, '\n'))
-	{
-		i = read(fd, tmp, BUFFER_SIZE);
-		if (i <= 0)
-			break ;
-		tmp[i] = '\0';
-		buffer = ft_strjoin(buffer, tmp);
-	}
-	free(tmp);
-	if (i < 0)
-		return (NULL);
-	return (buffer);
+    buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
+    if (!buffer)
+        return (NULL);
+    bytes_read = 1;
+    while (!ft_strchr(remainder, '\n') && bytes_read > 0)
+    {
+        bytes_read = read(fd, buffer, BUFFER_SIZE);
+        if (bytes_read == -1)
+        {
+            free(buffer);
+            return (NULL);
+        }
+        buffer[bytes_read] = '\0';
+        remainder = ft_strjoin(remainder, buffer);
+    }
+    free(buffer);
+    return (remainder);
 }
 
-static char	*ft_line(char **buffer)
+static char *extract_line(char **remainder)
 {
-	char	*line;
-	char	*tmp;
-	char	*nl;
-	size_t	len;
+    char *line;
+    char *tmp;
+    char *newline_pos;
 
-	if (!*buffer || **buffer == '\0')
-		return (NULL);
-	nl = ft_strchr(*buffer, '\n');
-	if (nl)
-	{
-		len = nl - *buffer + 1;
-		line = ft_strdup(*buffer);
-		line[len] = '\0';
-		tmp = ft_strdup(nl + 1);
-		free(*buffer);
-		*buffer = tmp;
-	}
-	else
-	{
-		line = ft_strdup(*buffer);
-		free(*buffer);
-		*buffer = NULL;
-	}
-	return (line);
+    if (!*remainder || **remainder == '\0')
+        return (NULL);
+    newline_pos = ft_strchr(*remainder, '\n');
+    if (newline_pos)
+    {
+        line = malloc(sizeof(char) * (newline_pos - *remainder + 2));
+        if (!line)
+            return (NULL);
+        for (size_t i = 0; i <= (size_t)(newline_pos - *remainder); i++)
+            line[i] = (*remainder)[i];
+        line[newline_pos - *remainder + 1] = '\0';
+        tmp = ft_strdup(newline_pos + 1);
+        free(*remainder);
+        *remainder = tmp;
+    }
+    else
+    {
+        line = ft_strdup(*remainder);
+        free(*remainder);
+        *remainder = NULL;
+    }
+    return (line);
 }
 
-char	*get_next_line(int fd)
+char *get_next_line(int fd)
 {
-	static char	*buffer;
+    static char *remainder;
+    char *line;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (NULL);
-	buffer = ft_read(fd, buffer);
-	if (!buffer)
-		return (NULL);
-	return (ft_line(&buffer));
+    if (fd < 0 || BUFFER_SIZE <= 0)
+        return (NULL);
+    remainder = read_and_store(fd, remainder);
+    if (!remainder)
+        return (NULL);
+    line = extract_line(&remainder);
+    if (!line && remainder)
+    {
+        free(remainder);
+        remainder = NULL;
+    }
+    return (line);
 }
 //
 // #include <fcntl.h>

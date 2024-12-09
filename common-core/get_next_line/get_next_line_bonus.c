@@ -5,21 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/21 11:25:20 by mivogel           #+#    #+#             */
-/*   Updated: 2024/11/25 15:26:57 by mivogel          ###   ########.fr       */
+/*   Created: 2024/11/19 13:02:34 by mivogel           #+#    #+#             */
+/*   Updated: 2024/12/06 15:28:12 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
-
-static char	*ft_join_free(char *buffer, char *tmp)
-{
-	char	*dst;
-
-	dst = ft_strjoin(buffer, tmp);
-	free(buffer);
-	return (dst);
-}
+#include "get_next_line_bonus.h"
 
 static char	*ft_read(int fd, char *buffer)
 {
@@ -42,7 +33,7 @@ static char	*ft_read(int fd, char *buffer)
 			return (NULL);
 		}
 		tmp[i] = 0;
-		buffer = ft_join_free(buffer, tmp);
+		buffer = ft_strjoin(buffer, tmp);
 		if (ft_strchr(tmp, '\n'))
 			break ;
 	}
@@ -78,7 +69,7 @@ static char	*ft_next(char *buffer)
 {
 	int		i;
 	int		j;
-	char	*line;
+	char	*next;
 
 	i = 0;
 	while (buffer[i] && buffer[i] != '\n')
@@ -88,15 +79,15 @@ static char	*ft_next(char *buffer)
 		free(buffer);
 		return (NULL);
 	}
-	line = ft_calloc(ft_strlen(buffer) - i + 1, sizeof(*buffer));
-	if (!line)
+	next = ft_calloc(ft_strlen(buffer) - i + 1, sizeof(*buffer));
+	if (!next)
 		return (NULL);
 	i++;
 	j = 0;
 	while (buffer[i])
-		line[j++] = buffer[i++];
+		next[j++] = buffer[i++];
 	free(buffer);
-	return (line);
+	return (next);
 }
 
 char	*get_next_line(int fd)
@@ -111,6 +102,11 @@ char	*get_next_line(int fd)
 		return (NULL);
 	line = ft_line(buffer[fd]);
 	buffer[fd] = ft_next(buffer[fd]);
+	if (!line && buffer[fd])
+	{
+		free(buffer[fd]);
+		buffer[fd] = NULL;
+	}
 	return (line);
 }
 //
@@ -120,9 +116,8 @@ char	*get_next_line(int fd)
 // int	main(void)
 // {
 // 	int		fd;
-// 	int		fd2;
+// 	int fd2;
 // 	char	*line;
-// 	char	*line2;
 //
 // 	fd = open("test.txt", O_RDONLY);
 // 	fd2 = open("test2.txt", O_RDONLY);
@@ -131,14 +126,16 @@ char	*get_next_line(int fd)
 // 		perror("Error opening file");
 // 		return (1);
 // 	}
-// 	line = get_next_line(fd);
-// 	line2 = get_next_line(fd2);
+// 	line = get_next_line_bonus(fd);
+// 	line2 = get_next_line_bonus(fd2);
 // 	while (line && line2)
 // 	{
-// 		printf("fd1 :%s", line);
-// 		printf("fd2 :%s", line2);
-// 		line = get_next_line(fd);
-// 		line2 = get_next_line(fd2);
+// 		printf("fd1 : %s", line);
+// 		printf("fd2 : %s", line);
+// 		free(line);
+// 		free(line2);
+// 		line = get_next_line_bonus(fd);
+// 		line2 = get_next_line_bonus(fd2);
 // 	}
 // 	close(fd);
 // 	close(fd2);

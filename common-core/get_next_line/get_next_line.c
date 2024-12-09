@@ -6,20 +6,11 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 13:02:34 by mivogel           #+#    #+#             */
-/*   Updated: 2024/12/02 12:19:23 by mivogel          ###   ########.fr       */
+/*   Updated: 2024/12/06 15:24:37 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
-static char	*ft_join_free(char *buffer, char *tmp)
-{
-	char	*dst;
-
-	dst = ft_strjoin(buffer, tmp);
-	free(buffer);
-	return (dst);
-}
 
 static char	*ft_read(int fd, char *buffer)
 {
@@ -42,7 +33,7 @@ static char	*ft_read(int fd, char *buffer)
 			return (NULL);
 		}
 		tmp[i] = 0;
-		buffer = ft_join_free(buffer, tmp);
+		buffer = ft_strjoin(buffer, tmp);
 		if (ft_strchr(tmp, '\n'))
 			break ;
 	}
@@ -111,6 +102,11 @@ char	*get_next_line(int fd)
 		return (NULL);
 	line = ft_line(buffer);
 	buffer = ft_next(buffer);
+	if (!line && buffer)
+	{
+		free(buffer);
+		buffer = NULL;
+	}
 	return (line);
 }
 //
@@ -132,6 +128,21 @@ char	*get_next_line(int fd)
 // 	while (line)
 // 	{
 // 		printf("ligne : %s", line);
+// 		free(line);
+// 		line = get_next_line(fd);
+// 	}
+// 	close(fd);
+// 	fd = open("test.txt", O_RDONLY);
+// 	if (fd < 0)
+// 	{
+// 		perror("Error opening file");
+// 		return (1);
+// 	}
+// 	line = get_next_line(fd);
+// 	while (line)
+// 	{
+// 		printf("ligne : %s", line);
+// 		free(line);
 // 		line = get_next_line(fd);
 // 	}
 // 	close(fd);

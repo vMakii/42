@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 13:02:34 by mivogel           #+#    #+#             */
-/*   Updated: 2024/12/06 15:24:37 by mivogel          ###   ########.fr       */
+/*   Updated: 2024/12/10 10:51:26 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static char	*ft_read(int fd, char *buffer)
 	if (!buffer)
 		buffer = ft_calloc(1, 1);
 	tmp = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
-	if (!tmp)
+	if (!tmp || !buffer)
 		return (NULL);
 	i = 1;
 	while (i > 0)
@@ -77,6 +77,7 @@ static char	*ft_next(char *buffer)
 	if (!buffer[i])
 	{
 		free(buffer);
+		buffer = NULL;
 		return (NULL);
 	}
 	next = ft_calloc(ft_strlen(buffer) - i + 1, sizeof(*buffer));
@@ -113,38 +114,30 @@ char	*get_next_line(int fd)
 // #include <fcntl.h>
 // #include <stdio.h>
 //
-// int	main(void)
+// int	main(int ac, char **av)
 // {
+// 	int		i;
 // 	int		fd;
 // 	char	*line;
 //
-// 	fd = open("test.txt", O_RDONLY);
+// 	(void)ac;
+// 	fd = open(av[1], O_RDONLY);
 // 	if (fd < 0)
 // 	{
 // 		perror("Error opening file");
 // 		return (1);
 // 	}
 // 	line = get_next_line(fd);
+// 	i = 0;
 // 	while (line)
 // 	{
-// 		printf("ligne : %s", line);
+// 		printf("%s", line);
 // 		free(line);
 // 		line = get_next_line(fd);
+// 		i++;
 // 	}
-// 	close(fd);
-// 	fd = open("test.txt", O_RDONLY);
-// 	if (fd < 0)
-// 	{
-// 		perror("Error opening file");
-// 		return (1);
-// 	}
-// 	line = get_next_line(fd);
-// 	while (line)
-// 	{
-// 		printf("ligne : %s", line);
+// 	if (line)
 // 		free(line);
-// 		line = get_next_line(fd);
-// 	}
 // 	close(fd);
 // 	return (0);
 // }

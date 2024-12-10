@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 15:14:42 by mivogel           #+#    #+#             */
-/*   Updated: 2024/12/06 15:13:14 by mivogel          ###   ########.fr       */
+/*   Updated: 2024/12/10 10:50:33 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	*ft_strjoin(char *s1, char const *s2)
 	size_t	j;
 	char	*dst;
 
-	if (!s1 && !s2)
+	if (!s1 || !s2)
 		return (NULL);
 	dst = malloc(sizeof(char) * ((ft_strlen(s1) + ft_strlen(s2)) + 1));
 	if (!dst)

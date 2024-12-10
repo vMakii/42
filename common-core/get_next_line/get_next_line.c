@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 13:02:34 by mivogel           #+#    #+#             */
-/*   Updated: 2024/12/10 10:51:26 by mivogel          ###   ########.fr       */
+/*   Updated: 2024/12/10 11:19:58 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ char	*get_next_line(int fd)
 // 	}
 // 	line = get_next_line(fd);
 // 	i = 0;
-// 	while (line)
+// 	while (i < 2)
 // 	{
 // 		printf("%s", line);
 // 		free(line);

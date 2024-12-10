@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 13:19:08 by mivogel           #+#    #+#             */
-/*   Updated: 2024/11/29 16:57:21 by mivogel          ###   ########.fr       */
+/*   Updated: 2024/12/10 11:59:45 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 typedef struct s_stack
 {
 	int				nb;
-	int				index;
 	struct s_stack	*next;
 }					t_stack;
 
@@ -35,4 +34,6 @@ void				ft_rra(t_stack **stack);
 void				ft_rrb(t_stack **stack);
 void				ft_rrr(t_stack **stack_a, t_stack **stack_b);
 
+// sorting
+int					ft_is_sorted(t_list **stack);
 #endif

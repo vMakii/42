@@ -1,37 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_push.c                                          :+:      :+:    :+:   */
+/*   ft_sorting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/28 16:30:18 by mivogel           #+#    #+#             */
-/*   Updated: 2024/12/10 11:37:06 by mivogel          ###   ########.fr       */
+/*   Created: 2024/12/10 11:56:29 by mivogel           #+#    #+#             */
+/*   Updated: 2024/12/10 12:00:12 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-static void	ft_push(t_stack **dst, t_stack **src)
+int	ft_is_sorted(t_list **stack)
 {
-	t_stack	*tmp;
+	t_list	*head;
 
-	if (!src || !(*src))
-		return ;
-	tmp = *src;
-	*src = tmp->next;
-	tmp->next = *dst;
-	*dst = tmp;
-}
-
-void	ft_pa(t_stack **stack_a, t_stack **stack_b)
-{
-	ft_push(stack_a, stack_b);
-	ft_printf("pa\n");
-}
-
-void	ft_pb(t_stack **stack_b, t_stack **stack_a)
-{
-	ft_push(stack_b, stack_a);
-	ft_printf("pb\n");
+	head = *stack;
+	while (head && head->next)
+	{
+		if (head->content > head->next->content)
+			return (0);
+		head = head->next;
+	}
+	return (1);
 }

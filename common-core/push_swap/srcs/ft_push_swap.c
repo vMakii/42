@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 13:38:55 by mivogel           #+#    #+#             */
-/*   Updated: 2024/12/02 14:15:12 by mivogel          ###   ########.fr       */
+/*   Updated: 2024/12/10 12:04:03 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,13 @@ static int	ft_getdouble(char *s, char **str, int index)
 	return (0);
 }
 
-static int	check_args(char **av)
+static int	check_args(int ac, char **av)
 {
 	int	i;
 
 	i = 1;
+	if (ac == 2)
+		av = ft_split(av[1], ' ');
 	while (av[i])
 	{
 		if (!(ft_strlen(av[i]) == ft_strlen(ft_itoa(ft_atoi(av[i])))))
@@ -44,13 +46,18 @@ static int	check_args(char **av)
 	return (1);
 }
 
-static void	ft_init(t_list **stack, char **av)
+static void	ft_init(t_list **stack, int ac, char **av)
 {
 	t_list				*new;
 	unsigned long long	content;
 	int					i;
 
 	i = 1;
+	if (ac == 2)
+	{
+		av = ft_split(av[1], ' ');
+		i = 0;
+	}
 	while (av[i])
 	{
 		content = ft_atoi(av[i]);
@@ -70,21 +77,31 @@ int	main(int ac, char **av)
 	t_list	**a;
 	t_list	**b;
 
-	b = NULL;
 	if (ac < 2)
 		exit(EXIT_FAILURE);
-	if (!check_args(av))
+	if (!check_args(ac, av))
 	{
 		ft_putstr_fd("Error\n", 2);
 		exit(EXIT_FAILURE);
 	}
 	a = (t_list **)malloc(sizeof(t_list *));
 	*a = NULL;
-	ft_init(a, av);
-	while (*a)
+	ft_init(a, ac, av);
+	if (ft_is_sorted(a))
 	{
-		ft_printf("%d\n", (*a)->content);
-		*a = (*a)->next;
+		ft_printf("success");
+		exit(EXIT_SUCCESS);
 	}
+	b = (t_list **)malloc(sizeof(t_list *));
+	*b = NULL;
+	// ft_sort(a, b);
+	free(a);
+	free(b);
+	return (0);
+	// while (*a)
+	// {
+	// 	ft_printf("%d\n", (*a)->content);
+	// 	*a = (*a)->next;
+	// }
 	exit(EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 17:40:58 by mivogel           #+#    #+#             */
-/*   Updated: 2024/12/10 11:28:11 by mivogel          ###   ########.fr       */
+/*   Updated: 2024/12/10 13:24:15 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ typedef struct s_list
 {
 	void			*content;
 	struct s_list	*next;
-	struct s_list	*prev;
 }					t_list;
 
 // libft

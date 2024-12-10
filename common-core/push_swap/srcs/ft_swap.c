@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   swap.c                                             :+:      :+:    :+:   */
+/*   ft_swap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 14:40:00 by mivogel           #+#    #+#             */
-/*   Updated: 2024/11/28 16:44:46 by mivogel          ###   ########.fr       */
+/*   Updated: 2024/12/10 13:11:48 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-static void	ft_swap(t_stack **stack)
+static void	ft_swap(t_list **stack)
 {
-	t_stack	*first;
-	t_stack	*second;
+	t_list	*first;
+	t_list	*second;
 
 	if (!stack || !(*stack) || !(*stack)->next)
 		return ;
@@ -26,19 +26,19 @@ static void	ft_swap(t_stack **stack)
 	*stack = second;
 }
 
-void	ft_sa(t_stack **stack)
+void	ft_sa(t_list **stack)
 {
 	ft_swap(stack);
 	ft_printf("sa\n");
 }
 
-void	ft_sb(t_stack **stack)
+void	ft_sb(t_list **stack)
 {
 	ft_swap(stack);
 	ft_printf("sb\n");
 }
 
-void	ft_ss(t_stack **stack_a, t_stack **stack_b)
+void	ft_ss(t_list **stack_a, t_list **stack_b)
 {
 	ft_swap(stack_a);
 	ft_swap(stack_b);

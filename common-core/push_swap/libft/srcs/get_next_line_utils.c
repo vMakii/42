@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 15:14:42 by mivogel           #+#    #+#             */
-/*   Updated: 2024/11/29 11:14:54 by mivogel          ###   ########.fr       */
+/*   Updated: 2024/12/10 11:28:24 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char	*ft_strchr(const char *str, int c)
 	return (NULL);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin_free(char *s1, char const *s2)
 {
 	size_t	i;
 	size_t	j;
@@ -46,18 +46,20 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	if (!dst)
 		return (NULL);
 	i = 0;
-	while (s1[i])
+	if (s1)
 	{
-		dst[i] = s1[i];
-		i++;
+		while (s1[i])
+		{
+			dst[i] = s1[i];
+			i++;
+		}
 	}
 	j = 0;
-	while (s2[j])
-	{
-		dst[i + j] = s2[j];
-		j++;
-	}
-	dst[i + j] = '\0';
+	if (s2)
+		while (s2[j])
+			dst[i++] = s2[j++];
+	dst[i] = '\0';
+	free(s1);
 	return (dst);
 }
 

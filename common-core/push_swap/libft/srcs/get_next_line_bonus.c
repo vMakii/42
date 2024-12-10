@@ -5,21 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/21 11:25:20 by mivogel           #+#    #+#             */
-/*   Updated: 2024/11/29 11:15:19 by mivogel          ###   ########.fr       */
+/*   Created: 2024/11/19 13:02:34 by mivogel           #+#    #+#             */
+/*   Updated: 2024/12/10 11:30:48 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-static char	*ft_join_free(char *buffer, char *tmp)
-{
-	char	*dst;
-
-	dst = ft_strjoin(buffer, tmp);
-	free(buffer);
-	return (dst);
-}
 
 static char	*ft_read(int fd, char *buffer)
 {
@@ -29,7 +20,7 @@ static char	*ft_read(int fd, char *buffer)
 	if (!buffer)
 		buffer = ft_calloc(1, 1);
 	tmp = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
-	if (!tmp)
+	if (!tmp || !buffer)
 		return (NULL);
 	i = 1;
 	while (i > 0)
@@ -42,7 +33,7 @@ static char	*ft_read(int fd, char *buffer)
 			return (NULL);
 		}
 		tmp[i] = 0;
-		buffer = ft_join_free(buffer, tmp);
+		buffer = ft_strjoin_free(buffer, tmp);
 		if (ft_strchr(tmp, '\n'))
 			break ;
 	}
@@ -78,7 +69,7 @@ static char	*ft_next(char *buffer)
 {
 	int		i;
 	int		j;
-	char	*line;
+	char	*next;
 
 	i = 0;
 	while (buffer[i] && buffer[i] != '\n')
@@ -86,20 +77,21 @@ static char	*ft_next(char *buffer)
 	if (!buffer[i])
 	{
 		free(buffer);
+		buffer = NULL;
 		return (NULL);
 	}
-	line = ft_calloc(ft_strlen(buffer) - i + 1, sizeof(*buffer));
-	if (!line)
+	next = ft_calloc(ft_strlen(buffer) - i + 1, sizeof(*buffer));
+	if (!next)
 		return (NULL);
 	i++;
 	j = 0;
 	while (buffer[i])
-		line[j++] = buffer[i++];
+		next[j++] = buffer[i++];
 	free(buffer);
-	return (line);
+	return (next);
 }
 
-char	*get_next_line_bonus(int fd)
+char	*get_next_line(int fd)
 {
 	static char	*buffer[1024];
 	char		*line;
@@ -111,34 +103,44 @@ char	*get_next_line_bonus(int fd)
 		return (NULL);
 	line = ft_line(buffer[fd]);
 	buffer[fd] = ft_next(buffer[fd]);
+	if (!line && buffer[fd])
+	{
+		free(buffer[fd]);
+		buffer[fd] = NULL;
+	}
 	return (line);
 }
 //
 // #include <fcntl.h>
 // #include <stdio.h>
 //
-// int	main(void)
+// int	main(int ac, char **av)
 // {
+// 	int		i;
 // 	int		fd;
 // 	int		fd2;
 // 	char	*line;
-// 	char	*line2;
 //
-// 	fd = open("test.txt", O_RDONLY);
-// 	fd2 = open("test2.txt", O_RDONLY);
+//  (void)ac;
+// 	fd = open(av[1], O_RDONLY);
+// 	fd2 = open(av[2], O_RDONLY);
 // 	if (fd < 0 || fd2 < 0)
 // 	{
 // 		perror("Error opening file");
 // 		return (1);
 // 	}
-// 	line = get_next_line(fd);
-// 	line2 = get_next_line(fd2);
+// 	line = get_next_line_bonus(fd);
+// 	line2 = get_next_line_bonus(fd2);
+// 	i = 0;
 // 	while (line && line2)
 // 	{
-// 		printf("fd1 :%s", line);
-// 		printf("fd2 :%s", line2);
-// 		line = get_next_line(fd);
-// 		line2 = get_next_line(fd2);
+// 		printf("fd1 : %s", line);
+// 		printf("fd2 : %s", line);
+// 		free(line);
+// 		free(line2);
+// 		line = get_next_line_bonus(fd);
+// 		line2 = get_next_line_bonus(fd2);
+// 		i++;
 // 	}
 // 	close(fd);
 // 	close(fd2);

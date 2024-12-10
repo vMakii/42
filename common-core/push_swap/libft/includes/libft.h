@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 17:40:58 by mivogel           #+#    #+#             */
-/*   Updated: 2024/12/02 14:23:54 by mivogel          ###   ########.fr       */
+/*   Updated: 2024/12/10 11:28:11 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int					ft_puthexa(unsigned int n, const char type);
 char				*get_next_line(int fd);
 size_t				ft_strlen(const char *str);
 char				*ft_strchr(const char *str, int c);
-char				*ft_strjoin(char const *s1, char const *s2);
+char				*ft_strjoin_free(char *s1, char const *s2);
 void				ftbzero(void *s, size_t n);
 void				*ft_calloc(size_t n, size_t size);
 // bonus

@@ -6,7 +6,7 @@
 #    By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/02 11:36:11 by mivogel           #+#    #+#              #
-#    Updated: 2024/12/03 15:03:58 by mivogel          ###   ########.fr        #
+#    Updated: 2024/12/10 11:33:14 by mivogel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ $(NAME): ${OBJS} ${LIBFT}
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(LIBFT): $(LIBFTDIR)
-	@$(MAKE) bonus -C ${LIBFTDIR}
+	@$(MAKE) -C ${LIBFTDIR}
 
 clean:
 	@$(MAKE) clean -C $(LIBFTDIR)

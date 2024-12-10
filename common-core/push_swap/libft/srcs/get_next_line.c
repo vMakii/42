@@ -6,20 +6,11 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 13:02:34 by mivogel           #+#    #+#             */
-/*   Updated: 2024/11/29 11:14:47 by mivogel          ###   ########.fr       */
+/*   Updated: 2024/12/10 11:28:32 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-static char	*ft_join_free(char *buffer, char *tmp)
-{
-	char	*dst;
-
-	dst = ft_strjoin(buffer, tmp);
-	free(buffer);
-	return (dst);
-}
 
 static char	*ft_read(int fd, char *buffer)
 {
@@ -29,7 +20,7 @@ static char	*ft_read(int fd, char *buffer)
 	if (!buffer)
 		buffer = ft_calloc(1, 1);
 	tmp = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
-	if (!tmp)
+	if (!tmp || !buffer)
 		return (NULL);
 	i = 1;
 	while (i > 0)
@@ -42,7 +33,7 @@ static char	*ft_read(int fd, char *buffer)
 			return (NULL);
 		}
 		tmp[i] = 0;
-		buffer = ft_join_free(buffer, tmp);
+		buffer = ft_strjoin_free(buffer, tmp);
 		if (ft_strchr(tmp, '\n'))
 			break ;
 	}
@@ -86,6 +77,7 @@ static char	*ft_next(char *buffer)
 	if (!buffer[i])
 	{
 		free(buffer);
+		buffer = NULL;
 		return (NULL);
 	}
 	next = ft_calloc(ft_strlen(buffer) - i + 1, sizeof(*buffer));
@@ -111,29 +103,41 @@ char	*get_next_line(int fd)
 		return (NULL);
 	line = ft_line(buffer);
 	buffer = ft_next(buffer);
+	if (!line && buffer)
+	{
+		free(buffer);
+		buffer = NULL;
+	}
 	return (line);
 }
 //
 // #include <fcntl.h>
 // #include <stdio.h>
 //
-// int	main(void)
+// int	main(int ac, char **av)
 // {
+// 	int		i;
 // 	int		fd;
 // 	char	*line;
 //
-// 	fd = open("test.txt", O_RDONLY);
+// 	(void)ac;
+// 	fd = open(av[1], O_RDONLY);
 // 	if (fd < 0)
 // 	{
 // 		perror("Error opening file");
 // 		return (1);
 // 	}
 // 	line = get_next_line(fd);
-// 	while (line)
+// 	i = 0;
+// 	while (i < 2)
 // 	{
-// 		printf("ligne : %s", line);
+// 		printf("%s", line);
+// 		free(line);
 // 		line = get_next_line(fd);
+// 		i++;
 // 	}
+// 	if (line)
+// 		free(line);
 // 	close(fd);
 // 	return (0);
 // }

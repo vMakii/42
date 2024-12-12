@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 17:52:05 by mivogel           #+#    #+#             */
-/*   Updated: 2024/12/02 14:22:38 by mivogel          ###   ########.fr       */
+/*   Updated: 2024/12/12 13:37:10 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_lstclear(t_list **lst, void (*del)(void *))
 	t_list	*head;
 	t_list	*tmp;
 
-	if (!lst || !del)
+	if (!lst)
 		return ;
 	head = *lst;
 	while (head)

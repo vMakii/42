@@ -6,13 +6,13 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 14:22:56 by mivogel           #+#    #+#             */
-/*   Updated: 2024/12/02 14:23:24 by mivogel          ###   ########.fr       */
+/*   Updated: 2024/12/12 11:51:55 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstfree_content(void *content)
+void	ft_free(void *content)
 {
 	free(content);
 }

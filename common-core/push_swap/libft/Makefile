@@ -6,7 +6,7 @@
 #    By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/27 13:05:51 by mivogel           #+#    #+#              #
-#    Updated: 2024/12/12 14:39:48 by mivogel          ###   ########.fr        #
+#    Updated: 2024/12/12 14:45:12 by mivogel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,27 +31,27 @@ CFLAGS = -Wall -Wextra -Werror -Iincludes
 
 RED = '\033[0;31m'
 GREEN = '\033[0;32m'
-NC = '\033[0m'
+RESET = '\033[0m'
 
 all: ${NAME}
 
 $(NAME): ${OBJS}
 	@ar rcs $@ $^
-	@echo $(GREEN)✅$@ compiled! $(NC)
+	@echo $(GREEN)✅$@ compiled! $(RESET)
 
 %.o : %.c 
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 bonus: ${OBJS} ${BONUS_OBJS}
 	@ar rcs ${NAME} ${BONUS_OBJS} ${OBJS}
-	@echo $(GREEN)✅$(NAME) with bonus compiled! $(NC)
+	@echo $(GREEN)✅$(NAME) with bonus compiled! $(RESET)
 clean:
 	@rm -f ${OBJS} ${BONUS_OBJS}
-	@echo $(RED)🗑️ *.o deleted! $(NC)
+	@echo $(RED)🗑️ *.o deleted! $(RESET)
 
 fclean:
 	@rm -f ${NAME}
-	@echo $(RED)🗑️ $(NAME) deleted! $(NC)
+	@echo $(RED)🗑️ $(NAME) deleted! $(RESET)
 
 re: fclean all
 

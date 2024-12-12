@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 13:38:55 by mivogel           #+#    #+#             */
-/*   Updated: 2024/12/10 13:27:40 by mivogel          ###   ########.fr       */
+/*   Updated: 2024/12/12 11:37:56 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,9 @@ int	main(int ac, char **av)
 	*a = NULL;
 	ft_init(a, ac, av);
 	if (ft_is_sorted(a))
+	{
 		exit(EXIT_SUCCESS);
+	}
 	b = (t_list **)malloc(sizeof(t_list *));
 	*b = NULL;
 	// ft_sort(a, b);

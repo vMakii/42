@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 14:21:32 by mivogel           #+#    #+#             */
-/*   Updated: 2024/12/12 14:27:14 by mivogel          ###   ########.fr       */
+/*   Updated: 2024/12/17 13:48:34 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,10 @@ int	ft_check_args(int ac, char **av)
 
 	i = 1;
 	if (ac == 2)
+	{
 		av = ft_split(av[1], ' ');
+		i = 0;
+	}
 	while (av[i])
 	{
 		if (!ft_isnum(av[i]))
@@ -68,6 +71,8 @@ int	ft_check_args(int ac, char **av)
 		if (ft_getdouble(av[i], av, i))
 			return (0);
 		if (ft_atoi(av[i]) < 0)
+			return (0);
+		if (ft_strncmp(av[i], "2147483647", 12) == 0)
 			return (0);
 		i++;
 	}

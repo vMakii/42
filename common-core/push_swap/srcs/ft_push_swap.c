@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 13:38:55 by mivogel           #+#    #+#             */
-/*   Updated: 2024/12/16 14:21:03 by mivogel          ###   ########.fr       */
+/*   Updated: 2024/12/18 11:42:13 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_free_stack(t_list **stack)
 {
-	ft_lstclear(stack, NULL);
+	ft_lstclear(stack);
 	free(stack);
 }
 

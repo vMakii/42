@@ -6,7 +6,7 @@
 #    By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/02 11:36:11 by mivogel           #+#    #+#              #
-#    Updated: 2024/12/17 14:22:00 by mivogel          ###   ########.fr        #
+#    Updated: 2024/12/18 11:33:19 by mivogel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,7 @@ $(NAME): ${OBJS} ${LIBFT}
 a: all clean
 
 $(LIBFT): $(LIBFTDIR)
-	@$(MAKE) bonus -C ${LIBFTDIR}
+	@$(MAKE) -C ${LIBFTDIR}
 
 clean:
 	@$(MAKE) clean -C $(LIBFTDIR)

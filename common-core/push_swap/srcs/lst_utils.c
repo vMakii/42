@@ -6,40 +6,82 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 14:19:28 by mivogel           #+#    #+#             */
-/*   Updated: 2024/12/17 14:50:23 by mivogel          ###   ########.fr       */
+/*   Updated: 2024/12/18 13:15:28 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-int	ft_min(t_list *stack)
+void	ft_lstclear(t_list **lst)
 {
-	int	min;
-	int	value;
+	t_list	*head;
+	t_list	*tmp;
 
-	min = *(int *)(stack)->content;
-	while (stack)
+	if (!lst)
+		return ;
+	head = *lst;
+	while (head)
 	{
-		value = *(int *)(stack)->content;
-		if (value && value < min)
-			min = value;
-		stack = stack->next;
+		tmp = head->next;
+		free(head);
+		head = tmp;
 	}
-	return (min);
+	*lst = NULL;
 }
 
-int	ft_max(t_list *stack)
+int	ft_lstsize(t_list *lst)
 {
-	int	max;
-	int	value;
+	int	i;
 
-	max = *(int *)(stack)->content;
+	i = 0;
+	while (lst)
+	{
+		lst = lst->next;
+		i++;
+	}
+	return (i);
+}
+
+t_list	*ft_lstnew(int value)
+{
+	t_list	*new;
+
+	new = (t_list *)malloc(sizeof(t_list));
+	if (!new)
+		return (NULL);
+	new->nb = value;
+	new->index = -1;
+	new->next = NULL;
+	return (new);
+}
+
+void	ft_lstadd_back(t_list **lst, t_list *new)
+{
+	t_list	*tmp;
+
+	if (!lst || !new)
+		return ;
+	if (*lst == NULL)
+		*lst = new;
+	else
+	{
+		tmp = *lst;
+		while (tmp->next)
+			tmp = tmp->next;
+		tmp->next = new;
+	}
+}
+
+int	ft_max(t_list **stack)
+{
+	int	i;
+
+	i = stack->index;
 	while (stack)
 	{
-		value = *(int *)(stack)->content;
-		if (value && value > max)
-			max = value;
+		if (stack->index > i)
+			i = stack->index;
 		stack = stack->next;
 	}
-	return (max);
+	return (i);
 }

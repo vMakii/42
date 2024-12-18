@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 14:19:28 by mivogel           #+#    #+#             */
-/*   Updated: 2024/12/18 14:41:58 by mivogel          ###   ########.fr       */
+/*   Updated: 2024/12/18 14:44:39 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,14 +74,14 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 
 int	ft_max(t_list *stack)
 {
-	int	i;
+	int	max;
 
-	i = stack->index;
+	max = stack->index;
 	while (stack)
 	{
-		if (stack->index > i)
-			i = stack->index;
+		if (stack->index > max)
+			max = stack->index;
 		stack = stack->next;
 	}
-	return (i);
+	return (max);
 }

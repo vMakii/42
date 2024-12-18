@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 13:19:08 by mivogel           #+#    #+#             */
-/*   Updated: 2024/12/18 13:17:11 by mivogel          ###   ########.fr       */
+/*   Updated: 2024/12/18 14:42:17 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void				ft_sort(t_list **stack_a, t_list **stack_b);
 void				ft_lstclear(t_list **lst);
 int					ft_lstsize(t_list *lst);
 t_list				*ft_lstnew(int value);
-int					ft_max(t_list **stack);
+int					ft_max(t_list *stack);
 void				ft_lstadd_back(t_list **lst, t_list *new);
 
 #endif

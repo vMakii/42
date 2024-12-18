@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 14:21:32 by mivogel           #+#    #+#             */
-/*   Updated: 2024/12/17 13:48:34 by mivogel          ###   ########.fr       */
+/*   Updated: 2024/12/18 14:34:24 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,10 +96,10 @@ void	ft_init(t_list **stack, int ac, char **av)
 	while (av[i])
 	{
 		content = ft_atoi(av[i]);
-		new = ft_lstnew((void *)content);
+		new = ft_lstnew(content);
 		if (!new)
 		{
-			ft_lstclear(stack, NULL);
+			ft_lstclear(stack);
 			exit(EXIT_FAILURE);
 		}
 		ft_lstadd_back(stack, new);

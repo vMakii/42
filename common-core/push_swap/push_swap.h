@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 13:19:08 by mivogel           #+#    #+#             */
-/*   Updated: 2024/12/18 14:42:17 by mivogel          ###   ########.fr       */
+/*   Updated: 2024/12/18 15:44:19 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ int					ft_check_args(int ac, char **av);
 // sorting
 int					ft_is_sorted(t_list **stack);
 void				ft_sort3(t_list **stack);
+void				ft_pushb(t_list **stack_a, t_list **stack_b, int size_a);
+void				ft_bigsort(t_list **stack_a, t_list **stack_b, int size_a);
 void				ft_sort(t_list **stack_a, t_list **stack_b);
 // utils
 void				ft_lstclear(t_list **lst);

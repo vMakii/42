@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 16:48:16 by mivogel           #+#    #+#             */
-/*   Updated: 2024/12/10 13:11:42 by mivogel          ###   ########.fr       */
+/*   Updated: 2024/12/18 14:57:58 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	ft_rotate(t_list **stack)
 		return ;
 	first = *stack;
 	last = *stack;
-	while (last)
+	while (last->next)
 		last = last->next;
 	*stack = first->next;
 	first->next = NULL;

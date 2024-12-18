@@ -6,29 +6,11 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 11:56:29 by mivogel           #+#    #+#             */
-/*   Updated: 2024/12/18 14:42:04 by mivogel          ###   ########.fr       */
+/*   Updated: 2024/12/18 15:54:44 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
-
-int	ft_is_sorted(t_list **stack)
-{
-	t_list	*head;
-
-	head = *stack;
-	while (head && head->next)
-	{
-		if (head->nb > head->next->nb)
-		{
-			ft_printf("not sorted!\n");
-			return (0);
-		}
-		head = head->next;
-	}
-	ft_printf("sorted!\n");
-	return (1);
-}
 
 void	ft_id(t_list *stack)
 {
@@ -53,12 +35,31 @@ void	ft_id(t_list *stack)
 	}
 }
 
+int	ft_is_sorted(t_list **stack)
+{
+	t_list	*head;
+
+	head = *stack;
+	while (head && head->next)
+	{
+		if (head->nb > head->next->nb)
+		{
+			ft_printf("not sorted!\n");
+			return (0);
+		}
+		head = head->next;
+	}
+	ft_printf("sorted!\n");
+	return (1);
+}
+
 void	ft_sort3(t_list **stack)
 {
 	int	max;
 
 	max = ft_max(*stack);
-	ft_printf("max : %d\n", max);
+	if (!ft_is_sorted(stack))
+		return ;
 	if ((*stack)->index == max)
 		ft_ra(stack);
 	else if ((*stack)->next->index == max)
@@ -71,13 +72,12 @@ void	ft_sort(t_list **stack_a, t_list **stack_b)
 {
 	int	size_a;
 
-	(void)stack_b;
 	size_a = ft_lstsize(*stack_a);
 	ft_id(*stack_a);
 	if (size_a == 2)
 		return (ft_sa(stack_a));
 	if (size_a == 3)
 		return (ft_sort3(stack_a));
-	// else
-	// 	return (ft_bigsort(stack_a, stack_b, size_a));
+	else
+		return (ft_bigsort(stack_a, stack_b, size_a));
 }

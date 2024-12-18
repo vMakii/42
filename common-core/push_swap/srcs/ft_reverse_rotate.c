@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 08:51:32 by mivogel           #+#    #+#             */
-/*   Updated: 2024/12/10 13:11:29 by mivogel          ###   ########.fr       */
+/*   Updated: 2024/12/18 15:05:29 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	ft_reverse_rotate(t_list **stack)
 	if (!stack || !(*stack) || !(*stack)->next)
 		return ;
 	prev = *stack;
-	while (prev->next)
+	while (prev->next->next)
 		prev = prev->next;
 	last = prev->next;
 	prev->next = NULL;

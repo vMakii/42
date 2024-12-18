@@ -6,7 +6,7 @@
 #    By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/02 11:36:11 by mivogel           #+#    #+#              #
-#    Updated: 2024/12/18 11:33:19 by mivogel          ###   ########.fr        #
+#    Updated: 2024/12/18 15:45:20 by mivogel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,13 +16,13 @@ LIBFT = libft/libft.a
 
 LIBFTDIR = libft/
 
-SRCS = ft_push_swap.c lst_utils.c ft_sorting.c ft_checks.c ft_push.c ft_swap.c ft_rotate.c ft_reverse_rotate.c
+SRCS = ft_push_swap.c lst_utils.c ft_sorting.c big_sort.c ft_checks.c ft_push.c ft_swap.c ft_rotate.c ft_reverse_rotate.c
 
 OBJS = $(addprefix srcs/, ${SRCS:.c=.o})
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror -Iincludes
+CFLAGS = -Wall -Wextra -Werror -g3 -Iincludes
 
 RED = '\033[0;31m'
 GREEN = '\033[0;32m'

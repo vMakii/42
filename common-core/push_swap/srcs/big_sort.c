@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 15:35:08 by mivogel           #+#    #+#             */
-/*   Updated: 2024/12/18 15:55:24 by mivogel          ###   ########.fr       */
+/*   Updated: 2024/12/19 11:19:35 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,25 @@
 void	ft_pushb(t_list **stack_a, t_list **stack_b, int size_a)
 {
 	int	i;
+	int	push;
 
 	i = 0;
-	while (i < size_a / 2)
+	push = 0;
+	while (i > size_a && push < size_a / 2)
 	{
 		if ((*stack_a)->index <= size_a / 2)
+		{
 			ft_pb(stack_a, stack_b);
+			push++;
+		}
 		else
 			ft_ra(stack_a);
 		i++;
 	}
-	while (i + 3 < size_a)
+	while (size_a - push > 3)
 	{
 		ft_pb(stack_a, stack_b);
-		i++;
+		push++;
 	}
 }
 

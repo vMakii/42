@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 11:56:29 by mivogel           #+#    #+#             */
-/*   Updated: 2024/12/18 15:54:44 by mivogel          ###   ########.fr       */
+/*   Updated: 2024/12/19 11:52:38 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	ft_id(t_list *stack)
 			tmp = tmp->next;
 		}
 		head->index = i;
-		ft_printf("id : %d\n", head->index);
+		// ft_printf("id : %d\n", head->index);
 		head = head->next;
 	}
 }
@@ -44,12 +44,12 @@ int	ft_is_sorted(t_list **stack)
 	{
 		if (head->nb > head->next->nb)
 		{
-			ft_printf("not sorted!\n");
+			// ft_printf("not sorted!\n");
 			return (0);
 		}
 		head = head->next;
 	}
-	ft_printf("sorted!\n");
+	// ft_printf("sorted!\n");
 	return (1);
 }
 
@@ -58,7 +58,7 @@ void	ft_sort3(t_list **stack)
 	int	max;
 
 	max = ft_max(*stack);
-	if (!ft_is_sorted(stack))
+	if (ft_is_sorted(stack))
 		return ;
 	if ((*stack)->index == max)
 		ft_ra(stack);

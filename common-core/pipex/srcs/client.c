@@ -1,41 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   server.c                                           :+:      :+:    :+:   */
+/*   client.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/07 10:20:21 by mivogel           #+#    #+#             */
-/*   Updated: 2025/01/07 11:56:51 by mivogel          ###   ########.fr       */
+/*   Created: 2025/01/07 11:25:18 by mivogel           #+#    #+#             */
+/*   Updated: 2025/01/07 11:40:33 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minitalk.h"
 
-void	handler(int s)
+void	send_signal(int pid, char *str)
 {
-	static int				bits;
-	static unsigned char	c;
+	int				i;
+	unsigned char	tmp;
 
-	c |= (s == SIGUSR1);
-	bits++;
-	if (bits == 8)
+	while (*str)
 	{
-		ft_printf("%c", c);
-		bits = 0;
-		c = 0;
+		i = 8;
+		tmp = *(str);
+		while (i > 0)
+		{
+			i--;
+			if (tmp >> i & 1)
+				kill(pid, SIGUSR1);
+			else
+				kill(pid, SIGUSR2);
+			usleep(100);
+		}
+		str++;
 	}
-	else
-		c <<= 1;
 }
 
-int	main(void)
+int	main(int ac, char **av)
 {
-	ft_printf("PID: %d\n", getpid());
-	while (1)
+	if (ac != 3)
 	{
-		signal(SIGUSR1, handler);
-		signal(SIGUSR2, handler);
+		ft_printf("Format: [./client <SERVER PID> <STRING>]\n");
+		exit(EXIT_FAILURE);
 	}
+	else
+		send_signal(ft_atoi(av[1]), av[2]);
 	return (0);
 }

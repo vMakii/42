@@ -6,11 +6,11 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 10:20:21 by mivogel           #+#    #+#             */
-/*   Updated: 2025/01/07 11:56:51 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/01/07 14:35:41 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minitalk.h"
+#include "minitalk.h"
 
 void	handler(int s)
 {

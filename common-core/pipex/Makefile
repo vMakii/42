@@ -6,7 +6,7 @@
 #    By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/02 11:36:11 by mivogel           #+#    #+#              #
-#    Updated: 2025/01/07 12:13:50 by mivogel          ###   ########.fr        #
+#    Updated: 2025/01/07 14:34:08 by mivogel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,11 +48,11 @@ all: ${SERVER} ${CLIENT}
 
 $(SERVER): ${OBJS_S} ${LIBFT}
 	@${CC} ${CFLAGS} -o $@ $(OBJS_S) ${LIBFT}
-	@echo $(Green)✅$@ compiled! $(NC)
+	@echo $(L_Green)✅$@ compiled! $(NC)
 
 $(CLIENT): ${OBJS_C} ${LIBFT}
 	@${CC} ${CFLAGS} -o $@ $(OBJS_C) ${LIBFT}
-	@echo $(Green)✅$@ compiled! $(NC)
+	@echo $(L_Green)✅$@ compiled! $(NC)
 
 %.o : %.c 
 	@$(CC) $(CFLAGS) -c $< -o $@
@@ -64,13 +64,13 @@ $(LIBFT): $(LIBFTDIR)
 
 clean:
 	@$(MAKE) clean -C $(LIBFTDIR)
-	@rm -f ${OBJS}
-	@echo $(Red)🗑️ *.o deleted! $(NC)
+	@rm -f ${OBJS_S} ${OBJS_C}
+	@echo $(L_Red)🗑️ *.o deleted! $(NC)
 
 fclean: clean
 	@$(MAKE) fclean -C $(LIBFTDIR)
 	@rm -f ${NAME}
-	@echo $(Red)🗑️ $(NAME) deleted! $(NC)
+	@echo $(L_Red)🗑️ $(NAME) deleted! $(NC)
 
 re: fclean all
 

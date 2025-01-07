@@ -6,11 +6,11 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 11:25:18 by mivogel           #+#    #+#             */
-/*   Updated: 2025/01/07 11:40:33 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/01/07 14:35:47 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minitalk.h"
+#include "minitalk.h"
 
 void	send_signal(int pid, char *str)
 {

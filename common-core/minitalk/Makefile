@@ -6,7 +6,7 @@
 #    By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/02 11:36:11 by mivogel           #+#    #+#              #
-#    Updated: 2025/01/07 14:34:08 by mivogel          ###   ########.fr        #
+#    Updated: 2025/01/08 12:27:39 by mivogel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,11 +17,15 @@ NAME = ${SERVER} ${CLIENT}
 
 SERVER = server
 SRCS_S = server.c
+SRCS_BONUS_S = server_bonus.c
 OBJS_S = $(addprefix srcs/, ${SRCS_S:.c=.o})
+OBJS_BONUS_S = $(addprefix srcs/, ${SRCS_BONUS_S:.c=.o})
 
 CLIENT = client
 SRCS_C = client.c
+SRCS_BONUS_C = client_bonus.c
 OBJS_C = $(addprefix srcs/, ${SRCS_C:.c=.o})
+OBJS_BONUS_C = $(addprefix srcs/, ${SRCS_BONUS_C:.c=.o})
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g3 -Iincludes
@@ -54,10 +58,16 @@ $(CLIENT): ${OBJS_C} ${LIBFT}
 	@${CC} ${CFLAGS} -o $@ $(OBJS_C) ${LIBFT}
 	@echo $(L_Green)✅$@ compiled! $(NC)
 
-%.o : %.c 
+%.o : %.c 	
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 a: all clean
+
+bonus: ${OBJS_BONUS_S} ${OBJS_BONUS_C} ${LIBFT}
+	@${CC} ${CFLAGS} -o ${SERVER} $(OBJS_BONUS_S) ${LIBFT}	
+	@echo $(L_Green)✅${SERVER} with bonus compiled! $(NC)
+	@${CC} ${CFLAGS} -o ${CLIENT} $(OBJS_BONUS_C) ${LIBFT}
+	@echo $(L_Green)✅${CLIENT} with bonus compiled! $(NC)
 
 $(LIBFT): $(LIBFTDIR)
 	@$(MAKE) -C ${LIBFTDIR}

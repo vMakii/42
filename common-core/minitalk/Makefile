@@ -6,7 +6,7 @@
 #    By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/02 11:36:11 by mivogel           #+#    #+#              #
-#    Updated: 2025/01/08 12:27:39 by mivogel          ###   ########.fr        #
+#    Updated: 2025/01/08 14:34:59 by mivogel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,7 +74,7 @@ $(LIBFT): $(LIBFTDIR)
 
 clean:
 	@$(MAKE) clean -C $(LIBFTDIR)
-	@rm -f ${OBJS_S} ${OBJS_C}
+	@rm -f ${OBJS_S} ${OBJS_C} ${OBJS_BONUS_S} ${OBJS_BONUS_C}
 	@echo $(L_Red)🗑️ *.o deleted! $(NC)
 
 fclean: clean

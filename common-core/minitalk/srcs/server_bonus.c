@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 09:49:58 by mivogel           #+#    #+#             */
-/*   Updated: 2025/01/08 12:26:29 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/01/08 14:21:37 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,11 @@ void	handler(int s, siginfo_t *info, void *content)
 	bits++;
 	if (bits == 8)
 	{
-		ft_printf("%c\n", c);
+		if (c == '\0')
+		{
+			ft_printf("\n");
+		}
+		ft_printf("%c", c);
 		bits = 0;
 		c = 0;
 		kill(info->si_pid, SIGUSR1);

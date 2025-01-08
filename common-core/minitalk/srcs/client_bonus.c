@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 10:04:36 by mivogel           #+#    #+#             */
-/*   Updated: 2025/01/08 12:32:45 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/01/08 14:31:07 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,11 @@
 void	send_signal(int pid, char *str)
 {
 	int				i;
+	int				len;
 	unsigned char	tmp;
 
-	while (*str)
+	len = ft_strlen(str) + 1;
+	while (len)
 	{
 		i = 8;
 		tmp = *(str);
@@ -31,6 +33,7 @@ void	send_signal(int pid, char *str)
 			usleep(100);
 		}
 		str++;
+		len--;
 	}
 }
 
@@ -54,7 +57,7 @@ int	main(int ac, char **av)
 
 	if (ac != 3)
 	{
-		ft_printf("Format: [./client <SERVER PID> <STRING>]\n");
+		ft_printf("Usage: [./client <SERVER PID> <STRING>]\n");
 		exit(EXIT_FAILURE);
 	}
 	else

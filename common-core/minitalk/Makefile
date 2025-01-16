@@ -6,7 +6,7 @@
 #    By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/02 11:36:11 by mivogel           #+#    #+#              #
-#    Updated: 2025/01/13 15:06:15 by mivogel          ###   ########.fr        #
+#    Updated: 2025/01/16 14:29:25 by mivogel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,6 +55,8 @@ a: all clean
 
 b: bonus clean
 
+ab: all bonus clean
+
 all: ${SERVER} ${CLIENT}
 
 bonus: $(BONUS)
@@ -77,18 +79,18 @@ $(BONUS): ${OBJS_BONUS_S} ${OBJS_BONUS_C} ${LIBFT}
 	@echo $(L_Green)✅${CLIENT_BONUS} with bonus compiled! $(NC)
 
 $(LIBFT): $(LIBFTDIR)
-	@$(MAKE) -C ${LIBFTDIR}
+	@$(MAKE) --no-print-directory -C ${LIBFTDIR}
 
 clean:
-	@$(MAKE) clean -C $(LIBFTDIR)
+	@$(MAKE) --no-print-directory clean -C $(LIBFTDIR)
 	@rm -f ${OBJS_S} ${OBJS_C} ${OBJS_BONUS_S} ${OBJS_BONUS_C}
 	@echo $(L_Red)🗑️ *.o deleted! $(NC)
 
 fclean: clean
-	@$(MAKE) fclean -C $(LIBFTDIR)
+	@$(MAKE) --no-print-directory fclean -C $(LIBFTDIR)
 	@rm -f ${NAME} $(BONUS)
 	@echo $(L_Red)🗑️ $(NAME) deleted! $(NC)
 
 re: fclean all
 
-.PHONY : a b all bonus clean fclean re
+.PHONY : a b ab all bonus clean fclean re

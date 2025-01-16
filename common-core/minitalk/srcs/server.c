@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 10:20:21 by mivogel           #+#    #+#             */
-/*   Updated: 2025/01/16 14:08:22 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/01/16 14:19:29 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,19 @@
 
 char	*ft_addchar(char *str, unsigned char c)
 {
-	static int	i;
-	char		*new;
+	int		len;
+	char	*new;
 
-	new = malloc(sizeof(char) * i + 2);
+	len = 0;
+	if (str)
+		len = ft_strlen(str);
+	new = malloc(sizeof(char) * len + 2);
 	if (!new)
 		return (NULL);
-	ft_strlcpy(str, new, i);
-	new[i++] = c;
-	new[i] = '\0';
+	if (str)
+		ft_strlcpy(new, str, len + 1);
+	new[len++] = c;
+	new[len] = '\0';
 	free(str);
 	return (new);
 }
@@ -43,6 +47,7 @@ void	handler(int s)
 		{
 			ft_printf("%s\n", str);
 			free(str);
+			str = NULL;
 		}
 		else
 			str = ft_addchar(str, c);

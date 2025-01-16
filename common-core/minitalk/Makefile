@@ -6,7 +6,7 @@
 #    By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/02 11:36:11 by mivogel           #+#    #+#              #
-#    Updated: 2025/01/16 14:29:25 by mivogel          ###   ########.fr        #
+#    Updated: 2025/01/16 14:36:20 by mivogel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -93,4 +93,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY : a b ab all bonus clean fclean re
+.PHONY : a b ab all bonus clean fclean

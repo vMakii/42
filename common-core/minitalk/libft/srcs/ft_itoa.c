@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 10:45:59 by mivogel           #+#    #+#             */
-/*   Updated: 2025/01/16 12:33:08 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/01/16 14:04:01 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char	*ft_itoa(int nbr)
 	int		len;
 
 	nb = (long)nbr;
-	len = get_size(nb);
+	len = ft_get_size(nb);
 	str = (char *)malloc(sizeof(char) * len + 1);
 	if (nb == 0)
 		str[0] = '0';

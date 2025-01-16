@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 10:45:59 by mivogel           #+#    #+#             */
-/*   Updated: 2024/11/11 16:38:00 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/01/16 12:33:08 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,27 +27,15 @@ static int	ft_get_size(int n)
 	return (i);
 }
 
-static void	ft_fill(char *str, long nb, int len)
+char	*ft_itoa(int nbr)
 {
-	while (nb > 0)
-	{
-		str[len--] = nb % 10 + '0';
-		nb /= 10;
-	}
-}
-
-char	*ft_itoa(int n)
-{
-	int		len;
 	char	*str;
 	long	nb;
+	int		len;
 
-	nb = (long)n;
-	len = ft_get_size(n);
-	str = (char *)malloc(sizeof(char) * (len + 1));
-	if (!str)
-		return (NULL);
-	str[len--] = '\0';
+	nb = (long)nbr;
+	len = get_size(nb);
+	str = (char *)malloc(sizeof(char) * len + 1);
 	if (nb == 0)
 		str[0] = '0';
 	if (nb < 0)
@@ -55,6 +43,11 @@ char	*ft_itoa(int n)
 		str[0] = '-';
 		nb = -nb;
 	}
-	ft_fill(str, nb, len);
+	str[len--] = '\0';
+	while (nb)
+	{
+		str[len--] = nb % 10 + '0';
+		nb /= 10;
+	}
 	return (str);
 }

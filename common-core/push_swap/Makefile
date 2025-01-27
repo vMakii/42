@@ -6,50 +6,65 @@
 #    By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/02 11:36:11 by mivogel           #+#    #+#              #
-#    Updated: 2024/12/18 15:45:20 by mivogel          ###   ########.fr        #
+#    Updated: 2025/01/27 10:37:17 by mivogel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = push_swap
 
 LIBFT = libft/libft.a
-
 LIBFTDIR = libft/
 
 SRCS = ft_push_swap.c lst_utils.c ft_sorting.c big_sort.c ft_checks.c ft_push.c ft_swap.c ft_rotate.c ft_reverse_rotate.c
-
 OBJS = $(addprefix srcs/, ${SRCS:.c=.o})
 
 CC = cc
-
 CFLAGS = -Wall -Wextra -Werror -g3 -Iincludes
 
-RED = '\033[0;31m'
-GREEN = '\033[0;32m'
-RESET = '\033[0m'
-
-all: ${NAME}
-
-$(NAME): ${OBJS} ${LIBFT}
-	@${CC} ${CFLAGS} -o $@ $(OBJS) ${LIBFT}
-	@echo $(GREEN)✅$@ compiled! $(RESET)
-
-%.o : %.c 
-	@$(CC) $(CFLAGS) -c $< -o $@
+Black='\e[0;30m'
+Gray='\e[0;37m'
+D_Gray='\e[1;30m'
+Red='\e[0;31m'
+L_Red='\e[1;31m'
+Green='\e[0;32m'
+L_Green='\e[1;32m'
+Orange='\e[0;33m'
+Yellow='\e[1;33m'
+Blue='\e[0;34m'
+L_Blue='\e[1;34m'
+Purple='\e[0;35m'
+L_Purple='\e[1;35m'
+Cyan='\e[0;36m'
+L_Cyan='\e[1;36m'
+White='\e[1;37m'
+NC='\e[0m'
 
 a: all clean
 
+all: ${NAME}
+
+bonus: $(BONUS)
+
+$(NAME): ${OBJS} ${LIBFT}
+	@${CC} ${CFLAGS} -o $@ $(OBJS) ${LIBFT}
+	@echo $(L_Green)✅$@ compiled! $(NC)
+
+%.o : %.c 	
+	@$(CC) $(CFLAGS) -c $< -o $@
+
 $(LIBFT): $(LIBFTDIR)
-	@$(MAKE) -C ${LIBFTDIR}
+	@$(MAKE) --no-print-directory -C ${LIBFTDIR}
 
 clean:
-	@$(MAKE) clean -C $(LIBFTDIR)
+	@$(MAKE) --no-print-directory clean -C $(LIBFTDIR)
 	@rm -f ${OBJS}
-	@echo $(RED)🗑️ *.o deleted! $(RESET)
+	@echo $(L_Red)🗑️ *.o deleted! $(NC)
+
 fclean: clean
-	@$(MAKE) fclean -C $(LIBFTDIR)
+	@$(MAKE) --no-print-directory fclean -C $(LIBFTDIR)
 	@rm -f ${NAME}
-	@echo $(RED)🗑️ $(NAME) deleted! $(RESET)
+	@echo $(L_Red)🗑️ $(NAME) deleted! $(NC)
+
 re: fclean all
 
-.PHONY : all clean fclean re
+.PHONY : a all bonus clean fclean

@@ -6,7 +6,7 @@
 #    By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/27 13:05:51 by mivogel           #+#    #+#              #
-#    Updated: 2024/12/12 14:45:12 by mivogel          ###   ########.fr        #
+#    Updated: 2025/01/13 14:29:04 by mivogel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,34 +24,50 @@ OBJS = $(addprefix srcs/, ${SRCS:.c=.o})
 BONUS_OBJS = $(addprefix srcs/, ${BONUS_SRCS:.c=.o})
 
 NAME = libft.a
+BONUS = libftbonus.a
 
 CC = cc
-
 CFLAGS = -Wall -Wextra -Werror -Iincludes
 
-RED = '\033[0;31m'
-GREEN = '\033[0;32m'
-RESET = '\033[0m'
+Black='\e[0;30m'
+Gray='\e[0;37m'
+D_Gray='\e[1;30m'
+Red='\e[0;31m'
+L_Red='\e[1;31m'
+Green='\e[0;32m'
+L_Green='\e[1;32m'
+Orange='\e[0;33m'
+Yellow='\e[1;33m'
+Blue='\e[0;34m'
+L_Blue='\e[1;34m'
+Purple='\e[0;35m'
+L_Purple='\e[1;35m'
+Cyan='\e[0;36m'
+L_Cyan='\e[1;36m'
+White='\e[1;37m'
+NC='\e[0m'
 
 all: ${NAME}
 
+bonus: $(BONUS)
+
 $(NAME): ${OBJS}
 	@ar rcs $@ $^
-	@echo $(GREEN)✅$@ compiled! $(RESET)
+	@echo $(L_Green)✅$@ compiled! $(NC)
 
 %.o : %.c 
 	@$(CC) $(CFLAGS) -c $< -o $@
 
-bonus: ${OBJS} ${BONUS_OBJS}
-	@ar rcs ${NAME} ${BONUS_OBJS} ${OBJS}
-	@echo $(GREEN)✅$(NAME) with bonus compiled! $(RESET)
+$(BONUS): ${OBJS} ${BONUS_OBJS}
+	@ar rcs $@ ${BONUS_OBJS} ${OBJS}
+	@echo $(L_Green)✅$@ compiled! $(NC)
 clean:
 	@rm -f ${OBJS} ${BONUS_OBJS}
-	@echo $(RED)🗑️ *.o deleted! $(RESET)
+	@echo $(L_Red)🗑️ *.o deleted! $(NC)
 
 fclean:
-	@rm -f ${NAME}
-	@echo $(RED)🗑️ $(NAME) deleted! $(RESET)
+	@rm -f ${NAME} $(BONUS)
+	@echo $(L_Red)🗑️ $(NAME) deleted! $(NC)
 
 re: fclean all
 

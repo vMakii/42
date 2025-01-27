@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_checks.c                                        :+:      :+:    :+:   */
+/*   checks.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 14:21:32 by mivogel           #+#    #+#             */
-/*   Updated: 2024/12/18 14:34:24 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/01/27 15:00:06 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-static void	ft_freesplit(char **tab)
+static void	freesplit(char **tab)
 {
 	int	i;
 
@@ -24,7 +24,7 @@ static void	ft_freesplit(char **tab)
 	free(tab);
 }
 
-static int	ft_getdouble(char *s, char **str, int index)
+static int	getdouble(char *s, char **str, int index)
 {
 	int	i;
 
@@ -38,7 +38,7 @@ static int	ft_getdouble(char *s, char **str, int index)
 	return (0);
 }
 
-static int	ft_isnum(char *str)
+static int	isnum(char *str)
 {
 	int	i;
 
@@ -54,21 +54,16 @@ static int	ft_isnum(char *str)
 	return (1);
 }
 
-int	ft_check_args(int ac, char **av)
+int	valid_input(char **av)
 {
 	int	i;
 
-	i = 1;
-	if (ac == 2)
-	{
-		av = ft_split(av[1], ' ');
-		i = 0;
-	}
+	i = 0;
 	while (av[i])
 	{
-		if (!ft_isnum(av[i]))
+		if (!isnum(av[i]))
 			return (0);
-		if (ft_getdouble(av[i], av, i))
+		if (getdouble(av[i], av, i))
 			return (0);
 		if (ft_atoi(av[i]) < 0)
 			return (0);
@@ -76,35 +71,25 @@ int	ft_check_args(int ac, char **av)
 			return (0);
 		i++;
 	}
-	if (ac == 2)
-		ft_freesplit(av);
 	return (1);
 }
 
-void	ft_init(t_list **stack, int ac, char **av)
+int	ft_check(int ac, char **av, t_list **a, t_list **b)
 {
-	t_list				*new;
-	unsigned long long	content;
-	int					i;
+	int	i;
 
-	i = 1;
+	i = 0;
 	if (ac == 2)
-	{
 		av = ft_split(av[1], ' ');
-		i = 0;
-	}
+	if (!valid_input(av))
+		return (0);
 	while (av[i])
-	{
-		content = ft_atoi(av[i]);
-		new = ft_lstnew(content);
-		if (!new)
-		{
-			ft_lstclear(stack);
-			exit(EXIT_FAILURE);
-		}
-		ft_lstadd_back(stack, new);
 		i++;
-	}
+	*a = ft_init(av, i);
+	if (!*a)
+		return (0);
+	*b = NULL;
 	if (ac == 2)
-		ft_freesplit(av);
+		freesplit(av);
+	return (1);
 }

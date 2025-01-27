@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 14:19:28 by mivogel           #+#    #+#             */
-/*   Updated: 2024/12/18 14:44:39 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/01/27 15:12:11 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,15 @@
 
 void	ft_lstclear(t_list **lst)
 {
-	t_list	*head;
 	t_list	*tmp;
 
 	if (!lst)
 		return ;
-	head = *lst;
-	while (head)
+	while (*lst)
 	{
-		tmp = head->next;
-		free(head);
-		head = tmp;
+		tmp = (*lst)->next;
+		free(*lst);
+		*lst = tmp;
 	}
 	*lst = NULL;
 }
@@ -59,8 +57,6 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 {
 	t_list	*tmp;
 
-	if (!lst || !new)
-		return ;
 	if (*lst == NULL)
 		*lst = new;
 	else
@@ -71,17 +67,26 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 		tmp->next = new;
 	}
 }
-
-int	ft_max(t_list *stack)
+t_list	*ft_init(char **av, int nb)
 {
-	int	max;
+	t_list	*a;
+	t_list	*new;
+	int		content;
+	int		i;
 
-	max = stack->index;
-	while (stack)
+	i = 0;
+	a = NULL;
+	while (av[i])
 	{
-		if (stack->index > max)
-			max = stack->index;
-		stack = stack->next;
+		content = ft_atoi(av[i]);
+		new = ft_lstnew(content);
+		if (!new)
+		{
+			ft_lstclear(a);
+			return (NULL);
+		}
+		ft_lstadd_back(&a, new);
+		i++;
 	}
-	return (max);
+	return (a);
 }

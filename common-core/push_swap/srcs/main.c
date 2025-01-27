@@ -1,52 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_push_swap.c                                     :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 13:38:55 by mivogel           #+#    #+#             */
-/*   Updated: 2024/12/19 13:01:16 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/01/27 15:15:02 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../push_swap.h"
+#include "push_swap.h"
 
-void	ft_free_stack(t_list **stack)
+static void	push_swap(t_list **a, ta_list **b, const int size)
 {
-	ft_lstclear(stack);
-	free(stack);
+	if (!is_sorted(*a))
+	{
+		if (size == 2)
+			ft_sa(a);
+		else if (size == 3)
+			ft_sort3(a);
+		else if (size > 3)
+			ft_sort(a, b);
+	}
 }
 
 int	main(int ac, char **av)
 {
-	t_list	**a;
-	t_list	**b;
+	t_list	*a;
+	t_list	*b;
+	int		size;
 
-	if (ac < 2)
+	if (ac < 2 || !ft_check(ac, av, &a, &b))
 		exit(EXIT_FAILURE);
-	if (!ft_check_args(ac, av))
-	{
-		ft_putstr_fd("Error\n", 2);
-		exit(EXIT_FAILURE);
-	}
-	a = (t_list **)malloc(sizeof(t_list *));
-	*a = NULL;
-	ft_init(a, ac, av);
-	if (ft_is_sorted(a))
-	{
-		ft_free_stack(a);
-		exit(EXIT_SUCCESS);
-	}
-	b = (t_list **)malloc(sizeof(t_list *));
-	*b = NULL;
-	ft_sort(a, b);
-	while (*a)
-	{
-		ft_printf("%d\n", (*a)->nb);
-		*a = (*a)->next;
-	}
-	ft_free_stack(a);
-	ft_free_stack(b);
-	exit(EXIT_SUCCESS);
+	size = ft_lstsize(a);
+	ft_getid(a, size);
+	push_swap(&a, &b, size);
+	ft_lstclear(&a);
+	ft_lstclear(&b);
+	exit(EXIT_SUCCES);
 }

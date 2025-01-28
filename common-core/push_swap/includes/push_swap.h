@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 13:19:08 by mivogel           #+#    #+#             */
-/*   Updated: 2025/01/28 11:46:52 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/01/28 13:35:34 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int					ft_is_sorted(t_list *stack);
 void				ft_sort3(t_list **stack);
 void				ft_sort(t_list **stack_a, t_list **stack_b, int size);
 void				ft_pushb(t_list **stack_a, t_list **stack_b, int size);
+void				ft_insert(t_list **stack_a, t_list **stack_b);
 // utils
 int					ft_check(int ac, char **av, t_list **a, t_list **b);
 void				ft_lstclear(t_list **lst);

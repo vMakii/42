@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 16:30:18 by mivogel           #+#    #+#             */
-/*   Updated: 2025/01/28 10:57:42 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/01/28 13:09:52 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	ft_push(t_list **dst, t_list **src)
 {
 	t_list	*tmp;
 
-	if (!src || !*src)
+	if (!*src)
 		return ;
 	tmp = (*src)->next;
 	(*src)->next = *dst;

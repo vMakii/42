@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 15:35:08 by mivogel           #+#    #+#             */
-/*   Updated: 2025/01/28 11:24:45 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/01/28 13:39:51 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	ft_pushb(t_list **stack_a, t_list **stack_b, int size)
 	{
 		if ((*stack_a)->index <= size / 2)
 		{
-			ft_pb(stack_a, stack_b);
+			ft_pb(stack_b, stack_a);
 			push++;
 		}
 		else
@@ -32,7 +32,18 @@ void	ft_pushb(t_list **stack_a, t_list **stack_b, int size)
 	}
 	while (size - push > 3)
 	{
-		ft_pb(stack_a, stack_b);
+		ft_pb(stack_b, stack_a);
 		push++;
+	}
+}
+
+void	ft_insert(t_list **stack_a, t_list **stack_b)
+{
+	while (*stack_b)
+	{
+		if ((*stack_b)->index > (*stack_a)->index)
+			ft_ra(stack_a);
+		else
+			ft_pa(stack_a, stack_b);
 	}
 }

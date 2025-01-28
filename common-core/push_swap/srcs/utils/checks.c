@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 14:21:32 by mivogel           #+#    #+#             */
-/*   Updated: 2025/01/28 12:06:25 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/01/28 12:35:01 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int	getdouble(char *s, char **str, int index)
 {
 	int	i;
 
-	i = 1;
+	i = 0;
 	while (i < index)
 	{
 		if (!ft_strncmp(s, str[i], INT_MAX))
@@ -61,7 +61,6 @@ static int	valid_input(char **av)
 	i = 0;
 	while (av[i])
 	{
-		ft_printf("%s\n", av[i]);
 		if (!isnum(av[i]))
 			return (0);
 		if (getdouble(av[i], av, i))

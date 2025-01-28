@@ -6,18 +6,18 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 13:19:08 by mivogel           #+#    #+#             */
-/*   Updated: 2025/01/27 12:19:30 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/01/28 11:46:52 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-# include "libft/includes/libft.h"
+# include "../libft/includes/libft.h"
 
 typedef struct s_list
 {
-	int				nb;
+	int				value;
 	int				index;
 	struct s_list	*next;
 }					t_list;
@@ -34,20 +34,18 @@ void				ft_rr(t_list **stack_a, t_list **stack_b);
 void				ft_rra(t_list **stack);
 void				ft_rrb(t_list **stack);
 void				ft_rrr(t_list **stack_a, t_list **stack_b);
-// checks
-void				ft_init(t_list **stack, int ac, char **av);
-int					ft_check_args(int ac, char **av);
-// sorting
-int					ft_is_sorted(t_list **stack);
+// sort
+void				ft_getid(t_list *stack);
+int					ft_is_sorted(t_list *stack);
 void				ft_sort3(t_list **stack);
-void				ft_pushb(t_list **stack_a, t_list **stack_b, int size_a);
-void				ft_bigsort(t_list **stack_a, t_list **stack_b, int size_a);
-void				ft_sort(t_list **stack_a, t_list **stack_b);
+void				ft_sort(t_list **stack_a, t_list **stack_b, int size);
+void				ft_pushb(t_list **stack_a, t_list **stack_b, int size);
 // utils
+int					ft_check(int ac, char **av, t_list **a, t_list **b);
 void				ft_lstclear(t_list **lst);
 int					ft_lstsize(t_list *lst);
 t_list				*ft_lstnew(int value);
-int					ft_max(t_list *stack);
 void				ft_lstadd_back(t_list **lst, t_list *new);
+t_list				*ft_init(char **av, int n);
 
 #endif

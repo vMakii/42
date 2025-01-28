@@ -6,11 +6,11 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 14:21:32 by mivogel           #+#    #+#             */
-/*   Updated: 2025/01/27 15:00:06 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/01/28 12:06:25 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../push_swap.h"
+#include "push_swap.h"
 
 static void	freesplit(char **tab)
 {
@@ -54,13 +54,14 @@ static int	isnum(char *str)
 	return (1);
 }
 
-int	valid_input(char **av)
+static int	valid_input(char **av)
 {
 	int	i;
 
 	i = 0;
 	while (av[i])
 	{
+		ft_printf("%s\n", av[i]);
 		if (!isnum(av[i]))
 			return (0);
 		if (getdouble(av[i], av, i))
@@ -74,21 +75,23 @@ int	valid_input(char **av)
 	return (1);
 }
 
-int	ft_check(int ac, char **av, t_list **a, t_list **b)
+int	ft_check(int ac, char **av, t_list **stack_a, t_list **stack_b)
 {
 	int	i;
 
 	i = 0;
 	if (ac == 2)
 		av = ft_split(av[1], ' ');
+	else
+		av++;
 	if (!valid_input(av))
 		return (0);
 	while (av[i])
 		i++;
-	*a = ft_init(av, i);
-	if (!*a)
+	*stack_a = ft_init(av, i);
+	if (!*stack_a)
 		return (0);
-	*b = NULL;
+	*stack_b = NULL;
 	if (ac == 2)
 		freesplit(av);
 	return (1);

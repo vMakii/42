@@ -6,11 +6,11 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 14:19:28 by mivogel           #+#    #+#             */
-/*   Updated: 2025/01/27 15:12:11 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/01/28 11:47:34 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../push_swap.h"
+#include "push_swap.h"
 
 void	ft_lstclear(t_list **lst)
 {
@@ -47,7 +47,7 @@ t_list	*ft_lstnew(int value)
 	new = (t_list *)malloc(sizeof(t_list));
 	if (!new)
 		return (NULL);
-	new->nb = value;
+	new->value = value;
 	new->index = -1;
 	new->next = NULL;
 	return (new);
@@ -67,7 +67,8 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 		tmp->next = new;
 	}
 }
-t_list	*ft_init(char **av, int nb)
+
+t_list	*ft_init(char **av, int n)
 {
 	t_list	*a;
 	t_list	*new;
@@ -76,13 +77,13 @@ t_list	*ft_init(char **av, int nb)
 
 	i = 0;
 	a = NULL;
-	while (av[i])
+	while (i < n)
 	{
 		content = ft_atoi(av[i]);
 		new = ft_lstnew(content);
 		if (!new)
 		{
-			ft_lstclear(a);
+			ft_lstclear(&a);
 			return (NULL);
 		}
 		ft_lstadd_back(&a, new);

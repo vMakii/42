@@ -6,22 +6,22 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 13:38:55 by mivogel           #+#    #+#             */
-/*   Updated: 2025/01/27 15:15:02 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/01/28 11:52:01 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	push_swap(t_list **a, ta_list **b, const int size)
+static void	push_swap(t_list **a, t_list **b, const int size)
 {
-	if (!is_sorted(*a))
+	if (!ft_is_sorted(*a))
 	{
 		if (size == 2)
 			ft_sa(a);
 		else if (size == 3)
 			ft_sort3(a);
 		else if (size > 3)
-			ft_sort(a, b);
+			ft_sort(a, b, size);
 	}
 }
 
@@ -32,11 +32,14 @@ int	main(int ac, char **av)
 	int		size;
 
 	if (ac < 2 || !ft_check(ac, av, &a, &b))
+	{
+		ft_printf("Error\n");
 		exit(EXIT_FAILURE);
+	}
 	size = ft_lstsize(a);
-	ft_getid(a, size);
+	ft_getid(a);
 	push_swap(&a, &b, size);
 	ft_lstclear(&a);
 	ft_lstclear(&b);
-	exit(EXIT_SUCCES);
+	exit(EXIT_SUCCESS);
 }

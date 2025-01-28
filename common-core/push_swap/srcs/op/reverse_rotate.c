@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_reverse_rotate.c                                :+:      :+:    :+:   */
+/*   reverse_rotate.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 08:51:32 by mivogel           #+#    #+#             */
-/*   Updated: 2024/12/18 15:05:29 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/01/28 10:57:50 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../push_swap.h"
+#include "push_swap.h"
 
 static void	ft_reverse_rotate(t_list **stack)
 {

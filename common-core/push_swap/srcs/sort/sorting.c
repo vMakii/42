@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 11:56:29 by mivogel           #+#    #+#             */
-/*   Updated: 2025/01/28 15:40:24 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/01/28 16:01:18 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,13 +83,19 @@ void	ft_sort(t_list **stack_a, t_list **stack_b, int size)
 	while (*stack_b)
 	{
 		max = getmax(*stack_a);
-		if ((*stack_b)->index > max && (*stack_a)->index == max - 1)
-			ft_pa(stack_a, stack_b);
-		else if ((*stack_b)->index > (*stack_a)->index)
-			ft_ra(stack_a);
+		if ((*stack_b)->index > max)
+		{
+			while ((*stack_a)->index != 0)
+				ft_ra(stack_a);
+		}
 		else
-			ft_pa(stack_a, stack_b);
+		{
+			while ((*stack_a)->index != 0
+				&& (*stack_a)->index < (*stack_b)->index)
+				ft_ra(stack_a);
+		}
+		ft_pa(stack_a, stack_b);
 	}
 	while ((*stack_a)->index != 0)
-		ft_rra(stack_a);
+		ft_ra(stack_a);
 }

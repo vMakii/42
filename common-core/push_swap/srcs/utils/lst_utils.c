@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 14:19:28 by mivogel           #+#    #+#             */
-/*   Updated: 2025/01/28 11:47:34 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/01/29 11:24:59 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,9 @@ t_list	*ft_lstnew(int value)
 	if (!new)
 		return (NULL);
 	new->value = value;
-	new->index = -1;
+	new->index = 0;
+	new->pos = -1;
+	new->target = -1;
 	new->next = NULL;
 	return (new);
 }

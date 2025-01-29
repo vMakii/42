@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 13:19:08 by mivogel           #+#    #+#             */
-/*   Updated: 2025/01/28 13:35:34 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/01/29 13:25:57 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,10 @@ typedef struct s_list
 {
 	int				value;
 	int				index;
+	int				pos;
+	int				target;
+	int				cost_a;
+	int				cost_b;
 	struct s_list	*next;
 }					t_list;
 
@@ -35,12 +39,16 @@ void				ft_rra(t_list **stack);
 void				ft_rrb(t_list **stack);
 void				ft_rrr(t_list **stack_a, t_list **stack_b);
 // sort
+void				ft_pushb(t_list **stack_a, t_list **stack_b, int size);
+void				ft_sort(t_list **stack_a, t_list **stack_b, int size);
+void				ft_move(t_list **stack_a, t_list **stack_b, int cost_a,
+						int cost_b);
+int					ft_getmax(t_list *stack);
+int					ft_getmin(t_list *stack);
 void				ft_getid(t_list *stack);
 int					ft_is_sorted(t_list *stack);
 void				ft_sort3(t_list **stack);
-void				ft_sort(t_list **stack_a, t_list **stack_b, int size);
-void				ft_pushb(t_list **stack_a, t_list **stack_b, int size);
-void				ft_insert(t_list **stack_a, t_list **stack_b);
+
 // utils
 int					ft_check(int ac, char **av, t_list **a, t_list **b);
 void				ft_lstclear(t_list **lst);
@@ -48,5 +56,8 @@ int					ft_lstsize(t_list *lst);
 t_list				*ft_lstnew(int value);
 void				ft_lstadd_back(t_list **lst, t_list *new);
 t_list				*ft_init(char **av, int n);
+int					ft_abs(int n);
+void				ft_target(t_list **stack_a, t_list **stack_b);
+void				ft_cost(t_list **stack_a, t_list **stack_b, int size_a);
 
 #endif

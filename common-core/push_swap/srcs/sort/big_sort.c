@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 15:35:08 by mivogel           #+#    #+#             */
-/*   Updated: 2025/01/29 13:26:13 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/01/29 15:21:08 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	ft_sort(t_list **stack_a, t_list **stack_b, int size)
 	{
 		size = ft_lstsize(*stack_a);
 		ft_target(stack_a, stack_b);
-		ft_cost(stack_a, stack_b, size);
+		ft_cost(stack_b, size);
 		ft_solve(stack_a, stack_b);
 	}
 }

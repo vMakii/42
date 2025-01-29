@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 12:46:33 by mivogel           #+#    #+#             */
-/*   Updated: 2025/01/29 13:52:11 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/01/29 15:19:50 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,38 @@ static void	r(t_list **stack_a, t_list **stack_b, int *cost_a, int *cost_b)
 	}
 }
 
-static void	rota(t_list **stack_a, int *cost_a)
+static void	rot_a(t_list **stack, int *cost)
 {
+	while (*cost)
+	{
+		if (*cost > 0)
+		{
+			(*cost)--;
+			ft_ra(stack);
+		}
+		else if (*cost < 0)
+		{
+			(*cost)++;
+			ft_rra(stack);
+		}
+	}
+}
+
+static void	rot_b(t_list **stack, int *cost)
+{
+	while (*cost)
+	{
+		if (*cost > 0)
+		{
+			(*cost)--;
+			ft_rb(stack);
+		}
+		else if (*cost < 0)
+		{
+			(*cost)++;
+			ft_rrb(stack);
+		}
+	}
 }
 
 void	ft_move(t_list **stack_a, t_list **stack_b, int cost_a, int cost_b)
@@ -46,5 +76,5 @@ void	ft_move(t_list **stack_a, t_list **stack_b, int cost_a, int cost_b)
 		rot_a(stack_a, &cost_a);
 	if (cost_b != 0)
 		rot_b(stack_b, &cost_a);
-	pa(stack_a, stack_b);
+	ft_pa(stack_a, stack_b);
 }

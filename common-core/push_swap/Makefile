@@ -6,7 +6,7 @@
 #    By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/02 11:36:11 by mivogel           #+#    #+#              #
-#    Updated: 2025/01/28 11:33:54 by mivogel          ###   ########.fr        #
+#    Updated: 2025/01/29 15:19:37 by mivogel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME = push_swap
 LIBFT = libft/libft.a
 LIBFTDIR = libft/
 
-SRCS = main.c op/push.c op/reverse_rotate.c op/rotate.c op/swap.c sort/big_sort.c sort/sorting.c utils/checks.c utils/lst_utils.c  
+SRCS = main.c op/push.c op/reverse_rotate.c op/rotate.c op/swap.c sort/big_sort.c sort/move.c sort/sorting.c utils/checks.c utils/lst_utils.c utils/sort_utils.c  
 OBJS = $(addprefix srcs/, ${SRCS:.c=.o})
 
 CC = cc

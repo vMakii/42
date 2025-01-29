@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 10:55:57 by mivogel           #+#    #+#             */
-/*   Updated: 2025/01/29 13:17:04 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/01/29 16:09:47 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,13 @@ static void	get_pos(t_list **stack)
 	}
 }
 
-static int	get_target_pos(t_list **stack_a, int index)
+static int	get_target_pos(t_list **stack_a, int index, int target_pos)
 {
 	t_list	*tmp;
 	int		target_id;
-	int		target_pos;
 
 	tmp = *stack_a;
 	target_id = INT_MAX;
-	target_pos = -1;
 	while (tmp)
 	{
 		if (tmp->index > index && tmp->index < target_id)
@@ -50,7 +48,7 @@ static int	get_target_pos(t_list **stack_a, int index)
 			target_id = tmp->index;
 			target_pos = tmp->pos;
 		}
-		else if (target_pos == -1 || tmp->index < target_id)
+		else if (tmp->index < target_id)
 		{
 			target_id = tmp->index;
 			target_pos = tmp->pos;
@@ -71,13 +69,13 @@ void	ft_target(t_list **stack_a, t_list **stack_b)
 	get_pos(stack_b);
 	while (tmp)
 	{
-		target = get_target_pos(stack_a, tmp->index);
+		target = get_target_pos(stack_a, tmp->index, target);
 		tmp->target = target;
 		tmp = tmp->next;
 	}
 }
 
-void	ft_cost(t_list **stack_a, t_list **stack_b, int size_a)
+void	ft_cost(t_list **stack_b, int size_a)
 {
 	t_list	*b;
 	int		size_b;

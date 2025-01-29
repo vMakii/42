@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 11:56:29 by mivogel           #+#    #+#             */
-/*   Updated: 2025/01/29 10:28:20 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/01/29 15:43:29 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	ft_getid(t_list *stack)
 	head = stack;
 	while (head)
 	{
-		i = 0;
+		i = 1;
 		tmp = stack;
 		while (tmp)
 		{

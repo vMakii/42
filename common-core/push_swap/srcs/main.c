@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 13:38:55 by mivogel           #+#    #+#             */
-/*   Updated: 2025/01/28 11:52:01 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/01/30 12:31:43 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,12 @@ int	main(int ac, char **av)
 	if (ac < 2 || !ft_check(ac, av, &a, &b))
 	{
 		ft_printf("Error\n");
-		exit(EXIT_FAILURE);
+		return (0);
 	}
 	size = ft_lstsize(a);
 	ft_getid(a);
 	push_swap(&a, &b, size);
 	ft_lstclear(&a);
 	ft_lstclear(&b);
-	exit(EXIT_SUCCESS);
+	return (0);
 }

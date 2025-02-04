@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 15:35:08 by mivogel           #+#    #+#             */
-/*   Updated: 2025/01/29 15:21:08 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/02/04 15:45:39 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static void	ft_solve(t_list **stack_a, t_list **stack_b)
 	while (tmp)
 	{
 		cost = ft_abs(tmp->cost_a) + ft_abs(tmp->cost_b);
-		if (cost < cheapest)
+		if (cost < ft_abs(cheapest))
 		{
 			cheapest = cost;
 			cost_a = tmp->cost_a;
@@ -59,6 +59,23 @@ static void	ft_solve(t_list **stack_a, t_list **stack_b)
 		tmp = tmp->next;
 	}
 	ft_move(stack_a, stack_b, cost_a, cost_b);
+}
+
+static void	double_rotor(t_list **stack_a)
+{
+	int	size;
+
+	size = ft_lstsize(*stack_a);
+	if ((*stack_a)->index > size / 2)
+	{
+		while (!ft_is_sorted(*stack_a))
+			ft_ra(stack_a);
+	}
+	else
+	{
+		while (!ft_is_sorted(*stack_a))
+			ft_rra(stack_a);
+	}
 }
 
 void	ft_sort(t_list **stack_a, t_list **stack_b, int size)
@@ -72,4 +89,6 @@ void	ft_sort(t_list **stack_a, t_list **stack_b, int size)
 		ft_cost(stack_b, size);
 		ft_solve(stack_a, stack_b);
 	}
+	if (!ft_is_sorted(*stack_a))
+		double_rotor(stack_a);
 }

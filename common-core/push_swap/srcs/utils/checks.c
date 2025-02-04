@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 14:21:32 by mivogel           #+#    #+#             */
-/*   Updated: 2025/01/28 12:35:01 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/01/30 12:42:08 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,7 @@ static int	valid_input(char **av)
 			return (0);
 		if (getdouble(av[i], av, i))
 			return (0);
-		if (ft_atoi(av[i]) < 0)
-			return (0);
-		if (ft_strncmp(av[i], "2147483647", 12) == 0)
+		if (ft_atoi(av[i]) < INT_MIN || ft_atoi(av[i]) > INT_MAX)
 			return (0);
 		i++;
 	}

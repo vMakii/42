@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 12:46:33 by mivogel           #+#    #+#             */
-/*   Updated: 2025/01/29 15:19:50 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/02/04 15:43:00 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,7 @@ void	ft_move(t_list **stack_a, t_list **stack_b, int cost_a, int cost_b)
 		rr(stack_a, stack_b, &cost_a, &cost_b);
 	else if (cost_a > 0 && cost_b > 0)
 		r(stack_a, stack_b, &cost_a, &cost_b);
-	if (cost_a != 0)
-		rot_a(stack_a, &cost_a);
-	if (cost_b != 0)
-		rot_b(stack_b, &cost_a);
+	rot_a(stack_a, &cost_a);
+	rot_b(stack_b, &cost_b);
 	ft_pa(stack_a, stack_b);
 }

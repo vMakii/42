@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 13:19:08 by mivogel           #+#    #+#             */
-/*   Updated: 2025/01/29 15:44:14 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/01/30 11:54:16 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ void				ft_sort(t_list **stack_a, t_list **stack_b, int size);
 void				ft_move(t_list **stack_a, t_list **stack_b, int cost_a,
 						int cost_b);
 int					ft_getmax(t_list *stack);
-int					ft_getmin(t_list *stack);
 void				ft_getid(t_list *stack);
 int					ft_is_sorted(t_list *stack);
 void				ft_sort3(t_list **stack);

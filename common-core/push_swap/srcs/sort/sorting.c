@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 11:56:29 by mivogel           #+#    #+#             */
-/*   Updated: 2025/01/29 15:43:29 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/02/04 15:45:57 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void	ft_getid(t_list *stack)
 			tmp = tmp->next;
 		}
 		head->index = i;
+		// ft_printf("id: %d\n", i);
 		head = head->next;
 	}
 }

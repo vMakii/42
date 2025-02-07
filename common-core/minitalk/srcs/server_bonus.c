@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 09:49:58 by mivogel           #+#    #+#             */
-/*   Updated: 2025/01/16 14:41:55 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/02/07 11:46:01 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,11 @@ char	*ft_addchar(char *str, unsigned char c)
 		len = ft_strlen(str);
 	new = malloc(sizeof(char) * len + 2);
 	if (!new)
+	{
+		free(str);
+		str = NULL;
 		return (NULL);
+	}
 	if (str)
 		ft_strlcpy(new, str, len + 1);
 	new[len++] = c;

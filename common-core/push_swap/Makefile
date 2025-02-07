@@ -6,7 +6,7 @@
 #    By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/02 11:36:11 by mivogel           #+#    #+#              #
-#    Updated: 2025/02/04 19:47:08 by mivogel          ###   ########.fr        #
+#    Updated: 2025/02/07 10:50:34 by mivogel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,11 +45,23 @@ all: ${NAME}
 
 bonus: $(BONUS)
 
+100: $(NAME)
+	$(eval ARG = $(shell shuf -i 0-999 -n 100))
+	@./push_swap $(ARG) | ./checker_linux $(ARG)
+	@echo -n "Nombre d'operations: " 
+	@./push_swap $(ARG) | wc -l
+
+500: $(NAME)
+	$(eval ARG = $(shell shuf -i 0-999 -n 500))
+	@./push_swap $(ARG) | ./checker_linux $(ARG)
+	@echo -n "Nombre d'operations: " 
+	@./push_swap $(ARG) | wc -l
+
 $(NAME): ${OBJS} ${LIBFT}
 	@${CC} ${CFLAGS} -o $@ $(OBJS) ${LIBFT}
 	@echo $(L_Green)✅$@ compiled! $(NC)
 
-%.o : %.c 	
+%.o: %.c 	
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(LIBFT): $(LIBFTDIR)
@@ -94,7 +106,7 @@ NAMEE_BONUS = push_swap_bonus
 MIN = -999
 MAX = 999
 HOW_MANY = 500
-HOW_MUCH = 100
+HOW_MUCH = 10
 
 # MAKE A: Run PUSH_SWAP with 'HOW_MANY' random numbers between 'MIN' and 'MAX'
 # 

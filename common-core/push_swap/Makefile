@@ -6,17 +6,21 @@
 #    By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/02 11:36:11 by mivogel           #+#    #+#              #
-#    Updated: 2025/02/07 10:50:34 by mivogel          ###   ########.fr        #
+#    Updated: 2025/02/10 15:41:24 by mivogel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = push_swap
+BONUS = checker
 
 LIBFT = libft/libft.a
 LIBFTDIR = libft/
 
-SRCS = main.c op/push.c op/reverse_rotate.c op/rotate.c op/swap.c sort/big_sort.c sort/move.c sort/sorting.c utils/checks.c utils/lst_utils.c utils/sort_utils.c  
+SRCS = main.c op/push.c op/reverse_rotate.c op/rotate.c op/swap.c sort/big_sort.c sort/move.c sort/sorting.c utils/checks.c utils/lst_utils.c utils/sort_utils.c
+BONUS_SRCS = bonus/checker.c bonus/checker_utils.c op/push.c op/reverse_rotate.c op/rotate.c op/swap.c sort/sorting.c utils/checks.c utils/lst_utils.c
+
 OBJS = $(addprefix srcs/, ${SRCS:.c=.o})
+BONUS_OBJS = $(addprefix srcs/, ${BONUS_SRCS:.c=.o})
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g3 -Iincludes
@@ -43,11 +47,9 @@ ac: all clean
 
 all: ${NAME}
 
-bonus: $(BONUS)
-
-100: $(NAME)
+100: $(NAME) $(BONUS)
 	$(eval ARG = $(shell shuf -i 0-999 -n 100))
-	@./push_swap $(ARG) | ./checker_linux $(ARG)
+	@./push_swap $(ARG) | ./checker $(ARG)
 	@echo -n "Nombre d'operations: " 
 	@./push_swap $(ARG) | wc -l
 
@@ -60,6 +62,10 @@ bonus: $(BONUS)
 $(NAME): ${OBJS} ${LIBFT}
 	@${CC} ${CFLAGS} -o $@ $(OBJS) ${LIBFT}
 	@echo $(L_Green)✅$@ compiled! $(NC)
+
+bonus: ${LIBFT} ${OBJS} ${BONUS_OBJS}
+	@${CC} ${CFLAGS} -o ${BONUS} ${BONUS_OBJS} ${LIBFT}
+	@echo $(L_Purple)✅$@ compiled! $(NC)
 
 %.o: %.c 	
 	@$(CC) $(CFLAGS) -c $< -o $@

@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 13:19:08 by mivogel           #+#    #+#             */
-/*   Updated: 2025/01/30 11:54:16 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/02/10 15:09:28 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,7 @@ t_list				*ft_init(char **av, int n);
 int					ft_abs(int n);
 void				ft_target(t_list **stack_a, t_list **stack_b);
 void				ft_cost(t_list **stack_b, int size_a);
+// bonus
+char				*ft_op(t_list **a, t_list **b, char *line);
 
 #endif

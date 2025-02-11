@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 11:56:29 by mivogel           #+#    #+#             */
-/*   Updated: 2025/02/11 14:07:49 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/02/11 14:16:36 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	ft_sort3(t_list **stack)
 
 void	ft_sort5(t_list **stack_a, t_list **stack_b)
 {
-	while (ft_lstsize(*stack_a) == 3)
+	while (ft_lstsize(*stack_a) > 3)
 	{
 		if ((*stack_a)->index == 1 || (*stack_a)->index == 2)
 			ft_pb(stack_b, stack_a);

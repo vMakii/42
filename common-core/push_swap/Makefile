@@ -6,7 +6,7 @@
 #    By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/02 11:36:11 by mivogel           #+#    #+#              #
-#    Updated: 2025/02/10 15:41:24 by mivogel          ###   ########.fr        #
+#    Updated: 2025/02/11 11:58:43 by mivogel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -111,8 +111,8 @@ NAMEE_BONUS = push_swap_bonus
 
 MIN = -999
 MAX = 999
-HOW_MANY = 500
-HOW_MUCH = 10
+HOW_MANY = 5
+HOW_MUCH = 100
 
 # MAKE A: Run PUSH_SWAP with 'HOW_MANY' random numbers between 'MIN' and 'MAX'
 # 

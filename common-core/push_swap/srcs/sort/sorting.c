@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 11:56:29 by mivogel           #+#    #+#             */
-/*   Updated: 2025/02/10 09:49:38 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/02/11 14:07:49 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,20 @@ void	ft_sort3(t_list **stack)
 		ft_rra(stack);
 	if ((*stack)->index > (*stack)->next->index)
 		ft_sa(stack);
+}
+
+void	ft_sort5(t_list **stack_a, t_list **stack_b)
+{
+	while (ft_lstsize(*stack_a) == 3)
+	{
+		if ((*stack_a)->index == 1 || (*stack_a)->index == 2)
+			ft_pb(stack_b, stack_a);
+		else
+			ft_ra(stack_a);
+	}
+	if (ft_is_sorted(*stack_b))
+		ft_sb(stack_b);
+	ft_sort3(stack_a);
+	ft_pa(stack_a, stack_b);
+	ft_pa(stack_a, stack_b);
 }

@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 15:35:08 by mivogel           #+#    #+#             */
-/*   Updated: 2025/02/11 15:46:31 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/02/14 10:45:21 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,21 +21,21 @@ void	ft_pushb(t_list **stack_a, t_list **stack_b, int size)
 	{
 		if ((*stack_a)->index <= size / 3)
 		{
-			ft_pb(stack_b, stack_a);
-			ft_rb(stack_b);
+			ft_pb(stack_b, stack_a, 0);
+			ft_rb(stack_b, 0);
 			push++;
 		}
 		else if ((*stack_a)->index <= size * 2 / 3)
 		{
-			ft_pb(stack_b, stack_a);
+			ft_pb(stack_b, stack_a, 0);
 			push++;
 		}
 		else
-			ft_ra(stack_a);
+			ft_ra(stack_a, 0);
 	}
 	while (size - push > 3)
 	{
-		ft_pb(stack_b, stack_a);
+		ft_pb(stack_b, stack_a, 0);
 		push++;
 	}
 }
@@ -72,12 +72,12 @@ static void	double_rotor(t_list **stack_a)
 	if ((*stack_a)->index > size / 2)
 	{
 		while (!ft_is_sorted(*stack_a))
-			ft_ra(stack_a);
+			ft_ra(stack_a, 0);
 	}
 	else
 	{
 		while (!ft_is_sorted(*stack_a))
-			ft_rra(stack_a);
+			ft_rra(stack_a, 0);
 	}
 }
 

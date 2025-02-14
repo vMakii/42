@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 14:40:00 by mivogel           #+#    #+#             */
-/*   Updated: 2025/01/28 10:58:07 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/02/14 10:37:13 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,21 +26,24 @@ static void	ft_swap(t_list **stack)
 	*stack = second;
 }
 
-void	ft_sa(t_list **stack)
+void	ft_sa(t_list **stack, int n)
 {
 	ft_swap(stack);
-	ft_printf("sa\n");
+	if (n == 0)
+		ft_printf("sa\n");
 }
 
-void	ft_sb(t_list **stack)
+void	ft_sb(t_list **stack, int n)
 {
 	ft_swap(stack);
-	ft_printf("sb\n");
+	if (n == 0)
+		ft_printf("sb\n");
 }
 
-void	ft_ss(t_list **stack_a, t_list **stack_b)
+void	ft_ss(t_list **stack_a, t_list **stack_b, int n)
 {
 	ft_swap(stack_a);
 	ft_swap(stack_b);
-	ft_printf("ss\n");
+	if (n == 0)
+		ft_printf("ss\n");
 }

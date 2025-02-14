@@ -6,13 +6,16 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 13:19:08 by mivogel           #+#    #+#             */
-/*   Updated: 2025/02/11 14:07:17 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/02/14 10:31:13 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 5
+# endif
 # include "../libft/includes/libft.h"
 
 typedef struct s_list
@@ -27,17 +30,17 @@ typedef struct s_list
 }					t_list;
 
 // op
-void				ft_sa(t_list **stack);
-void				ft_sb(t_list **stack);
-void				ft_ss(t_list **stack_a, t_list **stack_b);
-void				ft_pa(t_list **stack_a, t_list **stack_b);
-void				ft_pb(t_list **stack_b, t_list **stack_a);
-void				ft_ra(t_list **stack);
-void				ft_rb(t_list **stack);
-void				ft_rr(t_list **stack_a, t_list **stack_b);
-void				ft_rra(t_list **stack);
-void				ft_rrb(t_list **stack);
-void				ft_rrr(t_list **stack_a, t_list **stack_b);
+void				ft_sa(t_list **stack, int n);
+void				ft_sb(t_list **stack, int n);
+void				ft_ss(t_list **stack_a, t_list **stack_b, int n);
+void				ft_pa(t_list **stack_a, t_list **stack_b, int n);
+void				ft_pb(t_list **stack_b, t_list **stack_a, int n);
+void				ft_ra(t_list **stack, int n);
+void				ft_rb(t_list **stack, int n);
+void				ft_rr(t_list **stack_a, t_list **stack_b, int n);
+void				ft_rra(t_list **stack, int n);
+void				ft_rrb(t_list **stack, int n);
+void				ft_rrr(t_list **stack_a, t_list **stack_b, int n);
 // sort
 void				ft_pushb(t_list **stack_a, t_list **stack_b, int size);
 void				ft_sort(t_list **stack_a, t_list **stack_b, int size);

@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 16:48:16 by mivogel           #+#    #+#             */
-/*   Updated: 2025/01/28 10:57:58 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/02/14 10:36:37 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,21 +28,24 @@ static void	ft_rotate(t_list **stack)
 	last->next = first;
 }
 
-void	ft_ra(t_list **stack)
+void	ft_ra(t_list **stack, int n)
 {
 	ft_rotate(stack);
-	ft_printf("ra\n");
+	if (n == 0)
+		ft_printf("ra\n");
 }
 
-void	ft_rb(t_list **stack)
+void	ft_rb(t_list **stack, int n)
 {
 	ft_rotate(stack);
-	ft_printf("rb\n");
+	if (n == 0)
+		ft_printf("rb\n");
 }
 
-void	ft_rr(t_list **stack_a, t_list **stack_b)
+void	ft_rr(t_list **stack_a, t_list **stack_b, int n)
 {
 	ft_rotate(stack_a);
 	ft_rotate(stack_b);
-	ft_printf("rr\n");
+	if (n == 0)
+		ft_printf("rr\n");
 }

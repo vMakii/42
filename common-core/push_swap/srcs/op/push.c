@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 16:30:18 by mivogel           #+#    #+#             */
-/*   Updated: 2025/01/28 13:09:52 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/02/14 10:32:08 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,16 @@ static void	ft_push(t_list **dst, t_list **src)
 	*src = tmp;
 }
 
-void	ft_pa(t_list **stack_a, t_list **stack_b)
+void	ft_pa(t_list **stack_a, t_list **stack_b, int n)
 {
 	ft_push(stack_a, stack_b);
-	ft_printf("pa\n");
+	if (n == 0)
+		ft_printf("pa\n");
 }
 
-void	ft_pb(t_list **stack_b, t_list **stack_a)
+void	ft_pb(t_list **stack_b, t_list **stack_a, int n)
 {
 	ft_push(stack_b, stack_a);
-	ft_printf("pb\n");
+	if (n == 0)
+		ft_printf("pb\n");
 }

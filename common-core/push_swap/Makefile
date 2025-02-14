@@ -6,7 +6,7 @@
 #    By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/02 11:36:11 by mivogel           #+#    #+#              #
-#    Updated: 2025/02/11 11:58:43 by mivogel          ###   ########.fr        #
+#    Updated: 2025/02/14 10:48:34 by mivogel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,6 +47,12 @@ ac: all clean
 
 all: ${NAME}
 
+5: $(NAME) $(BONUS)
+	$(eval ARG = $(shell shuf -i 0-999 -n 5))
+	@./push_swap $(ARG) | ./checker $(ARG)
+	@echo -n "Nombre d'operations: " 
+	@./push_swap $(ARG) | wc -l
+
 100: $(NAME) $(BONUS)
 	$(eval ARG = $(shell shuf -i 0-999 -n 100))
 	@./push_swap $(ARG) | ./checker $(ARG)
@@ -55,7 +61,7 @@ all: ${NAME}
 
 500: $(NAME)
 	$(eval ARG = $(shell shuf -i 0-999 -n 500))
-	@./push_swap $(ARG) | ./checker_linux $(ARG)
+	@./push_swap $(ARG) | ./checker $(ARG)
 	@echo -n "Nombre d'operations: " 
 	@./push_swap $(ARG) | wc -l
 
@@ -63,9 +69,11 @@ $(NAME): ${OBJS} ${LIBFT}
 	@${CC} ${CFLAGS} -o $@ $(OBJS) ${LIBFT}
 	@echo $(L_Green)✅$@ compiled! $(NC)
 
-bonus: ${LIBFT} ${OBJS} ${BONUS_OBJS}
+$(BONUS): bonus
+
+bonus: ${OBJS} ${BONUS_OBJS} ${LIBFT}
 	@${CC} ${CFLAGS} -o ${BONUS} ${BONUS_OBJS} ${LIBFT}
-	@echo $(L_Purple)✅$@ compiled! $(NC)
+	@echo $(L_Purple) $@ compiled! $(NC)
 
 %.o: %.c 	
 	@$(CC) $(CFLAGS) -c $< -o $@
@@ -75,12 +83,12 @@ $(LIBFT): $(LIBFTDIR)
 
 clean:
 	@$(MAKE) --no-print-directory clean -C $(LIBFTDIR)
-	@rm -f ${OBJS}
+	@rm -f ${OBJS} ${BONUS_OBJS}
 	@echo $(L_Red)🗑️ *.o deleted! $(NC)
 
 fclean: clean
 	@$(MAKE) --no-print-directory fclean -C $(LIBFTDIR)
-	@rm -f ${NAME}
+	@rm -f ${NAME} ${BONUS}
 	@echo $(L_Red)🗑️ $(NAME) deleted! $(NC)
 
 re: fclean all

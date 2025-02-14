@@ -6,7 +6,7 @@
 #    By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/02 11:36:11 by mivogel           #+#    #+#              #
-#    Updated: 2025/02/14 10:48:34 by mivogel          ###   ########.fr        #
+#    Updated: 2025/02/14 11:10:41 by mivogel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,8 +19,9 @@ LIBFTDIR = libft/
 SRCS = main.c op/push.c op/reverse_rotate.c op/rotate.c op/swap.c sort/big_sort.c sort/move.c sort/sorting.c utils/checks.c utils/lst_utils.c utils/sort_utils.c
 BONUS_SRCS = bonus/checker.c bonus/checker_utils.c op/push.c op/reverse_rotate.c op/rotate.c op/swap.c sort/sorting.c utils/checks.c utils/lst_utils.c
 
-OBJS = $(addprefix srcs/, ${SRCS:.c=.o})
-BONUS_OBJS = $(addprefix srcs/, ${BONUS_SRCS:.c=.o})
+OBJS_DIR = obj
+OBJS = $(addprefix ${OBJS_DIR}/, ${SRCS:.c=.o})
+BONUS_OBJS = $(addprefix ${OBJS_DIR}/, ${BONUS_SRCS:.c=.o})
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g3 -Iincludes
@@ -45,22 +46,25 @@ NC='\e[0m'
 
 ac: all clean
 
-all: ${NAME}
+all: ${NAME} ${BONUS}
 
 5: $(NAME) $(BONUS)
 	$(eval ARG = $(shell shuf -i 0-999 -n 5))
+	@echo ARG: $(ARG)
 	@./push_swap $(ARG) | ./checker $(ARG)
 	@echo -n "Nombre d'operations: " 
 	@./push_swap $(ARG) | wc -l
 
 100: $(NAME) $(BONUS)
-	$(eval ARG = $(shell shuf -i 0-999 -n 100))
+	$(eval ARG = $(shell shuf -i 0-999 -n 100))	
+	@echo ARG: $(ARG)
 	@./push_swap $(ARG) | ./checker $(ARG)
 	@echo -n "Nombre d'operations: " 
 	@./push_swap $(ARG) | wc -l
 
 500: $(NAME)
-	$(eval ARG = $(shell shuf -i 0-999 -n 500))
+	$(eval ARG = $(shell shuf -i 0-999 -n 500))	
+	@echo ARG: $(ARG)
 	@./push_swap $(ARG) | ./checker $(ARG)
 	@echo -n "Nombre d'operations: " 
 	@./push_swap $(ARG) | wc -l
@@ -69,13 +73,12 @@ $(NAME): ${OBJS} ${LIBFT}
 	@${CC} ${CFLAGS} -o $@ $(OBJS) ${LIBFT}
 	@echo $(L_Green)✅$@ compiled! $(NC)
 
-$(BONUS): bonus
-
-bonus: ${OBJS} ${BONUS_OBJS} ${LIBFT}
+${BONUS}: ${OBJS} ${BONUS_OBJS} ${LIBFT}
 	@${CC} ${CFLAGS} -o ${BONUS} ${BONUS_OBJS} ${LIBFT}
-	@echo $(L_Purple) $@ compiled! $(NC)
+	@echo $(L_Purple)$@ compiled! $(NC)
 
-%.o: %.c 	
+${OBJS_DIR}/%.o: srcs/%.c
+	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(LIBFT): $(LIBFTDIR)
@@ -83,13 +86,13 @@ $(LIBFT): $(LIBFTDIR)
 
 clean:
 	@$(MAKE) --no-print-directory clean -C $(LIBFTDIR)
-	@rm -f ${OBJS} ${BONUS_OBJS}
+	@rm -rf ${OBJS_DIR}
 	@echo $(L_Red)🗑️ *.o deleted! $(NC)
 
 fclean: clean
 	@$(MAKE) --no-print-directory fclean -C $(LIBFTDIR)
 	@rm -f ${NAME} ${BONUS}
-	@echo $(L_Red)🗑️ $(NAME) deleted! $(NC)
+	@echo $(L_Red)🗑️ $(NAME) and $(BONUS) deleted! $(NC)
 
 re: fclean all
 

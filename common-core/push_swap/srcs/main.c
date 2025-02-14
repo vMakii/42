@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 13:38:55 by mivogel           #+#    #+#             */
-/*   Updated: 2025/02/11 14:09:12 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/02/14 10:53:57 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	push_swap(t_list **a, t_list **b, const int size)
 	if (!ft_is_sorted(*a))
 	{
 		if (size == 2)
-			ft_sa(a);
+			ft_sa(a, 0);
 		else if (size == 3)
 			ft_sort3(a);
 		else if (size == 5)

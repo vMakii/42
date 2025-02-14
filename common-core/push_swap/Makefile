@@ -6,7 +6,7 @@
 #    By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/02 11:36:11 by mivogel           #+#    #+#              #
-#    Updated: 2025/02/14 11:10:41 by mivogel          ###   ########.fr        #
+#    Updated: 2025/02/14 11:13:43 by mivogel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ LIBFTDIR = libft/
 SRCS = main.c op/push.c op/reverse_rotate.c op/rotate.c op/swap.c sort/big_sort.c sort/move.c sort/sorting.c utils/checks.c utils/lst_utils.c utils/sort_utils.c
 BONUS_SRCS = bonus/checker.c bonus/checker_utils.c op/push.c op/reverse_rotate.c op/rotate.c op/swap.c sort/sorting.c utils/checks.c utils/lst_utils.c
 
-OBJS_DIR = obj
+OBJS_DIR = objs
 OBJS = $(addprefix ${OBJS_DIR}/, ${SRCS:.c=.o})
 BONUS_OBJS = $(addprefix ${OBJS_DIR}/, ${BONUS_SRCS:.c=.o})
 

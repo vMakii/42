@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 10:07:10 by mivogel           #+#    #+#             */
-/*   Updated: 2025/02/14 10:38:50 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/02/17 10:59:06 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	*ft_op(t_list **a, t_list **b, char *line)
 		ft_ra(a, 1);
 	else if (!ft_strncmp(line, "rb", 2))
 		ft_rb(b, 1);
-	else if (!ft_strncmp(line, "rr", 3))
+	else if (!ft_strncmp(line, "rr\n", 3))
 		ft_rr(a, b, 1);
 	else if (!ft_strncmp(line, "rra", 3))
 		ft_rra(a, 1);

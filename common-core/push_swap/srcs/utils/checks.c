@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 14:21:32 by mivogel           #+#    #+#             */
-/*   Updated: 2025/01/30 12:42:08 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/02/17 11:57:52 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int	ft_check(int ac, char **av, t_list **stack_a, t_list **stack_b)
 		av = ft_split(av[1], ' ');
 	else
 		av++;
-	if (!valid_input(av))
+	if (!av || !valid_input(av))
 		return (0);
 	while (av[i])
 		i++;

@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 09:49:58 by mivogel           #+#    #+#             */
-/*   Updated: 2025/02/07 11:46:01 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/02/18 10:57:33 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,6 @@ void	handler(int s, siginfo_t *info, void *content)
 	static char				*str;
 
 	(void)content;
-	if (!str)
-		str = NULL;
 	c |= (s == SIGUSR1);
 	bits++;
 	if (bits == 8)

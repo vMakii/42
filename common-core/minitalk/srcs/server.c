@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 10:20:21 by mivogel           #+#    #+#             */
-/*   Updated: 2025/02/07 13:47:41 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/02/18 11:03:25 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,6 @@ void	handler(int s)
 	static unsigned char	c;
 	static char				*str;
 
-	if (!str)
-		str = NULL;
 	c |= (s == SIGUSR1);
 	bits++;
 	if (bits == 8)
@@ -65,10 +63,11 @@ void	handler(int s)
 int	main(void)
 {
 	ft_printf("PID: %d\n", getpid());
+	signal(SIGUSR1, handler);
+	signal(SIGUSR2, handler);
 	while (1)
 	{
-		signal(SIGUSR1, handler);
-		signal(SIGUSR2, handler);
+		pause();
 	}
 	return (0);
 }

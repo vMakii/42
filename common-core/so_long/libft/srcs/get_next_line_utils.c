@@ -6,21 +6,21 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 15:14:42 by mivogel           #+#    #+#             */
-/*   Updated: 2024/12/10 11:28:24 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/02/18 14:56:02 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen(const char *str)
-{
-	size_t	i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
+// size_t	ft_strlen(const char *str)
+// {
+// 	size_t	i;
+//
+// 	i = 0;
+// 	while (str[i])
+// 		i++;
+// 	return (i);
+// }
 
 char	*ft_strchr(const char *str, int c)
 {

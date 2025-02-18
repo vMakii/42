@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/06 17:23:58 by mivogel           #+#    #+#             */
-/*   Updated: 2025/02/18 14:47:01 by mivogel          ###   ########.fr       */
+/*   Created: 2025/02/18 12:25:02 by mivogel           #+#    #+#             */
+/*   Updated: 2025/02/18 13:53:16 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "so_long.h"
 
-size_t	ft_strlen(const char *str)
+int	main(int ac, char **av)
 {
-	size_t	i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
+	if (ac != 2)
+		return (ft_printf("Error\n"), 1);
+	ft_check_map(av[1]);
+	ft_printf("0");
+	return (0);
 }

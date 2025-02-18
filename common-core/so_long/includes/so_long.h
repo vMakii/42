@@ -1,23 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/06 17:23:58 by mivogel           #+#    #+#             */
-/*   Updated: 2025/02/18 14:47:01 by mivogel          ###   ########.fr       */
+/*   Created: 2025/02/18 12:32:54 by mivogel           #+#    #+#             */
+/*   Updated: 2025/02/18 14:52:50 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef SO_LONG_H
+# define SO_LONG_H
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 5
+# endif
 
-size_t	ft_strlen(const char *str)
+# include "../libft/includes/libft.h"
+# include <fcntl.h>
+# include <stdio.h>
+
+typedef struct s_coord
 {
-	size_t	i;
+	int		x;
+	int		y;
+}			t_coord;
 
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
+typedef struct s_map
+{
+	char	**tab;
+	int		nb;
+	int		mov;
+	t_coord	player;
+	t_coord	*coin;
+	t_coord	exit;
+}			t_map;
+
+int			ft_check_map(char *av);
+
+#endif

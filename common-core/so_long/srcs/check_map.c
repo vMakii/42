@@ -1,23 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/06 17:23:58 by mivogel           #+#    #+#             */
-/*   Updated: 2025/02/18 14:47:01 by mivogel          ###   ########.fr       */
+/*   Created: 2025/02/18 12:41:11 by mivogel           #+#    #+#             */
+/*   Updated: 2025/02/18 14:23:21 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "so_long.h"
 
-size_t	ft_strlen(const char *str)
+int	ft_check_map(char *av)
 {
-	size_t	i;
+	int		fd;
+	char	*line;
+	char	*str;
 
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
+	fd = open(av, O_RDONLY);
+	if (fd < 0)
+	{
+		perror("Error");
+		exit(0);
+	}
+	line = get_next_line(fd);
+	while (!line)
+	{
+		line = get_next_line(fd);
+		str = ft_strjoin(str, line);
+	}
+	free(line);
+	return (1);
 }

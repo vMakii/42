@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 15:14:42 by mivogel           #+#    #+#             */
-/*   Updated: 2025/02/18 14:56:02 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/02/20 10:19:21 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,19 +63,19 @@ char	*ft_strjoin_free(char *s1, char const *s2)
 	return (dst);
 }
 
-void	ft_bzero(void *s, size_t n)
-{
-	size_t			i;
-	unsigned char	*str;
-
-	i = 0;
-	str = s;
-	while (i < n)
-	{
-		str[i] = 0;
-		i++;
-	}
-}
+// void	ft_bzero(void *s, size_t n)
+// {
+// 	size_t			i;
+// 	unsigned char	*str;
+//
+// 	i = 0;
+// 	str = s;
+// 	while (i < n)
+// 	{
+// 		str[i] = 0;
+// 		i++;
+// 	}
+// }
 
 void	*ft_calloc(size_t n, size_t size)
 {

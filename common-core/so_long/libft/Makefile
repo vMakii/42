@@ -6,7 +6,7 @@
 #    By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/27 13:05:51 by mivogel           #+#    #+#              #
-#    Updated: 2025/01/13 14:29:04 by mivogel          ###   ########.fr        #
+#    Updated: 2025/02/20 10:25:14 by mivogel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,8 +20,9 @@ BONUS_SRCS = ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_b
 			 ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c ft_free.c \
 			 get_next_line_bonus.c
 
-OBJS = $(addprefix srcs/, ${SRCS:.c=.o})
-BONUS_OBJS = $(addprefix srcs/, ${BONUS_SRCS:.c=.o})
+OBJS_DIR = objs
+OBJS = $(addprefix ${OBJS_DIR}/, ${SRCS:.c=.o})
+BONUS_OBJS = $(addprefix ${OBJS_DIR}/, ${BONUS_SRCS:.c=.o})
 
 NAME = libft.a
 BONUS = libftbonus.a
@@ -55,14 +56,15 @@ $(NAME): ${OBJS}
 	@ar rcs $@ $^
 	@echo $(L_Green)✅$@ compiled! $(NC)
 
-%.o : %.c 
+${OBJS_DIR}/%.o: srcs/%.c
+	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(BONUS): ${OBJS} ${BONUS_OBJS}
 	@ar rcs $@ ${BONUS_OBJS} ${OBJS}
 	@echo $(L_Green)✅$@ compiled! $(NC)
 clean:
-	@rm -f ${OBJS} ${BONUS_OBJS}
+	@rm -rf ${OBJS_DIR} 
 	@echo $(L_Red)🗑️ *.o deleted! $(NC)
 
 fclean:

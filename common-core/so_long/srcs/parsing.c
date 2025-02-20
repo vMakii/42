@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 13:38:27 by mivogel           #+#    #+#             */
-/*   Updated: 2025/02/20 14:07:24 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/02/20 14:17:38 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,16 +70,3 @@ int	ft_contains(char **tab)
 // int	ft_validexit(char **tab)
 // {
 // }
-
-void	ft_parsing(char **tab, int len)
-{
-	// int	i;
-	// int	j;
-	//
-	// i = 0;
-	// j = 0;
-	if (!ft_walls(tab, len) || !ft_contains(tab))
-	{
-		exit(0);
-	}
-}

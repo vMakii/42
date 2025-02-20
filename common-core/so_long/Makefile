@@ -6,7 +6,7 @@
 #    By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/02 11:36:11 by mivogel           #+#    #+#              #
-#    Updated: 2025/02/18 14:54:36 by mivogel          ###   ########.fr        #
+#    Updated: 2025/02/20 14:02:26 by mivogel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME = so_long
 LIBFT = libft/libft.a
 LIBFTDIR = libft/
 
-SRCS = main.c check_map.c
+SRCS = main.c check_map.c parsing.c
 OBJS_DIR = objs
 OBJS = $(addprefix ${OBJS_DIR}/, ${SRCS:.c=.o})
 

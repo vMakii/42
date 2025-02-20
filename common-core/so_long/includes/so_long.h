@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 12:32:54 by mivogel           #+#    #+#             */
-/*   Updated: 2025/02/20 10:33:13 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/02/20 14:07:01 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,9 @@ typedef struct s_map
 }			t_map;
 
 int			ft_check_map(char *av);
+// parsing
+int			ft_walls(char **tab, int len);
+int			ft_contains(char **tab);
+void		ft_parsing(char **tab, int len);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 12:41:11 by mivogel           #+#    #+#             */
-/*   Updated: 2025/02/20 14:22:39 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/02/25 14:48:53 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,44 +33,67 @@ char	**ft_mapcpy(char **tab)
 	return (cpy);
 }
 
-void	ft_parsing(char **tab, int len)
+void	ft_printmap(char **tab)
 {
-	// int	i;
-	// int	j;
-	//
-	// i = 0;
-	// j = 0;
-	if (!ft_walls(tab, len) || !ft_contains(tab))
+	int	i;
+
+	i = 0;
+	while (tab[i])
 	{
-		exit(0);
+		ft_printf("%s\n", tab[i]);
+		i++;
 	}
 }
 
-int	ft_check_map(char *av)
+void	ft_parsing(t_map map)
 {
-	int		fd;
 	int		len;
-	char	*line;
+	char	**cpy;
+
+	len = ft_strlen(map.tab[0]) - 1;
+	cpy = ft_mapcpy(map.tab);
+	ft_printmap(cpy);
+	if (!ft_walls(map.tab, len) || !ft_contains(map.tab)
+		|| !ft_validexit(map.tab))
+		ft_exit_map(map);
+}
+
+char	**ft_readmap(int fd)
+{
+	int		len;
 	char	*str;
+	char	*line;
 	char	**tab;
 
 	str = ft_strdup("");
 	if (!str)
-		exit(0);
+		return (NULL);
+	line = get_next_line(fd);
+	len = ft_strlen(line) - 2;
+	while (line)
+	{
+		str = ft_strjoin_free(str, line);
+		free(line);
+		line = get_next_line(fd);
+	}
+	// ft_check_str(str);
+	tab = ft_split(str, '\n');
+	free(str);
+	return (tab);
+}
+
+t_map	ft_check_map(char *av)
+{
+	int		fd;
+	t_map	map;
+
 	fd = open(av, O_RDONLY);
 	if (fd < 0)
 	{
 		perror("Error");
 		exit(0);
 	}
-	line = get_next_line(fd);
-	len = ft_strlen(line) - 2;
-	while (line)
-	{
-		str = ft_strjoin(str, line);
-		line = get_next_line(fd);
-	}
-	tab = ft_split(str, '\n');
-	ft_parsing(tab, len);
-	return (1);
+	map = ft_map(fd);
+	ft_parsing(map);
+	return (map);
 }

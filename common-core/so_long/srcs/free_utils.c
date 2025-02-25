@@ -1,30 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free.c                                          :+:      :+:    :+:   */
+/*   free_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/02 14:22:56 by mivogel           #+#    #+#             */
-/*   Updated: 2025/02/25 12:56:21 by mivogel          ###   ########.fr       */
+/*   Created: 2025/02/25 13:04:14 by mivogel           #+#    #+#             */
+/*   Updated: 2025/02/25 15:00:03 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "so_long.h"
 
-void	ft_free(void *content)
-{
-	free(content);
-}
-
-void	ft_freetab(char **tab)
+void	ft_free_coins(t_coord *coins, int nbcoin)
 {
 	int	i;
 
 	i = 0;
-	while (tab[i])
+	while (i < nbcoin)
+	{
+		free(&coins[i]);
 		i++;
-	while (i >= 0)
-		free(tab[i--]);
-	free(tab);
+	}
+	free(coins);
+}
+
+void	ft_exit_map(t_map map)
+{
+	ft_freetab(map.tab);
+	ft_free_coins(map.coins, map.nbcoin);
+	exit(0);
 }

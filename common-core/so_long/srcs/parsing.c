@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 13:38:27 by mivogel           #+#    #+#             */
-/*   Updated: 2025/02/20 14:17:38 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/02/25 14:41:52 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,55 @@ int	ft_contains(char **tab)
 	return (1);
 }
 
-// int	ft_validexit(char **tab)
-// {
-// }
+void	ft_floodfill(char **tab, int x, int y)
+{
+	// ft_printf("x: %d\ny: %d\nmap: %c\n", x, y, tab[x][y]);
+	if (tab[x][y] == '1' || tab[x][y] == 'V')
+		return ;
+	tab[x][y] = 'V';
+	ft_floodfill(tab, x - 1, y);
+	ft_floodfill(tab, x + 1, y);
+	ft_floodfill(tab, x, y - 1);
+	ft_floodfill(tab, x, y + 1);
+}
+
+static int	validmap(char **tab)
+{
+	int	i;
+	int	j;
+
+	i = -1;
+	while (tab[++i])
+	{
+		j = -1;
+		while (tab[i][++j])
+		{
+			if (tab[i][j] == 'C' || tab[i][j] == 'E')
+				return (0);
+		}
+	}
+	return (1);
+}
+
+int	ft_validexit(char **tab)
+{
+	int	i;
+	int	j;
+
+	i = -1;
+	while (tab[++i])
+	{
+		j = -1;
+		while (tab[i][++j])
+		{
+			if (tab[i][j] == 'P')
+				ft_floodfill(tab, i, j);
+		}
+	}
+	if (!validmap(tab))
+		return (printf("Error: no valid exit\n"), 0);
+	else
+		return (1);
+	// ft_printf("\n");
+	// ft_printmap(tab);
+}

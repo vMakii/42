@@ -6,7 +6,7 @@
 #    By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/02 11:36:11 by mivogel           #+#    #+#              #
-#    Updated: 2025/02/25 13:07:11 by mivogel          ###   ########.fr        #
+#    Updated: 2025/02/26 12:56:30 by mivogel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,12 +15,13 @@ NAME = so_long
 LIBFT = libft/libft.a
 LIBFTDIR = libft/
 
-SRCS = main.c check_map.c parsing.c map_utils.c free_utils.c
+SRCS = main.c checks/check_map.c checks/parsing.c utils/map_utils.c utils/free_utils.c
 OBJS_DIR = objs
 OBJS = $(addprefix ${OBJS_DIR}/, ${SRCS:.c=.o})
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g3 -Iincludes
+CFLAGS = -Wall -Wextra -Werror -g3 -Iincludes -Imlx
+MLX_FLAGS = -Lmlx -lmlx -lX11 -lXext -lm -lGL
 
 Black='\e[0;30m'
 Gray='\e[0;37m'
@@ -45,7 +46,7 @@ a: all clean
 all: ${NAME}
 
 $(NAME): ${OBJS} ${LIBFT}
-	@${CC} ${CFLAGS} -o $@ $(OBJS) ${LIBFT}
+	@${CC} ${MLX_FLAGS} -o $@ $(OBJS) ${LIBFT}
 	@echo $(L_Green)✅$@ compiled! $(NC)
 
 ${OBJS_DIR}/%.o: srcs/%.c

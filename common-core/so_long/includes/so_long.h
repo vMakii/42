@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 12:32:54 by mivogel           #+#    #+#             */
-/*   Updated: 2025/02/25 15:01:25 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/02/26 12:43:44 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 
 # include "../libft/includes/libft.h"
 # include <fcntl.h>
+# include <mlx.h>
+# include <mlx_int.h>
 # include <stdio.h>
 
 typedef struct s_coord
@@ -37,22 +39,30 @@ typedef struct s_map
 	t_coord	exit;
 }			t_map;
 
-void		ft_free_coins(t_coord *coins, int nbcoin);
+typedef struct s_data
+{
+	void	*mlx_ptr;
+	void	*win_ptr;
+	t_map	map;
+}			t_data;
+
 // check_map
-char		**ft_readmap(int fd);
 char		**ft_mapcpy(char **tab);
 void		ft_printmap(char **tab);
-void		ft_parsing(t_map map);
-t_map		ft_check_map(char *av);
+int			ft_check_str(char *str);
+t_map		ft_map(int fd);
+int			ft_parsing(t_map map);
 // parsing
 int			ft_walls(char **tab, int len);
 int			ft_contains(char **tab);
-void		ft_floodfill(char **tab, int x, int y);
 int			ft_validexit(char **tab);
+// free_utils
+void		ft_free_map(t_map map);
 // map_utils
 int			ft_countcoins(char **tab);
 t_coord		ft_getpos(char **tab, char c);
 t_coord		ft_coord(int i, int j);
 t_coord		*ft_getcoins_pos(char **tab, int nbcoin);
-t_map		ft_map(int fd);
+char		**ft_readmap(int fd);
+
 #endif

@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 13:38:27 by mivogel           #+#    #+#             */
-/*   Updated: 2025/02/25 14:41:52 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/02/26 11:28:05 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,8 @@ int	ft_contains(char **tab)
 	return (1);
 }
 
-void	ft_floodfill(char **tab, int x, int y)
+static void	ft_floodfill(char **tab, int x, int y)
 {
-	// ft_printf("x: %d\ny: %d\nmap: %c\n", x, y, tab[x][y]);
 	if (tab[x][y] == '1' || tab[x][y] == 'V')
 		return ;
 	tab[x][y] = 'V';
@@ -112,10 +111,16 @@ int	ft_validexit(char **tab)
 				ft_floodfill(tab, i, j);
 		}
 	}
+	ft_printf("\n");
+	ft_printmap(tab);
 	if (!validmap(tab))
-		return (printf("Error: no valid exit\n"), 0);
+	{
+		ft_freetab(tab);
+		return (printf("Error: map not valid\n"), 0);
+	}
 	else
+	{
+		ft_freetab(tab);
 		return (1);
-	// ft_printf("\n");
-	// ft_printmap(tab);
+	}
 }

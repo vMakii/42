@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 12:41:11 by mivogel           #+#    #+#             */
-/*   Updated: 2025/02/25 14:48:53 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/02/26 11:40:06 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,44 @@ void	ft_printmap(char **tab)
 	}
 }
 
-void	ft_parsing(t_map map)
+int	ft_check_str(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '\n' && str[i + 1] == '\n')
+			return (ft_printf("Error: consecutive newline"), 0);
+		i++;
+	}
+	i = -1;
+	while (str[++i])
+	{
+		if (str[i] != '1' && str[i] != '0' && str[i] != 'P' && str[i] != 'C'
+			&& str[i] != 'E' && str[i] != '\n')
+			return (ft_printf("Error: map contains invalid item(s)"), 0);
+	}
+	return (1);
+}
+
+t_map	ft_map(int fd)
+{
+	t_map	map;
+
+	map.tab = ft_readmap(fd);
+	if (!map.tab)
+		exit(0);
+	map.nb = 0;
+	map.mov = 0;
+	map.nbcoin = ft_countcoins(map.tab);
+	map.player = ft_getpos(map.tab, 'P');
+	map.coins = ft_getcoins_pos(map.tab, map.nbcoin);
+	map.exit = ft_getpos(map.tab, 'E');
+	return (map);
+}
+
+int	ft_parsing(t_map map)
 {
 	int		len;
 	char	**cpy;
@@ -53,47 +90,7 @@ void	ft_parsing(t_map map)
 	len = ft_strlen(map.tab[0]) - 1;
 	cpy = ft_mapcpy(map.tab);
 	ft_printmap(cpy);
-	if (!ft_walls(map.tab, len) || !ft_contains(map.tab)
-		|| !ft_validexit(map.tab))
-		ft_exit_map(map);
-}
-
-char	**ft_readmap(int fd)
-{
-	int		len;
-	char	*str;
-	char	*line;
-	char	**tab;
-
-	str = ft_strdup("");
-	if (!str)
-		return (NULL);
-	line = get_next_line(fd);
-	len = ft_strlen(line) - 2;
-	while (line)
-	{
-		str = ft_strjoin_free(str, line);
-		free(line);
-		line = get_next_line(fd);
-	}
-	// ft_check_str(str);
-	tab = ft_split(str, '\n');
-	free(str);
-	return (tab);
-}
-
-t_map	ft_check_map(char *av)
-{
-	int		fd;
-	t_map	map;
-
-	fd = open(av, O_RDONLY);
-	if (fd < 0)
-	{
-		perror("Error");
-		exit(0);
-	}
-	map = ft_map(fd);
-	ft_parsing(map);
-	return (map);
+	if (!ft_walls(map.tab, len) || !ft_contains(map.tab) || !ft_validexit(cpy))
+		return (0);
+	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 11:00:38 by mivogel           #+#    #+#             */
-/*   Updated: 2025/02/25 14:51:48 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/02/26 11:27:30 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,18 +91,25 @@ t_coord	*ft_getcoins_pos(char **tab, int nbcoin)
 	return (coins);
 }
 
-t_map	ft_map(int fd)
+char	**ft_readmap(int fd)
 {
-	t_map	map;
+	char	*str;
+	char	*line;
+	char	**tab;
 
-	map.tab = ft_readmap(fd);
-	if (!map.tab)
-		exit(0);
-	map.nb = 0;
-	map.mov = 0;
-	map.nbcoin = ft_countcoins(map.tab);
-	map.player = ft_getpos(map.tab, 'P');
-	map.coins = ft_getcoins_pos(map.tab, map.nbcoin);
-	map.exit = ft_getpos(map.tab, 'E');
-	return (map);
+	str = ft_strdup("");
+	if (!str)
+		return (NULL);
+	line = get_next_line(fd);
+	while (line)
+	{
+		str = ft_strjoin_free(str, line);
+		free(line);
+		line = get_next_line(fd);
+	}
+	if (!ft_check_str(str))
+		return (NULL);
+	tab = ft_split(str, '\n');
+	free(str);
+	return (tab);
 }

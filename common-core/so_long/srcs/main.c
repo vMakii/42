@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 12:25:02 by mivogel           #+#    #+#             */
-/*   Updated: 2025/02/27 12:18:22 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/02/27 13:08:39 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,28 @@ int	ft_key(int keycode, t_data *data)
 	return (0);
 }
 
+void	ft_img(t_data *data)
+{
+	data->sprite.img_floor = mlx_xpm_file_to_image(data->mlx_ptr,
+			"assets/gburtin/gburtin0", 32, 32);
+	data->sprite.img_wall = mlx_xpm_file_to_image(data->mlx_ptr,
+			"assets/gburtin/gburtin1", 32, 32);
+}
+
+void	ft_draw(t_data *data)
+{
+}
+
+void	ft_game(t_data *data)
+{
+	ft_img(data);
+	ft_draw(data);
+	mlx_hook(data->win_ptr, DestroyNotify, StructureNotifyMask, &ft_close,
+		data);
+	mlx_key_hook(data->win_ptr, ft_key, data);
+	mlx_loop(data->mlx_ptr);
+}
+
 int	main(int ac, char **av)
 {
 	t_data	data;
@@ -57,10 +79,9 @@ int	main(int ac, char **av)
 		return (0);
 	}
 	data.mlx_ptr = mlx_init();
+	if (!data.mlx_ptr)
+		return (ft_printf("Error: mlx initialization failed\n"), 1);
 	data.win_ptr = mlx_new_window(data.mlx_ptr, 500, 500, "gburtin");
-	mlx_hook(data.win_ptr, DestroyNotify, StructureNotifyMask, &ft_close,
-		&data);
-	mlx_key_hook(data.win_ptr, ft_key, &data);
-	mlx_loop(data.mlx_ptr);
+	ft_game(&data);
 	return (0);
 }

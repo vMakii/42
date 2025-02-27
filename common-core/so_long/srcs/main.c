@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 12:25:02 by mivogel           #+#    #+#             */
-/*   Updated: 2025/02/26 12:40:29 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/02/27 12:18:22 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,23 @@ t_map	ft_init_map(char *av)
 	return (map);
 }
 
+int	ft_close(t_data *data)
+{
+	ft_free_map(data->map);
+	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+	mlx_destroy_display(data->mlx_ptr);
+	free(data->mlx_ptr);
+	exit(0);
+	return (0);
+}
+
+int	ft_key(int keycode, t_data *data)
+{
+	if (keycode == XK_Escape)
+		ft_close(data);
+	return (0);
+}
+
 int	main(int ac, char **av)
 {
 	t_data	data;
@@ -41,6 +58,9 @@ int	main(int ac, char **av)
 	}
 	data.mlx_ptr = mlx_init();
 	data.win_ptr = mlx_new_window(data.mlx_ptr, 500, 500, "gburtin");
-	ft_free_map(data.map);
+	mlx_hook(data.win_ptr, DestroyNotify, StructureNotifyMask, &ft_close,
+		&data);
+	mlx_key_hook(data.win_ptr, ft_key, &data);
+	mlx_loop(data.mlx_ptr);
 	return (0);
 }

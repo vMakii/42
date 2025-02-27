@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 12:32:54 by mivogel           #+#    #+#             */
-/*   Updated: 2025/02/27 10:22:08 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/02/27 12:14:42 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 # include <mlx.h>
 # include <mlx_int.h>
 # include <stdio.h>
+
+// # define ESC 53
 
 typedef struct s_coord
 {

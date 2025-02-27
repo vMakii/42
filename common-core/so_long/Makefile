@@ -6,7 +6,7 @@
 #    By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/02 11:36:11 by mivogel           #+#    #+#              #
-#    Updated: 2025/02/27 10:34:22 by mivogel          ###   ########.fr        #
+#    Updated: 2025/02/27 11:04:46 by mivogel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ OBJS_DIR = objs
 OBJS = $(addprefix ${OBJS_DIR}/, ${SRCS:.c=.o})
 
 CC = cc
+MAKE = make --no-print-directory
 CFLAGS = -Wall -Wextra -Werror -g3 -Iincludes -Imlx
 MLX_FLAGS = -Lmlx -lmlx -lX11 -lXext -lm -lGL
 
@@ -49,7 +50,7 @@ a: all clean
 all: ${NAME}
 
 $(NAME): ${OBJS} ${LIBFT} ${MLX}
-	@${CC} ${MLX_FLAGS} -o $@ $(OBJS) ${LIBFT} ${MLX}
+	@${CC} -o $@ $(OBJS) ${LIBFT} ${MLX_FLAGS}
 	@echo $(L_Green)✅$@ compiled! $(NC)
 
 ${OBJS_DIR}/%.o: srcs/%.c
@@ -57,10 +58,10 @@ ${OBJS_DIR}/%.o: srcs/%.c
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(LIBFT): $(LIBFTDIR)
-	@$(MAKE) --no-print-directory -C ${LIBFTDIR}
+	@$(MAKE) -C ${LIBFTDIR}
 
 $(MLX):
-	@$(MAKE) -C ${MLXDIR} --no-print-directory
+	@$(MAKE) -C ${MLXDIR}
 
 clean:
 	@$(MAKE) --no-print-directory clean -C $(LIBFTDIR)

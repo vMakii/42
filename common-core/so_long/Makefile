@@ -6,7 +6,7 @@
 #    By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/02 11:36:11 by mivogel           #+#    #+#              #
-#    Updated: 2025/02/26 12:56:30 by mivogel          ###   ########.fr        #
+#    Updated: 2025/02/27 10:34:22 by mivogel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,9 @@ NAME = so_long
 
 LIBFT = libft/libft.a
 LIBFTDIR = libft/
+
+MLX = mlx/libmlx.a
+MLXDIR = mlx/
 
 SRCS = main.c checks/check_map.c checks/parsing.c utils/map_utils.c utils/free_utils.c
 OBJS_DIR = objs
@@ -45,8 +48,8 @@ a: all clean
 
 all: ${NAME}
 
-$(NAME): ${OBJS} ${LIBFT}
-	@${CC} ${MLX_FLAGS} -o $@ $(OBJS) ${LIBFT}
+$(NAME): ${OBJS} ${LIBFT} ${MLX}
+	@${CC} ${MLX_FLAGS} -o $@ $(OBJS) ${LIBFT} ${MLX}
 	@echo $(L_Green)✅$@ compiled! $(NC)
 
 ${OBJS_DIR}/%.o: srcs/%.c
@@ -56,8 +59,12 @@ ${OBJS_DIR}/%.o: srcs/%.c
 $(LIBFT): $(LIBFTDIR)
 	@$(MAKE) --no-print-directory -C ${LIBFTDIR}
 
+$(MLX):
+	@$(MAKE) -C ${MLXDIR} --no-print-directory
+
 clean:
 	@$(MAKE) --no-print-directory clean -C $(LIBFTDIR)
+	@$(MAKE) --no-print-directory clean -C $(MLXDIR)
 	@rm -rf ${OBJS_DIR}
 	@echo $(L_Red)🗑️ *.o deleted! $(NC)
 

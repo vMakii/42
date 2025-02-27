@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 12:41:11 by mivogel           #+#    #+#             */
-/*   Updated: 2025/02/27 10:50:47 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/02/27 15:20:52 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,9 @@ t_map	ft_map(int fd)
 	if (!map.tab)
 		exit(0);
 	map.nb = 0;
-	map.mov = 0;
 	map.nbcoin = ft_countcoins(map.tab);
+	map.height = ft_tablen(map.tab);
+	map.width = ft_strlen(map.tab[0]);
 	map.player = ft_getpos(map.tab, 'P');
 	map.coins = ft_getcoins_pos(map.tab, map.nbcoin);
 	map.exit = ft_getpos(map.tab, 'E');

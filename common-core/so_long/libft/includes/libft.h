@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 17:40:58 by mivogel           #+#    #+#             */
-/*   Updated: 2025/02/25 13:02:29 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/02/27 15:22:54 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void	*ft_memcpy(void *dst, const void *src, size_t n);
 void	*ft_memmove(void *dst, const void *src, size_t n);
 int		ft_memcmp(const void *ptr1, const void *ptr2, size_t n);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
+int		ft_tablen(char **tab);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strtrim(char const *s1, char const *set);
 char	**ft_split(char const *s, char c);

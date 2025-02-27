@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 10:20:21 by mivogel           #+#    #+#             */
-/*   Updated: 2025/02/27 14:32:32 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/02/27 14:35:12 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,9 @@ void	handler(int s)
 		if (c == '\0')
 		{
 			if (str)
-			{
 				ft_printf("%s\n", str);
-				free(str);
-				str = NULL;
-			}
+			free(str);
+			str = NULL;
 		}
 		else
 			str = ft_addchar(str, c);

@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 09:49:58 by mivogel           #+#    #+#             */
-/*   Updated: 2025/02/27 14:32:34 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/02/27 14:38:13 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ char	*ft_addchar(char *str, unsigned char c)
 
 void	handler(int s, siginfo_t *info, void *content)
 {
-	static int				bits;
-	static unsigned char	c;
+	static int				bits = 0;
+	static unsigned char	c = 0;
 
 	(void)content;
 	c = (c << 1) | (s == SIGUSR1);
@@ -47,7 +47,8 @@ void	handler(int s, siginfo_t *info, void *content)
 	{
 		if (c == '\0')
 		{
-			ft_printf("%s\n", str);
+			if (str)
+				ft_printf("%s\n", str);
 			free(str);
 			str = NULL;
 			kill(info->si_pid, SIGUSR1);
@@ -65,7 +66,8 @@ int	main(void)
 
 	ft_printf("PID: %d\n", getpid());
 	sa.sa_sigaction = handler;
-	sa.sa_flags = SA_SIGINFO;
+	sa.sa_flags = SA_SIGINFO | SA_RESTART;
+	sigemptyset(&sa.sa_mask);
 	sigaction(SIGUSR1, &sa, NULL);
 	sigaction(SIGUSR2, &sa, NULL);
 	while (1)

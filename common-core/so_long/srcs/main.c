@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 12:25:02 by mivogel           #+#    #+#             */
-/*   Updated: 2025/03/05 12:11:46 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/03/05 13:06:43 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,10 +75,32 @@ void	ft_img(t_data *data)
 	ft_img_outerwalls(data);
 }
 
+void	*get_wall_texture(t_data *data, int i, int j)
+{
+	if (i == 0 && j == 0)
+		return (data->sprite.walls.wall_l1);
+	else if (i == 0 && j == data->map.width - 1)
+		return (data->sprite.walls.wall_r1);
+	else if (i == data->map.height - 1 && j == 0)
+		return (data->sprite.walls.wall_l3);
+	else if (i == data->map.height - 1 && j == data->map.width - 1)
+		return (data->sprite.walls.wall_r3);
+	else if (i == 0)
+		return (data->sprite.walls.wall_t);
+	else if (i == data->map.height - 1)
+		return (data->sprite.walls.wall_b);
+	else if (j == 0)
+		return (data->sprite.walls.wall_l2);
+	else if (j == data->map.width - 1)
+		return (data->sprite.walls.wall_r2);
+	return (NULL);
+}
+
 void	ft_draw_outerwalls(t_data *data)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
+	void	*wall_img;
 
 	i = -1;
 	while (data->map.tab[++i])
@@ -86,30 +108,10 @@ void	ft_draw_outerwalls(t_data *data)
 		j = -1;
 		while (data->map.tab[i][++j])
 		{
-			if (i == 0 && j == 0)
-				mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
-					data->sprite.walls.wall_l1, j * 32, i * 32);
-			else if (i == 0 && j == data->map.width - 1)
-				mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
-					data->sprite.walls.wall_r1, j * 32, i * 32);
-			else if (i == data->map.height - 1 && j == 0)
-				mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
-					data->sprite.walls.wall_l3, j * 32, i * 32);
-			else if (i == data->map.height - 1 && j == data->map.width - 1)
-				mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
-					data->sprite.walls.wall_r3, j * 32, i * 32);
-			else if (i == 0)
-				mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
-					data->sprite.walls.wall_t, j * 32, i * 32);
-			else if (i == data->map.height - 1)
-				mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
-					data->sprite.walls.wall_b, j * 32, i * 32);
-			else if (j == 0)
-				mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
-					data->sprite.walls.wall_l2, j * 32, i * 32);
-			else if (j == data->map.width - 1)
-				mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
-					data->sprite.walls.wall_r2, j * 32, i * 32);
+			wall_img = get_wall_texture(data, i, j);
+			if (wall_img)
+				mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, wall_img,
+					j * 32, i * 32);
 		}
 	}
 }

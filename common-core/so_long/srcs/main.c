@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 12:25:02 by mivogel           #+#    #+#             */
-/*   Updated: 2025/02/27 16:53:38 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/03/05 12:11:46 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,35 +44,35 @@ int	ft_key(int keycode, t_data *data)
 	return (0);
 }
 
+void	*ft_load_img(t_data *data, char *path)
+{
+	void	*img;
+
+	img = mlx_xpm_file_to_image(data->mlx_ptr, path, &data->sprite.height,
+			&data->sprite.width);
+	if (!img)
+	{
+		ft_printf("Error: mlx_xpm_file_to_image failed\n");
+		ft_close(data);
+	}
+	return (img);
+}
+
 void	ft_img_outerwalls(t_data *data)
 {
-	data->sprite.walls.wall_l1 = mlx_xpm_file_to_image(data->mlx_ptr, WALL_L1,
-			&data->sprite.height, &data->sprite.width);
-	data->sprite.walls.wall_l2 = mlx_xpm_file_to_image(data->mlx_ptr, WALL_L2,
-			&data->sprite.height, &data->sprite.width);
-	data->sprite.walls.wall_l3 = mlx_xpm_file_to_image(data->mlx_ptr, WALL_L3,
-			&data->sprite.height, &data->sprite.width);
-	data->sprite.walls.wall_r1 = mlx_xpm_file_to_image(data->mlx_ptr, WALL_R1,
-			&data->sprite.height, &data->sprite.width);
-	data->sprite.walls.wall_r2 = mlx_xpm_file_to_image(data->mlx_ptr, WALL_R2,
-			&data->sprite.height, &data->sprite.width);
-	data->sprite.walls.wall_r3 = mlx_xpm_file_to_image(data->mlx_ptr, WALL_R3,
-			&data->sprite.height, &data->sprite.width);
-	data->sprite.walls.wall_t = mlx_xpm_file_to_image(data->mlx_ptr, WALL_T,
-			&data->sprite.height, &data->sprite.width);
-	data->sprite.walls.wall_b = mlx_xpm_file_to_image(data->mlx_ptr, WALL_B,
-			&data->sprite.height, &data->sprite.width);
+	data->sprite.walls.wall_l1 = ft_load_img(data, WALL_L1);
+	data->sprite.walls.wall_l2 = ft_load_img(data, WALL_L2);
+	data->sprite.walls.wall_l3 = ft_load_img(data, WALL_L3);
+	data->sprite.walls.wall_r1 = ft_load_img(data, WALL_R1);
+	data->sprite.walls.wall_r2 = ft_load_img(data, WALL_R2);
+	data->sprite.walls.wall_r3 = ft_load_img(data, WALL_R3);
+	data->sprite.walls.wall_t = ft_load_img(data, WALL_T);
+	data->sprite.walls.wall_b = ft_load_img(data, WALL_B);
 }
 
 void	ft_img(t_data *data)
 {
 	ft_img_outerwalls(data);
-	// data->sprite.img_floor = mlx_xpm_file_to_image(data->mlx_ptr,
-	// 		"./assets/gburtin/gburtin0.xpm", data->sprite.height,
-	// 		data->sprite.width);
-	// data->sprite.img_wall = mlx_xpm_file_to_image(data->mlx_ptr,
-	// 		"./assets/gburtin/gburtin1.xpm", data->sprite.height,
-	// 		data->sprite.width);
 }
 
 void	ft_draw_outerwalls(t_data *data)
@@ -89,27 +89,27 @@ void	ft_draw_outerwalls(t_data *data)
 			if (i == 0 && j == 0)
 				mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
 					data->sprite.walls.wall_l1, j * 32, i * 32);
-			// else if (i == 0 && j == data->map.width - 1)
-			// 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
-			// 		data->sprite.walls.wall_r1, j * 32, i * 32);
-			// else if (i == data->map.height - 1 && j == 0)
-			// 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
-			// 		data->sprite.walls.wall_l3, j * 32, i * 32);
-			// else if (i == data->map.height - 1 && j == data->map.width - 1)
-			// 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
-			// 		data->sprite.walls.wall_r3, j * 32, i * 32);
-			// else if (i == 0)
-			// 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
-			// 		data->sprite.walls.wall_t, j * 32, i * 32);
-			// else if (i == data->map.height - 1)
-			// 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
-			// 		data->sprite.walls.wall_b, j * 32, i * 32);
-			// else if (j == 0)
-			// 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
-			// 		data->sprite.walls.wall_l2, j * 32, i * 32);
-			// else if (j == data->map.width - 1)
-			// 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
-			// 		data->sprite.walls.wall_r2, j * 32, i * 32);
+			else if (i == 0 && j == data->map.width - 1)
+				mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
+					data->sprite.walls.wall_r1, j * 32, i * 32);
+			else if (i == data->map.height - 1 && j == 0)
+				mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
+					data->sprite.walls.wall_l3, j * 32, i * 32);
+			else if (i == data->map.height - 1 && j == data->map.width - 1)
+				mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
+					data->sprite.walls.wall_r3, j * 32, i * 32);
+			else if (i == 0)
+				mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
+					data->sprite.walls.wall_t, j * 32, i * 32);
+			else if (i == data->map.height - 1)
+				mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
+					data->sprite.walls.wall_b, j * 32, i * 32);
+			else if (j == 0)
+				mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
+					data->sprite.walls.wall_l2, j * 32, i * 32);
+			else if (j == data->map.width - 1)
+				mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
+					data->sprite.walls.wall_r2, j * 32, i * 32);
 		}
 	}
 }

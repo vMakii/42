@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 12:32:54 by mivogel           #+#    #+#             */
-/*   Updated: 2025/02/27 16:42:12 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/03/06 14:29:22 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,13 @@
 # define WALL_R3 "./assets/wall/wall_R3.xpm"
 # define WALL_T "./assets/wall/wall_T.xpm"
 # define WALL_B "./assets/wall/wall_B.xpm"
+# define WALL "./assets/wall/wall.xpm"
+# define FLOOR "./assets/floor/floor.xpm"
+# define COIN "./assets/coin/key.xpm"
+# define EXIT1 "./assets/exit/exit1.xpm"
+# define EXIT2 "./assets/exit/exit2.xpm"
+# define PLAYER1 "./assets/player/player1.xpm"
+# define PLAYER2 "./assets/player/player2.xpm"
 
 typedef struct s_coord
 {
@@ -59,12 +66,19 @@ typedef struct s_walls
 	void		*wall_r3;
 	void		*wall_t;
 	void		*wall_b;
+	void		*wall;
 }				t_walls;
 
 typedef struct s_sprite
 {
 	int			height;
 	int			width;
+	void		*floor;
+	void		*coin;
+	void		*exit1;
+	void		*exit2;
+	void		*player1;
+	void		*player2;
 	t_walls		walls;
 }				t_sprite;
 

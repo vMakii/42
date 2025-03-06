@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 12:25:02 by mivogel           #+#    #+#             */
-/*   Updated: 2025/03/05 13:06:43 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/03/06 14:48:33 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,21 @@ void	ft_img_outerwalls(t_data *data)
 	data->sprite.walls.wall_b = ft_load_img(data, WALL_B);
 }
 
+void	ft_img_inner(t_data *data)
+{
+	data->sprite.walls.wall = ft_load_img(data, WALL);
+	data->sprite.floor = ft_load_img(data, FLOOR);
+	data->sprite.coin = ft_load_img(data, COIN);
+	data->sprite.exit1 = ft_load_img(data, EXIT1);
+	data->sprite.exit2 = ft_load_img(data, EXIT2);
+	data->sprite.player1 = ft_load_img(data, PLAYER1);
+	data->sprite.player2 = ft_load_img(data, PLAYER2);
+}
+
 void	ft_img(t_data *data)
 {
 	ft_img_outerwalls(data);
+	ft_img_inner(data);
 }
 
 void	*get_wall_texture(t_data *data, int i, int j)
@@ -116,27 +128,40 @@ void	ft_draw_outerwalls(t_data *data)
 	}
 }
 
+void	ft_draw_inner(t_data *data)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (data->map.tab[++i])
+	{
+		j = 0;
+		while (data->map.tab[i][++j])
+		{
+			if (data->map.tab[i][j] == '1')
+				mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
+					data->sprite.walls.wall, j * 32, i * 32);
+			else if (data->map.tab[i][j] == '0')
+				mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
+					data->sprite.floor, j * 32, i * 32);
+			else if (data->map.tab[i][j] == 'C')
+				mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
+					data->sprite.coin, j * 32, i * 32);
+			else if (data->map.tab[i][j] == 'E')
+				mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
+					data->sprite.exit1, j * 32, i * 32);
+			else if (data->map.tab[i][j] == 'P')
+				mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
+					data->sprite.player1, j * 32, i * 32);
+		}
+	}
+}
+
 void	ft_draw(t_data *data)
 {
 	ft_draw_outerwalls(data);
-	// int	x;
-	// int	y;
-	// x = 0;
-	// while (data->map.tab[x])
-	// {
-	// 	y = 0;
-	// 	while (data->map.tab[x][y])
-	// 	{
-	// 		if (data->map.tab[x][y] == '1')
-	// 			mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
-	// 				data->sprite.img_wall, y * 32, x * 32);
-	// 		else
-	// 			mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
-	// 				data->sprite.img_floor, y * 32, x * 32);
-	// 		y++;
-	// 	}
-	// 	x++;
-	// }
+	ft_draw_inner(data);
 }
 
 void	ft_game(t_data *data)

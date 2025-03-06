@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 12:41:11 by mivogel           #+#    #+#             */
-/*   Updated: 2025/02/27 15:20:52 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/03/06 16:48:30 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	ft_printmap(char **tab)
 		ft_printf("%s\n", tab[i]);
 		i++;
 	}
+	ft_printf("\n");
 }
 
 int	ft_check_str(char *str)
@@ -73,7 +74,6 @@ t_map	ft_map(int fd)
 	map.tab = ft_readmap(fd);
 	if (!map.tab)
 		exit(0);
-	map.nb = 0;
 	map.nbcoin = ft_countcoins(map.tab);
 	map.height = ft_tablen(map.tab);
 	map.width = ft_strlen(map.tab[0]);

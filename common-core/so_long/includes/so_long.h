@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 12:32:54 by mivogel           #+#    #+#             */
-/*   Updated: 2025/03/06 14:29:22 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/03/06 16:59:27 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ typedef struct s_coord
 typedef struct s_map
 {
 	char		**tab;
-	int			nb;
 	int			nbcoin;
 	int			height;
 	int			width;

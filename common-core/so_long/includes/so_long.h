@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 12:32:54 by mivogel           #+#    #+#             */
-/*   Updated: 2025/03/06 16:59:27 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/03/07 12:18:55 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,10 @@
 # define COIN "./assets/coin/key.xpm"
 # define EXIT1 "./assets/exit/exit1.xpm"
 # define EXIT2 "./assets/exit/exit2.xpm"
-# define PLAYER1 "./assets/player/player1.xpm"
-# define PLAYER2 "./assets/player/player2.xpm"
+# define PLAYER_R1 "./assets/player/player_R1.xpm"
+# define PLAYER_R2 "./assets/player/player_R2.xpm"
+# define PLAYER_L1 "./assets/player/player_L1.xpm"
+# define PLAYER_L2 "./assets/player/player_L2.xpm"
 
 typedef struct s_coord
 {
@@ -68,6 +70,15 @@ typedef struct s_walls
 	void		*wall;
 }				t_walls;
 
+typedef struct s_player
+{
+	char		dir;
+	void		*player_r1;
+	void		*player_r2;
+	void		*player_l1;
+	void		*player_l2;
+}				t_player;
+
 typedef struct s_sprite
 {
 	int			height;
@@ -76,8 +87,7 @@ typedef struct s_sprite
 	void		*coin;
 	void		*exit1;
 	void		*exit2;
-	void		*player1;
-	void		*player2;
+	t_player	player;
 	t_walls		walls;
 }				t_sprite;
 

@@ -6,13 +6,14 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 12:25:02 by mivogel           #+#    #+#             */
-/*   Updated: 2025/03/06 18:13:39 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/03/07 12:54:53 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
 void	ft_draw(t_data *data);
+void	ft_draw_player(t_data *data, int i, int j);
 
 t_map	ft_init_map(char *av)
 {
@@ -44,8 +45,10 @@ int	ft_wincond(t_data *data, int i, int j)
 	{
 		if (data->map.nbcoin == 0)
 			ft_close(data);
+		else
+			return (1);
 	}
-	return (1);
+	return (0);
 }
 
 void	ft_move_up(t_data *data)
@@ -54,6 +57,8 @@ void	ft_move_up(t_data *data)
 		return ;
 	if (data->map.tab[data->map.player.x - 1][data->map.player.y] == 'C')
 		data->map.nbcoin--;
+	if (ft_wincond(data, data->map.player.x - 1, data->map.player.y))
+		return ;
 	data->map.tab[data->map.player.x][data->map.player.y] = '0';
 	data->map.player.x--;
 	data->map.tab[data->map.player.x][data->map.player.y] = 'P';
@@ -67,6 +72,8 @@ void	ft_move_down(t_data *data)
 		return ;
 	if (data->map.tab[data->map.player.x + 1][data->map.player.y] == 'C')
 		data->map.nbcoin--;
+	if (ft_wincond(data, data->map.player.x + 1, data->map.player.y))
+		return ;
 	data->map.tab[data->map.player.x][data->map.player.y] = '0';
 	data->map.player.x++;
 	data->map.tab[data->map.player.x][data->map.player.y] = 'P';
@@ -80,10 +87,11 @@ void	ft_move_left(t_data *data)
 		return ;
 	if (data->map.tab[data->map.player.x][data->map.player.y - 1] == 'C')
 		data->map.nbcoin--;
-	if (data->map.tab[data->map.player.x][data->map.player.y - 1] == 'E')
-		ft_wincond(data, data->map.player.x, data->map.player.y - 1);
+	if (ft_wincond(data, data->map.player.x, data->map.player.y - 1))
+		return ;
 	data->map.tab[data->map.player.x][data->map.player.y] = '0';
 	data->map.player.y--;
+	data->sprite.player.dir = 'L';
 	data->map.tab[data->map.player.x][data->map.player.y] = 'P';
 	data->mov++;
 	ft_printf("%d\n", data->mov);
@@ -95,8 +103,11 @@ void	ft_move_right(t_data *data)
 		return ;
 	if (data->map.tab[data->map.player.x][data->map.player.y + 1] == 'C')
 		data->map.nbcoin--;
+	if (ft_wincond(data, data->map.player.x, data->map.player.y + 1))
+		return ;
 	data->map.tab[data->map.player.x][data->map.player.y] = '0';
 	data->map.player.y++;
+	data->sprite.player.dir = 'R';
 	data->map.tab[data->map.player.x][data->map.player.y] = 'P';
 	data->mov++;
 	ft_printf("%d\n", data->mov);
@@ -151,8 +162,10 @@ void	ft_img_inner(t_data *data)
 	data->sprite.coin = ft_load_img(data, COIN);
 	data->sprite.exit1 = ft_load_img(data, EXIT1);
 	data->sprite.exit2 = ft_load_img(data, EXIT2);
-	data->sprite.player1 = ft_load_img(data, PLAYER1);
-	data->sprite.player2 = ft_load_img(data, PLAYER2);
+	data->sprite.player.player_r1 = ft_load_img(data, PLAYER_R1);
+	data->sprite.player.player_r2 = ft_load_img(data, PLAYER_R2);
+	data->sprite.player.player_l1 = ft_load_img(data, PLAYER_L1);
+	data->sprite.player.player_l2 = ft_load_img(data, PLAYER_L2);
 }
 
 void	ft_img(t_data *data)
@@ -223,8 +236,29 @@ void	ft_draw_inner(t_data *data, int i, int j)
 				data->sprite.exit1, j * 32, i * 32);
 	}
 	else if (data->map.tab[i][j] == 'P')
-		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
-			data->sprite.player1, j * 32, i * 32);
+		ft_draw_player(data, i, j);
+}
+
+void	ft_draw_player(t_data *data, int i, int j)
+{
+	if (data->sprite.player.dir == 'R')
+	{
+		if (data->mov % 2 == 0)
+			mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
+				data->sprite.player.player_r1, j * 32, i * 32);
+		else
+			mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
+				data->sprite.player.player_r2, j * 32, i * 32);
+	}
+	else if (data->sprite.player.dir == 'L')
+	{
+		if (data->mov % 2 == 0)
+			mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
+				data->sprite.player.player_l1, j * 32, i * 32);
+		else
+			mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
+				data->sprite.player.player_l2, j * 32, i * 32);
+	}
 }
 
 void	ft_draw(t_data *data)
@@ -247,14 +281,10 @@ void	ft_draw(t_data *data)
 void	ft_game(t_data *data)
 {
 	ft_img(data);
-	ft_printf("img\n");
 	ft_draw(data);
-	ft_printf("draw\n");
 	mlx_hook(data->win_ptr, DestroyNotify, StructureNotifyMask, &ft_close,
 		data);
-	ft_printf("hook\n");
 	mlx_key_hook(data->win_ptr, ft_key, data);
-	ft_printf("key_hook\n");
 	mlx_loop(data->mlx_ptr);
 }
 
@@ -273,8 +303,9 @@ int	main(int ac, char **av)
 	data.mlx_ptr = mlx_init();
 	if (!data.mlx_ptr)
 		return (ft_printf("Error: mlx initialization failed\n"), 1);
-	data.win_ptr = mlx_new_window(data.mlx_ptr, 500, 500, "gburtin");
+	data.win_ptr = mlx_new_window(data.mlx_ptr, 800, 800, "gburtin");
 	data.mov = 0;
+	data.sprite.player.dir = 'R';
 	ft_game(&data);
 	return (0);
 }

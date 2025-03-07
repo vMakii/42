@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 12:32:54 by mivogel           #+#    #+#             */
-/*   Updated: 2025/03/07 12:18:55 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/03/07 16:51:13 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include <mlx_int.h>
 # include <stdio.h>
 
-# define WALL_L1 "./assets/wall/wall_L1.xpm"
+# define WALL_L1 "./assets/wall/wall_bonus.xpm"
 # define WALL_L2 "./assets/wall/wall_L2.xpm"
 # define WALL_L3 "./assets/wall/wall_L3.xpm"
 # define WALL_R1 "./assets/wall/wall_R1.xpm"

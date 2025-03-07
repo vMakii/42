@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 12:25:02 by mivogel           #+#    #+#             */
-/*   Updated: 2025/03/07 15:17:27 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/03/07 17:17:51 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	ft_draw(t_data *data);
 void	ft_draw_player(t_data *data, int i, int j);
 void	ft_destroy_image(t_data *data);
+void	ft_display_moves(t_data *data);
 
 t_map	ft_init_map(char *av)
 {
@@ -86,7 +87,6 @@ void	ft_move_up(t_data *data)
 	data->map.player.x--;
 	data->map.tab[data->map.player.x][data->map.player.y] = 'P';
 	data->mov++;
-	ft_printf("%d\n", data->mov);
 }
 
 void	ft_move_down(t_data *data)
@@ -101,7 +101,6 @@ void	ft_move_down(t_data *data)
 	data->map.player.x++;
 	data->map.tab[data->map.player.x][data->map.player.y] = 'P';
 	data->mov++;
-	ft_printf("%d\n", data->mov);
 }
 
 void	ft_move_left(t_data *data)
@@ -117,7 +116,6 @@ void	ft_move_left(t_data *data)
 	data->sprite.player.dir = 'L';
 	data->map.tab[data->map.player.x][data->map.player.y] = 'P';
 	data->mov++;
-	ft_printf("%d\n", data->mov);
 }
 
 void	ft_move_right(t_data *data)
@@ -133,7 +131,6 @@ void	ft_move_right(t_data *data)
 	data->sprite.player.dir = 'R';
 	data->map.tab[data->map.player.x][data->map.player.y] = 'P';
 	data->mov++;
-	ft_printf("%d\n", data->mov);
 }
 
 int	ft_key(int keycode, t_data *data)
@@ -299,6 +296,16 @@ void	ft_draw(t_data *data)
 			ft_draw_inner(data, i, j);
 		}
 	}
+	ft_display_moves(data);
+}
+
+void	ft_display_moves(t_data *data)
+{
+	char	*mov;
+
+	mov = ft_itoa(data->mov);
+	mlx_string_put(data->mlx_ptr, data->win_ptr, 11, 14, 0x00FFFFFF, mov);
+	free(mov);
 }
 
 void	ft_game(t_data *data)
@@ -326,7 +333,8 @@ int	main(int ac, char **av)
 	data.mlx_ptr = mlx_init();
 	if (!data.mlx_ptr)
 		return (ft_printf("Error: mlx initialization failed\n"), 1);
-	data.win_ptr = mlx_new_window(data.mlx_ptr, 500, 500, "gburtin");
+	data.win_ptr = mlx_new_window(data.mlx_ptr, data.map.width * 32,
+			data.map.height * 32, "gburtin");
 	data.mov = 0;
 	data.sprite.player.dir = 'R';
 	ft_game(&data);

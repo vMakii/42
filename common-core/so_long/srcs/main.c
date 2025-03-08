@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 12:25:02 by mivogel           #+#    #+#             */
-/*   Updated: 2025/03/07 17:17:51 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/03/08 23:32:04 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,10 @@ void	ft_destroy_image(t_data *data)
 	mlx_destroy_image(data->mlx_ptr, data->sprite.player.player_r2);
 	mlx_destroy_image(data->mlx_ptr, data->sprite.player.player_l1);
 	mlx_destroy_image(data->mlx_ptr, data->sprite.player.player_l2);
+	mlx_destroy_image(data->mlx_ptr, data->sprite.skull.skull_l1);
+	mlx_destroy_image(data->mlx_ptr, data->sprite.skull.skull_l2);
+	mlx_destroy_image(data->mlx_ptr, data->sprite.skull.skull_r1);
+	mlx_destroy_image(data->mlx_ptr, data->sprite.skull.skull_r2);
 }
 
 int	ft_wincond(t_data *data, int i, int j)
@@ -145,6 +149,9 @@ int	ft_key(int keycode, t_data *data)
 		ft_move_left(data);
 	if (keycode == XK_d)
 		ft_move_right(data);
+	if (data->map.skull.x != -1 && data->map.skull.y != -1)
+		ft_move_skull(data);
+	// mlx_clear_window(data->mlx_ptr, data->win_ptr);
 	ft_draw(data);
 	return (0);
 }
@@ -186,6 +193,10 @@ void	ft_img_inner(t_data *data)
 	data->sprite.player.player_r2 = ft_load_img(data, PLAYER_R2);
 	data->sprite.player.player_l1 = ft_load_img(data, PLAYER_L1);
 	data->sprite.player.player_l2 = ft_load_img(data, PLAYER_L2);
+	data->sprite.skull.skull_l1 = ft_load_img(data, SKULL_L1);
+	data->sprite.skull.skull_l2 = ft_load_img(data, SKULL_L2);
+	data->sprite.skull.skull_r1 = ft_load_img(data, SKULL_R1);
+	data->sprite.skull.skull_r2 = ft_load_img(data, SKULL_R2);
 }
 
 void	ft_img(t_data *data)
@@ -337,6 +348,7 @@ int	main(int ac, char **av)
 			data.map.height * 32, "gburtin");
 	data.mov = 0;
 	data.sprite.player.dir = 'R';
+	data.sprite.skull.dir = 'R';
 	ft_game(&data);
 	return (0);
 }

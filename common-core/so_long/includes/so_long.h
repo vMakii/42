@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 12:32:54 by mivogel           #+#    #+#             */
-/*   Updated: 2025/03/07 16:51:13 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/03/08 23:23:12 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,10 @@
 # define PLAYER_R2 "./assets/player/player_R2.xpm"
 # define PLAYER_L1 "./assets/player/player_L1.xpm"
 # define PLAYER_L2 "./assets/player/player_L2.xpm"
+# define SKULL_L1 "./assets/skull/skull_L1.xpm"
+# define SKULL_L2 "./assets/skull/skull_L2.xpm"
+# define SKULL_R1 "./assets/skull/skull_R1.xpm"
+# define SKULL_R2 "./assets/skull/skull_R2.xpm"
 
 typedef struct s_coord
 {
@@ -52,6 +56,7 @@ typedef struct s_map
 	int			nbcoin;
 	int			height;
 	int			width;
+	t_coord		skull;
 	t_coord		player;
 	t_coord		*coins;
 	t_coord		exit;
@@ -79,6 +84,15 @@ typedef struct s_player
 	void		*player_l2;
 }				t_player;
 
+typedef struct s_skull
+{
+	char		dir;
+	void		*skull_l1;
+	void		*skull_l2;
+	void		*skull_r1;
+	void		*skull_r2;
+}				t_skull;
+
 typedef struct s_sprite
 {
 	int			height;
@@ -88,6 +102,7 @@ typedef struct s_sprite
 	void		*exit1;
 	void		*exit2;
 	t_player	player;
+	t_skull		skull;
 	t_walls		walls;
 }				t_sprite;
 

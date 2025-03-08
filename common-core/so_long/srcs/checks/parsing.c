@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 13:38:27 by mivogel           #+#    #+#             */
-/*   Updated: 2025/03/06 16:29:45 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/03/08 21:31:05 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	ft_walls(char **tab, int len)
 		while (tab[i][++j])
 		{
 			if (len < j)
-				return (ft_printf("Error: not rectangle\n"), 0);
+				return (ft_printf("Error: not rectangular\n"), 0);
 			if (tab[0][j] != '1' || tab[i][0] != '1' || tab[i][len] != '1')
 				return (ft_printf("Error: no outer wall\n"), 0);
 		}
@@ -89,7 +89,7 @@ static int	validmap(char **tab)
 		j = -1;
 		while (tab[i][++j])
 		{
-			if (tab[i][j] == 'C')
+			if (tab[i][j] == 'C' || tab[i][j] == 'S')
 				return (0);
 		}
 	}

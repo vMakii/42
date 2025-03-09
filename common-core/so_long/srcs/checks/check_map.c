@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 12:41:11 by mivogel           #+#    #+#             */
-/*   Updated: 2025/03/08 22:57:37 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/03/09 22:54:16 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,13 @@ t_coord	ft_getskull(char **tab)
 				skull++;
 		}
 	}
-	if (skull != 1)
+	if (skull > 1)
 	{
-		ft_printf("Error: multiple skull(s)\n");
+		ft_printf("Error: multiple skulls\n");
 		return (ft_coord(-1, -1));
 	}
+	if (skull == 0)
+		return (ft_coord(0, 0));
 	return (ft_getpos(tab, 'S'));
 }
 

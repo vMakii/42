@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 12:32:54 by mivogel           #+#    #+#             */
-/*   Updated: 2025/03/08 23:23:12 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/03/09 22:45:44 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ typedef struct s_data
 
 // check_map
 char			**ft_mapcpy(char **tab);
-void			ft_printmap(char **tab);
+// void			ft_printmap(char **tab);
 int				ft_check_str(char *str);
 t_map			ft_map(int fd);
 int				ft_parsing(t_map map);

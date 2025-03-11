@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 12:25:02 by mivogel           #+#    #+#             */
-/*   Updated: 2025/03/10 18:26:30 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/03/11 18:39:59 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	ft_draw_player(t_data *data, int i, int j);
 void	ft_draw_skull(t_data *data, int i, int j);
 void	ft_destroy_image(t_data *data);
 void	ft_display_moves(t_data *data);
+void	ft_move_skull_1(t_data *data, int x, int y);
+void	ft_move_skull_2(t_data *data, int x, int y);
 
 t_map	ft_init_map(char *av)
 {
@@ -73,9 +75,22 @@ int	ft_wincond(t_data *data, int i, int j)
 	if (data->map.tab[i][j] == 'E')
 	{
 		if (data->map.nbcoin == 0)
+		{
+			ft_printf("You win!\n");
 			ft_close(data);
+		}
 		else
 			return (1);
+	}
+	return (0);
+}
+
+int	ft_losecond(t_data *data, int i, int j)
+{
+	if (data->map.tab[i][j] == 'S')
+	{
+		ft_printf("You lose!\n");
+		ft_close(data);
 	}
 	return (0);
 }
@@ -88,6 +103,7 @@ void	ft_move_up(t_data *data)
 		data->map.nbcoin--;
 	if (ft_wincond(data, data->map.player.x - 1, data->map.player.y))
 		return ;
+	ft_losecond(data, data->map.player.x - 1, data->map.player.y);
 	data->map.tab[data->map.player.x][data->map.player.y] = '0';
 	data->map.player.x--;
 	data->map.tab[data->map.player.x][data->map.player.y] = 'P';
@@ -102,6 +118,7 @@ void	ft_move_down(t_data *data)
 		data->map.nbcoin--;
 	if (ft_wincond(data, data->map.player.x + 1, data->map.player.y))
 		return ;
+	ft_losecond(data, data->map.player.x + 1, data->map.player.y);
 	data->map.tab[data->map.player.x][data->map.player.y] = '0';
 	data->map.player.x++;
 	data->map.tab[data->map.player.x][data->map.player.y] = 'P';
@@ -116,6 +133,7 @@ void	ft_move_left(t_data *data)
 		data->map.nbcoin--;
 	if (ft_wincond(data, data->map.player.x, data->map.player.y - 1))
 		return ;
+	ft_losecond(data, data->map.player.x, data->map.player.y - 1);
 	data->map.tab[data->map.player.x][data->map.player.y] = '0';
 	data->map.player.y--;
 	data->sprite.player.dir = 'L';
@@ -131,6 +149,7 @@ void	ft_move_right(t_data *data)
 		data->map.nbcoin--;
 	if (ft_wincond(data, data->map.player.x, data->map.player.y + 1))
 		return ;
+	ft_losecond(data, data->map.player.x, data->map.player.y + 1);
 	data->map.tab[data->map.player.x][data->map.player.y] = '0';
 	data->map.player.y++;
 	data->sprite.player.dir = 'R';
@@ -145,7 +164,10 @@ void	ft_move_skull_up(t_data *data)
 		|| data->map.tab[data->map.skull.x - 1][data->map.skull.y] == 'C')
 		return ;
 	if (data->map.tab[data->map.skull.x - 1][data->map.skull.y] == 'P')
+	{
+		ft_printf("You lose!\n");
 		ft_close(data);
+	}
 	data->map.tab[data->map.skull.x][data->map.skull.y] = '0';
 	data->map.skull.x--;
 	data->map.tab[data->map.skull.x][data->map.skull.y] = 'S';
@@ -159,7 +181,10 @@ void	ft_move_skull_down(t_data *data)
 		|| data->map.tab[data->map.skull.x + 1][data->map.skull.y] == 'C')
 		return ;
 	if (data->map.tab[data->map.skull.x + 1][data->map.skull.y] == 'P')
+	{
+		ft_printf("You lose!\n");
 		ft_close(data);
+	}
 	data->map.tab[data->map.skull.x][data->map.skull.y] = '0';
 	data->map.skull.x++;
 	data->map.tab[data->map.skull.x][data->map.skull.y] = 'S';
@@ -173,7 +198,10 @@ void	ft_move_skull_left(t_data *data)
 		|| data->map.tab[data->map.skull.x][data->map.skull.y - 1] == 'C')
 		return ;
 	if (data->map.tab[data->map.skull.x][data->map.skull.y - 1] == 'P')
+	{
+		ft_printf("You lose!\n");
 		ft_close(data);
+	}
 	data->map.tab[data->map.skull.x][data->map.skull.y] = '0';
 	data->map.skull.y--;
 	data->sprite.skull.dir = 'L';
@@ -188,7 +216,10 @@ void	ft_move_skull_right(t_data *data)
 		|| data->map.tab[data->map.skull.x][data->map.skull.y + 1] == 'C')
 		return ;
 	if (data->map.tab[data->map.skull.x][data->map.skull.y + 1] == 'P')
+	{
+		ft_printf("You lose!\n");
 		ft_close(data);
+	}
 	data->map.tab[data->map.skull.x][data->map.skull.y] = '0';
 	data->map.skull.y++;
 	data->sprite.skull.dir = 'R';
@@ -203,24 +234,25 @@ void	ft_move_skull(t_data *data)
 
 	x = data->map.player.x - data->map.skull.x;
 	y = data->map.player.y - data->map.skull.y;
-	ft_printf("x: %d, y: %d\n", x, y);
+	ft_move_skull_1(data, x, y);
+	ft_move_skull_2(data, x, y);
+}
+
+void	ft_move_skull_1(t_data *data, int x, int y)
+{
 	if (y == 0 && x > 0)
-	{
 		ft_move_skull_down(data);
-	}
 	else if (y == 0 && x < 0)
-	{
 		ft_move_skull_up(data);
-	}
 	else if (x == 0 && y > 0)
-	{
 		ft_move_skull_right(data);
-	}
 	else if (x == 0 && y < 0)
-	{
 		ft_move_skull_left(data);
-	}
-	else if (x > 0 && y > 0)
+}
+
+void	ft_move_skull_2(t_data *data, int x, int y)
+{
+	if (x > 0 && y > 0)
 	{
 		if (x > y)
 			ft_move_skull_down(data);
@@ -264,7 +296,6 @@ int	ft_key(int keycode, t_data *data)
 		ft_move_right(data);
 	if (data->map.skull.x > 0 && data->map.skull.y > 0 && data->mov % 2 == 0)
 		ft_move_skull(data);
-	// mlx_clear_window(data->mlx_ptr, data->win_ptr);
 	ft_draw(data);
 	return (0);
 }
@@ -482,7 +513,7 @@ int	main(int ac, char **av)
 	if (!data.mlx_ptr)
 		return (ft_printf("Error: mlx initialization failed\n"), 1);
 	data.win_ptr = mlx_new_window(data.mlx_ptr, data.map.width * 32,
-			data.map.height * 32, "gburtin");
+			data.map.height * 32, "2D DUNGEON");
 	data.mov = 0;
 	data.mov_skull = 0;
 	data.sprite.player.dir = 'R';

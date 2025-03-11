@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 12:25:02 by mivogel           #+#    #+#             */
-/*   Updated: 2025/03/09 23:28:40 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/03/10 18:26:30 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,6 +138,64 @@ void	ft_move_right(t_data *data)
 	data->mov++;
 }
 
+void	ft_move_skull_up(t_data *data)
+{
+	if (data->map.tab[data->map.skull.x - 1][data->map.skull.y] == '1'
+		|| data->map.tab[data->map.skull.x - 1][data->map.skull.y] == 'E'
+		|| data->map.tab[data->map.skull.x - 1][data->map.skull.y] == 'C')
+		return ;
+	if (data->map.tab[data->map.skull.x - 1][data->map.skull.y] == 'P')
+		ft_close(data);
+	data->map.tab[data->map.skull.x][data->map.skull.y] = '0';
+	data->map.skull.x--;
+	data->map.tab[data->map.skull.x][data->map.skull.y] = 'S';
+	data->mov_skull++;
+}
+
+void	ft_move_skull_down(t_data *data)
+{
+	if (data->map.tab[data->map.skull.x + 1][data->map.skull.y] == '1'
+		|| data->map.tab[data->map.skull.x + 1][data->map.skull.y] == 'E'
+		|| data->map.tab[data->map.skull.x + 1][data->map.skull.y] == 'C')
+		return ;
+	if (data->map.tab[data->map.skull.x + 1][data->map.skull.y] == 'P')
+		ft_close(data);
+	data->map.tab[data->map.skull.x][data->map.skull.y] = '0';
+	data->map.skull.x++;
+	data->map.tab[data->map.skull.x][data->map.skull.y] = 'S';
+	data->mov_skull++;
+}
+
+void	ft_move_skull_left(t_data *data)
+{
+	if (data->map.tab[data->map.skull.x][data->map.skull.y - 1] == '1'
+		|| data->map.tab[data->map.skull.x][data->map.skull.y - 1] == 'E'
+		|| data->map.tab[data->map.skull.x][data->map.skull.y - 1] == 'C')
+		return ;
+	if (data->map.tab[data->map.skull.x][data->map.skull.y - 1] == 'P')
+		ft_close(data);
+	data->map.tab[data->map.skull.x][data->map.skull.y] = '0';
+	data->map.skull.y--;
+	data->sprite.skull.dir = 'L';
+	data->map.tab[data->map.skull.x][data->map.skull.y] = 'S';
+	data->mov_skull++;
+}
+
+void	ft_move_skull_right(t_data *data)
+{
+	if (data->map.tab[data->map.skull.x][data->map.skull.y + 1] == '1'
+		|| data->map.tab[data->map.skull.x][data->map.skull.y + 1] == 'E'
+		|| data->map.tab[data->map.skull.x][data->map.skull.y + 1] == 'C')
+		return ;
+	if (data->map.tab[data->map.skull.x][data->map.skull.y + 1] == 'P')
+		ft_close(data);
+	data->map.tab[data->map.skull.x][data->map.skull.y] = '0';
+	data->map.skull.y++;
+	data->sprite.skull.dir = 'R';
+	data->map.tab[data->map.skull.x][data->map.skull.y] = 'S';
+	data->mov_skull++;
+}
+
 void	ft_move_skull(t_data *data)
 {
 	int	x;
@@ -148,39 +206,47 @@ void	ft_move_skull(t_data *data)
 	ft_printf("x: %d, y: %d\n", x, y);
 	if (y == 0 && x > 0)
 	{
-		if (data->map.tab[data->map.skull.x + 1][data->map.skull.y] == '1')
-			return ;
-		data->map.tab[data->map.skull.x][data->map.skull.y] = '0';
-		data->map.skull.x++;
-		data->sprite.skull.dir = 'R';
-		data->map.tab[data->map.skull.x][data->map.skull.y] = 'S';
+		ft_move_skull_down(data);
 	}
 	else if (y == 0 && x < 0)
 	{
-		if (data->map.tab[data->map.skull.x - 1][data->map.skull.y] == '1')
-			return ;
-		data->map.tab[data->map.skull.x][data->map.skull.y] = '0';
-		data->map.skull.x--;
-		data->sprite.skull.dir = 'L';
-		data->map.tab[data->map.skull.x][data->map.skull.y] = 'S';
+		ft_move_skull_up(data);
 	}
 	else if (x == 0 && y > 0)
 	{
-		if (data->map.tab[data->map.skull.x][data->map.skull.y + 1] == '1')
-			return ;
-		data->map.tab[data->map.skull.x][data->map.skull.y] = '0';
-		data->map.skull.y++;
-		data->sprite.skull.dir = 'R';
-		data->map.tab[data->map.skull.x][data->map.skull.y] = 'S';
+		ft_move_skull_right(data);
 	}
 	else if (x == 0 && y < 0)
 	{
-		if (data->map.tab[data->map.skull.x][data->map.skull.y - 1] == '1')
-			return ;
-		data->map.tab[data->map.skull.x][data->map.skull.y] = '0';
-		data->map.skull.y--;
-		data->sprite.skull.dir = 'L';
-		data->map.tab[data->map.skull.x][data->map.skull.y] = 'S';
+		ft_move_skull_left(data);
+	}
+	else if (x > 0 && y > 0)
+	{
+		if (x > y)
+			ft_move_skull_down(data);
+		else
+			ft_move_skull_right(data);
+	}
+	else if (x > 0 && y < 0)
+	{
+		if (x > -y)
+			ft_move_skull_down(data);
+		else
+			ft_move_skull_left(data);
+	}
+	else if (x < 0 && y > 0)
+	{
+		if (-x > y)
+			ft_move_skull_up(data);
+		else
+			ft_move_skull_right(data);
+	}
+	else if (x < 0 && y < 0)
+	{
+		if (-x > -y)
+			ft_move_skull_up(data);
+		else
+			ft_move_skull_left(data);
 	}
 }
 
@@ -196,7 +262,7 @@ int	ft_key(int keycode, t_data *data)
 		ft_move_left(data);
 	if (keycode == XK_d)
 		ft_move_right(data);
-	if (data->map.skull.x > 0 && data->map.skull.y > 0)
+	if (data->map.skull.x > 0 && data->map.skull.y > 0 && data->mov % 2 == 0)
 		ft_move_skull(data);
 	// mlx_clear_window(data->mlx_ptr, data->win_ptr);
 	ft_draw(data);
@@ -345,7 +411,7 @@ void	ft_draw_skull(t_data *data, int i, int j)
 {
 	if (data->sprite.skull.dir == 'R')
 	{
-		if (data->mov % 2 == 0)
+		if (data->mov_skull % 2 == 0)
 			mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
 				data->sprite.skull.skull_r1, j * 32, i * 32);
 		else
@@ -354,7 +420,7 @@ void	ft_draw_skull(t_data *data, int i, int j)
 	}
 	else if (data->sprite.skull.dir == 'L')
 	{
-		if (data->mov % 2 == 0)
+		if (data->mov_skull % 2 == 0)
 			mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
 				data->sprite.skull.skull_l1, j * 32, i * 32);
 		else
@@ -418,6 +484,7 @@ int	main(int ac, char **av)
 	data.win_ptr = mlx_new_window(data.mlx_ptr, data.map.width * 32,
 			data.map.height * 32, "gburtin");
 	data.mov = 0;
+	data.mov_skull = 0;
 	data.sprite.player.dir = 'R';
 	data.sprite.skull.dir = 'R';
 	ft_game(&data);

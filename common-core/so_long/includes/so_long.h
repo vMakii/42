@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 12:32:54 by mivogel           #+#    #+#             */
-/*   Updated: 2025/03/09 22:45:44 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/03/10 17:04:54 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ typedef struct s_data
 	void		*mlx_ptr;
 	void		*win_ptr;
 	int			mov;
+	int			mov_skull;
 	t_map		map;
 	t_sprite	sprite;
 }				t_data;

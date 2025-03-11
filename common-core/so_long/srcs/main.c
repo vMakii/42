@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 12:25:02 by mivogel           #+#    #+#             */
-/*   Updated: 2025/03/11 18:39:59 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/03/11 21:30:18 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -252,13 +252,10 @@ void	ft_move_skull_1(t_data *data, int x, int y)
 
 void	ft_move_skull_2(t_data *data, int x, int y)
 {
-	if (x > 0 && y > 0)
-	{
-		if (x > y)
-			ft_move_skull_down(data);
-		else
-			ft_move_skull_right(data);
-	}
+	if (x > 0 && y > 0 && x > y)
+		ft_move_skull_down(data);
+	else if (x > 0 && y > 0 && x <= y)
+		ft_move_skull_right(data);
 	else if (x > 0 && y < 0)
 	{
 		if (x > -y)

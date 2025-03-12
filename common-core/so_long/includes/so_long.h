@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 12:32:54 by mivogel           #+#    #+#             */
-/*   Updated: 2025/03/10 17:04:54 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/03/12 21:13:59 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,24 +43,6 @@
 # define SKULL_L2 "./assets/skull/skull_L2.xpm"
 # define SKULL_R1 "./assets/skull/skull_R1.xpm"
 # define SKULL_R2 "./assets/skull/skull_R2.xpm"
-
-typedef struct s_coord
-{
-	int			x;
-	int			y;
-}				t_coord;
-
-typedef struct s_map
-{
-	char		**tab;
-	int			nbcoin;
-	int			height;
-	int			width;
-	t_coord		skull;
-	t_coord		player;
-	t_coord		*coins;
-	t_coord		exit;
-}				t_map;
 
 typedef struct s_walls
 {
@@ -106,6 +88,24 @@ typedef struct s_sprite
 	t_walls		walls;
 }				t_sprite;
 
+typedef struct s_coord
+{
+	int			x;
+	int			y;
+}				t_coord;
+
+typedef struct s_map
+{
+	char		**tab;
+	int			nbcoin;
+	int			height;
+	int			width;
+	t_coord		skull;
+	t_coord		player;
+	t_coord		*coins;
+	t_coord		exit;
+}				t_map;
+
 typedef struct s_data
 {
 	void		*mlx_ptr;
@@ -116,23 +116,50 @@ typedef struct s_data
 	t_sprite	sprite;
 }				t_data;
 
-// check_map
+// checks
 char			**ft_mapcpy(char **tab);
-// void			ft_printmap(char **tab);
 int				ft_check_str(char *str);
 t_map			ft_map(int fd);
 int				ft_parsing(t_map map);
-// parsing
 int				ft_walls(char **tab, int len);
 int				ft_contains(char **tab);
 int				ft_validexit(char **tab);
-// free_utils
+// game
+void			ft_draw_outerwalls(t_data *data);
+void			ft_draw_inner(t_data *data, int i, int j);
+void			ft_draw_player(t_data *data, int i, int j);
+void			ft_draw_skull(t_data *data, int i, int j);
+void			ft_draw(t_data *data);
+void			*ft_load_img(t_data *data, char *path);
+void			*get_wall_texture(t_data *data, int i, int j);
+void			ft_img_outerwalls(t_data *data);
+void			ft_img_inner(t_data *data);
+void			ft_img(t_data *data);
+int				ft_key(int keycode, t_data *data);
+void			ft_move_up(t_data *data);
+void			ft_move_down(t_data *data);
+void			ft_move_left(t_data *data);
+void			ft_move_right(t_data *data);
+void			ft_move_skull_up(t_data *data);
+void			ft_move_skull_down(t_data *data);
+void			ft_move_skull_left(t_data *data);
+void			ft_move_skull_right(t_data *data);
+// utils
 void			ft_free_map(t_map map);
-// map_utils
+void			ft_destroy_image(t_data *data);
+int				ft_close(t_data *data);
+t_map			ft_init_map(char *av);
+int				ft_wincond(t_data *data, int i, int j);
+int				ft_losecond(t_data *data, int i, int j);
+void			ft_display_moves(t_data *data);
+void			ft_game(t_data *data);
 int				ft_countcoins(char **tab);
 t_coord			ft_getpos(char **tab, char c);
 t_coord			ft_coord(int i, int j);
 t_coord			*ft_getcoins_pos(char **tab, int nbcoin);
 char			**ft_readmap(int fd);
+void			ft_move_skull(t_data *data);
+void			ft_move_skull_1(t_data *data, int x, int y);
+void			ft_move_skull_2(t_data *data, int x, int y);
 
 #endif

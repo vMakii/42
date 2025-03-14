@@ -6,13 +6,11 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 09:49:58 by mivogel           #+#    #+#             */
-/*   Updated: 2025/02/27 14:38:13 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/03/14 09:53:05 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
-
-char	*str;
 
 char	*ft_addchar(char *str, unsigned char c)
 {
@@ -37,6 +35,7 @@ char	*ft_addchar(char *str, unsigned char c)
 
 void	handler(int s, siginfo_t *info, void *content)
 {
+	static char				*str;
 	static int				bits = 0;
 	static unsigned char	c = 0;
 

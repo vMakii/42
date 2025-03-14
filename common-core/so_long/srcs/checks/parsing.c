@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 13:38:27 by mivogel           #+#    #+#             */
-/*   Updated: 2025/03/08 21:31:05 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/03/14 13:07:30 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	ft_contains(char **tab)
 
 static void	ft_floodfill(char **tab, int x, int y)
 {
-	if (tab[x][y] == '1' || tab[x][y] == 'V' || tab[x][y] == 'E')
+	if (tab[x][y] == '1' || tab[x][y] == 'V' || tab[x][y] == 'S')
 		return ;
 	tab[x][y] = 'V';
 	ft_floodfill(tab, x - 1, y);
@@ -89,7 +89,7 @@ static int	validmap(char **tab)
 		j = -1;
 		while (tab[i][++j])
 		{
-			if (tab[i][j] == 'C' || tab[i][j] == 'S')
+			if (tab[i][j] == 'C' || tab[i][j] == 'E')
 				return (0);
 		}
 	}

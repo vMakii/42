@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 12:32:54 by mivogel           #+#    #+#             */
-/*   Updated: 2025/03/12 21:13:59 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/03/14 11:50:46 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@
 # define EXIT1 "./assets/exit/exit1.xpm"
 # define EXIT2 "./assets/exit/exit2.xpm"
 # define PLAYER_R1 "./assets/player/player_R1.xpm"
-# define PLAYER_R2 "./assets/player/player_R2.xpm"
+# define PLAYER_R2 "./assets/player/player_R22.xpm"
 # define PLAYER_L1 "./assets/player/player_L1.xpm"
-# define PLAYER_L2 "./assets/player/player_L2.xpm"
+# define PLAYER_L2 "./assets/player/player_L22.xpm"
 # define SKULL_L1 "./assets/skull/skull_L1.xpm"
 # define SKULL_L2 "./assets/skull/skull_L2.xpm"
 # define SKULL_R1 "./assets/skull/skull_R1.xpm"

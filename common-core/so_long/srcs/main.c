@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 12:25:02 by mivogel           #+#    #+#             */
-/*   Updated: 2025/03/12 21:10:34 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/03/14 10:41:10 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	main(int ac, char **av)
 
 	if (ac != 2)
 		return (ft_printf("Usage Error: [./so_long *.ber]\n"), 1);
+	ft_memset(&data, 0, sizeof(t_data));
 	data.map = ft_init_map(av[1]);
 	if (!ft_parsing(data.map))
 	{

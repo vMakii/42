@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 12:41:11 by mivogel           #+#    #+#             */
-/*   Updated: 2025/03/09 22:54:16 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/03/14 10:42:31 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ t_map	ft_map(int fd)
 {
 	t_map	map;
 
+	ft_memset(&map, 0, sizeof(t_map));
 	map.tab = ft_readmap(fd);
 	if (!map.tab)
 		exit(0);

@@ -6,13 +6,13 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 10:04:36 by mivogel           #+#    #+#             */
-/*   Updated: 2025/03/17 13:16:11 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/03/17 14:49:43 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-int		g_msg = 0;
+static volatile sig_atomic_t	g_msg = 0;
 
 void	send_signal(int pid, char *str)
 {
@@ -33,35 +33,25 @@ void	send_signal(int pid, char *str)
 			else
 				kill(pid, SIGUSR2);
 			while (!g_msg)
-			{
 				usleep(100);
-			}
+			g_msg = 0;
 		}
 		str++;
 		len--;
 	}
 }
 
-void	handler(int s)
+void	handler(int s, siginfo_t *info, void *content)
 {
+	(void)info;
+	(void)content;
 	if (s == SIGUSR1)
-	{
-		if (!g_msg)
-		{
-			g_msg = 1;
-		}
-	}
+		g_msg = 1;
 	else if (s == SIGUSR2)
 	{
-		ft_printf("Message received by server\n");
+		// ft_printf("Message received by server\n");
+		exit(EXIT_SUCCESS);
 	}
-	// if (!g_msg)
-	// {
-	// 	if (s == SIGUSR1)
-	// 	{
-	// 		g_msg = 1;
-	// 	}
-	// }
 }
 
 int	main(int ac, char **av)
@@ -75,13 +65,13 @@ int	main(int ac, char **av)
 		exit(EXIT_FAILURE);
 	}
 	pid = ft_atoi(av[1]);
-	if (pid <= 0 || pid > 4194304)
-	{
-		ft_printf("Invalid PID\n");
-		exit(EXIT_FAILURE);
-	}
-	sa.sa_handler = handler;
-	sa.sa_flags = SA_RESTART;
+	// if (pid <= 0 || pid > 4194304)
+	// {
+	// 	ft_printf("Invalid PID\n");
+	// 	exit(EXIT_FAILURE);
+	// }
+	sa.sa_sigaction = handler;
+	sa.sa_flags = SA_SIGINFO;
 	sigaction(SIGUSR1, &sa, NULL);
 	sigaction(SIGUSR2, &sa, NULL);
 	send_signal(pid, av[2]);

@@ -1,41 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   server_bonus.c                                     :+:      :+:    :+:   */
+/*   server.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 09:49:58 by mivogel           #+#    #+#             */
-/*   Updated: 2025/03/17 10:52:59 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/03/17 15:16:36 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-char	*ft_addchar(char *str, unsigned char c)
+void	handle_str(unsigned char c)
 {
-	int		len;
-	char	*new;
+	static char		buffer[1000000000];
+	static size_t	i = 0;
 
-	len = 0;
-	if (str)
-		len = ft_strlen(str);
-	new = malloc(sizeof(char) * (len + 2));
-	if (!new)
-		return (NULL);
-	if (str)
+	if (c == '\0')
 	{
-		ft_strlcpy(new, str, len + 1);
-		free(str);
+		buffer[i] = '\0';
+		ft_printf("%s\n", buffer);
+		i = 0;
 	}
-	new[len] = c;
-	new[len + 1] = '\0';
-	return (new);
+	else
+		buffer[i++] = c;
 }
 
 void	handler(int s, siginfo_t *info, void *content)
 {
-	static char				*str;
 	static int				bits = 0;
 	static unsigned char	c = 0;
 
@@ -44,19 +37,11 @@ void	handler(int s, siginfo_t *info, void *content)
 	bits++;
 	if (bits == 8)
 	{
-		if (c == '\0')
-		{
-			if (str)
-				ft_printf("%s\n", str);
-			free(str);
-			str = NULL;
-			kill(info->si_pid, SIGUSR1);
-		}
-		else
-			str = ft_addchar(str, c);
+		handle_str(c);
 		bits = 0;
 		c = 0;
 	}
+	kill(info->si_pid, SIGUSR1);
 }
 
 int	main(void)

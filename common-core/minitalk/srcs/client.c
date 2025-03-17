@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 10:04:36 by mivogel           #+#    #+#             */
-/*   Updated: 2025/03/17 14:49:43 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/03/17 15:16:39 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,11 @@ int	main(int ac, char **av)
 		exit(EXIT_FAILURE);
 	}
 	pid = ft_atoi(av[1]);
-	// if (pid <= 0 || pid > 4194304)
-	// {
-	// 	ft_printf("Invalid PID\n");
-	// 	exit(EXIT_FAILURE);
-	// }
+	if (pid <= 0 || pid > 4194304)
+	{
+		ft_printf("Invalid PID\n");
+		exit(EXIT_FAILURE);
+	}
 	sa.sa_sigaction = handler;
 	sa.sa_flags = SA_SIGINFO;
 	sigaction(SIGUSR1, &sa, NULL);

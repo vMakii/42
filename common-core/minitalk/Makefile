@@ -6,7 +6,7 @@
 #    By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/02 11:36:11 by mivogel           #+#    #+#              #
-#    Updated: 2025/01/16 14:36:20 by mivogel          ###   ########.fr        #
+#    Updated: 2025/03/17 11:50:01 by mivogel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,12 +51,6 @@ L_Cyan='\e[1;36m'
 White='\e[1;37m'
 NC='\e[0m'
 
-a: all clean
-
-b: bonus clean
-
-ab: all bonus clean
-
 all: ${SERVER} ${CLIENT}
 
 bonus: $(BONUS)
@@ -71,6 +65,7 @@ $(CLIENT): ${OBJS_C} ${LIBFT}
 
 %.o : %.c 	
 	@$(CC) $(CFLAGS) -c $< -o $@
+	@echo $(L_Green) $(NC)
 
 $(BONUS): ${OBJS_BONUS_S} ${OBJS_BONUS_C} ${LIBFT}
 	@${CC} ${CFLAGS} -o ${SERVER_BONUS} $(OBJS_BONUS_S) ${LIBFT}	

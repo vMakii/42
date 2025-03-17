@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/07 10:20:21 by mivogel           #+#    #+#             */
-/*   Updated: 2025/03/17 10:50:45 by mivogel          ###   ########.fr       */
+/*   Created: 2025/01/08 09:49:58 by mivogel           #+#    #+#             */
+/*   Updated: 2025/03/17 11:45:38 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,13 @@ char	*ft_addchar(char *str, unsigned char c)
 	return (new);
 }
 
-void	handler(int s)
+void	handler(int s, siginfo_t *info, void *content)
 {
 	static char				*str;
-	static int				bits;
-	static unsigned char	c;
+	static int				bits = 0;
+	static unsigned char	c = 0;
 
+	(void)content;
 	c = (c << 1) | (s == SIGUSR1);
 	bits++;
 	if (bits == 8)
@@ -49,6 +50,7 @@ void	handler(int s)
 				ft_printf("%s\n", str);
 			free(str);
 			str = NULL;
+			kill(info->si_pid, SIGUSR1);
 		}
 		else
 			str = ft_addchar(str, c);
@@ -62,12 +64,12 @@ int	main(void)
 	struct sigaction	sa;
 
 	ft_printf("PID: %d\n", getpid());
-	sa.sa_handler = handler;
-	sa.sa_flags = SA_RESTART;
+	sa.sa_sigaction = handler;
+	sa.sa_flags = SA_SIGINFO | SA_RESTART;
 	sigemptyset(&sa.sa_mask);
 	sigaction(SIGUSR1, &sa, NULL);
 	sigaction(SIGUSR2, &sa, NULL);
 	while (1)
-		usleep(100);
+		pause();
 	return (0);
 }

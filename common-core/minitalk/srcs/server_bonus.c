@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 09:49:58 by mivogel           #+#    #+#             */
-/*   Updated: 2025/03/14 09:53:05 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/03/17 10:52:59 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,6 @@ int	main(void)
 	sigaction(SIGUSR1, &sa, NULL);
 	sigaction(SIGUSR2, &sa, NULL);
 	while (1)
-		usleep(100);
+		pause();
 	return (0);
 }

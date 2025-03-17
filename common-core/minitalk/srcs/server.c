@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 09:49:58 by mivogel           #+#    #+#             */
-/*   Updated: 2025/03/17 11:45:38 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/03/17 13:09:31 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,10 @@ void	handler(int s, siginfo_t *info, void *content)
 			kill(info->si_pid, SIGUSR1);
 		}
 		else
+		{
 			str = ft_addchar(str, c);
+			kill(info->si_pid, SIGUSR2);
+		}
 		bits = 0;
 		c = 0;
 	}

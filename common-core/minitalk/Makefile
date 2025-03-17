@@ -6,7 +6,7 @@
 #    By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/02 11:36:11 by mivogel           #+#    #+#              #
-#    Updated: 2025/03/17 11:50:01 by mivogel          ###   ########.fr        #
+#    Updated: 2025/03/17 13:14:11 by mivogel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,7 +65,6 @@ $(CLIENT): ${OBJS_C} ${LIBFT}
 
 %.o : %.c 	
 	@$(CC) $(CFLAGS) -c $< -o $@
-	@echo $(L_Green) $(NC)
 
 $(BONUS): ${OBJS_BONUS_S} ${OBJS_BONUS_C} ${LIBFT}
 	@${CC} ${CFLAGS} -o ${SERVER_BONUS} $(OBJS_BONUS_S) ${LIBFT}	

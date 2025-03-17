@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 10:04:36 by mivogel           #+#    #+#             */
-/*   Updated: 2025/03/17 15:16:39 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/03/17 15:20:47 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,7 @@ void	handler(int s, siginfo_t *info, void *content)
 	if (s == SIGUSR1)
 		g_msg = 1;
 	else if (s == SIGUSR2)
-	{
-		// ft_printf("Message received by server\n");
 		exit(EXIT_SUCCESS);
-	}
 }
 
 int	main(int ac, char **av)

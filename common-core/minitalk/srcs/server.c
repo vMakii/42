@@ -6,13 +6,13 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 09:49:58 by mivogel           #+#    #+#             */
-/*   Updated: 2025/03/17 15:16:36 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/03/19 13:14:01 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-void	handle_str(unsigned char c)
+void	handle_str(unsigned char c, int pid)
 {
 	static char		buffer[1000000000];
 	static size_t	i = 0;
@@ -21,6 +21,7 @@ void	handle_str(unsigned char c)
 	{
 		buffer[i] = '\0';
 		ft_printf("%s\n", buffer);
+		kill(pid, SIGUSR2);
 		i = 0;
 	}
 	else
@@ -37,7 +38,7 @@ void	handler(int s, siginfo_t *info, void *content)
 	bits++;
 	if (bits == 8)
 	{
-		handle_str(c);
+		handle_str(c, info->si_pid);
 		bits = 0;
 		c = 0;
 	}

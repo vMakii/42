@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 13:04:14 by mivogel           #+#    #+#             */
-/*   Updated: 2025/03/12 15:57:22 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/03/19 14:03:24 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,6 @@ int	ft_close(t_data *data)
 	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
 	mlx_destroy_display(data->mlx_ptr);
 	free(data->mlx_ptr);
+	ft_printf("moves: %d\n", data->mov);
 	exit(0);
 }

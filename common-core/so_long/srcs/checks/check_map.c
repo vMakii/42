@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 12:41:11 by mivogel           #+#    #+#             */
-/*   Updated: 2025/03/20 13:08:34 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/03/20 15:17:29 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,10 @@ int	ft_parsing(t_map map)
 	cpy = ft_mapcpy(map.tab);
 	if (!ft_walls(map.tab, len) || !ft_contains(map.tab) || !ft_validexit(cpy)
 		|| map.skull.x == -1)
+	{
+		ft_freetab(cpy);
 		return (0);
+	}
+	ft_freetab(cpy);
 	return (1);
 }

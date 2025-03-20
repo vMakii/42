@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 13:38:27 by mivogel           #+#    #+#             */
-/*   Updated: 2025/03/20 12:48:18 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/03/20 15:17:14 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,13 +117,7 @@ int	ft_validexit(char **tab)
 		}
 	}
 	if (!validmap(tab))
-	{
-		ft_freetab(tab);
 		return (printf("Error\nMap not valid\n"), 0);
-	}
 	else
-	{
-		ft_freetab(tab);
 		return (1);
-	}
 }

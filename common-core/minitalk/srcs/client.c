@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 10:04:36 by mivogel           #+#    #+#             */
-/*   Updated: 2025/03/17 15:20:47 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/03/20 11:18:07 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ void	send_signal(int pid, char *str)
 			else
 				kill(pid, SIGUSR2);
 			while (!g_msg)
-				usleep(100);
+				;
+			// usleep(50);
 			g_msg = 0;
 		}
 		str++;

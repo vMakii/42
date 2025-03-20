@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 13:38:27 by mivogel           #+#    #+#             */
-/*   Updated: 2025/03/14 13:07:30 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/03/20 12:48:18 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,15 @@ int	ft_walls(char **tab, int len)
 		while (tab[i][++j])
 		{
 			if (len < j)
-				return (ft_printf("Error: not rectangular\n"), 0);
+				return (ft_printf("Error\nNot rectangular\n"), 0);
 			if (tab[0][j] != '1' || tab[i][0] != '1' || tab[i][len] != '1')
-				return (ft_printf("Error: no outer wall\n"), 0);
+				return (ft_printf("Error\nNo outer wall\n"), 0);
 		}
 	}
 	j = -1;
 	while (tab[max_i][++j])
 		if (tab[max_i][j] != '1')
-			return (ft_printf("Error: no outer wall\n"), 0);
+			return (ft_printf("Error\nNo outer wall\n"), 0);
 	return (1);
 }
 
@@ -63,13 +63,14 @@ int	ft_contains(char **tab)
 		}
 	}
 	if (p != 1 || c < 1 || e != 1)
-		return (ft_printf("Error: multiple or no key(s) element(s)\n"), 0);
+		return (ft_printf("Error\nMultiple or no key(s) element(s)\n"), 0);
 	return (1);
 }
 
 static void	ft_floodfill(char **tab, int x, int y)
 {
-	if (tab[x][y] == '1' || tab[x][y] == 'V' || tab[x][y] == 'S')
+	if (tab[x][y] == '1' || tab[x][y] == 'V' || tab[x][y] == 'S'
+		|| tab[x][y] == 'E')
 		return ;
 	tab[x][y] = 'V';
 	ft_floodfill(tab, x - 1, y);
@@ -89,7 +90,11 @@ static int	validmap(char **tab)
 		j = -1;
 		while (tab[i][++j])
 		{
-			if (tab[i][j] == 'C' || tab[i][j] == 'E')
+			if (tab[i][j] == 'C')
+				return (0);
+			if (tab[i][j] == 'E' && (tab[i][j + 1] != 'V' && tab[i][j
+					- 1] != 'V' && tab[i + 1][j] != 'V' && tab[i
+					- 1][j] != 'V'))
 				return (0);
 		}
 	}
@@ -114,7 +119,7 @@ int	ft_validexit(char **tab)
 	if (!validmap(tab))
 	{
 		ft_freetab(tab);
-		return (printf("Error: map not valid\n"), 0);
+		return (printf("Error\nMap not valid\n"), 0);
 	}
 	else
 	{

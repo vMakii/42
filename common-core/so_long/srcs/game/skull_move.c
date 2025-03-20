@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:51:54 by mivogel           #+#    #+#             */
-/*   Updated: 2025/03/12 23:00:41 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/03/20 11:51:07 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	ft_move_skull_up(t_data *data)
 		return ;
 	if (data->map.tab[data->map.skull.x - 1][data->map.skull.y] == 'P')
 	{
-		ft_printf("You lose!\n");
+		ft_printf("\e[1;31mYou lose!\e[0m\n");
 		ft_close(data);
 	}
 	data->map.tab[data->map.skull.x][data->map.skull.y] = '0';
@@ -37,7 +37,7 @@ void	ft_move_skull_down(t_data *data)
 		return ;
 	if (data->map.tab[data->map.skull.x + 1][data->map.skull.y] == 'P')
 	{
-		ft_printf("You lose!\n");
+		ft_printf("\e[1;31mYou lose!\e[0m\n");
 		ft_close(data);
 	}
 	data->map.tab[data->map.skull.x][data->map.skull.y] = '0';
@@ -54,7 +54,7 @@ void	ft_move_skull_left(t_data *data)
 		return ;
 	if (data->map.tab[data->map.skull.x][data->map.skull.y - 1] == 'P')
 	{
-		ft_printf("You lose!\n");
+		ft_printf("\e[1;31mYou lose!\e[0m\n");
 		ft_close(data);
 	}
 	data->map.tab[data->map.skull.x][data->map.skull.y] = '0';
@@ -72,7 +72,7 @@ void	ft_move_skull_right(t_data *data)
 		return ;
 	if (data->map.tab[data->map.skull.x][data->map.skull.y + 1] == 'P')
 	{
-		ft_printf("You lose!\n");
+		ft_printf("\e[1;31mYou lose!\e[0m\n");
 		ft_close(data);
 	}
 	data->map.tab[data->map.skull.x][data->map.skull.y] = '0';

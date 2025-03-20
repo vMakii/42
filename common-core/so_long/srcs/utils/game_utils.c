@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:59:58 by mivogel           #+#    #+#             */
-/*   Updated: 2025/03/12 23:00:32 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/03/20 12:26:59 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_map	ft_init_map(char *av)
 	fd = open(av, O_RDONLY);
 	if (fd < 0)
 	{
-		perror("Error");
+		ft_printf("Error\nFile not found\n");
 		exit(0);
 	}
 	map = ft_map(fd);
@@ -33,7 +33,7 @@ int	ft_wincond(t_data *data, int i, int j)
 	{
 		if (data->map.nbcoin == 0)
 		{
-			ft_printf("You win!\n");
+			ft_printf("\e[1;32mYou win!\e[0m\n");
 			ft_close(data);
 		}
 		else
@@ -46,7 +46,7 @@ int	ft_losecond(t_data *data, int i, int j)
 {
 	if (data->map.tab[i][j] == 'S')
 	{
-		ft_printf("You lose!\n");
+		ft_printf("\e[1;31mYou lose!\e[0m\n");
 		ft_close(data);
 	}
 	return (0);

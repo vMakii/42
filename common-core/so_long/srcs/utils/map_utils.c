@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 11:00:38 by mivogel           #+#    #+#             */
-/*   Updated: 2025/02/27 16:00:18 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/03/20 13:07:39 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,11 @@ char	**ft_readmap(int fd)
 	if (!str)
 		return (NULL);
 	line = get_next_line(fd);
+	if (!line)
+	{
+		ft_printf("Error\nEmpty file\n");
+		return (NULL);
+	}
 	while (line)
 	{
 		str = ft_strjoin_free(str, line);

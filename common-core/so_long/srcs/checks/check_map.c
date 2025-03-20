@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 12:41:11 by mivogel           #+#    #+#             */
-/*   Updated: 2025/03/14 10:42:31 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/03/20 13:08:34 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ t_coord	ft_getskull(char **tab)
 	}
 	if (skull > 1)
 	{
-		ft_printf("Error: multiple skulls\n");
+		ft_printf("Error\nMultiple skulls\n");
 		return (ft_coord(-1, -1));
 	}
 	if (skull == 0)
@@ -68,7 +68,7 @@ int	ft_check_str(char *str)
 	while (str[i])
 	{
 		if (str[i] == '\n' && str[i + 1] == '\n')
-			return (ft_printf("Error: consecutive newline"), 0);
+			return (ft_printf("Error\nConsecutive newline"), 0);
 		i++;
 	}
 	i = -1;
@@ -76,7 +76,7 @@ int	ft_check_str(char *str)
 	{
 		if (str[i] != '1' && str[i] != '0' && str[i] != 'P' && str[i] != 'C'
 			&& str[i] != 'E' && str[i] != 'S' && str[i] != '\n')
-			return (ft_printf("Error: map contains invalid item(s)"), 0);
+			return (ft_printf("Error\nMap contains invalid item(s)"), 0);
 	}
 	return (1);
 }

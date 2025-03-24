@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 12:32:54 by mivogel           #+#    #+#             */
-/*   Updated: 2025/03/19 10:56:03 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/03/24 12:25:31 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,11 +98,12 @@ typedef struct s_map
 {
 	char		**tab;
 	int			nbcoin;
+	int			nbskull;
 	int			height;
 	int			width;
-	t_coord		skull;
 	t_coord		player;
 	t_coord		*coins;
+	t_coord		*skulls;
 	t_coord		exit;
 }				t_map;
 
@@ -140,10 +141,10 @@ void			ft_move_up(t_data *data);
 void			ft_move_down(t_data *data);
 void			ft_move_left(t_data *data);
 void			ft_move_right(t_data *data);
-void			ft_move_skull_up(t_data *data);
-void			ft_move_skull_down(t_data *data);
-void			ft_move_skull_left(t_data *data);
-void			ft_move_skull_right(t_data *data);
+void			ft_move_skull_up(t_data *data, int i);
+void			ft_move_skull_down(t_data *data, int i);
+void			ft_move_skull_left(t_data *data, int i);
+void			ft_move_skull_right(t_data *data, int i);
 // utils
 void			ft_free_map(t_map map);
 void			ft_destroy_image(t_data *data);
@@ -153,13 +154,13 @@ int				ft_wincond(t_data *data, int i, int j);
 int				ft_losecond(t_data *data, int i, int j);
 void			ft_display_moves(t_data *data);
 void			ft_game(t_data *data);
-int				ft_countcoins(char **tab);
+int				ft_countitems(char **tab, char items);
 t_coord			ft_getpos(char **tab, char c);
 t_coord			ft_coord(int i, int j);
 t_coord			*ft_getcoins_pos(char **tab, int nbcoin);
 char			**ft_readmap(int fd);
 void			ft_move_skull(t_data *data);
-void			ft_move_skull_1(t_data *data, int x, int y);
-void			ft_move_skull_2(t_data *data, int x, int y);
+void			ft_move_skull_1(t_data *data, int i, int x, int y);
+void			ft_move_skull_2(t_data *data, int i, int x, int y);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 20:54:04 by mivogel           #+#    #+#             */
-/*   Updated: 2025/03/12 23:00:25 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/03/24 13:16:28 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	*ft_load_img(t_data *data, char *path)
 			&data->sprite.width);
 	if (!img)
 	{
-		ft_printf("Error: mlx_xpm_file_to_image failed\n");
+		ft_printf("Error\nmlx_xpm_file_to_image failed\n");
 		ft_close(data);
 	}
 	return (img);

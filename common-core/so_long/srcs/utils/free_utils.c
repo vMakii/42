@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 13:04:14 by mivogel           #+#    #+#             */
-/*   Updated: 2025/03/19 14:03:24 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/03/24 12:46:33 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	ft_free_map(t_map map)
 {
 	ft_freetab(map.tab);
 	free(map.coins);
+	if (map.nbskull)
+		free(map.skulls);
 }
 
 void	ft_destroy_image(t_data *data)

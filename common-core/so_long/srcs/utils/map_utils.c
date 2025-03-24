@@ -6,13 +6,13 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 11:00:38 by mivogel           #+#    #+#             */
-/*   Updated: 2025/03/20 13:07:39 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/03/24 11:37:35 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	ft_countcoins(char **tab)
+int	ft_countitems(char **tab, char items)
 {
 	int	n;
 	int	i;
@@ -25,7 +25,7 @@ int	ft_countcoins(char **tab)
 		j = 0;
 		while (tab[i][j])
 		{
-			if (tab[i][j] == 'C')
+			if (tab[i][j] == items)
 				n++;
 			j++;
 		}
@@ -97,15 +97,12 @@ char	**ft_readmap(int fd)
 	char	*line;
 	char	**tab;
 
+	line = get_next_line(fd);
+	if (!line)
+		return (ft_printf("Error\nEmpty file\n"), NULL);
 	str = ft_strdup("");
 	if (!str)
 		return (NULL);
-	line = get_next_line(fd);
-	if (!line)
-	{
-		ft_printf("Error\nEmpty file\n");
-		return (NULL);
-	}
 	while (line)
 	{
 		str = ft_strjoin_free(str, line);
@@ -113,7 +110,10 @@ char	**ft_readmap(int fd)
 		line = get_next_line(fd);
 	}
 	if (!ft_check_str(str))
+	{
+		free(str);
 		return (NULL);
+	}
 	tab = ft_split(str, '\n');
 	free(str);
 	return (tab);

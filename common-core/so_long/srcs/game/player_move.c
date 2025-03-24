@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:11:49 by mivogel           #+#    #+#             */
-/*   Updated: 2025/03/20 11:47:06 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/03/24 12:12:24 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ int	ft_key(int keycode, t_data *data)
 	if (keycode == XK_d)
 		ft_move_right(data);
 	if ((keycode == XK_w || keycode == XK_s || keycode == XK_a
-			|| keycode == XK_d) && (data->map.skull.x > 0
-			&& data->map.skull.y > 0 && data->mov % 2 == 0))
+			|| keycode == XK_d) && (data->map.nbskull > 0 && data->mov
+			% 2 == 0))
 		ft_move_skull(data);
 	ft_draw(data);
 	return (0);

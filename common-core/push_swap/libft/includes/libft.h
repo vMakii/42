@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 17:40:58 by mivogel           #+#    #+#             */
-/*   Updated: 2025/02/10 14:39:59 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/03/21 13:42:29 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,11 @@
 
 // libft
 int		ft_atoi(const char *str);
+long	ft_atol(const char *str);
 void	ft_bzero(void *s, size_t n);
 void	*ft_calloc(size_t n, size_t size);
+void	ft_free(void *content);
+void	ft_freetab(char **tab);
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
 int		ft_isalnum(int c);
@@ -52,6 +55,7 @@ void	*ft_memcpy(void *dst, const void *src, size_t n);
 void	*ft_memmove(void *dst, const void *src, size_t n);
 int		ft_memcmp(const void *ptr1, const void *ptr2, size_t n);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
+int		ft_tablen(char **tab);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strtrim(char const *s1, char const *set);
 char	**ft_split(char const *s, char c);
@@ -63,7 +67,6 @@ void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
 // bonus
-// void	ft_free(void *content);
 // t_list	*ft_lstnew(void *content);
 // void	ft_lstadd_front(t_list **lst, t_list *new);
 // int		ft_lstsize(t_list *lst);
@@ -85,10 +88,8 @@ int		ft_puthexa(unsigned int n, const char type);
 
 // get_next_line
 char	*get_next_line(int fd);
-size_t	ft_strlen(const char *str);
 char	*ft_strchr(const char *str, int c);
 char	*ft_strjoin_free(char *s1, char const *s2);
-void	ftbzero(void *s, size_t n);
 void	*ft_calloc(size_t n, size_t size);
 // bonus
 char	*get_next_line_bonus(int fd);

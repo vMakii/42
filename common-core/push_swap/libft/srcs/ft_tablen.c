@@ -1,30 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free.c                                          :+:      :+:    :+:   */
+/*   ft_tablen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/02 14:22:56 by mivogel           #+#    #+#             */
-/*   Updated: 2025/02/25 12:56:21 by mivogel          ###   ########.fr       */
+/*   Created: 2025/02/27 15:21:44 by mivogel           #+#    #+#             */
+/*   Updated: 2025/03/14 11:56:16 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_free(void *content)
-{
-	free(content);
-}
-
-void	ft_freetab(char **tab)
+int	ft_tablen(char **tab)
 {
 	int	i;
 
 	i = 0;
 	while (tab[i])
 		i++;
-	while (i >= 0)
-		free(tab[i--]);
-	free(tab);
+	return (i);
 }

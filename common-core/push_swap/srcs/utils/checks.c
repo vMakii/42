@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 14:21:32 by mivogel           #+#    #+#             */
-/*   Updated: 2025/02/17 11:57:52 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/03/21 17:24:42 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ static int	isnum(char *str)
 
 static int	valid_input(char **av)
 {
-	int	i;
+	int		i;
+	long	n;
 
 	i = 0;
 	while (av[i])
@@ -65,7 +66,8 @@ static int	valid_input(char **av)
 			return (0);
 		if (getdouble(av[i], av, i))
 			return (0);
-		if (ft_atoi(av[i]) < INT_MIN || ft_atoi(av[i]) > INT_MAX)
+		n = ft_atol(av[i]);
+		if (n < INT_MIN || n > INT_MAX)
 			return (0);
 		i++;
 	}
@@ -82,7 +84,7 @@ int	ft_check(int ac, char **av, t_list **stack_a, t_list **stack_b)
 	else
 		av++;
 	if (!av || !valid_input(av))
-		return (0);
+		return (freesplit(av), 0);
 	while (av[i])
 		i++;
 	*stack_a = ft_init(av, i);

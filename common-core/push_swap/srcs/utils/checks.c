@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 14:21:32 by mivogel           #+#    #+#             */
-/*   Updated: 2025/03/25 20:23:40 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/03/25 21:01:51 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,29 +76,20 @@ static int	valid_input(char **av)
 
 int	ft_check(int ac, char **av, t_list **stack_a, t_list **stack_b)
 {
-	int			i;
-	static int	split = 0;
-
-	i = 0;
 	if (ac == 2)
-	{
 		av = ft_split(av[1], ' ');
-		split++;
-	}
 	else
 		av++;
-	while (av[i])
-		i++;
-	*stack_a = ft_init(av, i);
-	if (!*stack_a)
-		return (0);
-	*stack_b = NULL;
 	if (!av || !valid_input(av))
 	{
 		if (ac == 2)
 			freesplit(av);
 		return (0);
 	}
+	*stack_a = ft_init(av);
+	if (!*stack_a)
+		return (0);
+	*stack_b = NULL;
 	if (ac == 2)
 		freesplit(av);
 	return (1);

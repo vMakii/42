@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 14:19:28 by mivogel           #+#    #+#             */
-/*   Updated: 2025/01/29 15:43:15 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/03/25 21:02:58 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,15 +72,19 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 	}
 }
 
-t_list	*ft_init(char **av, int n)
+t_list	*ft_init(char **av)
 {
 	t_list	*a;
 	t_list	*new;
 	int		content;
 	int		i;
+	int		n;
 
 	i = 0;
+	n = 0;
 	a = NULL;
+	while (av[n])
+		n++;
 	while (i < n)
 	{
 		content = ft_atoi(av[i]);

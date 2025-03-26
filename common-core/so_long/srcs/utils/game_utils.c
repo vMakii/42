@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:59:58 by mivogel           #+#    #+#             */
-/*   Updated: 2025/03/20 12:26:59 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/03/26 10:44:06 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,6 @@ void	ft_game(t_data *data)
 	ft_draw(data);
 	mlx_hook(data->win_ptr, DestroyNotify, StructureNotifyMask, &ft_close,
 		data);
-	mlx_key_hook(data->win_ptr, &ft_key, data);
+	mlx_hook(data->win_ptr, KeyPress, KeyPressMask, &ft_key, data);
 	mlx_loop(data->mlx_ptr);
 }

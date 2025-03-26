@@ -6,7 +6,7 @@
 #    By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/02 11:36:11 by mivogel           #+#    #+#              #
-#    Updated: 2025/03/25 21:02:39 by mivogel          ###   ########.fr        #
+#    Updated: 2025/03/26 14:28:47 by mivogel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,21 +49,21 @@ all: ${NAME} ${BONUS}
 5: $(NAME) $(BONUS)
 	$(eval ARG = $(shell shuf -i 0-999 -n 5))
 	@echo ARG: $(ARG)
-	@./push_swap $(ARG) | ./checker_linux $(ARG)
+	@./push_swap $(ARG) | ./checker $(ARG)
 	@echo -n "Nombre d'operations: " 
 	@./push_swap $(ARG) | wc -l
 
 100: $(NAME) $(BONUS)
 	$(eval ARG = $(shell shuf -i 0-999 -n 100))	
 	@echo ARG: $(ARG)
-	@./push_swap $(ARG) | ./checker_linux $(ARG)
+	@./push_swap $(ARG) | ./checker $(ARG)
 	@echo -n "Nombre d'operations: " 
 	@./push_swap $(ARG) | wc -l
 
 500: $(NAME)
 	$(eval ARG = $(shell shuf -i 0-999 -n 500))	
 	@echo ARG: $(ARG)
-	@./push_swap $(ARG) | ./checker_linux $(ARG)
+	@./push_swap $(ARG) | ./checker $(ARG)
 	@echo -n "Nombre d'operations: " 
 	@./push_swap $(ARG) | wc -l
 

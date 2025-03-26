@@ -6,18 +6,27 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 10:07:10 by mivogel           #+#    #+#             */
-/*   Updated: 2025/02/17 10:59:06 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/03/26 15:20:33 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void	ft_error(t_list **a, t_list **b, char *line)
+{
+	ft_printf("Error\n");
+	free(line);
+	ft_lstclear(a);
+	ft_lstclear(b);
+	exit(0);
+}
 
 char	*ft_op(t_list **a, t_list **b, char *line)
 {
 	if (!ft_strncmp(line, "pa", 2))
 		ft_pa(a, b, 1);
 	else if (!ft_strncmp(line, "pb", 2))
-		ft_pb(b, a, 1);
+		ft_pb(a, b, 1);
 	else if (!ft_strncmp(line, "sa", 2))
 		ft_sa(a, 1);
 	else if (!ft_strncmp(line, "sb", 2))
@@ -36,5 +45,7 @@ char	*ft_op(t_list **a, t_list **b, char *line)
 		ft_rrb(b, 1);
 	else if (!ft_strncmp(line, "rrr", 3))
 		ft_rrr(a, b, 1);
+	else
+		ft_error(a, b, line);
 	return (get_next_line(0));
 }

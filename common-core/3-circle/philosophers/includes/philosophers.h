@@ -1,26 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/08 10:51:58 by mivogel           #+#    #+#             */
-/*   Updated: 2024/11/08 10:54:48 by mivogel          ###   ########.fr       */
+/*   Created: 2025/03/27 18:47:35 by mivogel           #+#    #+#             */
+/*   Updated: 2025/03/27 18:58:55 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef PHILOSOPHERS_H
+# define PHILOSOPHERS_H
+# include <pthread.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <string.h>
+# include <sys/time.h>
+# include <unistd.h>
 
-char	*ft_strdup(const char *src)
+typedef struct s_data
 {
-	size_t	len;
-	char	*dst;
+	int	num_philo;
+	int	time_to_die;
+	int	time_to_eat;
+	int	time_to_sleep;
+	int	num_meals;
+}		t_data;
 
-	len = ft_strlen(src) + 1;
-	dst = (char *)malloc(len);
-	if (!dst)
-		return (NULL);
-	ft_memcpy(dst, src, len);
-	return (dst);
-}
+#endif

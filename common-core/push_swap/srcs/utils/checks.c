@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 14:21:32 by mivogel           #+#    #+#             */
-/*   Updated: 2025/03/25 21:01:51 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/03/27 10:37:07 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ static int	isnum(char *str)
 	i = 0;
 	if (str[i] == '+' || str[i] == '-')
 		i++;
+	if (!str[i])
+		return (0);
 	while (str[i])
 	{
 		if (!ft_isdigit(str[i]))
@@ -67,7 +69,7 @@ static int	valid_input(char **av)
 		if (getdouble(av[i], av, i))
 			return (0);
 		n = ft_atol(av[i]);
-		if (n < INT_MIN || n > INT_MAX)
+		if (n < INT_MIN || n > INT_MAX || ft_strlen(av[i]) > 12)
 			return (0);
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 18:47:35 by mivogel           #+#    #+#             */
-/*   Updated: 2025/03/28 12:35:36 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/03/28 13:45:08 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@
 # include <sys/time.h>
 # include <unistd.h>
 
-struct t_data;
-
 typedef struct s_philo
 {
 	int				id;
@@ -29,7 +27,6 @@ typedef struct s_philo
 	pthread_t		thread;
 	pthread_mutex_t	*left_fork;
 	pthread_mutex_t	*right_fork;
-	struct s_data	*data;
 }					t_philo;
 
 typedef struct s_data

@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 10:07:10 by mivogel           #+#    #+#             */
-/*   Updated: 2025/03/27 11:01:09 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/03/28 14:08:40 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	ft_error(t_list **a, t_list **b, char *line)
 {
+	get_next_line(0, 1);
 	ft_printf("Error\n");
 	free(line);
 	ft_lstclear(a);
@@ -47,5 +48,5 @@ char	*ft_op(t_list **a, t_list **b, char *line)
 		ft_rrr(a, b, 1);
 	else
 		ft_error(a, b, line);
-	return (get_next_line(0));
+	return (get_next_line(0, 0));
 }

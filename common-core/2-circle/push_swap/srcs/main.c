@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 13:38:55 by mivogel           #+#    #+#             */
-/*   Updated: 2025/03/28 12:43:00 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/03/28 14:22:57 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ int	main(int ac, char **av)
 	t_list	*b;
 	int		size;
 
+	if (ac == 1)
+		return (0);
 	if (ac < 2 || !ft_check(ac, av, &a, &b))
 	{
 		ft_printf("Error\n");

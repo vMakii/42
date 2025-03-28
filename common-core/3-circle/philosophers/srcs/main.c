@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 18:39:10 by mivogel           #+#    #+#             */
-/*   Updated: 2025/03/28 12:41:52 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/03/28 14:06:54 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ void	ft_init(t_data *data, int ac, char **av)
 	}
 	data->dead = 0;
 	data->num_philo = ft_atoi(av[1]);
-	printf("Number of philosophers: %d\n", data->num_philo);
 	data->time_to_die = ft_atoi(av[2]);
 	data->time_to_eat = ft_atoi(av[3]);
 	data->time_to_sleep = ft_atoi(av[4]);
@@ -70,7 +69,6 @@ void	ft_init_philos(t_data *data)
 	int	i;
 
 	i = -1;
-	data->philos->data = data;
 	data->philos = malloc(sizeof(t_philo) * data->num_philo);
 	if (!data->philos)
 	{
@@ -80,6 +78,7 @@ void	ft_init_philos(t_data *data)
 	while (++i < data->num_philo)
 	{
 		data->philos[i].id = i + 1;
+		printf("Philosopher %d created\n", data->philos[i].id);
 		data->philos[i].num_meals = 0;
 	}
 }

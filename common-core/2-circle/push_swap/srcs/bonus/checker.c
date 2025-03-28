@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 10:06:37 by mivogel           #+#    #+#             */
-/*   Updated: 2025/03/27 11:01:04 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/03/28 14:23:25 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,14 @@ int	main(int ac, char **av)
 	t_list	*b;
 	char	*line;
 
+	if (ac == 1)
+		return (0);
 	if (ac < 2 || !ft_check(ac, av, &a, &b))
 	{
 		ft_printf("Error\n");
 		return (0);
 	}
-	line = get_next_line(0);
+	line = get_next_line(0, 0);
 	if (!line && !ft_is_sorted(a))
 		ft_printf("KO\n");
 	else if (!line && ft_is_sorted(a))

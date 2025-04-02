@@ -1,36 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_utils.c                                       :+:      :+:    :+:   */
+/*   sleep_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/28 11:37:59 by mivogel           #+#    #+#             */
-/*   Updated: 2025/04/02 10:49:22 by mivogel          ###   ########.fr       */
+/*   Created: 2025/04/02 14:14:55 by mivogel           #+#    #+#             */
+/*   Updated: 2025/04/02 14:30:32 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-void	ft_error(char *str)
+size_t	ft_get_time(void)
 {
-	printf("Error: %s\n", str);
-	return ;
+	struct timeval	time;
+
+	if (gettimeofday(&time, NULL) == 0)
+		return (time.tv_sec * 1000 + time.tv_usec / 1000);
+	return (0);
 }
 
-void	ft_free(t_data *data)
+void	ft_usleep(size_t time)
 {
-	int i;
+	size_t start;
 
-	i = -1;
-	while (++i < data->num_philo)
-	{
-		pthread_mutex_destroy(data->philos[i].left_fork);
-		pthread_mutex_destroy(data->philos[i].right_fork);
-		free(data->philos[i].left_fork);
-		free(data->philos[i].right_fork);
-	}
-	pthread_mutex_destroy(data->dead_lock);
-	free(data->dead_lock);
-	free(data->philos);
+	start = ft_get_time();
+	while (ft_get_time() - start < time)
+		usleep(100);
+	return ;
 }

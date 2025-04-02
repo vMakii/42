@@ -6,32 +6,64 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 10:16:08 by mivogel           #+#    #+#             */
-/*   Updated: 2025/03/28 10:17:19 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/04/02 11:49:36 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int	ft_atoi(const char *str)
+static int	ft_isdigit(int c)
+{
+	return (c >= '0' && c <= '9');
+}
+
+int	ft_isnum(char *str)
 {
 	int	i;
-	int	sign;
-	int	res;
 
 	i = 0;
-	sign = 1;
-	res = 0;
-	while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n' || str[i] == '\v'
-		|| str[i] == '\f' || str[i] == '\r')
+	if (str[i] == '+' || str[i] == '-')
 		i++;
-	if (str[i] == '-')
-		sign = -1;
-	if (str[i] == '-' || str[i] == '+')
-		i++;
-	while (str[i] >= '0' && str[i] <= '9')
+	if (!str[i])
+		return (0);
+	while (str[i])
 	{
-		res = res * 10 + str[i] - '0';
+		if (!ft_isdigit(str[i]))
+			return (0);
 		i++;
 	}
-	return (res * sign);
+	return (1);
+}
+
+int	ft_strlen(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
+}
+
+long	ft_atol(const char *str)
+{
+	long	res;
+	int		sign;
+
+	res = 0;
+	sign = 1;
+	while (*str && ((*str >= 9 && *str <= 13) || *str == 32))
+		str++;
+	if (*str == '-' || *str == '+')
+	{
+		if (*str == '-')
+			sign *= -1;
+		str++;
+	}
+	while (ft_isdigit((int)*str))
+	{
+		res = res * 10 + *str - '0';
+		str++;
+	}
+	return (sign * res);
 }

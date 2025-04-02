@@ -1,36 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_utils.c                                       :+:      :+:    :+:   */
+/*   admin.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/28 11:37:59 by mivogel           #+#    #+#             */
-/*   Updated: 2025/04/02 10:49:22 by mivogel          ###   ########.fr       */
+/*   Created: 2025/04/02 13:06:23 by mivogel           #+#    #+#             */
+/*   Updated: 2025/04/02 13:38:00 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-void	ft_error(char *str)
+void	*ft_admin(void *ptr)
 {
-	printf("Error: %s\n", str);
-	return ;
-}
+	t_data *data;
 
-void	ft_free(t_data *data)
-{
-	int i;
-
-	i = -1;
-	while (++i < data->num_philo)
-	{
-		pthread_mutex_destroy(data->philos[i].left_fork);
-		pthread_mutex_destroy(data->philos[i].right_fork);
-		free(data->philos[i].left_fork);
-		free(data->philos[i].right_fork);
-	}
-	pthread_mutex_destroy(data->dead_lock);
-	free(data->dead_lock);
-	free(data->philos);
+	data = (t_data *)ptr;
+	// while (1)
+	// {
+	// 	if (check_death(data))
+	// 		break ;
+	// 	else if (data->num_meals != -1)
+	// 		if (check_meals(data))
+	// 			break ;
+	// }
+	return (ptr);
 }

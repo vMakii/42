@@ -6,11 +6,22 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 10:16:08 by mivogel           #+#    #+#             */
-/*   Updated: 2025/04/02 11:49:36 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/04/04 18:52:55 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
+
+void	print_msg(t_philo *philo, char *msg)
+{
+	pthread_mutex_lock(philo->data->dead_lock);
+	if (!philo->data->dead)
+	{
+		printf("%ld %d %s\n", get_time() - philo->data->start_time, philo->id
+			+ 1, msg);
+	}
+	pthread_mutex_unlock(philo->data->dead_lock);
+}
 
 static int	ft_isdigit(int c)
 {

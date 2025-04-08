@@ -6,21 +6,11 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 10:16:08 by mivogel           #+#    #+#             */
-/*   Updated: 2025/04/08 15:09:27 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/04/08 16:34:14 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
-
-void	ft_print(char *str, int id, t_philo *philo, char *color)
-{
-	int	time;
-
-	pthread_mutex_lock(philo->data->print_lock);
-	time = ft_get_time() - philo->data->start_time;
-	printf("%s%d	%d %s%s\n", color, time, id, str, KEND);
-	pthread_mutex_unlock(philo->data->print_lock);
-}
 
 static int	ft_isdigit(int c)
 {

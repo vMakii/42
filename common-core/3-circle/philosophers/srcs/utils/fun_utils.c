@@ -6,12 +6,17 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 10:16:08 by mivogel           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2025/04/08 16:38:44 by mivogel          ###   ########.fr       */
+=======
+/*   Updated: 2025/04/02 11:49:36 by mivogel          ###   ########.fr       */
+>>>>>>> parent of 86718c3 (philo)
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
+<<<<<<< HEAD
 void	ft_print(char *str, int id, t_philo *philo, char *color)
 {
 	int	time;
@@ -23,6 +28,8 @@ void	ft_print(char *str, int id, t_philo *philo, char *color)
 	pthread_mutex_unlock(philo->data->print_lock);
 }
 
+=======
+>>>>>>> parent of 86718c3 (philo)
 static int	ft_isdigit(int c)
 {
 	return (c >= '0' && c <= '9');

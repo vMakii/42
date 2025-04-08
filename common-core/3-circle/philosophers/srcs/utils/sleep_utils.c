@@ -6,19 +6,19 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 14:14:55 by mivogel           #+#    #+#             */
-/*   Updated: 2025/04/02 14:30:32 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/04/08 14:44:24 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-size_t	ft_get_time(void)
+int	ft_get_time(void)
 {
 	struct timeval	time;
 
-	if (gettimeofday(&time, NULL) == 0)
-		return (time.tv_sec * 1000 + time.tv_usec / 1000);
-	return (0);
+	if (gettimeofday(&time, NULL))
+		return (0);
+	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
 }
 
 void	ft_usleep(size_t time)

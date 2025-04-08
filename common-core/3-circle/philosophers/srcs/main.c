@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 18:39:10 by mivogel           #+#    #+#             */
-/*   Updated: 2025/04/02 14:35:14 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/04/08 16:05:00 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,14 @@ static int	check_args(char **av)
 
 void	ft_init(t_data *data, int ac, char **av)
 {
+	data->start_time = ft_get_time();
 	data->dead = 0;
 	data->dead_lock = malloc(sizeof(pthread_mutex_t));
-	if (!data->dead_lock)
+	data->print_lock = malloc(sizeof(pthread_mutex_t));
+	if (!data->dead_lock || !data->print_lock)
 		return (ft_error("Malloc failed"));
 	pthread_mutex_init(data->dead_lock, NULL);
+	pthread_mutex_init(data->print_lock, NULL);
 	data->num_philo = ft_atol(av[1]);
 	data->time_to_die = ft_atol(av[2]);
 	data->time_to_eat = ft_atol(av[3]);
@@ -47,34 +50,43 @@ void	ft_init(t_data *data, int ac, char **av)
 		data->num_meals = -1;
 }
 
-pthread_mutex_t	*ft_init_fork(void)
-{
-	pthread_mutex_t	*fork;
-
-	fork = malloc(sizeof(pthread_mutex_t));
-	if (!fork)
-		return (ft_error("Malloc failed"), NULL);
-	pthread_mutex_init(fork, NULL);
-	return (fork);
-}
-
-void	ft_init_philos(t_data *data)
+void	ft_init_forks(pthread_mutex_t *forks, int num_philo)
 {
 	int	i;
 
 	i = -1;
+	while (++i < num_philo)
+	{
+		if (pthread_mutex_init(&forks[i], NULL))
+			return (ft_error("Mutex init failed"));
+	}
+}
+
+void	ft_init_philos(t_data *data)
+{
+	pthread_mutex_t	*forks;
+	int				i;
+
+	i = -1;
+	forks = malloc(sizeof(pthread_mutex_t) * data->num_philo);
 	data->philos = malloc(sizeof(t_philo) * data->num_philo);
-	if (!data->philos)
+	if (!data->philos || !forks)
 		return (ft_error("Malloc failed"));
+	ft_init_forks(forks, data->num_philo);
 	while (++i < data->num_philo)
 	{
 		data->philos[i].id = i + 1;
 		printf("Philosopher %d created\n", data->philos[i].id);
 		data->philos[i].num_meals = 0;
-		data->philos[i].left_fork = ft_init_fork();
-		data->philos[i].right_fork = ft_init_fork();
+		data->philos[i].last_meal = data->start_time;
+		if (i == 0)
+			data->philos[i].left_fork = &forks[data->num_philo - 1];
+		else
+			data->philos[i].left_fork = &forks[i - 1];
+		data->philos[i].right_fork = &forks[i];
 		data->philos[i].data = data;
 	}
+	data->forks = forks;
 }
 
 void	ft_init_threads(t_data *data)

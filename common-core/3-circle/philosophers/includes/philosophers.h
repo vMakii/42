@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 18:47:35 by mivogel           #+#    #+#             */
-/*   Updated: 2025/04/02 14:39:05 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/04/08 16:04:53 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,15 @@
 # include <string.h>
 # include <sys/time.h>
 # include <unistd.h>
+
+# define KWHITE "\033[0;37m"
+# define KRED "\033[0;31m"
+# define KGRN "\033[0;32m"
+# define KYEL "\033[0;33m"
+# define KBLU "\033[0;34m"
+# define KCYN "\033[0;36m"
+# define KPUR "\033[0;35m"
+# define KEND "\033[0m"
 
 struct s_data;
 
@@ -44,8 +53,11 @@ typedef struct s_philo
 
 typedef struct s_data
 {
+	int				start_time;
 	int				dead;
 	pthread_mutex_t	*dead_lock;
+	pthread_mutex_t	*print_lock;
+	pthread_mutex_t	*forks;
 	int				num_philo;
 	int				time_to_die;
 	int				time_to_eat;
@@ -57,13 +69,17 @@ typedef struct s_data
 // init
 void				*ft_admin(void *ptr);
 void				*ft_routine(void *ptr);
+void				ft_eat(t_philo *philo);
+void				ft_sleep(t_philo *philo);
+void				ft_think(t_philo *philo);
 // utils
 void				ft_error(char *str);
 void				ft_free(t_data *data);
+void				ft_print(char *str, int id, t_philo *philo, char *color);
 int					ft_isnum(char *str);
 int					ft_strlen(char *str);
 long				ft_atol(const char *str);
-size_t				ft_get_time(void);
+int					ft_get_time(void);
 void				ft_usleep(size_t time);
 
 #endif

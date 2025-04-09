@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 18:47:35 by mivogel           #+#    #+#             */
-/*   Updated: 2025/04/08 16:04:53 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/04/09 11:20:08 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct s_philo
 	int				num_meals;
 	int				last_meal;
 	pthread_t		thread;
+	pthread_mutex_t	meal_lock;
 	pthread_mutex_t	*left_fork;
 	pthread_mutex_t	*right_fork;
 	struct s_data	*data;
@@ -55,8 +56,8 @@ typedef struct s_data
 {
 	int				start_time;
 	int				dead;
-	pthread_mutex_t	*dead_lock;
-	pthread_mutex_t	*print_lock;
+	pthread_mutex_t	dead_lock;
+	pthread_mutex_t	print_lock;
 	pthread_mutex_t	*forks;
 	int				num_philo;
 	int				time_to_die;

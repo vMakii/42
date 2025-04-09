@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 18:39:10 by mivogel           #+#    #+#             */
-/*   Updated: 2025/04/08 16:05:00 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/04/09 11:21:06 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,12 @@ void	ft_init(t_data *data, int ac, char **av)
 {
 	data->start_time = ft_get_time();
 	data->dead = 0;
-	data->dead_lock = malloc(sizeof(pthread_mutex_t));
-	data->print_lock = malloc(sizeof(pthread_mutex_t));
-	if (!data->dead_lock || !data->print_lock)
-		return (ft_error("Malloc failed"));
-	pthread_mutex_init(data->dead_lock, NULL);
-	pthread_mutex_init(data->print_lock, NULL);
+	// data->dead_lock = malloc(sizeof(pthread_mutex_t));
+	// data->print_lock = malloc(sizeof(pthread_mutex_t));
+	// if (!data->dead_lock || !data->print_lock)
+	// 	return (ft_error("Malloc failed"));
+	pthread_mutex_init(&data->dead_lock, NULL);
+	pthread_mutex_init(&data->print_lock, NULL);
 	data->num_philo = ft_atol(av[1]);
 	data->time_to_die = ft_atol(av[2]);
 	data->time_to_eat = ft_atol(av[3]);
@@ -79,6 +79,7 @@ void	ft_init_philos(t_data *data)
 		printf("Philosopher %d created\n", data->philos[i].id);
 		data->philos[i].num_meals = 0;
 		data->philos[i].last_meal = data->start_time;
+		pthread_mutex_init(&data->philos[i].meal_lock, NULL);
 		if (i == 0)
 			data->philos[i].left_fork = &forks[data->num_philo - 1];
 		else

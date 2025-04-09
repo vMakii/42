@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 10:16:08 by mivogel           #+#    #+#             */
-/*   Updated: 2025/04/09 11:49:40 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/04/09 13:40:34 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,15 @@ void	ft_print(char *str, int id, t_philo *philo, char *color)
 {
 	int	time;
 
-	if (philo->data->dead == 1)
-		return ;
-	time = ft_get_time() - philo->data->start_time;
-	pthread_mutex_lock(&philo->data->print_lock);
-	printf("%s%d	%d %s%s\n", color, time, id, str, KEND);
-	pthread_mutex_unlock(&philo->data->print_lock);
+	pthread_mutex_lock(&philo->data->dead_lock);
+	if (philo->data->dead == 0)
+	{
+		time = ft_get_time() - philo->data->start_time;
+		pthread_mutex_lock(&philo->data->print_lock);
+		printf("%s%d	%d %s%s\n", color, time, id, str, KEND);
+		pthread_mutex_unlock(&philo->data->print_lock);
+	}
+	pthread_mutex_unlock(&philo->data->dead_lock);
 }
 
 static int	ft_isdigit(int c)

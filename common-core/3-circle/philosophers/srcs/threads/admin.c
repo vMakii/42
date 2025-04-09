@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 13:06:23 by mivogel           #+#    #+#             */
-/*   Updated: 2025/04/09 11:20:41 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/04/09 12:17:55 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,24 +31,24 @@ static int	death_check(t_data *data)
 	return (0);
 }
 
-// static int	meals_check(t_data *data)
-// {
-// 	int	i;
-// 	int	n;
+static int	meals_check(t_data *data)
+{
+	int	i;
+	int	n;
 
-// 	i = -1;
-// 	if (data->num_meals == -1)
-// 		return (0);
-// 	while (++i < data->num_philo)
-// 	{
-// 		pthread_mutex_lock(data->philos[i].meal_lock);
-// 		n = data->philos[i].num_meals;
-// 		pthread_mutex_unlock(data->philos[i].meal_lock);
-// 		if (n < data->num_meals)
-// 			return (0);
-// 	}
-// 	return (1);
-// }
+	i = -1;
+	if (data->num_meals == -1)
+		return (0);
+	while (++i < data->num_philo)
+	{
+		pthread_mutex_lock(&data->philos[i].meal_lock);
+		n = data->philos[i].num_meals;
+		pthread_mutex_unlock(&data->philos[i].meal_lock);
+		if (n < data->num_meals)
+			return (0);
+	}
+	return (1);
+}
 
 void	*ft_admin(void *ptr)
 {
@@ -57,7 +57,7 @@ void	*ft_admin(void *ptr)
 	data = (t_data *)ptr;
 	while (1)
 	{
-		if (death_check(data) == 1)
+		if (death_check(data) == 1 || meals_check(data) == 1)
 		{
 			pthread_mutex_lock(&data->dead_lock);
 			data->dead = 1;

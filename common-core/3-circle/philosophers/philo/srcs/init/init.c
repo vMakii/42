@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 13:44:21 by mivogel           #+#    #+#             */
-/*   Updated: 2025/04/09 13:46:14 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/04/09 14:38:20 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ void	ft_init_philos(t_data *data)
 	while (++i < data->num_philo)
 	{
 		data->philos[i].id = i + 1;
-		printf("Philosopher %d created\n", data->philos[i].id);
 		data->philos[i].num_meals = 0;
 		data->philos[i].last_meal = data->start_time;
 		pthread_mutex_init(&data->philos[i].meal_lock, NULL);

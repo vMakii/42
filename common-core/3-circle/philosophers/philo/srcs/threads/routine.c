@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 10:34:31 by mivogel           #+#    #+#             */
-/*   Updated: 2025/04/09 12:39:28 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/04/09 14:18:10 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	*ft_routine(void *ptr)
 	t_philo	*philo;
 
 	philo = (t_philo *)ptr;
-	if (philo->id % 2 == 0)
+	if (philo->id % 2 != 0)
 	{
 		ft_print("is thinking", philo->id, philo, KYEL);
 		ft_usleep(10);

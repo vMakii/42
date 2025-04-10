@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 10:34:31 by mivogel           #+#    #+#             */
-/*   Updated: 2025/04/09 14:18:10 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/04/10 13:54:57 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,15 +45,15 @@ void	*ft_routine(void *ptr)
 
 void	ft_eat(t_philo *philo)
 {
-	pthread_mutex_lock(philo->left_fork);
+	pthread_mutex_lock(philo->right_fork);
 	ft_print("has taken a fork", philo->id, philo, KCYN);
 	if (philo->data->num_philo == 1)
 	{
 		ft_usleep(philo->data->time_to_die);
-		pthread_mutex_unlock(philo->left_fork);
+		pthread_mutex_unlock(philo->right_fork);
 		return ;
 	}
-	pthread_mutex_lock(philo->right_fork);
+	pthread_mutex_lock(philo->left_fork);
 	ft_print("has taken a fork", philo->id, philo, KCYN);
 	ft_print("is eating", philo->id, philo, KGRN);
 	pthread_mutex_lock(&philo->meal_lock);
@@ -61,8 +61,8 @@ void	ft_eat(t_philo *philo)
 	philo->num_meals++;
 	pthread_mutex_unlock(&philo->meal_lock);
 	ft_usleep(philo->data->time_to_eat);
-	pthread_mutex_unlock(philo->left_fork);
 	pthread_mutex_unlock(philo->right_fork);
+	pthread_mutex_unlock(philo->left_fork);
 }
 
 void	ft_sleep(t_philo *philo)

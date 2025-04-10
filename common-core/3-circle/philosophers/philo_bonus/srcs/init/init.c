@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 13:44:21 by mivogel           #+#    #+#             */
-/*   Updated: 2025/04/09 14:38:20 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/04/10 14:59:49 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,9 @@ void	ft_init(t_data *data, int ac, char **av)
 {
 	data->start_time = ft_get_time();
 	data->dead = 0;
-	pthread_mutex_init(&data->dead_lock, NULL);
-	pthread_mutex_init(&data->print_lock, NULL);
+	data->dead_sem = NULL;
+	data->print_sem = NULL;
+	data->forks = NULL;
 	data->num_philo = ft_atol(av[1]);
 	data->time_to_die = ft_atol(av[2]);
 	data->time_to_eat = ft_atol(av[3]);
@@ -48,63 +49,67 @@ void	ft_init(t_data *data, int ac, char **av)
 		data->num_meals = -1;
 }
 
-void	ft_init_forks(pthread_mutex_t *forks, int num_philo)
+void	ft_init_philos(t_data *data)
 {
 	int	i;
 
 	i = -1;
-	while (++i < num_philo)
-	{
-		if (pthread_mutex_init(&forks[i], NULL))
-			return (ft_error("Mutex init failed"));
-	}
-}
-
-void	ft_init_philos(t_data *data)
-{
-	pthread_mutex_t	*forks;
-	int				i;
-
-	i = -1;
-	forks = malloc(sizeof(pthread_mutex_t) * data->num_philo);
 	data->philos = malloc(sizeof(t_philo) * data->num_philo);
-	if (!data->philos || !forks)
-		return (ft_error("Malloc failed"));
-	ft_init_forks(forks, data->num_philo);
+	if (!data->philos)
+		return (ft_error("Malloc failed", data));
 	while (++i < data->num_philo)
 	{
 		data->philos[i].id = i + 1;
 		data->philos[i].num_meals = 0;
 		data->philos[i].last_meal = data->start_time;
-		pthread_mutex_init(&data->philos[i].meal_lock, NULL);
-		if (i == 0)
-			data->philos[i].left_fork = &forks[data->num_philo - 1];
-		else
-			data->philos[i].left_fork = &forks[i - 1];
-		data->philos[i].right_fork = &forks[i];
+		data->philos[i].meal_sem = NULL;
 		data->philos[i].data = data;
 	}
-	data->forks = forks;
 }
 
-void	ft_init_threads(t_data *data)
+void	ft_init_semaphores(t_data *data)
 {
-	pthread_t	admin;
-	int			i;
+	int	i;
 
-	if (pthread_create(&admin, NULL, &ft_admin, data))
-		return (ft_error("Thread creation failed"));
+	i = -1;
+	sem_unlink("dead");
+	sem_unlink("print");
+	sem_unlink("forks");
+	sem_unlink("meal");
+	data->dead_sem = sem_open("dead", O_CREAT, 0600, 1);
+	if (data->dead_sem == SEM_FAILED)
+		ft_error("Semaphore creation failed", data);
+	data->print_sem = sem_open("print", O_CREAT, 0600, 1);
+	if (data->print_sem == SEM_FAILED)
+		ft_error("Semaphore creation failed", data);
+	data->forks = sem_open("forks", O_CREAT, 0600, data->num_philo);
+	if (data->forks == SEM_FAILED)
+		ft_error("Semaphore creation failed", data);
+	while (++i < data->num_philo)
+	{
+		data->philos[i].meal_sem = sem_open("meal", O_CREAT, 0600, 1);
+		if (data->philos[i].meal_sem == SEM_FAILED)
+			ft_error("Semaphore creation failed", data);
+	}
+}
+
+void	ft_start_processes(t_data *data)
+{
+	int	i;
+
 	i = -1;
 	while (++i < data->num_philo)
 	{
-		if (pthread_create(&data->philos[i].thread, NULL, &ft_routine,
-				&data->philos[i]))
-			return (ft_error("Thread creation failed"));
+		data->philos[i].pid = fork();
+		if (data->philos[i].pid < 0)
+			ft_error("Fork failed", data);
+		if (data->philos[i].pid == 0)
+		{
+			ft_routine(&data->philos[i]);
+			exit(0);
+		}
 	}
-	if (pthread_join(admin, NULL))
-		return (ft_error("Thread join failed"));
 	i = -1;
 	while (++i < data->num_philo)
-		if (pthread_join(data->philos[i].thread, NULL))
-			return (ft_error("Thread join failed"));
+		waitpid(data->philos[i].pid, NULL, 0);
 }

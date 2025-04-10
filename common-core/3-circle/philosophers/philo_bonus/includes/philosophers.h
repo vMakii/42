@@ -5,7 +5,7 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/27 18:47:35 by mivogel           #+#    #+#             */
+/*   Created: 2025/03/27 18:47:35 by mivogel           #+#                #+#             */
 /*   Updated: 2025/04/09 14:06:54 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -13,12 +13,16 @@
 #ifndef PHILOSOPHERS_H
 # define PHILOSOPHERS_H
 
+# include <fcntl.h>
 # include <limits.h>
 # include <pthread.h>
+# include <semaphore.h>
+# include <signal.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
 # include <sys/time.h>
+# include <sys/wait.h>
 # include <unistd.h>
 
 # define KWHITE "\033[0;37m"
@@ -37,10 +41,8 @@ typedef struct s_philo
 	int					id;
 	int					num_meals;
 	int					last_meal;
-	pthread_t			thread;
-	pthread_mutex_t		meal_lock;
-	pthread_mutex_t		*left_fork;
-	pthread_mutex_t		*right_fork;
+	sem_t				*meal_sem;
+	pid_t				pid;
 	struct s_data		*data;
 }						t_philo;
 
@@ -48,9 +50,9 @@ typedef struct s_data
 {
 	int					start_time;
 	int					dead;
-	pthread_mutex_t		dead_lock;
-	pthread_mutex_t		print_lock;
-	pthread_mutex_t		*forks;
+	sem_t				*dead_sem;
+	sem_t				*print_sem;
+	sem_t				*forks;
 	int					num_philo;
 	int					time_to_die;
 	int					time_to_eat;
@@ -62,17 +64,17 @@ typedef struct s_data
 // init
 int						check_args(char **av);
 void					ft_init(t_data *data, int ac, char **av);
-void					ft_init_forks(pthread_mutex_t *forks, int num_philo);
+void					ft_init_semaphores(t_data *data);
 void					ft_init_philos(t_data *data);
-void					ft_init_threads(t_data *data);
-// threads
-void					*ft_admin(void *ptr);
-void					*ft_routine(void *ptr);
+void					ft_start_processes(t_data *data);
+// processes
+void					ft_routine(t_philo *philo);
 void					ft_eat(t_philo *philo);
 void					ft_sleep(t_philo *philo);
 void					ft_think(t_philo *philo);
+void					*ft_admin(void *ptr);
 // utils
-void					ft_error(char *str);
+void					ft_error(char *str, t_data *data);
 void					ft_free(t_data *data);
 void					ft_print(char *str, int id, t_philo *philo,
 							char *color);

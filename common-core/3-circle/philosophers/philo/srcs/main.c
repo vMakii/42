@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 18:39:10 by mivogel           #+#    #+#             */
-/*   Updated: 2025/04/09 13:53:24 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/04/10 19:20:57 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	main(int ac, char **av)
 
 	if (ac != 5 && ac != 6)
 	{
-		write(1, "Usage: ./philo <num_philo> <time_to_die> <time_to_eat>", 56);
+		write(1, "Usage: ./philo <num_philo> <time_to_die> <time_to_eat>", 55);
 		write(1, " <time_to_sleep> [num_meals]\n", 29);
 		return (1);
 	}

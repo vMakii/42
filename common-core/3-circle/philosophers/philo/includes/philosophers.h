@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 18:47:35 by mivogel           #+#    #+#             */
-/*   Updated: 2025/04/09 14:06:54 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/04/15 14:37:49 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,9 @@ void					ft_error(char *str);
 void					ft_free(t_data *data);
 void					ft_print(char *str, int id, t_philo *philo,
 							char *color);
+void					ft_get_forks_in_order(pthread_mutex_t *left_fork,
+							pthread_mutex_t *right_fork,
+							pthread_mutex_t **first, pthread_mutex_t **second);
 int						ft_isnum(char *str);
 int						ft_strlen(char *str);
 long					ft_atol(const char *str);

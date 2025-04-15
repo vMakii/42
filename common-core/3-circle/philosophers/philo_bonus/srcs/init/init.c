@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 13:44:21 by mivogel           #+#    #+#             */
-/*   Updated: 2025/04/15 10:51:43 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/04/15 11:24:47 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,8 @@ void	ft_init_semaphores(t_data *data)
 
 void	ft_start_processes(t_data *data)
 {
-	int	i;
+	int			i;
+	pthread_t	admin;
 
 	i = -1;
 	while (++i < data->num_philo)
@@ -109,7 +110,12 @@ void	ft_start_processes(t_data *data)
 			exit(0);
 		}
 	}
+	if (pthread_create(&admin, NULL, ft_admin, data) != 0)
+		ft_error("Thread creation failed", data);
+	pthread_join(admin, NULL);
 	i = -1;
 	while (++i < data->num_philo)
+	{
 		waitpid(data->philos[i].pid, NULL, 0);
+	}
 }

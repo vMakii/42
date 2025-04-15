@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 10:16:08 by mivogel           #+#    #+#             */
-/*   Updated: 2025/04/09 13:40:34 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/04/15 14:31:27 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,58 +27,18 @@ void	ft_print(char *str, int id, t_philo *philo, char *color)
 	pthread_mutex_unlock(&philo->data->dead_lock);
 }
 
-static int	ft_isdigit(int c)
+void	ft_get_forks_in_order(pthread_mutex_t *left_fork,
+		pthread_mutex_t *right_fork, pthread_mutex_t **first,
+		pthread_mutex_t **second)
 {
-	return (c >= '0' && c <= '9');
-}
-
-int	ft_isnum(char *str)
-{
-	int	i;
-
-	i = 0;
-	if (str[i] == '+' || str[i] == '-')
-		i++;
-	if (!str[i])
-		return (0);
-	while (str[i])
+	if (left_fork < right_fork)
 	{
-		if (!ft_isdigit(str[i]))
-			return (0);
-		i++;
+		*first = left_fork;
+		*second = right_fork;
 	}
-	return (1);
-}
-
-int	ft_strlen(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
-
-long	ft_atol(const char *str)
-{
-	long	res;
-	int		sign;
-
-	res = 0;
-	sign = 1;
-	while (*str && ((*str >= 9 && *str <= 13) || *str == 32))
-		str++;
-	if (*str == '-' || *str == '+')
+	else
 	{
-		if (*str == '-')
-			sign *= -1;
-		str++;
+		*first = right_fork;
+		*second = left_fork;
 	}
-	while (ft_isdigit((int)*str))
-	{
-		res = res * 10 + *str - '0';
-		str++;
-	}
-	return (sign * res);
 }

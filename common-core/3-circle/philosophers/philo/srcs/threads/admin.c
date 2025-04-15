@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 13:06:23 by mivogel           #+#    #+#             */
-/*   Updated: 2025/04/10 12:45:41 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/04/15 14:38:52 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ void	*ft_admin(void *ptr)
 			pthread_mutex_unlock(&data->dead_lock);
 			break ;
 		}
+		usleep(100);
 	}
 	return (ptr);
 }

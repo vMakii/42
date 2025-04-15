@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 10:34:31 by mivogel           #+#    #+#             */
-/*   Updated: 2025/04/15 10:50:56 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/04/15 11:12:13 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,6 @@ static int	death_check(t_philo *philo)
 
 void	ft_routine(t_philo *philo)
 {
-	pthread_t	admin;
-
-	if (pthread_create(&admin, NULL, &ft_admin, philo))
-		ft_error("Thread creation failed", philo->data);
-	pthread_detach(admin);
 	if (philo->id % 2 != 0)
 	{
 		ft_print("is thinking", philo->id, philo, KYEL);

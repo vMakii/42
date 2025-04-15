@@ -6,13 +6,13 @@
 #    By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/27 18:34:35 by mivogel           #+#    #+#              #
-#    Updated: 2025/04/10 14:01:22 by mivogel          ###   ########.fr        #
+#    Updated: 2025/04/15 14:48:36 by mivogel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo
 
-SRCS = main.c init/init.c threads/admin.c threads/routine.c utils/free_utils.c utils/fun_utils.c utils/sleep_utils.c
+SRCS = main.c init/init.c threads/admin.c threads/routine.c utils/free_utils.c utils/fun_utils.c utils/init_utils.c utils/sleep_utils.c
 
 OBJS_DIR = objs
 OBJS = $(addprefix ${OBJS_DIR}/, ${SRCS:.c=.o})

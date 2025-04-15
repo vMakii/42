@@ -14,15 +14,14 @@
 # define PHILOSOPHERS_H
 
 # include <fcntl.h>
-# include <limits.h>
 # include <pthread.h>
 # include <semaphore.h>
 # include <signal.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
+# include <sys/stat.h>
 # include <sys/time.h>
-# include <sys/wait.h>
 # include <unistd.h>
 
 # define KWHITE "\033[0;37m"

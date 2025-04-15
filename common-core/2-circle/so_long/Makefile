@@ -6,7 +6,7 @@
 #    By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/02 11:36:11 by mivogel           #+#    #+#              #
-#    Updated: 2025/03/20 11:55:01 by mivogel          ###   ########.fr        #
+#    Updated: 2025/04/15 14:52:15 by mivogel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,10 @@ LIBFTDIR = libft/
 MLX = mlx/libmlx.a
 MLXDIR = mlx/
 
-SRCS = main.c checks/check_map.c checks/parsing.c game/draw.c game/img.c game/player_move.c game/skull_move.c utils/free_utils.c utils/game_utils.c utils/map_utils.c utils/skull_utils.c
+SRCS = 	main.c \
+		checks/check_map.c checks/parsing.c \
+		game/draw.c game/img.c game/player_move.c game/skull_move.c \
+		utils/free_utils.c utils/game_utils.c utils/map_utils.c utils/skull_utils.c
 OBJS_DIR = objs
 OBJS = $(addprefix ${OBJS_DIR}/, ${SRCS:.c=.o})
 

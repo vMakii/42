@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 13:02:34 by mivogel           #+#    #+#             */
-/*   Updated: 2025/03/28 14:20:49 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/04/15 14:56:24 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,8 +102,6 @@ char	*get_next_line(int fd, int n)
 	{
 		if (buffer)
 			free(buffer);
-		if (line)
-			free(line);
 		return (NULL);
 	}
 	buffer = ft_read(fd, buffer);

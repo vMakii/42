@@ -6,7 +6,7 @@
 #    By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/27 13:05:51 by mivogel           #+#    #+#              #
-#    Updated: 2025/03/21 13:42:50 by mivogel          ###   ########.fr        #
+#    Updated: 2025/04/15 14:58:08 by mivogel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,7 +67,7 @@ clean:
 	@rm -rf ${OBJS_DIR} 
 	@echo $(L_Red)🗑️ *.o deleted! $(NC)
 
-fclean:
+fclean: clean
 	@rm -f ${NAME} $(BONUS)
 	@echo $(L_Red)🗑️ $(NAME) deleted! $(NC)
 

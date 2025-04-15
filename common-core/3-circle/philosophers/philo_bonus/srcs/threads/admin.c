@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 13:06:23 by mivogel           #+#    #+#             */
-/*   Updated: 2025/04/10 15:03:00 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/04/15 10:52:18 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 static int	death_check(t_philo *philo)
 {
-	sem_wait(philo->meal_sem);
+	// sem_wait(philo->meal_sem);
 	if (ft_get_time() - philo->last_meal >= philo->data->time_to_die)
 	{
 		ft_print("died", philo->id, philo, KRED);
-		sem_post(philo->meal_sem);
+		// sem_post(philo->meal_sem);
 		return (1);
 	}
-	sem_post(philo->meal_sem);
+	// sem_post(philo->meal_sem);
 	return (0);
 }
 
@@ -41,8 +41,10 @@ static int	meals_check(t_philo *philo)
 
 void	*ft_admin(void *ptr)
 {
+	int		i;
 	t_philo	*philo;
 
+	i = -1;
 	philo = (t_philo *)ptr;
 	while (1)
 	{

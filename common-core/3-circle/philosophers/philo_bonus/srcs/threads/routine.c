@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 10:34:31 by mivogel           #+#    #+#             */
-/*   Updated: 2025/04/10 15:14:14 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/04/15 10:50:56 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,10 @@ void	ft_eat(t_philo *philo)
 	sem_wait(philo->data->forks);
 	ft_print("has taken a fork", philo->id, philo, KCYN);
 	ft_print("is eating", philo->id, philo, KGRN);
-	// sem_wait(philo->meal_sem);
+	sem_wait(philo->meal_sem);
 	philo->last_meal = ft_get_time();
 	philo->num_meals++;
-	// sem_post(philo->meal_sem);
+	sem_post(philo->meal_sem);
 	ft_usleep(philo->data->time_to_eat);
 	sem_post(philo->data->forks);
 	sem_post(philo->data->forks);

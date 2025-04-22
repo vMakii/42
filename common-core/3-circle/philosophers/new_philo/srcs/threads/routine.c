@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 10:34:31 by mivogel           #+#    #+#             */
-/*   Updated: 2025/04/19 18:38:46 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/04/22 15:41:21 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ void	*ft_routine(void *ptr)
 	philo = (t_philo *)ptr;
 	if (!(philo->id % 2))
 	{
-		usleep(50);
+		ft_print("is thinking", philo->id, philo, KYEL);
+		ft_usleep(philo->data->time_to_eat);
 	}
 	while (death_check(philo))
 	{
@@ -53,6 +54,7 @@ void	ft_eat(t_philo *philo)
 		ft_print("has taken a fork", philo->id, philo, KCYN);
 		ft_usleep(philo->data->time_to_die + 1);
 		pthread_mutex_unlock(philo->left_fork);
+		return ;
 	}
 	ft_get_forks_in_order(philo->left_fork, philo->right_fork, &first, &second);
 	pthread_mutex_lock(first);

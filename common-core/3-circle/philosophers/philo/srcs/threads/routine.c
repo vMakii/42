@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 10:34:31 by mivogel           #+#    #+#             */
-/*   Updated: 2025/04/23 10:38:55 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/04/23 11:02:31 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	ft_eat(t_philo *philo)
 	{
 		pthread_mutex_lock(philo->left_fork);
 		ft_print("has taken a fork", philo->id, philo, KCYN);
-		ft_usleep(philo->data->time_to_die + 1);
+		ft_usleep(philo->data->time_to_die + 2);
 		pthread_mutex_unlock(philo->left_fork);
 		return ;
 	}

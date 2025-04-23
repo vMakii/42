@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 13:06:23 by mivogel           #+#    #+#             */
-/*   Updated: 2025/04/15 14:38:52 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/04/17 23:18:18 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int	death_check(t_data *data)
 	while (++i < data->num_philo)
 	{
 		pthread_mutex_lock(&data->philos[i].meal_lock);
-		if (ft_get_time() - data->philos[i].last_meal >= data->time_to_die)
+		if (ft_get_time() - data->philos[i].last_meal > data->time_to_die)
 		{
 			ft_print("died", data->philos[i].id, &data->philos[i], KRED);
 			pthread_mutex_unlock(&data->philos[i].meal_lock);
@@ -64,7 +64,7 @@ void	*ft_admin(void *ptr)
 			pthread_mutex_unlock(&data->dead_lock);
 			break ;
 		}
-		usleep(100);
+		usleep(50);
 	}
 	return (ptr);
 }

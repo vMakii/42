@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 13:44:21 by mivogel           #+#    #+#             */
-/*   Updated: 2025/04/09 14:38:20 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/04/17 12:57:07 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,11 +77,8 @@ void	ft_init_philos(t_data *data)
 		data->philos[i].num_meals = 0;
 		data->philos[i].last_meal = data->start_time;
 		pthread_mutex_init(&data->philos[i].meal_lock, NULL);
-		if (i == 0)
-			data->philos[i].left_fork = &forks[data->num_philo - 1];
-		else
-			data->philos[i].left_fork = &forks[i - 1];
-		data->philos[i].right_fork = &forks[i];
+		data->philos[i].left_fork = &forks[i];
+		data->philos[i].right_fork = &forks[(i + 1) % data->num_philo];
 		data->philos[i].data = data;
 	}
 	data->forks = forks;

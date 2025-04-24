@@ -1,39 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_isascii.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/16 10:00:59 by mivogel           #+#    #+#             */
-/*   Updated: 2025/04/24 16:50:16 by mivogel          ###   ########.fr       */
+/*   Created: 2024/11/06 15:46:27 by mivogel           #+#    #+#             */
+/*   Updated: 2024/11/06 17:40:08 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-void	ft_init_data(t_data *data, int ac, char **av)
+int	ft_isascii(int c)
 {
-	(void)ac;
-	(void)av;
-	data->prompt = NULL;
-	data->env = NULL;
-	data->exit_status = 0;
-}
-
-void	ft_free(t_data *data)
-{
-	if (data->prompt)
-		free(data->prompt);
-	free(data);
-}
-
-int	main(int ac, char **av, char **env)
-{
-	t_data data;
-
-	ft_memset(&data, 0, sizeof(t_data));
-	ft_init_data(&data, ac, av);
-	ft_free(&data);
-	return (0);
+	return (c >= 0 && c <= 127);
 }

@@ -1,39 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/16 10:00:59 by mivogel           #+#    #+#             */
-/*   Updated: 2025/04/24 16:50:16 by mivogel          ###   ########.fr       */
+/*   Created: 2024/11/08 13:36:05 by mivogel           #+#    #+#             */
+/*   Updated: 2025/02/25 13:18:00 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-void	ft_init_data(t_data *data, int ac, char **av)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	(void)ac;
-	(void)av;
-	data->prompt = NULL;
-	data->env = NULL;
-	data->exit_status = 0;
-}
+	size_t	i;
+	size_t	j;
+	char	*dst;
 
-void	ft_free(t_data *data)
-{
-	if (data->prompt)
-		free(data->prompt);
-	free(data);
-}
-
-int	main(int ac, char **av, char **env)
-{
-	t_data data;
-
-	ft_memset(&data, 0, sizeof(t_data));
-	ft_init_data(&data, ac, av);
-	ft_free(&data);
-	return (0);
+	if (!s1 || !s2)
+		return (NULL);
+	dst = malloc(sizeof(char) * ((ft_strlen(s1) + ft_strlen(s2)) + 1));
+	if (!dst)
+		return (NULL);
+	i = 0;
+	if (s1)
+	{
+		while (s1[i])
+		{
+			dst[i] = s1[i];
+			i++;
+		}
+	}
+	j = 0;
+	if (s2)
+		while (s2[j])
+			dst[i++] = s2[j++];
+	dst[i] = '\0';
+	return (dst);
 }

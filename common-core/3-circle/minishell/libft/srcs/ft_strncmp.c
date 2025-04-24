@@ -1,39 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/16 10:00:59 by mivogel           #+#    #+#             */
-/*   Updated: 2025/04/24 16:50:16 by mivogel          ###   ########.fr       */
+/*   Created: 2024/11/07 09:31:25 by mivogel           #+#    #+#             */
+/*   Updated: 2024/11/12 15:00:12 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-void	ft_init_data(t_data *data, int ac, char **av)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	(void)ac;
-	(void)av;
-	data->prompt = NULL;
-	data->env = NULL;
-	data->exit_status = 0;
-}
+	size_t	i;
 
-void	ft_free(t_data *data)
-{
-	if (data->prompt)
-		free(data->prompt);
-	free(data);
-}
-
-int	main(int ac, char **av, char **env)
-{
-	t_data data;
-
-	ft_memset(&data, 0, sizeof(t_data));
-	ft_init_data(&data, ac, av);
-	ft_free(&data);
+	i = 0;
+	while (s1[i] == s2[i] && s1[i] && i < n)
+		i++;
+	if (i < n)
+		return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 	return (0);
 }

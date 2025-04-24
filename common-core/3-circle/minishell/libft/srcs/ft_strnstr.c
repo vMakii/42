@@ -1,39 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/16 10:00:59 by mivogel           #+#    #+#             */
-/*   Updated: 2025/04/24 16:50:16 by mivogel          ###   ########.fr       */
+/*   Created: 2024/11/07 09:57:30 by mivogel           #+#    #+#             */
+/*   Updated: 2024/11/12 15:38:17 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-void	ft_init_data(t_data *data, int ac, char **av)
+char	*ft_strnstr(const char *str, const char *to_find, size_t n)
 {
-	(void)ac;
-	(void)av;
-	data->prompt = NULL;
-	data->env = NULL;
-	data->exit_status = 0;
-}
+	size_t	i;
+	size_t	j;
 
-void	ft_free(t_data *data)
-{
-	if (data->prompt)
-		free(data->prompt);
-	free(data);
-}
-
-int	main(int ac, char **av, char **env)
-{
-	t_data data;
-
-	ft_memset(&data, 0, sizeof(t_data));
-	ft_init_data(&data, ac, av);
-	ft_free(&data);
-	return (0);
+	if (!to_find[0])
+		return ((char *)str);
+	if (!n)
+		return (0);
+	i = 0;
+	while (str[i] && i < n)
+	{
+		j = 0;
+		while (str[i + j] && str[i + j] == to_find[j] && i + j < n)
+			j++;
+		if (!to_find[j])
+			return ((char *)str + i);
+		i++;
+	}
+	return (NULL);
 }

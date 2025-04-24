@@ -6,11 +6,14 @@
 #    By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/16 09:57:05 by mivogel           #+#    #+#              #
-#    Updated: 2025/04/16 09:57:56 by mivogel          ###   ########.fr        #
+#    Updated: 2025/04/24 13:07:53 by mivogel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
+
+LIBFT = libft/libft.a
+LIBFTDIR = libft/
 
 SRCS = main.c
 
@@ -26,19 +29,24 @@ NC='\e[0m'
 
 all: ${NAME}
 
-$(NAME): ${OBJS}
-	@${CC} ${CFLAGS} -o $@ $(OBJS)
+$(NAME): ${OBJS} $(LIBFT)
+	@${CC} ${CFLAGS} -o $@ $(OBJS) -lreadline $(LIBFT)
 	@echo $(Green)✅$@ compiled! $(NC)
 
 ${OBJS_DIR}/%.o: srcs/%.c
 	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
+$(LIBFT): $(LIBFTDIR)
+	@$(MAKE) --no-print-directory -C ${LIBFTDIR}
+
 clean:
+	@$(MAKE) --no-print-directory clean -C $(LIBFTDIR)
 	@rm -rf ${OBJS_DIR}
 	@echo $(Red)🗑️ *.o deleted! $(NC)
 
 fclean: clean
+	@$(MAKE) --no-print-directory fclean -C $(LIBFTDIR)
 	@rm -f ${NAME} ${BONUS}
 	@echo $(Red)🗑️ $(NAME) deleted! $(NC)
 

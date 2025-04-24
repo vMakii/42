@@ -1,39 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/16 10:00:59 by mivogel           #+#    #+#             */
-/*   Updated: 2025/04/24 16:50:16 by mivogel          ###   ########.fr       */
+/*   Created: 2024/11/08 10:15:24 by mivogel           #+#    #+#             */
+/*   Updated: 2024/11/29 10:45:43 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-void	ft_init_data(t_data *data, int ac, char **av)
+int	ft_atoi(const char *str)
 {
-	(void)ac;
-	(void)av;
-	data->prompt = NULL;
-	data->env = NULL;
-	data->exit_status = 0;
-}
+	int	i;
+	int	sign;
+	int	res;
 
-void	ft_free(t_data *data)
-{
-	if (data->prompt)
-		free(data->prompt);
-	free(data);
-}
-
-int	main(int ac, char **av, char **env)
-{
-	t_data data;
-
-	ft_memset(&data, 0, sizeof(t_data));
-	ft_init_data(&data, ac, av);
-	ft_free(&data);
-	return (0);
+	i = 0;
+	sign = 1;
+	res = 0;
+	while (str[i] && ((str[i] >= 9 && str[i] <= 13) || str[i] == 32))
+		i++;
+	if (str[i] == '-' || str[i] == '+')
+	{
+		if (str[i] == '-')
+			sign *= -1;
+		i++;
+	}
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		res = res * 10 + str[i] - '0';
+		i++;
+	}
+	return (sign * res);
 }

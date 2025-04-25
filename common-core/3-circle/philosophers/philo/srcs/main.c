@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 18:39:10 by mivogel           #+#    #+#             */
-/*   Updated: 2025/04/17 12:04:13 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/04/25 12:03:29 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ int	main(int ac, char **av)
 	if (!check_args(av))
 		return (ft_error("Invalid arguments"), 1);
 	memset(&data, 0, sizeof(t_data));
-	ft_init(&data, ac, av);
-	ft_init_philos(&data);
-	ft_init_threads(&data);
+	if (ft_init(&data, ac, av) || ft_init_philos(&data)
+		|| ft_init_threads(&data))
+		return (1);
 	ft_free(&data);
 	return (0);
 }

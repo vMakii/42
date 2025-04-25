@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 10:34:31 by mivogel           #+#    #+#             */
-/*   Updated: 2025/04/23 11:02:31 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/04/25 11:04:06 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,4 +80,6 @@ void	ft_sleep(t_philo *philo)
 void	ft_think(t_philo *philo)
 {
 	ft_print("is thinking", philo->id, philo, KYEL);
+	ft_usleep((philo->data->time_to_die - (ft_get_time() - philo->last_meal))
+		/ 2);
 }

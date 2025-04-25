@@ -5,7 +5,7 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/09 13:44:21 by mivogel           #+#    #+#             */
+/*   Created: 2025/04/09 13:44:21 by mivogel           #+#                #+#             */
 /*   Updated: 2025/04/17 12:57:07 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -32,12 +32,14 @@ int	check_args(char **av)
 	return (1);
 }
 
-void	ft_init(t_data *data, int ac, char **av)
+int	ft_init(t_data *data, int ac, char **av)
 {
 	data->start_time = ft_get_time();
 	data->dead = 0;
-	pthread_mutex_init(&data->dead_lock, NULL);
-	pthread_mutex_init(&data->print_lock, NULL);
+	if (pthread_mutex_init(&data->dead_lock, NULL))
+		return (ft_error("Mutex init failed"), 1);
+	if (pthread_mutex_init(&data->print_lock, NULL))
+		return (ft_error("Mutex init failed"), 1);
 	data->num_philo = ft_atol(av[1]);
 	data->time_to_die = ft_atol(av[2]);
 	data->time_to_eat = ft_atol(av[3]);
@@ -46,9 +48,10 @@ void	ft_init(t_data *data, int ac, char **av)
 		data->num_meals = ft_atol(av[5]);
 	else
 		data->num_meals = -1;
+	return (0);
 }
 
-void	ft_init_forks(pthread_mutex_t *forks, int num_philo)
+int	ft_init_forks(pthread_mutex_t *forks, int num_philo)
 {
 	int	i;
 
@@ -56,11 +59,12 @@ void	ft_init_forks(pthread_mutex_t *forks, int num_philo)
 	while (++i < num_philo)
 	{
 		if (pthread_mutex_init(&forks[i], NULL))
-			return (ft_error("Mutex init failed"));
+			return (ft_error("Mutex init failed"), 1);
 	}
+	return (0);
 }
 
-void	ft_init_philos(t_data *data)
+int	ft_init_philos(t_data *data)
 {
 	pthread_mutex_t	*forks;
 	int				i;
@@ -69,39 +73,43 @@ void	ft_init_philos(t_data *data)
 	forks = malloc(sizeof(pthread_mutex_t) * data->num_philo);
 	data->philos = malloc(sizeof(t_philo) * data->num_philo);
 	if (!data->philos || !forks)
-		return (ft_error("Malloc failed"));
-	ft_init_forks(forks, data->num_philo);
+		return (ft_error("Malloc failed"), 1);
+	if (ft_init_forks(forks, data->num_philo))
+		return (1);
 	while (++i < data->num_philo)
 	{
 		data->philos[i].id = i + 1;
 		data->philos[i].num_meals = 0;
 		data->philos[i].last_meal = data->start_time;
-		pthread_mutex_init(&data->philos[i].meal_lock, NULL);
+		if (pthread_mutex_init(&data->philos[i].meal_lock, NULL))
+			return (ft_error("Mutex init failed"), 1);
 		data->philos[i].left_fork = &forks[i];
 		data->philos[i].right_fork = &forks[(i + 1) % data->num_philo];
 		data->philos[i].data = data;
 	}
 	data->forks = forks;
+	return (0);
 }
 
-void	ft_init_threads(t_data *data)
+int	ft_init_threads(t_data *data)
 {
 	pthread_t	admin;
 	int			i;
 
 	if (pthread_create(&admin, NULL, &ft_admin, data))
-		return (ft_error("Thread creation failed"));
+		return (ft_error("Thread creation failed"), 1);
 	i = -1;
 	while (++i < data->num_philo)
 	{
 		if (pthread_create(&data->philos[i].thread, NULL, &ft_routine,
 				&data->philos[i]))
-			return (ft_error("Thread creation failed"));
+			return (ft_error("Thread creation failed"), 1);
 	}
 	if (pthread_join(admin, NULL))
-		return (ft_error("Thread join failed"));
+		return (ft_error("Thread join failed"), 1);
 	i = -1;
 	while (++i < data->num_philo)
 		if (pthread_join(data->philos[i].thread, NULL))
-			return (ft_error("Thread join failed"));
+			return (ft_error("Thread join failed"), 1);
+	return (0);
 }

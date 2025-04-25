@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 18:47:35 by mivogel           #+#    #+#             */
-/*   Updated: 2025/04/15 14:37:49 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/04/25 11:53:43 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,10 @@ typedef struct s_data
 
 // init
 int						check_args(char **av);
-void					ft_init(t_data *data, int ac, char **av);
-void					ft_init_forks(pthread_mutex_t *forks, int num_philo);
-void					ft_init_philos(t_data *data);
-void					ft_init_threads(t_data *data);
+int						ft_init(t_data *data, int ac, char **av);
+int						ft_init_forks(pthread_mutex_t *forks, int num_philo);
+int						ft_init_philos(t_data *data);
+int						ft_init_threads(t_data *data);
 // threads
 void					*ft_admin(void *ptr);
 void					*ft_routine(void *ptr);

@@ -1,7 +1,6 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
-export PATH="$PATH:/opt/nvim/"
 # Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 # Set name of the theme to load --- if set to "random", it will
@@ -105,9 +104,17 @@ source $ZSH/oh-my-zsh.sh
 alias cc="cc -Wall -Werror -Wextra"
 alias nrc="norminette -R CheckDefine"
 
-now=$(date +"%H:%M %F")
-alias ga="git add * && git commit -m '${now}' && git push"
-alias gp="git commit -m '${now}' && git push"
+gitall() {
+    git add .
+    if [ -n "$1" ] # or better, if [ "$1" != "" ]
+    then
+        git commit -m "$1"
+    else
+        git commit -m update
+    fi
+    git push
+}
+alias gp="git commit -m update && git push"
 
 alias vim=nvim
 alias nvim="~/./nvim.appimage"
@@ -116,3 +123,4 @@ alias francinette=/mnt/nfs/homes/mivogel/francinette/tester.sh
 alias paco=/mnt/nfs/homes/mivogel/francinette/tester.sh
 alias ps="paco --strict"
 alias pm="paco -m"
+export PATH=/home/mivogel/.local/funcheck/host:$PATH

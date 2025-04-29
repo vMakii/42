@@ -43,7 +43,7 @@ int	main(int argc, char **argv)
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
-		printf("line | %s", line);
+		printf("%s", line);
 		free(line);
 		line = get_next_line(fd);
 	}

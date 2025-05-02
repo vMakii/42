@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 14:21:32 by mivogel           #+#    #+#             */
-/*   Updated: 2025/03/27 10:37:07 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/05/02 10:09:41 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,11 @@ int	ft_check(int ac, char **av, t_list **stack_a, t_list **stack_b)
 	}
 	*stack_a = ft_init(av);
 	if (!*stack_a)
+	{
+		if (ac == 2)
+			freesplit(av);
 		return (0);
+	}
 	*stack_b = NULL;
 	if (ac == 2)
 		freesplit(av);

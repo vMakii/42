@@ -1,8 +1,4 @@
-#include <fcntl.h>
-#include <stdlib.h>
-#include <unistd.h>
-// stdio is not needed, just let him for test with main
-#include <stdio.h>
+#include "get_next_line.h"
 
 char	*get_next_line(int fd)
 {

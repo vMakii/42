@@ -6,7 +6,7 @@
 #    By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/16 09:57:05 by mivogel           #+#    #+#              #
-#    Updated: 2025/04/24 13:07:53 by mivogel          ###   ########.fr        #
+#    Updated: 2025/05/05 15:17:26 by mivogel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME = minishell
 LIBFT = libft/libft.a
 LIBFTDIR = libft/
 
-SRCS = main.c
+SRCS = main.c env/env_utils.c \
 
 OBJS_DIR = objs
 OBJS = $(addprefix ${OBJS_DIR}/, ${SRCS:.c=.o})
@@ -47,9 +47,9 @@ clean:
 
 fclean: clean
 	@$(MAKE) --no-print-directory fclean -C $(LIBFTDIR)
-	@rm -f ${NAME} ${BONUS}
+	@rm -f ${NAME}
 	@echo $(Red)🗑️ $(NAME) deleted! $(NC)
 
 re: fclean all
 
-.PHONY : all bonus clean fclean
+.PHONY : all clean fclean

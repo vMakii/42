@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:01:29 by mivogel           #+#    #+#             */
-/*   Updated: 2025/04/24 16:49:59 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/05/05 15:00:55 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,9 @@ typedef struct s_data
 	char	**env;
 	int		exit_status;
 }			t_data;
+
+// env
+char		**ft_env(char **envp);
+void		ft_update_shlvl(char **env);
 
 #endif

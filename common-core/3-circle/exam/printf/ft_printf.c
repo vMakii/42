@@ -12,7 +12,7 @@ int	ft_putstr(char *str)
 
 	i = 0;
 	if (!str)
-		return (write(1, "(null)", 1));
+		return (write(1, "(null)", 6));
 	while (str[i])
 	{
 		ft_putchar(str[i]);

@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 14:56:33 by mivogel           #+#    #+#             */
-/*   Updated: 2025/05/05 15:06:58 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/05/12 12:22:28 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char	**ft_env(char **envp)
 void	ft_update_shlvl(char **env)
 {
 	int		i;
-	int		shlvl;
+	char	*shlvl;
 	char	*new_shlvl;
 
 	i = 0;
@@ -46,9 +46,10 @@ void	ft_update_shlvl(char **env)
 	{
 		if (ft_strncmp(env[i], "SHLVL=", 6) == 0)
 		{
-			shlvl = ft_atoi(env[i] + 6) + 1;
-			new_shlvl = ft_strjoin("SHLVL=", ft_itoa(shlvl));
+			shlvl = ft_itoa(ft_atoi(env[i] + 6) + 1);
+			new_shlvl = ft_strjoin("SHLVL=", shlvl);
 			free(env[i]);
+			free(shlvl);
 			env[i] = new_shlvl;
 			return ;
 		}

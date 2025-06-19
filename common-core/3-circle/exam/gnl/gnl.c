@@ -1,30 +1,16 @@
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 42
-# endif
-
-# include <fcntl.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-
-char	*get_next_line(int fd);
-
-#endif
-
 #include "get_next_line.h"
 
-char	*ft_strdup(char *s)
+static char	*ft_strdup(const char *s)
 {
-	int		i;
+	size_t	i;
 	char	*string;
 
 	i = 0;
 	while (s[i])
 		i++;
-	string = malloc(sizeof(char) * i + 1);
+	string = malloc(sizeof(char) * (i + 1));
+	if (!string)
+		return (NULL);
 	i = 0;
 	while (s[i])
 	{
@@ -35,7 +21,7 @@ char	*ft_strdup(char *s)
 	return (string);
 }
 
-char	*get_next_line(int fd)
+char	*gnl(int fd)
 {
 	static char buffer[BUFFER_SIZE];
 	static char line[70000];

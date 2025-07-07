@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 00:56:11 by salsoysa          #+#    #+#             */
-/*   Updated: 2025/05/23 14:14:05 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/07/05 14:02:32 by salsoysa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,7 @@ static void	print_no_args(char **env)
 			printf("\n");
 		i++;
 	}
-	// free_arr(envcp);
-	free(envcp);
+	ft_freetab(envcp);
 }
 
 int	check_arg(char *str)
@@ -45,14 +44,14 @@ int	check_arg(char *str)
 
 	i = 0;
 	if (!str[0] || (str[0] != '_' && !ft_isalpha(str[0])))
-		return (1);
+		return (0);
 	while (str[i] && str[i] != '=')
 	{
 		if (!ft_isalnum(str[i]) && str[i] != '_')
-			return (1);
+			return (0);
 		i++;
 	}
-	return (0);
+	return (1);
 }
 
 int	var_index(char **env, const char *var)
@@ -66,49 +65,46 @@ int	var_index(char **env, const char *var)
 	i = 0;
 	while (env[i])
 	{
-		if (!ft_strncmp(env[i], var, len) && (env[i][len] == '='
-				|| env[i][len] == '\0'))
-			return (i);
+		if (!ft_strncmp(env[i], var, len))
+			if (env[i][len] == '=' || env[i][len] == '\0')
+				return (i);
 		i++;
 	}
-	return (93);
+	return (-1);
 }
 
-int	export(char **env, char *str)
+int	export(char ***env, char *str)
 {
 	int		index;
 	int		i;
 	char	**update;
 
-	index = var_index(env, str);
+	index = var_index(*env, str);
 	if (index >= 0)
 	{
 		free(env[index]);
-		env[index] = str;
+		(*env)[index] = ft_strdup(str);
 	}
 	else
 	{
-		update = malloc(sizeof(char *) * (env_size(env) + 2));
+		update = malloc(sizeof(char *) * (env_size(*env) + 2));
 		if (!update)
-			return (1);
-		i = 0;
-		while (i < env_size(env))
-		{
-			update[i] = env[i];
-			i++;
-		}
-		update[i++] = str;
+			return (0);
+		i = -1;
+		while (++i < env_size(*env))
+			update[i] = (*env)[i];
+		update[i++] = ft_strdup(str);
 		update[i] = NULL;
-		free(env);
-		env = update;
+		free(*env);
+		(*env) = update;
 	}
-	return (0);
+	return (1);
 }
 
 int	ft_export(char **args, t_data *data)
 {
-	int	i;
 	int	exit_code;
+	int	i;
 
 	i = 1;
 	exit_code = 0;
@@ -119,13 +115,14 @@ int	ft_export(char **args, t_data *data)
 	}
 	while (args[i])
 	{
+		printf("Checking export arg: [%s]\n", args[i]);
 		if (!check_arg(args[i]))
 		{
 			ft_putstr_fd("export: invalid identifier\n", 2);
 			exit_code = 1;
 		}
-		else if (!export(data->env, args[i]))
-			return (printf("ERROR_MALLOC")); // print error a faire
+		else if (!export(&data->env, args[i]))
+			return (printf("ERROR_MALLOC\n"));
 		i++;
 	}
 	return (exit_code);

@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 15:06:54 by mivogel           #+#    #+#             */
-/*   Updated: 2025/06/03 15:08:26 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/07/07 13:48:04 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void	unset_utils(t_data *data, char *str)
 	}
 }
 
-void	ft_unset(t_data *data)
+int	ft_unset(t_data *data)
 {
 	t_cmd	*tmp;
 
@@ -48,4 +48,5 @@ void	ft_unset(t_data *data)
 		}
 		tmp = tmp->next;
 	}
+	return (0);
 }

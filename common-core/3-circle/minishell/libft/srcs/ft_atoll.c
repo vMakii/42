@@ -1,30 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free.c                                          :+:      :+:    :+:   */
+/*   ft_atoll.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/02 14:22:56 by mivogel           #+#    #+#             */
-/*   Updated: 2025/07/04 15:52:47 by salsoysa         ###   ########.fr       */
+/*   Created: 2025/07/02 16:44:27 by mivogel           #+#    #+#             */
+/*   Updated: 2025/07/02 16:44:48 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-// void	ft_free(void *content)
-// {
-// 	free(content);
-// }
-
-void	ft_freetab(char **tab)
+long long	ft_atoll(const char *str)
 {
-	int	i;
+	long long	res;
+	int			sign;
 
-	i = 0;
-	while (tab[i])
-		i++;
-	while (i >= 0)
-		free(tab[i--]);
-	free(tab);
+	res = 0;
+	sign = 1;
+	while (*str && ((*str >= 9 && *str <= 13) || *str == 32))
+		str++;
+	if (*str == '-' || *str == '+')
+	{
+		if (*str == '-')
+			sign *= -1;
+		str++;
+	}
+	while (ft_isdigit((int)*str))
+	{
+		res = res * 10 + *str - '0';
+		str++;
+	}
+	return (sign * res);
 }

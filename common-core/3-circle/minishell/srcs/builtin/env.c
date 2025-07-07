@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 14:34:21 by mivogel           #+#    #+#             */
-/*   Updated: 2025/05/21 10:50:07 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/07/07 11:23:12 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,5 @@ int	ft_env(t_data *data)
 		ft_putendl_fd(data->env[i], 1);
 		i++;
 	}
-	data->exit_status = 0;
 	return (0);
 }

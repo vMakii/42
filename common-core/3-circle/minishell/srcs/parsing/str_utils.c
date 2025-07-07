@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 11:23:45 by mivogel           #+#    #+#             */
-/*   Updated: 2025/06/04 14:09:17 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/07/07 14:23:53 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ static void	ft_cutword_utils(char *str, int *i, int *end)
 
 	if (ft_isredir(str, i))
 	{
-		// (*i)++;
 		while (str[*i] && ft_isspace(str[*i]))
 			(*i)++;
 	}
@@ -78,7 +77,7 @@ char	*ft_optimize(char *str)
 
 	i = 0;
 	start = 0;
-	if (str[i] == ' ')
+	if (str[i] == ' ' || str[i] == '|')
 		end = 1;
 	else if (ft_isredir(str, &i))
 	{
@@ -93,6 +92,8 @@ char	*ft_optimize(char *str)
 		end = ft_strlen(str);
 	tmp = ft_substr(str, start, end - start);
 	free(str);
+	if (!tmp)
+		return (NULL);
 	return (tmp);
 }
 
@@ -106,12 +107,13 @@ char	*ft_strtrim_quote(char *str)
 	i = 0;
 	j = 0;
 	cpy = malloc(ft_strlen(str) + 1);
+	if (!cpy)
+		return (NULL);
 	while (str[i])
 	{
 		if (str[i] == '\'' || str[i] == '"')
 		{
-			quote = str[i];
-			i++;
+			quote = str[i++];
 			while (str[i] && str[i] != quote)
 				cpy[j++] = str[i++];
 			i++;

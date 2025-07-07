@@ -6,7 +6,7 @@
 #    By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/16 09:57:05 by mivogel           #+#    #+#              #
-#    Updated: 2025/06/04 10:22:03 by mivogel          ###   ########.fr        #
+#    Updated: 2025/07/03 14:51:24 by mivogel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,11 +16,13 @@ LIBFT = libft/libft.a
 LIBFTDIR = libft/
 
 SRCS = main.c\
-	builtin/env.c builtin/exit.c builtin/unset.c builtin/export.c \
-	builtin/echo.c builtin/pwd.c \
-	env/env_utils.c\
+	builtin/cd.c builtin/env.c builtin/exit.c builtin/unset.c \
+	builtin/export.c builtin/echo.c builtin/pwd.c\
+	exec/exec.c exec/get_command_path.c exec/heredoc.c exec/readline.c exec/exec_utils.c \
+	exec/exec_utils_2.c \
 	parsing/expand.c parsing/parse.c parsing/str_utils.c parsing/tokens.c\
-	utils/err_utils.c utils/utils.c utils/lst_utils.c\
+	signals/handler.c signals/signals.c\
+	utils/cd_utils.c utils/env_utils.c utils/err_utils.c utils/export_utils.c utils/lst_utils.c\
 
 OBJS_DIR = objs
 OBJS = $(addprefix ${OBJS_DIR}/, ${SRCS:.c=.o})
@@ -48,6 +50,12 @@ $(LIBFT): $(LIBFTDIR)
 	@printf "\n"
 	@$(MAKE) --no-print-directory -C ${LIBFTDIR}
 
+valgrind: ${NAME}
+	@valgrind --suppressions=readline.supp --leak-check=full --show-leak-kinds=all --track-fds=yes --trace-children=yes ./${NAME}
+
+noenv: ${NAME}
+	@valgrind --suppressions=readline.supp --leak-check=full --show-leak-kinds=all --track-fds=yes env -i ./${NAME}
+
 clean:
 	@$(MAKE) --no-print-directory clean -C $(LIBFTDIR)
 	@rm -rf ${OBJS_DIR}
@@ -60,4 +68,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY : all clean fclean
+.PHONY : all noenv clean fclean

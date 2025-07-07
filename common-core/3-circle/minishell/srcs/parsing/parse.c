@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 13:04:42 by mivogel           #+#    #+#             */
-/*   Updated: 2025/06/04 14:10:50 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/07/07 12:28:28 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,7 @@ static bool	ft_check_quotes(const char *str)
 		i++;
 	}
 	if (in_sgl || in_dbl)
-	{
-		printf("minishell: error: unmatched quotes\n");
-		return (false);
-	}
+		return (ft_print_error("unmatched quotes"), false);
 	return (true);
 }
 
@@ -50,10 +47,38 @@ static bool	ft_checklast(const char *str)
 		i++;
 	}
 	if (c == '|' || c == '<' || c == '>')
+		return (ft_print_error("unexpected token"), false);
+	return (true);
+}
+
+static bool	ft_check_redir(const char *str)
+{
+	int	i;
+
+	i = -1;
+	while (str[++i])
 	{
-		printf("minishell: error: unexpected token '%c'\n", c);
-		return (false);
+		if (str[i] == '<' && str[i + 1] == '<' && str[i + 2] == '<')
+			return (ft_print_error("unexpected token"), false);
+		if (str[i] == '>' && str[i + 1] == '>' && str[i + 2] == '>')
+			return (ft_print_error("unexpected token"), false);
+		if (str[i] == '<' && str[i + 1] == '>')
+			return (ft_print_error("ambiguous redirection"), false);
+		if (str[i] == '|' && str[i + 1] == '|')
+			return (ft_print_error("unexpected token '||'"), false);
 	}
+	return (true);
+}
+
+static bool	ft_check_pipe(const char *str)
+{
+	int	i;
+
+	i = 0;
+	while (ft_isspace(str[i]))
+		i++;
+	if (str[i] == '|')
+		return (ft_print_error("unexpected token '|'"), false);
 	return (true);
 }
 
@@ -66,15 +91,20 @@ bool	ft_parse(t_data *data)
 	i = -1;
 	start = -1;
 	end = -1;
-	if (!ft_check_quotes(data->prompt) || !ft_checklast(data->prompt))
+	if (!ft_check_quotes(data->prompt) || !ft_checklast(data->prompt)
+		|| !ft_check_redir(data->prompt) || !ft_check_pipe(data->prompt))
+	{
+		data->exit_status = 2;
 		return (false);
+	}
 	while (data->prompt[++i])
 	{
 		ft_cutword(data->prompt, &i, &start, &end);
 		i = end - 1;
 		if (!ft_tokenize(data, start, end))
 		{
-			printf("minishell: error: tokenizator failed\n");
+			ft_print_error("tokenizator failed");
+			data->exit_status = 2;
 			return (false);
 		}
 	}

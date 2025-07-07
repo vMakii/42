@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 11:13:27 by mivogel           #+#    #+#             */
-/*   Updated: 2025/06/04 12:28:19 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/07/07 13:25:12 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,12 @@ t_cmd	*ft_getcmd(t_data *data, t_tokens type)
 		tmp = data->cmd;
 		if (tmp->type == type)
 			return (tmp);
-		while (tmp->next)
+		while (tmp)
 		{
 			if (tmp->type == type)
 				return (tmp);
+			if (tmp->type == PIPE)
+				return (NULL);
 			tmp = tmp->next;
 		}
 	}
@@ -53,7 +55,7 @@ static t_tokens	ft_tokenizator(t_data *data, char *str)
 		return (APPEND);
 	else if (ft_strncmp(str, ">", 1) == 0)
 		return (OUT);
-	else if (ft_strncmp(str, " ", 1) == 0)
+	else if (ft_strncmp(str, " ", 1) == 0 || ft_strncmp(str, "\t", 1) == 0)
 		return (SPC);
 	else if (ft_strncmp(str, "|", 1) == 0)
 	{
@@ -68,18 +70,23 @@ static t_tokens	ft_tokenizator(t_data *data, char *str)
 	return (ARG);
 }
 
-// TODO: expand
 static char	*ft_str_n_tokens(t_tokens *type, t_data *data, int start, int end)
 {
 	char	*str;
 
 	*type = ft_tokenizator(data, data->prompt + start);
 	str = ft_optimize(ft_substr(data->prompt, start, end - start));
-	printf("str before trim:  [%s]\n", str);
-	str = ft_expand(data, str);
-	printf("str after expand: [%s]\n", str);
+	if (!str)
+		return (NULL);
+	if (*type != HEREDOC)
+	{
+		str = ft_expand(data, str);
+		if (!str)
+			return (NULL);
+	}
 	str = ft_strtrim_quote(str);
-	printf("str after trim:   [%s]\n\n", str);
+	if (!str)
+		return (NULL);
 	if (*type == CMD && ft_isbuiltin(str))
 		*type = BUILTIN;
 	return (str);

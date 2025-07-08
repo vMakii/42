@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 14:45:00 by mivogel           #+#    #+#             */
-/*   Updated: 2025/07/03 14:56:24 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/07/08 11:59:12 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ static char	*get_target_path(char **args, t_data *data)
 {
 	char	*target_path;
 
-	if (!args[1])
+	if (!args[1] || args[1][0] == '~')
 	{
 		target_path = get_env_value(data->env, "HOME");
-		if (!target_path)
+		if (target_path[0] == '\0')
 		{
 			ft_print_error("cd: HOME not set");
 			return (NULL);
@@ -44,7 +44,7 @@ static char	*get_target_path(char **args, t_data *data)
 	else if (ft_strncmp(args[1], "-", 2) == 0)
 	{
 		target_path = get_env_value(data->env, "OLDPWD");
-		if (!target_path)
+		if (target_path[0] == '\0')
 		{
 			ft_print_error("cd: OLDPWD not set");
 			return (NULL);

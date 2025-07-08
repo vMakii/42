@@ -6,22 +6,12 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 14:54:38 by mivogel           #+#    #+#             */
-/*   Updated: 2025/07/07 15:45:51 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/07/08 11:39:57 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <unistd.h>
-
-int	ft_strlen(char *s)
-{
-	int	i;
-
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
-}
 
 void	find_n(char *s, int *n)
 {

@@ -6,7 +6,7 @@
 /*   By: salsoysa <salsoysa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 12:05:14 by salsoysa          #+#    #+#             */
-/*   Updated: 2025/07/05 20:29:38 by salsoysa         ###   ########.fr       */
+/*   Updated: 2025/07/08 12:08:30 by salsoysa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,34 @@ void	ft_next_segment(t_cmd **cmd)
 		*cmd = (*cmd)->next;
 	if (*cmd)
 		*cmd = (*cmd)->next;
-//	printf("%s", (*cmd)->str);
+}
+
+void	init_pipeline_state(t_data *data, t_pipeline_state *state)
+{
+	state->i = 0;
+	state->pipefd[0] = -1;
+	state->pipefd[1] = -1;
+	state->nb_pipes = ft_getnb_pipe(data) + 1;
+	state->old_fd = -1;
+	state->sig = -1;
+}
+
+void	close_pipedfds(int pipefd1, int pipefd2)
+{
+	if (pipefd1 >= 0)
+		close(pipefd1);
+	if (pipefd2 >= 0)
+		close(pipefd2);
+}
+
+void	ft_pipe(t_cmd *cmd, int *pipefd)
+{
+	if (cmd->next && cmd->next->next)
+	{
+		if (pipe(pipefd) < 0)
+		{
+			perror("minishell: pipe");
+			exit(EXIT_FAILURE);
+		}
+	}
 }

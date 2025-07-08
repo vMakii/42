@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_split.c                                        :+:      :+:    :+:   */
+/*   get_command_path.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 15:22:50 by salsoysa          #+#    #+#             */
-/*   Updated: 2025/06/23 11:24:52 by akaiissa         ###   ########.fr       */
+/*   Updated: 2025/07/08 15:04:40 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,23 +74,27 @@ static char	**split_path(char **env)
 }
 
 // Joins cmd with previously found paths, and returns the first executable path
-static char	*find_cmd_dir(char *cmd, char **exec_dir)
+static char	*find_cmd_dir(char *cmd, char **exec_dir, t_data *data)
 {
 	int		i;
 	char	*cmd_d;
 
 	cmd_d = NULL;
 	i = 0;
+	data->exit_status = 127;
 	while (exec_dir[i])
 	{
 		cmd_d = ft_strjoin(exec_dir[i], cmd);
 		if (!cmd_d)
+			break ;
+		if (access(cmd_d, F_OK) == 0)
 		{
-			ft_freetab(exec_dir);
-			// error malloc error while checking cmd path;
+			if (access(cmd_d, X_OK) == 0)
+				return (cmd_d);
+			data->exit_status = 126;
+			free(cmd_d);
+			break ;
 		}
-		if (access(cmd_d, F_OK | X_OK) == 0)
-			return (cmd_d);
 		free(cmd_d);
 		i++;
 	}
@@ -107,18 +111,24 @@ char	*get_command_path(char *cmd, t_data *data)
 
 	if (!cmd || !*cmd)
 		return (NULL);
-	if (access(cmd, F_OK | X_OK) == 0)
-		return (ft_strdup(cmd));
+	if (access(cmd, F_OK) == 0)
+	{
+		if (access(cmd, X_OK) == 0)
+			return (ft_strdup(cmd));
+		printf("minishell: permission denied: %s\n", cmd);
+		data->exit_status = 126;
+		return (NULL);
+	}
 	exec_dir = split_path(data->env);
 	if (!exec_dir)
 		return (NULL);
-	cmd_d = find_cmd_dir(cmd, exec_dir);
+	cmd_d = find_cmd_dir(cmd, exec_dir, data);
 	if (!cmd_d)
 	{
-		// error Command not found: cmd, exit status 127
-		data->exit_status = 127;
-		return (NULL);
+		if (data->exit_status == 126)
+			printf("minishell: permission denied: %s\n", cmd);
+		else
+			printf("minishell: command not found: %s\n", cmd);
 	}
-	ft_freetab(exec_dir);
 	return (cmd_d);
 }

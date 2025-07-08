@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:01:29 by mivogel           #+#    #+#             */
-/*   Updated: 2025/07/07 14:45:48 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/07/08 12:36:07 by salsoysa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,19 @@ void							ft_handle_redir(t_data *data, t_exec *exec,
 void							ft_next_segment(t_cmd **cmd);
 bool							ft_prepare_heredocs(t_data *data);
 char							*ft_readline(void);
+void							init_pipeline_state(t_data *data,
+									t_pipeline_state *state);
+void							close_pipedfds(int pipefd1, int pipefd2);
+void							ft_pipe(t_cmd *cmd, int *pipefd);
+void							init_pipeline_state(t_data *data,
+									t_pipeline_state *state);
+void							ft_next_segment(t_cmd **cmd);
+void							ft_child_process(t_pipeline_state *state,
+									t_cmd *cmd, t_exec *exec, t_data *data);
+void							ft_wait_for_child(t_pipeline_state *state,
+									t_data *data);
+void							ft_parent_process(t_pipeline_state *state,
+									t_cmd **cmd);
 
 // -- Parsing -- //
 char							*ft_expand(t_data *data, char *str);

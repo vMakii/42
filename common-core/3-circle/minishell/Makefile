@@ -6,66 +6,98 @@
 #    By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/16 09:57:05 by mivogel           #+#    #+#              #
-#    Updated: 2025/07/03 14:51:24 by mivogel          ###   ########.fr        #
+#    Updated: 2025/07/08 15:55:48 by mivogel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = minishell
+include srcs/make/srcs.mk
+include libft/make/colors.mk
 
-LIBFT = libft/libft.a
-LIBFTDIR = libft/
+TERM_WIDTH := $(shell tput cols)
+SHELL = /bin/bash
 
-SRCS = main.c\
-	builtin/cd.c builtin/env.c builtin/exit.c builtin/unset.c \
-	builtin/export.c builtin/echo.c builtin/pwd.c\
-	exec/exec.c exec/get_command_path.c exec/heredoc.c exec/readline.c exec/exec_utils.c \
-	exec/exec_utils_2.c \
-	parsing/expand.c parsing/parse.c parsing/str_utils.c parsing/tokens.c\
-	signals/handler.c signals/signals.c\
-	utils/cd_utils.c utils/env_utils.c utils/err_utils.c utils/export_utils.c utils/lst_utils.c\
+vpath %.c ${SRCS_PATH}
 
-OBJS_DIR = objs
-OBJS = $(addprefix ${OBJS_DIR}/, ${SRCS:.c=.o})
+INC = -I includes/ -I libft/includes
+LIBS = -L libft -lft -lreadline
+
+OBJS = ${patsubst %.c, ${OBJS_PATH}/%.o, ${SRCS}}
+OBJS_PATH = ./objs/
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g3 -Iincludes
+CFLAGS += -g3
+CFLAGS += -Wall -Wextra -Werror
+NAME = minishell
 
-Red='\e[0;31m'
-Green='\e[0;32m'
-NC='\e[0m'
+default:	help
+	@	${MAKE} --no-print-directory ${NAME}
 
 all: ${NAME}
 
-$(NAME): ${OBJS} $(LIBFT)
-	@${CC} ${CFLAGS} -o $@ $(OBJS) -lreadline $(LIBFT)
-	@printf "\n"
-	@echo $(Green)✅$@ compiled! $(NC)
+ifeq ($(shell test $(TERM_WIDTH) -gt 50; echo $$?), 0)
+help:
+	@	echo -ne "\r\033[2K" $(WHITE) "----------------------------------------------"${NC}"\n"
+	@	echo -ne "\r\033[2K" $(LIGHTPURPLE) "all       →  "${NC}"Compile the program.\n"
+	@	echo -ne "\r\033[2K" $(LIGHTPURPLE) "clean     →  "${NC}"Removes temporary files.\n"
+	@	echo -ne "\r\033[2K" $(LIGHTPURPLE) "fclean    →  "${NC}"Deletes all generated files.\n"
+	@	echo -ne "\r\033[2K" $(LIGHTPURPLE) "re        →  "${NC}"Rebuilds the project.\n"
+	@	echo -ne "\r\033[2K" $(LIGHTPURPLE) "valgrind  →  "${NC}"Check for memory leaks.\n"
+	@	echo -ne "\r\033[2K" $(LIGHTPURPLE) "libft     →  "${NC}"Rebuilds libft.\n"
+	@	echo -ne "\r\033[2K" $(WHITE) "----------------------------------------------"${NC}"\n"
+else
+help:
+	@	echo -ne "\r\033[2K" $(LIGHTPURPLE)"all\n"${NC}" Compile the program.\n"
+	@	echo -ne "\r\033[2K" $(LIGHTPURPLE)"clean\n"${NC}" Removes temporary files.\n"
+	@	echo -ne "\r\033[2K" $(LIGHTPURPLE)"fclean\n"${NC}" Deletes all generated files.\n"
+	@	echo -ne "\r\033[2K" $(LIGHTPURPLE)"re\n"${NC}" Rebuilds the project.\n"
+	@	echo -ne "\r\033[2K" $(LIGHTPURPLE)"valgrind\n"${NC}" Check for memory leaks.\n"
+	@	echo -ne "\r\033[2K" $(LIGHTPURPLE)"libft\n"${NC}" Rebuilds libft.\n"
+endif
 
-${OBJS_DIR}/%.o: srcs/%.c
-	@printf "\e[0;33mCompiling: %-30s\r\e[0m" "$<"
-	@mkdir -p $(dir $@)
-	@$(CC) $(CFLAGS) -c $< -o $@
+${OBJS}: ${OBJS_PATH}/%.o: %.c Makefile includes/minishell.h
+	@	$(MAKE) --no-print-directory -s -C libft
+	@	mkdir -p ${OBJS_PATH}
+	@	$(COLORCOMPIL)
+	@	${CC} ${CFLAGS} -c $< -o $@ ${INC}
 
-$(LIBFT): $(LIBFTDIR)
-	@printf "\n"
-	@$(MAKE) --no-print-directory -C ${LIBFTDIR}
+${NAME}:  ${OBJS}
+	@	${CC} ${CFLAGS} -o ${NAME} ${OBJS} ${LIBS} ${INC}	
+	@	echo -ne "\r\033[2K" $(LIGHTGREEN) "→ $(NAME) OK!\n"$(NC)
 
-valgrind: ${NAME}
-	@valgrind --suppressions=readline.supp --leak-check=full --show-leak-kinds=all --track-fds=yes --trace-children=yes ./${NAME}
+clean:	
+	@	+$(MAKE) --no-print-directory -s -C libft clean
+	@ 	echo -ne "\r\033[2K" $(LIGHTRED) "→ objs cleaned\n"$(NC)
+	@	rm -rf readline_leaks.supp
+	@	rm -rf ${OBJS_PATH}
 
-noenv: ${NAME}
-	@valgrind --suppressions=readline.supp --leak-check=full --show-leak-kinds=all --track-fds=yes env -i ./${NAME}
 
-clean:
-	@$(MAKE) --no-print-directory clean -C $(LIBFTDIR)
-	@rm -rf ${OBJS_DIR}
-	@echo $(Red)🗑️ *.o deleted! $(NC)
+fclean:	clean;
+	@	+$(MAKE) --no-print-directory -s -C libft fclean
+	@	echo -ne "\r\033[2K" $(LIGHTRED) "→ $(NAME) cleaned\n"$(NC)
+	@	rm -f ${NAME}
 
-fclean: clean
-	@$(MAKE) --no-print-directory fclean -C $(LIBFTDIR)
-	@rm -f ${NAME}
-	@echo $(Red)🗑️ $(NAME) deleted! $(NC)
+re:	fclean ${NAME}
 
-re: fclean all
+valgrind:	${NAME}
+	@	echo -ne \
+		"{\n" \
+		"	readline_leaks\n" \
+		"	Memcheck:Leak\n" \
+		"	...\n" \
+		"	fun:readline\n" \
+		"}\n" \
+		"{\n" \
+		"	readline_leaks\n" \
+		"	Memcheck:Leak\n" \
+		"	...\n" \
+		"	fun:add_history\n" \
+		"}\n" > readline_leaks.supp
+	@		echo -ne "\r\033[2K"$(LIGHTBLUE)"Valgrind ./${NAME}: \n--track-fds=yes \n--suppressions=readline_leaks.supp \n--leak-check=full --show-leak-kinds=all"$(NC)"\n"
+	@		-valgrind --track-fds=yes --suppressions=readline_leaks.supp --leak-check=full --show-leak-kinds=all ./${NAME}
 
-.PHONY : all noenv clean fclean
+libft:
+	@	+$(MAKE) --no-print-directory -s -C libft re
+
+include libft/make/colorcompil.mk
+
+.PHONY: default all clean fclean re valgrind libft 

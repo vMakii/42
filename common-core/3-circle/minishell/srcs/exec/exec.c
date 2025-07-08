@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 14:46:18 by mivogel           #+#    #+#             */
-/*   Updated: 2025/07/07 13:54:02 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/07/08 13:43:59 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,101 +109,116 @@ void	ft_exec(t_data *data)
 
 //     attendre tous les processus avec wait
 //     mettre à jour data->exit_status avec le statut du dernier processus
-void	close_pipedfds(int pipefd1, int pipefd2)
-{
-	if (pipefd1 >= 0)
-		close(pipefd1);
-	if (pipefd2 >= 0)
-		close(pipefd2);
-}
+
+// void	ft_exec_pipeline(t_data *data, t_cmd *cmd)
+//{
+//	t_exec	exec;
+//	int	status;
+//	t_pipeline_state	state;
+//
+//	state.i = 0;
+//	state.pipefd[0] = -1;
+//	state.pipefd[1] = -1;
+//	state.nb_pipes = ft_getnb_pipe(data) + 1;
+//	state.old_fd = -1;
+//	while (cmd)
+//	{
+//		if (cmd->next && cmd->next->next)
+//		{
+//			if (pipe(state.pipefd) == -1)
+//			{
+//				perror("minishell: pipe");
+//				exit(EXIT_FAILURE);
+//			}
+//		}
+//		state.pid[state.i] = fork();
+//		if (state.pid[state.i] == -1)
+//		{
+//			perror("minishell: fork");
+//			exit(EXIT_FAILURE);
+//		}
+//		else if (state.pid[state.i] == 0)
+//		{
+//			ft_set_signal(data, CHILD);
+//			if (state.i != state.nb_pipes - 1)
+//				dup2(state.pipefd[1], STDOUT_FILENO);
+//			if (state.i != 0)
+//			{
+//				dup2(state.old_fd, STDIN_FILENO);
+//				close(state.old_fd);
+//			}
+//			close_pipedfds(state.pipefd[0], state.pipefd[1]);
+//			ft_handle_redir(data, &exec, cmd);
+//			ft_exec_cmd(data, cmd);
+//			exit(EXIT_FAILURE);
+//		}
+//		else
+//		{
+//			close_pipedfds(state.pipefd[1], -1);
+//
+//			if (state.i != 0)
+//				close(state.old_fd);
+//			state.old_fd = state.pipefd[0];
+//			ft_next_segment(&cmd);
+//		}
+//		state.i++;
+//	}
+//	close_pipedfds(state.pipefd[0], -1);
+//	ft_set_signal(data, IGNORE);
+//	state.i = 0;
+//	while (state.i < state.nb_pipes)
+//	{
+//		waitpid(state.pid[state.i], &status, 0);
+//		if (WIFSIGNALED(status))
+//		{
+//			state.sig = WTERMSIG(status);
+//			if (state.sig == SIGQUIT)
+//			{
+//				ft_putstr_fd("Quit (core dumped)\n", STDERR_FILENO);
+//				data->exit_status = 131;
+//			}
+//			else if (state.sig == SIGINT)
+//			{
+//				ft_putstr_fd("\n", STDERR_FILENO);
+//				data->exit_status = 130;
+//			}
+//			else
+//				data->exit_status = 128 + state.sig;
+//		}
+//		else if (WIFEXITED(status))
+//		{
+//			if (state.i == state.nb_pipes - 1)
+//				data->exit_status = WEXITSTATUS(status);
+//		}
+//		state.i++;
+//	}
+//	ft_set_signal(data, BASE_CASE);
+//}
 
 void	ft_exec_pipeline(t_data *data, t_cmd *cmd)
 {
 	t_exec				exec;
-	int					status;
-	t_pipeline_state	state;
+	t_pipeline_state	st;
 
-	state.i = 0;
-	state.pipefd[0] = -1;
-	state.pipefd[1] = -1;
-	state.nb_pipes = ft_getnb_pipe(data) + 1;
-	state.old_fd = -1;
+	init_pipeline_state(data, &st);
 	while (cmd)
 	{
-		if (cmd->next && cmd->next->next)
-		{
-			if (pipe(state.pipefd) == -1)
-			{
-				perror("minishell: pipe");
-				exit(EXIT_FAILURE);
-			}
-		}
-		state.pid[state.i] = fork();
-		if (state.pid[state.i] == -1)
+		ft_pipe(cmd, st.pipefd);
+		st.pid[st.i] = fork();
+		if (st.pid[st.i] < 0)
 		{
 			perror("minishell: fork");
 			exit(EXIT_FAILURE);
 		}
-		else if (state.pid[state.i] == 0)
-		{
-			ft_set_signal(data, CHILD);
-			if (state.i != state.nb_pipes - 1)
-				dup2(state.pipefd[1], STDOUT_FILENO);
-			if (state.i != 0)
-			{
-				dup2(state.old_fd, STDIN_FILENO);
-				close(state.old_fd);
-			}
-			close_pipedfds(state.pipefd[0], state.pipefd[1]);
-			//			close(state.pipefd[0]);
-			//			close(state.pipefd[1]);
-			ft_handle_redir(data, &exec, cmd);
-			ft_exec_cmd(data, cmd);
-			exit(EXIT_FAILURE);
-		}
+		else if (st.pid[st.i] == 0)
+			ft_child_process(&st, cmd, &exec, data);
 		else
-		{
-			close_pipedfds(state.pipefd[1], -1);
-			//			close(state.pipefd[1]);
-			if (state.i != 0)
-				close(state.old_fd);
-			state.old_fd = state.pipefd[0];
-			ft_next_segment(&cmd);
-		}
-		state.i++;
+			ft_parent_process(&st, &cmd);
 	}
-	close_pipedfds(state.pipefd[0], -1);
+	close_pipedfds(st.pipefd[0], -1);
 	ft_set_signal(data, IGNORE);
-	state.i = 0;
-	while (state.i < state.nb_pipes)
-	{
-		waitpid(state.pid[state.i], &status, 0);
-		if (WIFSIGNALED(status))
-		{
-			state.sig = WTERMSIG(status);
-			if (state.sig == SIGQUIT)
-			{
-				ft_putstr_fd("Quit (core dumped)\n", STDERR_FILENO);
-				data->exit_status = 131;
-			}
-			else if (state.sig == SIGINT)
-			{
-				ft_putstr_fd("\n", STDERR_FILENO);
-				data->exit_status = 130;
-			}
-			else
-			{
-				data->exit_status = 128 + state.sig;
-			}
-		}
-		else if (WIFEXITED(status))
-		{
-			// Only set exit status from the last process in the pipeline
-			if (state.i == state.nb_pipes - 1)
-				data->exit_status = WEXITSTATUS(status);
-		}
-		state.i++;
-	}
+	st.i = 0;
+	ft_wait_for_child(&st, data);
 	ft_set_signal(data, BASE_CASE);
 }
 
@@ -220,14 +235,8 @@ void	ft_exec_cmd(t_data *data, t_cmd *cmd)
 	ft_handle_redir(data, &exec, cmd);
 	argv = ft_get_argv(cmd);
 	exec.cmd = get_command_path(argv[0], data);
-	// if (!exec.cmd)
-	// { // a voir pour les msg d'erreurs
-	// 	ft_putstr_fd("minishell: command not found: ", STDERR_FILENO);
-	// 	ft_putstr_fd(argv[0], STDERR_FILENO);
-	// 	ft_putstr_fd("\n", STDERR_FILENO);
-	// 	free(argv);
-	// 	return ;
-	// }
+	if (!exec.cmd)
+		exit(data->exit_status);
 	if (execve(exec.cmd, argv, data->env) == -1)
 	{
 		perror("minishell");

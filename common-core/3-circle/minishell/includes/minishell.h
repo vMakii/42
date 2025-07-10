@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:01:29 by mivogel           #+#    #+#             */
-/*   Updated: 2025/07/10 10:52:51 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/07/10 13:50:05 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ typedef struct s_expand
 	int							j;
 	int							len;
 	int							in_sgl;
+	int							in_dbl;
 }								t_expand;
 
 typedef struct s_cmd
@@ -113,6 +114,7 @@ int								ft_cd(char **args, t_data *data);
 int								ft_echo(char **args);
 int								ft_env(t_data *data);
 void							ft_exit(t_data *data);
+int								export(char ***env, char *str);
 int								ft_export(char **args, t_data *data);
 int								var_index(char **env, const char *var);
 int								ft_pwd(void);

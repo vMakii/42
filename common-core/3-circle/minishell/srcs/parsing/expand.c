@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 10:08:41 by mivogel           #+#    #+#             */
-/*   Updated: 2025/07/09 11:49:28 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/07/10 13:05:21 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,9 @@ char	*ft_expand(t_data *data, char *str)
 		return (NULL);
 	while (str[expand.i])
 	{
-		if (str[expand.i] == '\'')
+		if (str[expand.i] == '"')
+			expand.in_dbl = !expand.in_dbl;
+		if (str[expand.i] == '\'' && !expand.in_dbl)
 			expand.in_sgl = !expand.in_sgl;
 		if (str[expand.i] == '$' && !expand.in_sgl)
 		{

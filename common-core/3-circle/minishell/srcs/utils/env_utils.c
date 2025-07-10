@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 14:56:33 by mivogel           #+#    #+#             */
-/*   Updated: 2025/07/09 17:41:07 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/07/10 14:07:41 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,41 +44,45 @@ static char	**ft_gen_env(void)
 {
 	char	**env;
 	char	cwd[PATH_MAX];
+	char	*pwd_str;
 
 	env = malloc(sizeof(char *) * 4);
 	if (!env)
 		return (NULL);
-	env[0] = ft_strjoin("PWD=", ft_strdup(getcwd(cwd, PATH_MAX)));
+	pwd_str = getcwd(cwd, PATH_MAX);
+	if (!pwd_str)
+		pwd_str = "/";
+	env[0] = ft_strjoin("PWD=", pwd_str);
 	env[1] = ft_strdup("SHLVL=0");
 	env[2] = ft_strdup("_=/usr/bin/env");
 	env[3] = NULL;
 	return (env);
 }
 
-static void	ft_update_shlvl(char **env)
+static void	ft_update_shlvl(char ***env)
 {
 	int		i;
 	char	*shlvl;
 	char	*new_shlvl;
 
 	i = 0;
-	while (env[i])
+	while ((*env)[i])
 	{
-		if (ft_strncmp(env[i], "SHLVL=", 6) == 0)
+		if (ft_strncmp((*env)[i], "SHLVL=", 6) == 0)
 		{
-			shlvl = ft_itoa(ft_atoi(env[i] + 6) + 1);
+			shlvl = ft_itoa(ft_atoi((*env)[i] + 6) + 1);
 			new_shlvl = ft_strjoin("SHLVL=", shlvl);
 			if (!new_shlvl)
 				return (free(shlvl));
-			free(env[i]);
+			free((*env)[i]);
 			free(shlvl);
-			env[i] = new_shlvl;
+			(*env)[i] = new_shlvl;
 			return ;
 		}
 		i++;
 	}
-	env[i] = ft_strdup("SHLVL=1");
-	env[i + 1] = NULL;
+	if (!export(env, "SHLVL=0"))
+		return ;
 }
 
 char	**ft_getenv(char **envp)
@@ -105,6 +109,6 @@ char	**ft_getenv(char **envp)
 		}
 		env[i] = NULL;
 	}
-	ft_update_shlvl(env);
+	ft_update_shlvl(&env);
 	return (env);
 }

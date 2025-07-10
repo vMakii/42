@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 17:23:58 by mivogel           #+#    #+#             */
-/*   Updated: 2024/11/14 14:06:58 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/06/11 12:14:23 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ size_t	ft_strlen(const char *str)
 	size_t	i;
 
 	i = 0;
+	if (str == NULL)
+		return (0);
 	while (str[i])
 		i++;
 	return (i);

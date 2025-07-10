@@ -1,30 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free.c                                          :+:      :+:    :+:   */
+/*   ft_isspace.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/02 14:22:56 by mivogel           #+#    #+#             */
-/*   Updated: 2025/07/04 15:52:47 by salsoysa         ###   ########.fr       */
+/*   Created: 2025/05/23 10:24:34 by mivogel           #+#    #+#             */
+/*   Updated: 2025/06/03 11:09:38 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-// void	ft_free(void *content)
-// {
-// 	free(content);
-// }
-
-void	ft_freetab(char **tab)
+int	ft_isspace(int c)
 {
-	int	i;
-
-	i = 0;
-	while (tab[i])
-		i++;
-	while (i >= 0)
-		free(tab[i--]);
-	free(tab);
+	if (c == ' ' || c == '\t' || c == '\n' || c == '\v' || c == '\f'
+		|| c == '\r')
+		return (1);
+	return (0);
 }

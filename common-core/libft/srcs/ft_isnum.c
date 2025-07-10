@@ -1,30 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free.c                                          :+:      :+:    :+:   */
+/*   ft_isnum.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/02 14:22:56 by mivogel           #+#    #+#             */
-/*   Updated: 2025/07/04 15:52:47 by salsoysa         ###   ########.fr       */
+/*   Created: 2025/05/15 17:46:37 by mivogel           #+#    #+#             */
+/*   Updated: 2025/06/03 11:09:29 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-// void	ft_free(void *content)
-// {
-// 	free(content);
-// }
-
-void	ft_freetab(char **tab)
+int	ft_isnum(char *str)
 {
 	int	i;
 
 	i = 0;
-	while (tab[i])
+	while (str[i])
+	{
+		if (!ft_isdigit(str[i]))
+			return (0);
 		i++;
-	while (i >= 0)
-		free(tab[i--]);
-	free(tab);
+	}
+	return (1);
 }

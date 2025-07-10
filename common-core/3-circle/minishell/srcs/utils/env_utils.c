@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 14:56:33 by mivogel           #+#    #+#             */
-/*   Updated: 2025/07/08 12:06:26 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/07/09 17:41:07 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ static char	**ft_gen_env(void)
 	char	cwd[PATH_MAX];
 
 	env = malloc(sizeof(char *) * 4);
+	if (!env)
+		return (NULL);
 	env[0] = ft_strjoin("PWD=", ft_strdup(getcwd(cwd, PATH_MAX)));
 	env[1] = ft_strdup("SHLVL=0");
 	env[2] = ft_strdup("_=/usr/bin/env");

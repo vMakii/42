@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 11:23:45 by mivogel           #+#    #+#             */
-/*   Updated: 2025/07/07 14:23:53 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/07/09 18:50:05 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,21 @@ static void	ft_cutword_utils(char *str, int *i, int *end)
 		while (str[*i] && ft_isspace(str[*i]))
 			(*i)++;
 	}
-	if (str[*i] == '\'' || str[*i] == '"')
+	while (str[*i] && !ft_isspace(str[*i]) && str[*i] != '|' && str[*i] != '<'
+		&& str[*i] != '>')
 	{
-		quote = str[*i];
-		(*i)++;
-		while (str[*i] && str[*i] != quote)
+		if (str[*i] == '\'' || str[*i] == '"')
+		{
+			quote = str[*i];
+			(*i)++;
+			while (str[*i] && str[*i] != quote)
+				(*i)++;
+			if (str[*i] == quote)
+				(*i)++;
+		}
+		else
 			(*i)++;
 	}
-	while (str[*i] && !ft_isspace(str[*i]))
-		(*i)++;
 	*end = *i;
 }
 
@@ -60,6 +66,11 @@ void	ft_cutword(char *str, int *i, int *start, int *end)
 		(*i)++;
 		while (str[*i] && ft_isspace(str[*i]))
 			(*i)++;
+		*end = *i;
+	}
+	else if (str[*i] == '|')
+	{
+		(*i)++;
 		*end = *i;
 	}
 	else
@@ -84,9 +95,7 @@ char	*ft_optimize(char *str)
 		while (str[i] && ft_isspace(str[i]))
 			i++;
 		start = i;
-		while (str[i] && !ft_isspace(str[i]))
-			i++;
-		end = i;
+		end = ft_strlen(str);
 	}
 	else
 		end = ft_strlen(str);
@@ -116,7 +125,6 @@ char	*ft_strtrim_quote(char *str)
 			quote = str[i++];
 			while (str[i] && str[i] != quote)
 				cpy[j++] = str[i++];
-			i++;
 		}
 		else
 			cpy[j++] = str[i++];

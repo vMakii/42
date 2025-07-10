@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 11:43:09 by salsoysa          #+#    #+#             */
-/*   Updated: 2025/07/07 12:28:24 by salsoysa         ###   ########.fr       */
+/*   Updated: 2025/07/09 21:47:37 by salsoysa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ int	ft_getnb_pipe(t_data *data)
 	return (nb_pipe);
 }
 
-//					-- Converts cmd lst to an array --					      //
+//					-- Converts cmd lst to an array --
+//
 // -- Goes through the cmd list until it encounters a PIPE, and for each      //
 // -- CMD, ARG, BUILTIN, writes the strings in an array which we return       //
 char	**ft_get_argv(t_cmd *cmd)
@@ -38,15 +39,19 @@ char	**ft_get_argv(t_cmd *cmd)
 	char	**argv;
 	t_cmd	*tmp;
 
+	if (!cmd)
+		return (NULL);
 	i = 0;
 	argv = malloc(sizeof(char *) * (ft_lstsize(cmd) + 1));
+	if (!argv)
+		return (ft_print_error("malloc error"), NULL);
 	tmp = cmd;
 	while (tmp)
 	{
 		if (tmp->type == CMD || tmp->type == ARG || tmp->type == BUILTIN)
 		{
-			argv[i] = ft_strdup(tmp->str);
-			i++;
+			if (tmp->str && tmp->str[0] != '\0')
+				argv[i++] = ft_strdup(tmp->str);
 		}
 		if (tmp->type == PIPE)
 			break ;
@@ -114,8 +119,10 @@ void	ft_handle_redir(t_data *data, t_exec *exec, t_cmd *cmd)
 			data->heredoc_fd = -1;
 		}
 		if (tmp->type == IN || tmp->type == OUT || tmp->type == APPEND)
+		{
 			if (!ft_handle_redir_utils(data, exec, tmp))
 				exit(EXIT_FAILURE);
+		}
 		tmp = tmp->next;
 	}
 }

@@ -35,3 +35,5 @@ SRCS += env_utils.c
 SRCS += err_utils.c
 SRCS += export_utils.c
 SRCS += lst_utils.c
+SRCS += command_utils.c
+SRCS += heredoc_utils.c

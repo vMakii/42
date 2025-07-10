@@ -6,7 +6,7 @@
 #    By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/16 09:57:05 by mivogel           #+#    #+#              #
-#    Updated: 2025/07/08 15:55:48 by mivogel          ###   ########.fr        #
+#    Updated: 2025/07/10 11:01:12 by mivogel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -92,12 +92,12 @@ valgrind:	${NAME}
 		"	...\n" \
 		"	fun:add_history\n" \
 		"}\n" > readline_leaks.supp
-	@		echo -ne "\r\033[2K"$(LIGHTBLUE)"Valgrind ./${NAME}: \n--track-fds=yes \n--suppressions=readline_leaks.supp \n--leak-check=full --show-leak-kinds=all"$(NC)"\n"
-	@		-valgrind --track-fds=yes --suppressions=readline_leaks.supp --leak-check=full --show-leak-kinds=all ./${NAME}
+	@		echo -ne "\r\033[2K"$(LIGHTBLUE)"Valgrind ./${NAME}: \n--track-fds=yes \n--suppressions=readline_leaks.supp \n--leak-check=full --show-leak-kinds=all --track-origins=yes"$(NC)"\n"
+	@		-valgrind --track-fds=yes --suppressions=readline_leaks.supp --leak-check=full --show-leak-kinds=all --track-origins=yes ./${NAME}
 
 libft:
 	@	+$(MAKE) --no-print-directory -s -C libft re
 
 include libft/make/colorcompil.mk
 
-.PHONY: default all clean fclean re valgrind libft 
+.PHONY: default all clean fclean re valgrind libft

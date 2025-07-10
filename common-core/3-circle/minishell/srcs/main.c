@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:00:59 by mivogel           #+#    #+#             */
-/*   Updated: 2025/07/07 13:17:23 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/07/10 11:01:33 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int	main(int ac, char **av, char **env)
 		if (data.prompt == NULL)
 			break ;
 		ft_set_signal(&data, BASE_CASE);
-		if (ft_strlen(data.prompt) > 0)
+		if (ft_strlen(data.prompt) > 0 && ft_strlen(data.prompt) < INPUT_SIZE)
 		{
 			if (ft_parse(&data))
 				if (ft_prepare_heredocs(&data))

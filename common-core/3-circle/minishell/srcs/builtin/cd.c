@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 14:45:00 by mivogel           #+#    #+#             */
-/*   Updated: 2025/07/08 11:59:12 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/07/09 10:50:19 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,12 @@ int	ft_cd(char **args, t_data *data)
 	char	current_dir[PATH_MAX];
 	char	*saved_pwd;
 
+	if (ft_tablen(args) > 2)
+	{
+		errno = 0;
+		ft_print_error("cd: too many arguments");
+		return (1);
+	}
 	saved_pwd = get_saved_pwd(data, current_dir);
 	target_path = get_target_path(args, data);
 	if (!target_path)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils_2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: salsoysa <salsoysa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 12:05:14 by salsoysa          #+#    #+#             */
-/*   Updated: 2025/07/08 12:08:30 by salsoysa         ###   ########.fr       */
+/*   Updated: 2025/07/09 18:52:50 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void	ft_next_segment(t_cmd **cmd)
 	while (*cmd && (*cmd)->type != PIPE)
 		*cmd = (*cmd)->next;
 	if (*cmd)
+		*cmd = (*cmd)->next;
+	while (*cmd && (*cmd)->type == SPC)
 		*cmd = (*cmd)->next;
 }
 
@@ -42,14 +44,20 @@ void	close_pipedfds(int pipefd1, int pipefd2)
 		close(pipefd2);
 }
 
-void	ft_pipe(t_cmd *cmd, int *pipefd)
+bool	ft_pipe(t_cmd *cmd, int *pipefd)
 {
-	if (cmd->next && cmd->next->next)
+	t_cmd	*tmp;
+
+	tmp = cmd;
+	while (tmp && tmp->type != PIPE)
+		tmp = tmp->next;
+	if (tmp && tmp->type == PIPE)
 	{
 		if (pipe(pipefd) < 0)
 		{
 			perror("minishell: pipe");
-			exit(EXIT_FAILURE);
+			return (false);
 		}
 	}
+	return (true);
 }

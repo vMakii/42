@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 00:56:11 by salsoysa          #+#    #+#             */
-/*   Updated: 2025/07/05 14:02:32 by salsoysa         ###   ########.fr       */
+/*   Updated: 2025/07/09 18:17:02 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int	export(char ***env, char *str)
 	index = var_index(*env, str);
 	if (index >= 0)
 	{
-		free(env[index]);
+		free((*env)[index]);
 		(*env)[index] = ft_strdup(str);
 	}
 	else
@@ -115,10 +115,9 @@ int	ft_export(char **args, t_data *data)
 	}
 	while (args[i])
 	{
-		printf("Checking export arg: [%s]\n", args[i]);
 		if (!check_arg(args[i]))
 		{
-			ft_putstr_fd("export: invalid identifier\n", 2);
+			ft_putstr_fd("export: not a valid identifier\n", 2);
 			exit_code = 1;
 		}
 		else if (!export(&data->env, args[i]))

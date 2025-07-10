@@ -6,11 +6,37 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 10:08:41 by mivogel           #+#    #+#             */
-/*   Updated: 2025/06/05 15:04:18 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/07/09 11:49:28 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+bool	ft_check_redir_utils(const char *str, int i)
+{
+	if ((str[i] == '<' && str[i + 1] == '<' && str[i + 2] == '<')
+		|| (str[i] == '>' && str[i + 1] == '>' && str[i + 2] == '>'))
+	{
+		if (str[i] == '<')
+			return (ft_print_error("syntax error near unexpected token `<'"),
+				false);
+		else
+			return (ft_print_error("syntax error near unexpected token `>'"),
+				false);
+	}
+	if ((str[i] == '>' || str[i] == '<'))
+	{
+		if (str[i + 1] == '|')
+			return (ft_print_error("syntax error near unexpected token `|'"),
+				false);
+	}
+	if (str[i] == '<' && str[i + 1] == '>')
+		return (ft_print_error("syntax error ambiguous redirection"), false);
+	if (str[i] == '|' && str[i + 1] == '|')
+		return (ft_print_error("syntax error near unexpected token `||'"),
+			false);
+	return (true);
+}
 
 static int	ft_expand_len(t_data *data, const char *str)
 {
@@ -59,7 +85,8 @@ static void	ft_expand_loop(t_data *data, char *str, t_expand *expand)
 	char	*env_value;
 
 	expand->i++;
-	if (str[expand->i] == '\0')
+	if (str[expand->i] == '\0' || str[expand->i] == ' '
+		|| str[expand->i] == '"')
 		expand->exp[(expand->j)++] = '$';
 	else if (ft_strncmp(str + expand->i, "?", 1) == 0)
 	{
@@ -90,7 +117,9 @@ char	*ft_expand(t_data *data, char *str)
 		if (str[expand.i] == '\'')
 			expand.in_sgl = !expand.in_sgl;
 		if (str[expand.i] == '$' && !expand.in_sgl)
+		{
 			ft_expand_loop(data, str, &expand);
+		}
 		else
 			expand.exp[expand.j++] = str[expand.i++];
 	}

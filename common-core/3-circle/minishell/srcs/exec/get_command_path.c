@@ -6,11 +6,14 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 15:22:50 by salsoysa          #+#    #+#             */
-/*   Updated: 2025/07/08 15:04:40 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/07/10 10:41:09 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include "minishell.h"
+#include <asm-generic/errno-base.h>
+#include <dirent.h>
 
 // Searching for "PATH=" in environnement, when found, returns a string with
 // everything after the "=" sign, to get the needed directories
@@ -111,24 +114,22 @@ char	*get_command_path(char *cmd, t_data *data)
 
 	if (!cmd || !*cmd)
 		return (NULL);
-	if (access(cmd, F_OK) == 0)
-	{
-		if (access(cmd, X_OK) == 0)
-			return (ft_strdup(cmd));
-		printf("minishell: permission denied: %s\n", cmd);
-		data->exit_status = 126;
-		return (NULL);
-	}
+	if (ft_strchr(cmd, '/'))
+		return (_access_check(cmd, data));
 	exec_dir = split_path(data->env);
 	if (!exec_dir)
+	{
+		data->exit_status = 127;
+		printf("minishell: %s: No such file of directory\n", cmd);
 		return (NULL);
+	}
 	cmd_d = find_cmd_dir(cmd, exec_dir, data);
 	if (!cmd_d)
 	{
 		if (data->exit_status == 126)
-			printf("minishell: permission denied: %s\n", cmd);
+			printf("minishell: %s: Permission denied\n", cmd);
 		else
-			printf("minishell: command not found: %s\n", cmd);
+			printf("minishell: %s: command not found\n", cmd);
 	}
 	return (cmd_d);
 }

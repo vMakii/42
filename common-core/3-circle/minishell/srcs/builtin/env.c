@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 14:34:21 by mivogel           #+#    #+#             */
-/*   Updated: 2025/07/07 11:23:12 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/07/09 18:50:31 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_env(t_data *data)
 	i = 0;
 	while (data->env[i])
 	{
-		ft_putendl_fd(data->env[i], 1);
+		ft_putendl_fd(data->env[i], STDOUT_FILENO);
 		i++;
 	}
 	return (0);

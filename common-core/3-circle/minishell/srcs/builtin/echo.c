@@ -6,20 +6,26 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 14:35:20 by salsoysa          #+#    #+#             */
-/*   Updated: 2025/07/07 11:14:02 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/07/09 21:56:16 by salsoysa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	args_nb(char **args)
+static bool	check_for_opt(char *arg)
 {
 	int	i;
 
-	i = 0;
-	while (args[i])
+	i = 1;
+	if (!arg || arg[0] != '-' || arg[1] == '\0')
+		return (false);
+	while (arg[i])
+	{
+		if (arg[i] != 'n')
+			return (false);
 		i++;
-	return (i);
+	}
+	return (true);
 }
 
 int	ft_echo(char **args)
@@ -29,20 +35,17 @@ int	ft_echo(char **args)
 
 	i = 1;
 	opt_n = 0;
-	if (args_nb(args) > 1)
+	while (args[i] && check_for_opt(args[i]))
 	{
-		if (args[i] && !ft_strncmp(args[i], "-n", 2))
-		{
-			opt_n = 1;
-			i++;
-		}
-		while (args[i])
-		{
-			ft_putstr_fd(args[i], 1);
-			if (args[i + 1] && args[i][0] != '\0')
-				write(1, " ", 1);
-			i++;
-		}
+		opt_n = 1;
+		i++;
+	}
+	while (args[i])
+	{
+		ft_putstr_fd(args[i], 1);
+		if (args[i + 1] && args[i][0] != '\0')
+			write(1, " ", 1);
+		i++;
 	}
 	if (opt_n == 0)
 		write(1, "\n", 1);

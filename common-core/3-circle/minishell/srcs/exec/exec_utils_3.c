@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils_3.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: salsoysa <salsoysa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 16:12:57 by salsoysa          #+#    #+#             */
-/*   Updated: 2025/07/08 12:34:27 by salsoysa         ###   ########.fr       */
+/*   Updated: 2025/07/09 18:51:36 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,9 @@ void	ft_child_process(t_pipeline_state *state, t_cmd *cmd, t_exec *exec,
 {
 	ft_set_signal(data, CHILD);
 	if (state->i != state->nb_pipes - 1)
+	{
 		dup2(state->pipefd[1], STDOUT_FILENO);
+	}
 	if (state->i != 0)
 	{
 		dup2(state->old_fd, STDIN_FILENO);

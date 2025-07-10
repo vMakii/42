@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:01:29 by mivogel           #+#    #+#             */
-/*   Updated: 2025/07/08 12:36:07 by salsoysa         ###   ########.fr       */
+/*   Updated: 2025/07/10 10:52:51 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define MINISHELL_H
 
 # include "../libft/includes/libft.h"
+# include <dirent.h>
 # include <errno.h>
 # include <fcntl.h>
 # include <limits.h>
@@ -29,6 +30,7 @@
 
 # define POSITIVE_MAX 9223372036854775807ULL
 # define NEGATIVE_MAX 9223372036854775808ULL
+# define INPUT_SIZE 1024
 
 # define BASE_CASE 0
 # define SIGINT_BASE_CASE 1
@@ -79,6 +81,8 @@ typedef struct s_exec
 {
 	int							in;
 	int							out;
+	int							saved_stdin;
+	int							saved_stdout;
 	char						*cmd;
 	char						*argv;
 }								t_exec;
@@ -117,9 +121,11 @@ int								ft_unset(t_data *data);
 //  -- Exec -- //
 char							*get_command_path(char *cmd, t_data *data);
 int								ft_getnb_pipe(t_data *data);
-void							ft_exec_builtin(t_data *data);
+void							ft_exec_builtin(t_data *data, t_cmd *cmd,
+									char **argv);
 void							ft_exec(t_data *data);
-void							ft_exec_pipeline(t_data *data, t_cmd *cmd);
+void							ft_exec_pipeline(t_data *data, t_cmd *cmd,
+									t_exec *exec);
 void							ft_exec_cmd(t_data *data, t_cmd *cmd);
 char							**ft_get_argv(t_cmd *cmd);
 void							ft_handle_redir(t_data *data, t_exec *exec,
@@ -130,7 +136,7 @@ char							*ft_readline(void);
 void							init_pipeline_state(t_data *data,
 									t_pipeline_state *state);
 void							close_pipedfds(int pipefd1, int pipefd2);
-void							ft_pipe(t_cmd *cmd, int *pipefd);
+bool							ft_pipe(t_cmd *cmd, int *pipefd);
 void							init_pipeline_state(t_data *data,
 									t_pipeline_state *state);
 void							ft_next_segment(t_cmd **cmd);
@@ -142,6 +148,7 @@ void							ft_parent_process(t_pipeline_state *state,
 									t_cmd **cmd);
 
 // -- Parsing -- //
+bool							ft_check_redir_utils(const char *str, int i);
 char							*ft_expand(t_data *data, char *str);
 bool							ft_parse(t_data *data);
 void							ft_cutword(char *str, int *i, int *start,
@@ -175,5 +182,13 @@ void							ft_lstadd_back(t_cmd **lst, t_cmd *new);
 int								ft_lstsize(t_cmd *lst);
 void							ft_lstclear(t_cmd **lst);
 void							ft_lstprint(t_cmd *lst);
+char							*ft_random_filename(char *hd, size_t i);
+bool							_is_dir(char *cmd, t_data *data);
+char							*_access_check(char *cmd, t_data *data);
+char							*_random_file_name(char *dst, size_t len);
+bool							heredoc_read(t_data *data, int fd,
+									char *delimiter);
+int								_heredoc_util(t_data *d, int fd,
+									const char *name, char *eof);
 
 #endif

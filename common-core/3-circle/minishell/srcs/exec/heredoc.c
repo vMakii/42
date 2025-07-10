@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 14:04:45 by mivogel           #+#    #+#             */
-/*   Updated: 2025/07/07 10:50:40 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/07/09 20:20:27 by salsoysa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static bool	handle_heredoc_eof_error(t_data *data, char *str, char *delimiter)
 	return (true);
 }
 
-static bool	heredoc_read(t_data *data, int fd, char *delimiter)
+bool	heredoc_read(t_data *data, int fd, char *delimiter)
 {
 	char	*str;
 
@@ -61,28 +61,20 @@ static int	ft_handle_heredoc(t_data *data, char *eof)
 	int		fd;
 	char	filename[256];
 	char	*index_str;
+	char	random_name[15];
 
 	index_str = ft_itoa(data->heredoc_i++);
 	if (!index_str)
 		return (-1);
+	if (!_random_file_name(random_name, sizeof(random_name)))
+		return (-1);
 	ft_strlcpy(filename, ".heredoc", sizeof(filename));
+	ft_strlcat(filename, random_name, sizeof(filename));
 	ft_strlcat(filename, index_str, sizeof(filename));
 	ft_strlcat(filename, ".tmp", sizeof(filename));
 	free(index_str);
 	fd = open(filename, O_CREAT | O_WRONLY | O_TRUNC, 0644);
-	if (fd < 0)
-		return (-1);
-	if (!heredoc_read(data, fd, eof))
-	{
-		close(fd);
-		unlink(filename);
-		return (-1);
-	}
-	close(fd);
-	fd = open(filename, O_RDONLY);
-	if (fd >= 0)
-		unlink(filename);
-	return (fd);
+	return (_heredoc_util(data, fd, filename, eof));
 }
 
 bool	ft_prepare_heredocs(t_data *data)

@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:01:29 by mivogel           #+#    #+#             */
-/*   Updated: 2025/07/10 13:50:05 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/07/15 16:22:00 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@
 # define POSITIVE_MAX 9223372036854775807ULL
 # define NEGATIVE_MAX 9223372036854775808ULL
 # define INPUT_SIZE 1024
+# define MAX_PIPES 1000
+# define MAX_PROCESSES 1025
 
 # define BASE_CASE 0
 # define SIGINT_BASE_CASE 1
@@ -92,7 +94,7 @@ typedef struct s_pipeline_state
 {
 	int							nb_pipes;
 	int							pipefd[2];
-	pid_t						pid[1024];
+	pid_t						pid[MAX_PROCESSES];
 	int							i;
 	int							old_fd;
 	int							sig;

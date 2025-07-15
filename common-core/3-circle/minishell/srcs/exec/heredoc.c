@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 14:04:45 by mivogel           #+#    #+#             */
-/*   Updated: 2025/07/15 12:43:28 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/07/15 13:01:10 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,16 @@ static int	ft_handle_heredoc(t_data *data, char *eof)
 	char	*index_str;
 	char	random_name[15];
 
+	ft_memset(filename, 0, sizeof(filename));
+	ft_memset(random_name, 0, sizeof(random_name));
 	index_str = ft_itoa(data->heredoc_i++);
 	if (!index_str)
 		return (-1);
 	if (!_random_file_name(random_name, sizeof(random_name)))
+	{
+		free(index_str);
 		return (-1);
+	}
 	ft_strlcpy(filename, ".heredoc", sizeof(filename));
 	ft_strlcat(filename, random_name, sizeof(filename));
 	ft_strlcat(filename, index_str, sizeof(filename));

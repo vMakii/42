@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 15:25:11 by mivogel           #+#    #+#             */
-/*   Updated: 2025/07/15 12:50:48 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/07/15 12:53:58 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ char	*ft_readline(void)
 	while (1)
 	{
 		if (bytes == 0 && *line == '\0')
-			return (NULL);
+			return (free(line), NULL);
 		if (bytes < 0 || !line)
 		{
 			free(line);

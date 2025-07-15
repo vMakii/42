@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 09:44:43 by salsoysa          #+#    #+#             */
-/*   Updated: 2025/06/03 13:16:44 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/07/15 16:21:53 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,11 @@ char	**dup_env(char **envp)
 	while (envp[i])
 	{
 		env[i] = ft_strdup(envp[i]);
+		if (!env[i])
+		{
+			ft_freetab(env);
+			return (NULL);
+		}
 		i++;
 	}
 	env[i] = NULL;

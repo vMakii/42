@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 14:15:34 by mivogel           #+#    #+#             */
-/*   Updated: 2025/07/07 13:09:55 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/07/15 13:03:43 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,11 @@ void	ft_free(t_data *data, int end)
 	}
 	ft_lstclear(&data->cmd);
 	data->cmd = NULL;
+	if (data->heredoc_fd != -1)
+	{
+		close(data->heredoc_fd);
+		data->heredoc_fd = -1;
+	}
 	if (data->env && end)
 	{
 		ft_freetab(data->env);

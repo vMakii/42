@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 11:23:45 by mivogel           #+#    #+#             */
-/*   Updated: 2025/07/10 13:11:42 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/07/15 15:59:44 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,9 @@ char	*ft_optimize(char *str)
 	tmp = ft_substr(str, start, end - start);
 	free(str);
 	if (!tmp)
+	{
 		return (NULL);
+	}
 	return (tmp);
 }
 

@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 14:46:18 by mivogel           #+#    #+#             */
-/*   Updated: 2025/07/09 18:52:22 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/07/15 16:21:50 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,20 @@ void	ft_exec(t_data *data)
 	t_cmd	*cmd;
 	t_cmd	*builtin;
 	t_exec	exec;
+	int		nb_pipes;
 
 	ft_memset(&exec, 0, sizeof(t_exec));
 	cmd = ft_getcmd(data, CMD);
 	builtin = ft_getcmd(data, BUILTIN);
 	if (!cmd && !builtin)
 		return ;
-	if (builtin && !ft_getnb_pipe(data))
+	nb_pipes = ft_getnb_pipe(data);
+	if (nb_pipes < 0)
+	{
+		data->exit_status = 1;
+		return ;
+	}
+	if (builtin && !nb_pipes)
 	{
 		ft_prepare_exec_builtin(data, &exec);
 		return ;

@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 11:43:09 by salsoysa          #+#    #+#             */
-/*   Updated: 2025/07/09 21:47:37 by salsoysa         ###   ########.fr       */
+/*   Updated: 2025/07/15 16:21:48 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,14 @@ int	ft_getnb_pipe(t_data *data)
 	while (cmd)
 	{
 		if (cmd->type == PIPE)
+		{
 			nb_pipe++;
+			if (nb_pipe > MAX_PIPES)
+			{
+				ft_print_error("too many pipes");
+				return (-1);
+			}
+		}
 		cmd = cmd->next;
 	}
 	return (nb_pipe);
@@ -51,7 +58,15 @@ char	**ft_get_argv(t_cmd *cmd)
 		if (tmp->type == CMD || tmp->type == ARG || tmp->type == BUILTIN)
 		{
 			if (tmp->str && tmp->str[0] != '\0')
-				argv[i++] = ft_strdup(tmp->str);
+			{
+				argv[i] = ft_strdup(tmp->str);
+				if (!argv[i])
+				{
+					ft_freetab(argv);
+					return (ft_print_error("malloc error"), NULL);
+				}
+				i++;
+			}
 		}
 		if (tmp->type == PIPE)
 			break ;

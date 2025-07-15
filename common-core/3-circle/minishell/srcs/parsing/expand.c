@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 10:08:41 by mivogel           #+#    #+#             */
-/*   Updated: 2025/07/15 16:07:35 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/07/15 22:34:40 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,57 +51,94 @@ static int	ft_get_exit_status_len(int exit_status)
 	return (len);
 }
 
-static int	ft_expand_len(t_data *data, const char *str)
-{
-	int	i;
-	int	len;
-	int	in_sgl;
-	int	in_dbl;
+// static void	ft_process_quotes(const char *str, t_expand *params)
+// {
+// 	if (str[params->i] == '"')
+// 	{
+// 		params->in_dbl = !params->in_dbl;
+// 		(params->len)++;
+// 		(params->i)++;
+// 	}
+// 	else if (str[params->i] == '\'' && !params->in_dbl)
+// 	{
+// 		params->in_sgl = !params->in_sgl;
+// 		(params->len)++;
+// 		(params->i)++;
+// 	}
+// }
 
-	i = 0;
-	len = 0;
-	in_sgl = 0;
-	in_dbl = 0;
-	while (str[i])
+static void	ft_process_dollar_exit(t_data *data, const char *str,
+		t_expand *params)
+{
+	if (str[params->i + 1] == '?')
 	{
-		if (str[i] == '"')
+		params->len += ft_get_exit_status_len(data->exit_status);
+		params->i += 2;
+	}
+	else if (str[params->i + 1] == '\0' || str[params->i + 1] == ' '
+		|| str[params->i + 1] == '"')
+	{
+		(params->len)++;
+		(params->i)++;
+	}
+	else
+	{
+		params->len += ft_strlen(get_env_value(data->env, str + params->i + 1));
+		params->i += get_var_len(str + params->i + 1) + 1;
+	}
+}
+
+// static void	ft_process_dollar_edge(const char *str, t_expand *params)
+// {
+// 	if (str[params->i + 1] == '\0' || str[params->i + 1] == ' ' || str[params->i
+// 		+ 1] == '"')
+// 	{
+// 		(params->len)++;
+// 		(params->i)++;
+// 	}
+// }
+
+// static void	ft_process_dollar_var(t_data *data, const char *str,
+// 		t_expand *params)
+// {
+// 	params->len += ft_strlen(get_env_value(data->env, str + params->i + 1));
+// 	params->i += get_var_len(str + params->i + 1) + 1;
+// }
+
+static void	ft_expand_len_loop(t_data *data, const char *str, t_expand *params)
+{
+	if (str[params->i] == '"' || (str[params->i] == '\'' && !params->in_dbl))
+	{
+		if (str[params->i] == '"')
 		{
-			in_dbl = !in_dbl;
-			len++;
-			i++;
+			params->in_dbl = !params->in_dbl;
+			(params->len)++;
+			(params->i)++;
 		}
-		else if (str[i] == '\'' && !in_dbl)
+		else if (str[params->i] == '\'' && !params->in_dbl)
 		{
-			in_sgl = !in_sgl;
-			len++;
-			i++;
-		}
-		else if (str[i] == '$' && !in_sgl)
-		{
-			if (str[i + 1] == '?')
-			{
-				len += ft_get_exit_status_len(data->exit_status);
-				i += 2;
-			}
-			else if (str[i + 1] == '\0' || str[i + 1] == ' ' || str[i
-				+ 1] == '"')
-			{
-				len++;
-				i++;
-			}
-			else
-			{
-				len += ft_strlen(get_env_value(data->env, str + i + 1));
-				i += get_var_len(str + i + 1) + 1;
-			}
-		}
-		else
-		{
-			len++;
-			i++;
+			params->in_sgl = !params->in_sgl;
+			(params->len)++;
+			(params->i)++;
 		}
 	}
-	return (len);
+	else if (str[params->i] == '$' && !params->in_sgl)
+		ft_process_dollar_exit(data, str, params);
+	else
+	{
+		(params->len)++;
+		(params->i)++;
+	}
+}
+
+static int	ft_expand_len(t_data *data, const char *str)
+{
+	t_expand	params;
+
+	ft_memset(&params, 0, sizeof(t_expand));
+	while (str[params.i])
+		ft_expand_len_loop(data, str, &params);
+	return (params.len);
 }
 
 static void	ft_expand_var(t_data *data, char *str, t_expand *expand)
@@ -147,35 +184,57 @@ static void	ft_expand_loop(t_data *data, char *str, t_expand *expand)
 	}
 }
 
+static t_expand	*ft_init_expand(t_data *data, char *str)
+{
+	t_expand	*expand;
+
+	expand = malloc(sizeof(t_expand));
+	if (!expand)
+		return (NULL);
+	ft_memset(expand, 0, sizeof(t_expand));
+	expand->len = ft_expand_len(data, str);
+	expand->exp = malloc(expand->len + 1);
+	if (!expand->exp)
+	{
+		free(expand);
+		return (NULL);
+	}
+	return (expand);
+}
+
+static void	ft_process_char(char *str, t_expand *expand)
+{
+	if (str[expand->i] == '"')
+		expand->in_dbl = !expand->in_dbl;
+	if (str[expand->i] == '\'' && !expand->in_dbl)
+		expand->in_sgl = !expand->in_sgl;
+	if (expand->j < expand->len)
+		expand->exp[expand->j++] = str[expand->i++];
+	else
+		expand->i++;
+}
+
 char	*ft_expand(t_data *data, char *str)
 {
-	t_expand	expand;
+	t_expand	*expand;
+	char		*result;
 
-	ft_memset(&expand, 0, sizeof(t_expand));
-	expand.len = ft_expand_len(data, str);
-	expand.exp = malloc(expand.len + 1);
-	if (!expand.exp)
+	expand = ft_init_expand(data, str);
+	if (!expand)
 	{
 		free(str);
 		return (NULL);
 	}
-	while (str[expand.i])
+	while (str[expand->i])
 	{
-		if (str[expand.i] == '"')
-			expand.in_dbl = !expand.in_dbl;
-		if (str[expand.i] == '\'' && !expand.in_dbl)
-			expand.in_sgl = !expand.in_sgl;
-		if (str[expand.i] == '$' && !expand.in_sgl)
-			ft_expand_loop(data, str, &expand);
+		if (str[expand->i] == '$' && !expand->in_sgl)
+			ft_expand_loop(data, str, expand);
 		else
-		{
-			if (expand.j < expand.len)
-				expand.exp[expand.j++] = str[expand.i++];
-			else
-				expand.i++;
-		}
+			ft_process_char(str, expand);
 	}
-	expand.exp[expand.j] = '\0';
+	expand->exp[expand->j] = '\0';
+	result = expand->exp;
+	free(expand);
 	free(str);
-	return (expand.exp);
+	return (result);
 }

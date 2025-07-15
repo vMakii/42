@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 10:08:41 by mivogel           #+#    #+#             */
-/*   Updated: 2025/07/10 13:05:21 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/07/15 11:52:42 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,7 @@ static void	ft_expand_loop(t_data *data, char *str, t_expand *expand)
 	char	*env_value;
 
 	expand->i++;
-	if (str[expand->i] == '\0' || str[expand->i] == ' '
-		|| str[expand->i] == '"')
+	if (str[expand->i] == '\0' || str[expand->i] == ' ')
 		expand->exp[(expand->j)++] = '$';
 	else if (ft_strncmp(str + expand->i, "?", 1) == 0)
 	{

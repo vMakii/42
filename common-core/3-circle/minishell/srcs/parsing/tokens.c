@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 11:13:27 by mivogel           #+#    #+#             */
-/*   Updated: 2025/07/10 14:10:28 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/07/15 11:41:07 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,13 @@ t_cmd	*ft_getcmd(t_data *data, t_tokens type)
 
 static bool	ft_isbuiltin(char *str)
 {
-	if (ft_strncmp(str, "cd", 2) == 0 || ft_strncmp(str, "echo", 4) == 0
-		|| ft_strncmp(str, "env", 3) == 0 || ft_strncmp(str, "exit", 4) == 0
-		|| ft_strncmp(str, "export", 6) == 0 || ft_strncmp(str, "pwd", 3) == 0
-		|| ft_strncmp(str, "unset", 5) == 0)
+	int	len;
+
+	len = ft_strlen(str);
+	if (ft_strncmp(str, "cd", len) == 0 || ft_strncmp(str, "echo", len) == 0
+		|| ft_strncmp(str, "env", len) == 0 || ft_strncmp(str, "exit", len) == 0
+		|| ft_strncmp(str, "export", len) == 0 || ft_strncmp(str, "pwd",
+			len) == 0 || ft_strncmp(str, "unset", len) == 0)
 		return (true);
 	return (false);
 }

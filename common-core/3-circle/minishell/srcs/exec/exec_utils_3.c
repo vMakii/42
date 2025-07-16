@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 16:12:57 by salsoysa          #+#    #+#             */
-/*   Updated: 2025/07/09 18:51:36 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/07/16 17:16:20 by salsoysa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,4 +80,10 @@ void	ft_child_process(t_pipeline_state *state, t_cmd *cmd, t_exec *exec,
 	ft_exec_cmd(data, cmd);
 	ft_free(data, 1);
 	exit(EXIT_FAILURE);
+}
+
+void	_free_utils(char **argv, t_data *data, int end)
+{
+	ft_freetab(argv);
+	ft_free(data, end);
 }

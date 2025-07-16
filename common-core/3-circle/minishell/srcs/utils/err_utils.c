@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 14:15:34 by mivogel           #+#    #+#             */
-/*   Updated: 2025/07/15 13:03:43 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/07/16 13:44:09 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,13 @@ void	ft_free(t_data *data, int end)
 	{
 		ft_freetab(data->env);
 		data->env = NULL;
-		get_next_line(0, 1);  // Free static buffer in get_next_line
+		get_next_line(0, 1);
 	}
 }
 
 bool	is_tty(void)
 {
-	return (isatty(STDIN_FILENO));
+	return (isatty(STDIN_FILENO) && isatty(STDOUT_FILENO));
 }
 
 void	ft_print_error(char *msg)

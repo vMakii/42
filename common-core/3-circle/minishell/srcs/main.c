@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:00:59 by mivogel           #+#    #+#             */
-/*   Updated: 2025/07/15 11:53:38 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/07/16 13:52:28 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,9 @@ static char	*read_non_tty_input(void)
 	char	*input;
 
 	input = get_next_line(STDIN_FILENO, 0);
-	if (input && input[ft_strlen(input) - 1] == '\n')
+	if (input == NULL)
+		ft_putstr_fd("exit\n", 2);
+	else if (input && input[ft_strlen(input) - 1] == '\n')
 		input[ft_strlen(input) - 1] = '\0';
 	return (input);
 }
@@ -82,7 +84,6 @@ int	main(int ac, char **av, char **env)
 		ft_free(&data, 0);
 	}
 	rl_clear_history();
-	get_next_line(0, 1);  // Free static buffer in get_next_line
 	ft_free(&data, 1);
 	return (data.exit_status);
 }

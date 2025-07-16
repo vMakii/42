@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 14:46:18 by mivogel           #+#    #+#             */
-/*   Updated: 2025/07/15 16:21:50 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/07/16 13:08:22 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,7 @@ void	ft_exec_cmd(t_data *data, t_cmd *cmd)
 	if (execve(exec.cmd, argv, data->env) == -1)
 	{
 		perror("minishell");
+		free(exec.cmd);
 		ft_freetab(argv);
 		exit(EXIT_FAILURE);
 	}

@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:01:29 by mivogel           #+#    #+#             */
-/*   Updated: 2025/07/15 20:22:45 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/07/16 09:44:22 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,5 +194,6 @@ bool							heredoc_read(t_data *data, int fd,
 									char *delimiter);
 int								_heredoc_util(t_data *d, int fd,
 									const char *name, char *eof);
+int								ft_expand_len(t_data *data, const char *str);
 
 #endif

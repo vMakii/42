@@ -37,3 +37,4 @@ SRCS += export_utils.c
 SRCS += lst_utils.c
 SRCS += command_utils.c
 SRCS += heredoc_utils.c
+SRCS += parsing_utils.c

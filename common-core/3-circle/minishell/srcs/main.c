@@ -41,7 +41,7 @@ static char	*read_tty_input(void)
 		input = readline(PROMPT_COLOR PROMPT_TEXT PROMPT_RESET);
 	else
 		input = readline("minishell> ");
-	if (input == NULL)
+	if (input == NULL && isatty(STDIN_FILENO))
 		ft_putstr_fd("exit\n", 2);
 	else if (ft_strlen(input) > 0)
 		add_history(input);
@@ -53,7 +53,7 @@ static char	*read_non_tty_input(void)
 	char	*input;
 
 	input = get_next_line(STDIN_FILENO, 0);
-	if (input == NULL)
+	if (input == NULL && isatty(STDIN_FILENO))
 		ft_putstr_fd("exit\n", 2);
 	else if (input && input[ft_strlen(input) - 1] == '\n')
 		input[ft_strlen(input) - 1] = '\0';

@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 11:13:27 by mivogel           #+#    #+#             */
-/*   Updated: 2025/07/16 14:08:26 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/07/16 15:14:16 by salsoysa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,10 +116,7 @@ bool	ft_tokenize(t_data *data, int start, int end)
 	{
 		data->cmd = ft_lstnew(str, type);
 		if (!data->cmd)
-		{
-			free(str);
-			return (false);
-		}
+			return (free(str), false);
 	}
 	else
 	{

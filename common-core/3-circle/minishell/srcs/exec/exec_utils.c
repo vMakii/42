@@ -6,53 +6,17 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 11:43:09 by salsoysa          #+#    #+#             */
-/*   Updated: 2025/07/15 16:21:48 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/07/16 09:56:58 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// - Gives the number of pipes from which we deduce the number of commands -  //
-int	ft_getnb_pipe(t_data *data)
+char	**ft_get_argv_loop(t_cmd *tmp, char **argv)
 {
-	t_cmd	*cmd;
-	int		nb_pipe;
+	int	i;
 
-	cmd = data->cmd;
-	nb_pipe = 0;
-	while (cmd)
-	{
-		if (cmd->type == PIPE)
-		{
-			nb_pipe++;
-			if (nb_pipe > MAX_PIPES)
-			{
-				ft_print_error("too many pipes");
-				return (-1);
-			}
-		}
-		cmd = cmd->next;
-	}
-	return (nb_pipe);
-}
-
-//					-- Converts cmd lst to an array --
-//
-// -- Goes through the cmd list until it encounters a PIPE, and for each      //
-// -- CMD, ARG, BUILTIN, writes the strings in an array which we return       //
-char	**ft_get_argv(t_cmd *cmd)
-{
-	int		i;
-	char	**argv;
-	t_cmd	*tmp;
-
-	if (!cmd)
-		return (NULL);
 	i = 0;
-	argv = malloc(sizeof(char *) * (ft_lstsize(cmd) + 1));
-	if (!argv)
-		return (ft_print_error("malloc error"), NULL);
-	tmp = cmd;
 	while (tmp)
 	{
 		if (tmp->type == CMD || tmp->type == ARG || tmp->type == BUILTIN)
@@ -73,6 +37,25 @@ char	**ft_get_argv(t_cmd *cmd)
 		tmp = tmp->next;
 	}
 	argv[i] = NULL;
+	return (argv);
+}
+
+//					-- Converts cmd lst to an array --
+//
+// -- Goes through the cmd list until it encounters a PIPE, and for each      //
+// -- CMD, ARG, BUILTIN, writes the strings in an array which we return       //
+char	**ft_get_argv(t_cmd *cmd)
+{
+	char	**argv;
+	t_cmd	*tmp;
+
+	if (!cmd)
+		return (NULL);
+	argv = malloc(sizeof(char *) * (ft_lstsize(cmd) + 1));
+	if (!argv)
+		return (ft_print_error("malloc error"), NULL);
+	tmp = cmd;
+	ft_get_argv_loop(tmp, argv);
 	return (argv);
 }
 

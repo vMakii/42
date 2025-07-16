@@ -6,11 +6,35 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 12:05:14 by salsoysa          #+#    #+#             */
-/*   Updated: 2025/07/09 18:52:50 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/07/16 09:56:55 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+// - Gives the number of pipes from which we deduce the number of commands -  //
+int	ft_getnb_pipe(t_data *data)
+{
+	t_cmd	*cmd;
+	int		nb_pipe;
+
+	cmd = data->cmd;
+	nb_pipe = 0;
+	while (cmd)
+	{
+		if (cmd->type == PIPE)
+		{
+			nb_pipe++;
+			if (nb_pipe > MAX_PIPES)
+			{
+				ft_print_error("too many pipes");
+				return (-1);
+			}
+		}
+		cmd = cmd->next;
+	}
+	return (nb_pipe);
+}
 
 // fonction next_segment(cmd):
 //     avancer cmd jusqu’au prochain PIPE

@@ -5,7 +5,7 @@ OBJS = ${patsubst %.cpp, ${OBJS_PATH}/%.o, ${SRCS}}
 OBJS_PATH = ./objs/
 
 CC = c++
-INC = -Iincludes/
+INC = -I includes/
 CFLAGS = -Wall -Wextra -Werror -std=c++98
 
 vpath %.cpp ${SRCS_PATH}

@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 00:00:00 by mivogel           #+#    #+#             */
-/*   Updated: 2025/07/16 22:09:16 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/07/16 22:20:41 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,6 @@ int	main(void)
 			std::cout << "Goodbye!" << std::endl;
 			break ;
 		}
-		// else
-		// {
-		// 	std::cout << "Invalid command! Available commands: ADD, SEARCH, EXIT " << std::endl;
-		// }
 	}
 	return (0);
 }

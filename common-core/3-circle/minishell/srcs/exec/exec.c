@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 14:46:18 by mivogel           #+#    #+#             */
-/*   Updated: 2025/07/16 13:08:22 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/07/15 16:21:50 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ void	ft_exec_pipeline(t_data *data, t_cmd *cmd, t_exec *exec)
 		if (st.pid[st.i] < 0)
 		{
 			perror("minishell: fork");
+			ft_free(data, 1);
 			exit(EXIT_FAILURE);
 		}
 		else if (st.pid[st.i] == 0)
@@ -121,19 +122,22 @@ void	ft_exec_cmd(t_data *data, t_cmd *cmd)
 	{
 		ft_exec_builtin(data, cmd, argv);
 		ft_freetab(argv);
+		ft_free(data, 1);
 		exit(data->exit_status);
 	}
 	exec.cmd = get_command_path(argv[0], data);
 	if (!exec.cmd)
 	{
 		ft_freetab(argv);
+		ft_free(data, 1);
 		exit(data->exit_status);
 	}
 	if (execve(exec.cmd, argv, data->env) == -1)
 	{
 		perror("minishell");
-		free(exec.cmd);
 		ft_freetab(argv);
+		free(exec.cmd);
+		ft_free(data, 1);
 		exit(EXIT_FAILURE);
 	}
 }

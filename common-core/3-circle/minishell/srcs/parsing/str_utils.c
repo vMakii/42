@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 11:23:45 by mivogel           #+#    #+#             */
-/*   Updated: 2025/07/16 13:10:37 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/07/15 15:59:44 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ char	*ft_strtrim_quote(char *str)
 	j = 0;
 	cpy = malloc(ft_strlen(str) + 1);
 	if (!cpy)
-		return (free(str), NULL);
+		return (NULL);
 	while (str[i])
 	{
 		if (str[i] == '\'' || str[i] == '"')

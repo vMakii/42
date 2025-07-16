@@ -119,7 +119,10 @@ void	ft_handle_redir(t_data *data, t_exec *exec, t_cmd *cmd)
 		if (tmp->type == IN || tmp->type == OUT || tmp->type == APPEND)
 		{
 			if (!ft_handle_redir_utils(data, exec, tmp))
+			{
+				ft_free(data, 1);
 				exit(EXIT_FAILURE);
+			}
 		}
 		tmp = tmp->next;
 	}

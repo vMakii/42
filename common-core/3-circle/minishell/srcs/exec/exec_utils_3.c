@@ -78,5 +78,6 @@ void	ft_child_process(t_pipeline_state *state, t_cmd *cmd, t_exec *exec,
 	close_pipedfds(state->pipefd[0], state->pipefd[1]);
 	ft_handle_redir(data, exec, cmd);
 	ft_exec_cmd(data, cmd);
+	ft_free(data, 1);
 	exit(EXIT_FAILURE);
 }

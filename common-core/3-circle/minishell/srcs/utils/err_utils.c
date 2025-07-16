@@ -30,6 +30,7 @@ void	ft_free(t_data *data, int end)
 	{
 		ft_freetab(data->env);
 		data->env = NULL;
+		get_next_line(0, 1);  // Free static buffer in get_next_line
 	}
 }
 

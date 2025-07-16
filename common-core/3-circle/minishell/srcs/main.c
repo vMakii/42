@@ -82,6 +82,7 @@ int	main(int ac, char **av, char **env)
 		ft_free(&data, 0);
 	}
 	rl_clear_history();
+	get_next_line(0, 1);  // Free static buffer in get_next_line
 	ft_free(&data, 1);
 	return (data.exit_status);
 }

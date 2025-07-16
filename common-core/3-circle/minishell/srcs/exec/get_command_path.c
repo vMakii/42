@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 15:22:50 by salsoysa          #+#    #+#             */
-/*   Updated: 2025/07/16 13:09:33 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/07/10 10:41:09 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,11 +89,11 @@ static char	*find_cmd_dir(char *cmd, char **exec_dir, t_data *data)
 	{
 		cmd_d = ft_strjoin(exec_dir[i], cmd);
 		if (!cmd_d)
-			return (ft_freetab(exec_dir), NULL);
+			break ;
 		if (access(cmd_d, F_OK) == 0)
 		{
 			if (access(cmd_d, X_OK) == 0)
-				return (ft_freetab(exec_dir), cmd_d);
+				return (cmd_d);
 			data->exit_status = 126;
 			free(cmd_d);
 			break ;

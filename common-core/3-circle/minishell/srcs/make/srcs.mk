@@ -33,6 +33,7 @@ SRCS_PATH += ./srcs/utils/
 SRCS += cd_utils.c
 SRCS += env_utils.c
 SRCS += err_utils.c
+SRCS += expand_utils.c
 SRCS += export_utils.c
 SRCS += lst_utils.c
 SRCS += command_utils.c

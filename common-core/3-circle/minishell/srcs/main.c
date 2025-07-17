@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:00:59 by mivogel           #+#    #+#             */
-/*   Updated: 2025/07/16 17:15:53 by salsoysa         ###   ########.fr       */
+/*   Updated: 2025/07/17 14:33:21 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ int	main(int ac, char **av, char **env)
 				if (ft_prepare_heredocs(&data))
 					ft_exec(&data);
 		}
+		ft_lstprint(data.cmd);
 		ft_free(&data, 0);
 	}
 	rl_clear_history();

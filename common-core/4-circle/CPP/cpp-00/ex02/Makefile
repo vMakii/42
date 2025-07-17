@@ -6,11 +6,11 @@
 #    By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/17 12:51:46 by mivogel           #+#    #+#              #
-#    Updated: 2025/07/17 12:51:47 by mivogel          ###   ########.fr        #
+#    Updated: 2025/07/17 14:23:53 by mivogel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS = tests.cpp
+SRCS = tests.cpp Account.cpp
 SRCS_PATH = ./srcs/
 
 OBJS = ${patsubst %.cpp, ${OBJS_PATH}/%.o, ${SRCS}}
@@ -22,7 +22,7 @@ CFLAGS = -Wall -Wextra -Werror -std=c++98
 
 vpath %.cpp ${SRCS_PATH}
 
-NAME = phonebook
+NAME = Account
 
 all: ${NAME}
 

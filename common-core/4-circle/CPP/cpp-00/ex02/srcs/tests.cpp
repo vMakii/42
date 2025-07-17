@@ -66,7 +66,7 @@ int		main( void ) {
 
 // ************************************************************************** //
 // vim: set ts=4 sw=4 tw=80 noexpandtab:                                      //
-// -*- indent-tabs-mode:t;                                                   -*-
-// -*- mode: c++-mode;                                                       -*-
-// -*- fill-column: 75; comment-column: 75;                                  -*-
+// -*- indent-tabs-mode:t;                                                 -*-//
+// -*- mode: c++-mode;                                                     -*-//
+// -*- fill-column: 75; comment-column: 75;                                -*-//
 // ************************************************************************** //

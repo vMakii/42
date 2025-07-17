@@ -6,11 +6,15 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 12:55:18 by mivogel           #+#    #+#             */
-/*   Updated: 2025/07/17 14:22:23 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/07/17 14:28:51 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Account.hpp"
+#include <string>
+#include <iostream>
+#include <iomanip>
+#include <ctime>
 
 // Definition of static member variables
 int Account::_nbAccounts = 0;

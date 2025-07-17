@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   my_scanf.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/17 11:29:18 by mivogel           #+#    #+#             */
+/*   Updated: 2025/07/17 11:36:18 by mivogel          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdio.h> // fgetc, ungetc
 #include <stdarg.h> // va_list
 #include <ctype.h> // isdigit , isspace
@@ -169,13 +181,4 @@ int ft_scanf(const char *format, ...)
     int ret = ft_vfscanf(stdin, format, ap);
     va_end(ap);
     return (ret);
-}
-
-int main(void)
-{
-    int x;
-    char str[100];
-    char str2[200];
-    scanf("%d x %s %s", &x, str, str2);
-    printf("%d %s %s\n", x, str, str2);
 }

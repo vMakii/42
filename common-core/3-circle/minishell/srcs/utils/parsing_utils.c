@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 09:36:47 by mivogel           #+#    #+#             */
-/*   Updated: 2025/07/17 14:51:25 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/07/18 13:42:29 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ static bool	ft_check_redir_utils3(const char *str, int i)
 	if (str[i] == '>')
 	{
 		i++;
-		if (str[i + 1] == '>')
+		if (str[i] == '>')
 			i++;
-		while (ft_isspace(str[++i]))
-			;
+		while (ft_isspace(str[i]))
+			i++;
 		if (str[i] == '\0' || str[i] == '|' || str[i] == '>' || str[i] == '<')
 		{
 			ft_print_error("syntax error near unexpected token `>' or `>>'");
@@ -35,10 +35,10 @@ static bool	ft_check_redir_utils2(const char *str, int i)
 	if (str[i] == '<')
 	{
 		i++;
-		if (str[i + 1] == '<')
+		if (str[i] == '<')
 			i++;
-		while (ft_isspace(str[++i]))
-			;
+		while (ft_isspace(str[i]))
+			i++;
 		if (str[i] == '\0' || str[i] == '|' || str[i] == '>' || str[i] == '<')
 		{
 			ft_print_error("syntax error near unexpected token `<' or `<<'");

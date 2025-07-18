@@ -6,7 +6,7 @@
 #    By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/18 10:00:12 by mivogel           #+#    #+#              #
-#    Updated: 2025/07/18 11:03:36 by mivogel          ###   ########.fr        #
+#    Updated: 2025/07/18 11:54:59 by mivogel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ ${OBJS}: ${OBJS_PATH}/%.o: %.cpp Makefile
 
 ${NAME}: ${OBJS}
 	@	$(CC) $(CFLAGS) -o ${NAME} ${OBJS} $(INC)
+	@ 	echo "Executable created: ${NAME}"
 
 clean:
 	@	rm -rf ${OBJS_PATH}

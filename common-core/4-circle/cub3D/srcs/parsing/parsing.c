@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 10:51:08 by mivogel           #+#    #+#             */
-/*   Updated: 2025/07/16 12:40:16 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/07/22 11:01:52 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,6 @@ static bool	ft_check(t_data *data, char *map_file)
 	return (true);
 }
 
-// This function would handle the parsing of the map file.
-// For now, we will just print the file name.
 bool	ft_parsing(t_data *data, char *map_file)
 {
 	t_map	map;

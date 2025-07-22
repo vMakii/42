@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 10:08:38 by mivogel           #+#    #+#             */
-/*   Updated: 2025/07/16 12:40:12 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/07/22 10:59:08 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,12 @@
 # include <sys/stat.h>
 # include <sys/types.h>
 # include <unistd.h>
+
+typedef struct s_garbage
+{
+    void                *alloc;
+    struct s_garbage    *next;
+}                        t_garbage;
 
 typedef struct s_sprite
 {
@@ -43,6 +49,9 @@ typedef struct s_data
 {
 	t_map		map;
 }				t_data;
+
+// Garbage Collector
+void			*gc_malloc(size_t size, t_garbage **garbage_list);
 
 // Parsing
 bool			ft_parsing(t_data *data, char *map_file);

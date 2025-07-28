@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 17:40:58 by mivogel           #+#    #+#             */
-/*   Updated: 2025/07/09 19:00:31 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/07/22 14:45:51 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,11 @@ void		*ft_memmove(void *dst, const void *src, size_t n);
 int			ft_memcmp(const void *ptr1, const void *ptr2, size_t n);
 void		ft_print_tab(char **tab);
 char		*ft_substr(char const *s, unsigned int start, size_t len);
+char		**ft_tabcpy(char **src);
 int			ft_tablen(char **tab);
 char		*ft_strjoin(char const *s1, char const *s2);
 char		*ft_strtrim(char const *s1, char const *set);
+int			ft_count_word(char const *s, char sep);
 char		**ft_split(char const *s, char c);
 char		*ft_itoa(int n);
 char		*ft_strmapi(char const *s, char (*f)(unsigned int, char));
@@ -92,7 +94,6 @@ int			ft_puthexa(unsigned int n, const char type);
 // get_next_line
 char		*get_next_line(int fd, int n);
 char		*ft_strjoin_free(char *s1, char const *s2);
-void		*ft_calloc(size_t n, size_t size);
 // bonus
 char		*get_next_line_bonus(int fd);
 #endif

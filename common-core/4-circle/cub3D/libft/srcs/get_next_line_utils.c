@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 15:14:42 by mivogel           #+#    #+#             */
-/*   Updated: 2025/02/20 10:19:21 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/07/22 12:13:46 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,17 +65,17 @@ char	*ft_strjoin_free(char *s1, char const *s2)
 // 	}
 // }
 
-void	*ft_calloc(size_t n, size_t size)
-{
-	void	*ptr;
-	size_t	len;
+// void	*ft_calloc(size_t n, size_t size)
+// {
+// 	void	*ptr;
+// 	size_t	len;
 
-	if (n && size > (size_t)-1 / n)
-		return (NULL);
-	len = n * size;
-	ptr = (void *)malloc(len);
-	if (!ptr)
-		return (NULL);
-	ft_bzero(ptr, len);
-	return (ptr);
-}
+// 	if (n && size > (size_t)-1 / n)
+// 		return (NULL);
+// 	len = n * size;
+// 	ptr = (void *)malloc(len);
+// 	if (!ptr)
+// 		return (NULL);
+// 	ft_bzero(ptr, len);
+// 	return (ptr);
+// }

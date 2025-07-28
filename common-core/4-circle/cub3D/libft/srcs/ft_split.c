@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 09:08:24 by mivogel           #+#    #+#             */
-/*   Updated: 2025/02/25 12:54:16 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/07/22 12:07:37 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	ft_freesplit(char **tab, int count)
 	free(tab);
 }
 
-static int	ft_count_word(char const *s, char sep)
+int	ft_count_word(char const *s, char sep)
 {
 	int	i;
 

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+         #
+#    By: gburtin <gburtin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/16 10:47:43 by mivogel           #+#    #+#              #
-#    Updated: 2025/07/16 12:36:54 by mivogel          ###   ########.fr        #
+#    Updated: 2025/07/27 10:29:52 by gburtin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,8 +18,11 @@ SHELL = /bin/bash
 
 vpath %.c ${SRCS_PATH}
 
-INC = -I includes/ -I libft/includes
+INC = -I includes/ -I libft/includes -I mlx
 LIBS = -L libft -lft
+
+MLX = mlx/libmlx.a
+MLX_FLAGS = -Lmlx -lmlx -lX11 -lXext -lm -lGL
 
 OBJS = ${patsubst %.c, ${OBJS_PATH}/%.o, ${SRCS}}
 OBJS_PATH = ./objs/
@@ -43,6 +46,7 @@ help:
 	@	echo -ne "\r\033[2K" $(LIGHTPURPLE) "re        →  "${NC}"Rebuilds the project.\n"
 	@	echo -ne "\r\033[2K" $(LIGHTPURPLE) "valgrind  →  "${NC}"Check for memory leaks.\n"
 	@	echo -ne "\r\033[2K" $(LIGHTPURPLE) "libft     →  "${NC}"Rebuilds libft.\n"
+	@	echo -ne "\r\033[2K" $(LIGHTPURPLE) "mlx       →  "${NC}"Rebuilds libmlx.a.\n"
 	@	echo -ne "\r\033[2K" $(WHITE) "----------------------------------------------"${NC}"\n"
 else
 help:
@@ -52,25 +56,37 @@ help:
 	@	echo -ne "\r\033[2K" $(LIGHTPURPLE)"re\n"${NC}" Rebuilds the project.\n"
 	@	echo -ne "\r\033[2K" $(LIGHTPURPLE)"valgrind\n"${NC}" Check for memory leaks.\n"
 	@	echo -ne "\r\033[2K" $(LIGHTPURPLE)"libft\n"${NC}" Rebuilds libft.\n"
+	@	echo -ne "\r\033[2K" $(LIGHTPURPLE)"mlx\n"${NC}" Rebuilds libmlx.a.\n"
 endif
 
-${OBJS}: ${OBJS_PATH}/%.o: %.c Makefile includes/cub3D.h
+game: ${NAME}
+	@	echo -ne "\r\033[2K" $(LIGHTBLUE) "→ Run ./${NAME} maps/valid_map1.cub\n"$(NC)
+	@	./${NAME} maps/valid_map1.cub
+
+${OBJS}: ${OBJS_PATH}/%.o: %.c Makefile includes/cub3d.h
 	@	$(MAKE) --no-print-directory -s -C libft
 	@	mkdir -p ${OBJS_PATH}
 	@	$(COLORCOMPIL)
 	@	${CC} ${CFLAGS} -c $< -o $@ ${INC}
 
-${NAME}:  ${OBJS}
-	@	${CC} ${CFLAGS} -o ${NAME} ${OBJS} ${LIBS} ${INC}	
+${MLX}: 
+	@	echo -ne "\r\033[2K" $(YELLOW) "→ Compiling libmlx.a..."$(NC)
+	@	$(MAKE) --no-print-directory -s -C mlx 
+#> /dev/null 2>&1
+	@	echo -ne "\r\033[2K" $(LIGHTGREEN) "→ libmlx.a OK!"$(NC)"\n"
+	
+${NAME}: ${MLX} ${OBJS}
+	@	${CC} -o ${NAME} ${OBJS} ${LIBS} ${MLX_FLAGS} ${INC}	
 	@	echo -ne "\r\033[2K" $(LIGHTGREEN) "→ $(NAME) OK!\n"$(NC)
 
 clean:	
-	@	+$(MAKE) --no-print-directory -s -C libft clean
+	@	+$(MAKE) --no-print-directory -s -C mlx clean 
+#> /dev/null 2>&1
 	@ 	echo -ne "\r\033[2K" $(LIGHTRED) "→ objs cleaned\n"$(NC)
 	@	rm -rf ${OBJS_PATH}
 
 
-fclean:	clean;
+fclean:	clean
 	@	+$(MAKE) --no-print-directory -s -C libft fclean
 	@	echo -ne "\r\033[2K" $(LIGHTRED) "→ $(NAME) cleaned\n"$(NC)
 	@	rm -f ${NAME}
@@ -78,25 +94,15 @@ fclean:	clean;
 re:	fclean ${NAME}
 
 valgrind:	${NAME}
-	# @	echo -ne \
-	# 	"{\n" \
-	# 	"	readline_leaks\n" \
-	# 	"	Memcheck:Leak\n" \
-	# 	"	...\n" \
-	# 	"	fun:readline\n" \
-	# 	"}\n" \
-	# 	"{\n" \
-	# 	"	readline_leaks\n" \
-	# 	"	Memcheck:Leak\n" \
-	# 	"	...\n" \
-	# 	"	fun:add_history\n" \
-	# 	"}\n" > readline_leaks.supp
-	@		echo -ne "\r\033[2K"$(LIGHTBLUE)"Valgrind ./${NAME}: \n--track-fds=yes \n--suppressions=readline_leaks.supp \n--leak-check=full --show-leak-kinds=all --track-origins=yes"$(NC)"\n"
-	@		-valgrind --track-fds=yes --suppressions=readline_leaks.supp --leak-check=full --show-leak-kinds=all --track-origins=yes ./${NAME}
+	@		echo -ne "\r\033[2K"$(LIGHTBLUE)"Valgrind ./${NAME} maps/valid_map1.cub : \n--track-fds=yes \n--leak-check=full --show-leak-kinds=all --track-origins=yes"$(NC)"\n"
+	@		-valgrind --track-fds=yes --leak-check=full --show-leak-kinds=all --track-origins=yes ./${NAME} maps/valid_map1.cub
 
 libft:
 	@	+$(MAKE) --no-print-directory -s -C libft re
 
+mlx:
+	@	+$(MAKE) --no-print-directory -s -C mlx re
+
 include libft/make/colorcompil.mk
 
-.PHONY: default all clean fclean re valgrind libft
+.PHONY: default all clean fclean re valgrind libft mlx

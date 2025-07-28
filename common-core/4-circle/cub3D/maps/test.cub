@@ -1,0 +1,18 @@
+NO ./assets/cub3d/xpm_output/default_north.xpm
+SO ./assets/cub3d/xpm_output/default_south.xpm
+WE ./assets/cub3d/xpm_output/default_west.xpm
+EA ./assets/cub3d/xpm_output/default_east.xpm
+
+F 0,0,0
+C 255,255,255
+
+111111111111
+100000000001
+100S00000001
+100000000001
+100000000001
+100000000001
+100000000001
+100000000001
+100000000001
+111111111111

@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 13:10:27 by mivogel           #+#    #+#             */
-/*   Updated: 2025/09/01 13:23:27 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/09/01 16:58:08 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,8 @@ void	Harl::complain(std::string level)
 	}
 	
 	// Message pour un niveau non reconnu
-	std::cout << "Son of a member function pointer! There is no level \"" 
+	std::cout << "[ UNKNOWN ]" << std::endl
+		<< "Son of a member function pointer! There is no level \"" 
 		<< level << "\"." << std::endl;
 	return;
 }

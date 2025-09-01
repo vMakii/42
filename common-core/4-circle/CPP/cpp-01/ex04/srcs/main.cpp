@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 10:00:00 by mivogel           #+#    #+#             */
-/*   Updated: 2025/09/01 12:24:02 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/09/01 12:33:37 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,20 @@
 #include <fstream>
 #include <string>
 
+/*
+ * Affiche le message d'usage du programme
+ * Explique la syntaxe correcte avec les paramètres attendus
+ */
 void	printUsage(const char *programName)
 {
 	std::cout << "Usage: " << programName << " <filename> <string_to_replace> <replacement_string>" << std::endl;
 }
 
+/*
+ * Ouvre les flux d'entrée et de sortie pour les fichiers
+ * Vérifie que l'ouverture s'est bien passée et gère les erreurs
+ * Retourne 0 en cas de succès, -1 en cas d'erreur
+ */
 int	openStreams(std::ifstream *ifs, std::ofstream *ofs, const std::string &infile, const std::string &outfile)
 {
 	ifs->open(infile.c_str());
@@ -39,6 +48,11 @@ int	openStreams(std::ifstream *ifs, std::ofstream *ofs, const std::string &infil
 	return 0;
 }
 
+/*
+ * Remplace toutes les occurrences d'une chaîne cible par une chaîne de remplacement
+ * Gère le cas où la chaîne cible est vide (aucun remplacement)
+ * Évite les boucles infinies en ajustant la position après chaque remplacement
+ */
 std::string	replaceAll(const std::string &str, const std::string &target, const std::string &replacement)
 {
 	if (target.empty())
@@ -57,6 +71,11 @@ std::string	replaceAll(const std::string &str, const std::string &target, const 
 	return result;
 }
 
+/*
+ * Traite le fichier ligne par ligne en appliquant les remplacements
+ * Lit chaque ligne, applique la fonction replaceAll, et écrit dans le fichier de sortie
+ * Gère correctement les sauts de ligne pour préserver le formatage
+ */
 int	processFile(std::ifstream *ifs, std::ofstream *ofs, const std::string &target, const std::string &replacement)
 {
 	std::string line;
@@ -75,6 +94,13 @@ int	processFile(std::ifstream *ifs, std::ofstream *ofs, const std::string &targe
 	return 0;
 }
 
+/*
+ * Fonction principale du programme
+ * - Vérifie le nombre d'arguments
+ * - Initialise les variables avec les paramètres
+ * - Coordonne l'ouverture des fichiers, le traitement et la fermeture
+ * - Gère les codes de retour pour indiquer le succès ou l'échec
+ */
 int	main(int argc, char **argv)
 {
 	if (argc != 4)

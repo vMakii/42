@@ -1,4 +1,1 @@
-hello world
-this is a test file
-sed is for losers
-goodbye.
+Hello world! This is a test file.

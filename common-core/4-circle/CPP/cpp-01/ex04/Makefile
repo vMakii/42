@@ -23,6 +23,7 @@ ${NAME}: ${OBJS}
 
 clean:
 	@	rm -rf ${OBJS_PATH}
+	@	rm -f *.replace
 
 fclean: clean
 	@	rm -f ${NAME}

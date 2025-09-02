@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 18:00:21 by mivogel           #+#    #+#             */
-/*   Updated: 2025/09/01 22:43:34 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/09/01 23:14:36 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int main(void)
     
     return 0;
 }
+
 
 // Default constructor called
 // Copy constructor called

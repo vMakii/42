@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 11:10:00 by mivogel           #+#    #+#             */
-/*   Updated: 2025/07/16 21:54:36 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/09/02 20:50:20 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,16 +87,16 @@ void PhoneBook::searchContacts() const
 	std::cout << "Enter the index of the contact to display: ";
 	std::getline(std::cin, input);
 
-	if (input.length() == 1 && input[0] >= '0' && input[0] <= '7')
+	if (input.length() == 1 && input[0] >= '1' && input[0] <= '8')
 	{
-		index = input[0] - '0';
+		index = input[0] - '1';
 		if (index < this->_contactCount)
 			this->displayContact(index);
 		else
 			std::cout << "No contact at this index!" << std::endl;
 	}
 	else
-		std::cout << "Invalid index! Please enter a number between 0 and 7." << std::endl;
+		std::cout << "Invalid index! Please enter a number between 1 and 8." << std::endl;
 }
 
 void PhoneBook::displayContacts() const
@@ -112,7 +112,7 @@ void PhoneBook::displayContacts() const
 
 	for (int i = 0; i < this->_contactCount; i++)
 	{
-		std::cout << std::setw(10) << i << "|";
+		std::cout << std::setw(10) << i + 1 << "|";
 		std::cout << std::setw(10) << this->truncateString(this->_contacts[i].getFirstName()) << "|";
 		std::cout << std::setw(10) << this->truncateString(this->_contacts[i].getLastName()) << "|";
 		std::cout << std::setw(10) << this->truncateString(this->_contacts[i].getNickname()) << std::endl;

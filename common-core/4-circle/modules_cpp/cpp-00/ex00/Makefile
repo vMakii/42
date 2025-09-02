@@ -1,4 +1,16 @@
-SRCS = megaphone.cpp
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2025/09/02 20:37:06 by mivogel           #+#    #+#              #
+#    Updated: 2025/09/02 20:37:37 by mivogel          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+SRCS = Megaphone.cpp
 SRCS_PATH = ./
 
 OBJS = ${patsubst %.cpp, ${OBJS_PATH}/%.o, ${SRCS}}
@@ -9,7 +21,7 @@ CFLAGS = -Wall -Wextra -Werror -std=c++98
 
 vpath %.cpp ${SRCS_PATH}
 
-NAME = megaphone
+NAME = Megaphone
 
 all: ${NAME}
 

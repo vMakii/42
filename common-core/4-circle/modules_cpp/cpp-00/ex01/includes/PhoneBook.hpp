@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 20:39:39 by mivogel           #+#    #+#             */
-/*   Updated: 2025/09/02 20:50:30 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/09/02 21:04:19 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,10 @@ class PhoneBook
 	void searchContacts() const;
 	void displayContacts() const;
 	void displayContact(int index) const;
+	void displayMainMenu() const;
+	void displayHeader() const;
+	void displaySeparator() const;
+	void displayWelcome() const;
 	std::string truncateString(const std::string &str) const;
 };
 

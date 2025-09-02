@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 00:00:00 by mivogel           #+#    #+#             */
-/*   Updated: 2025/07/16 22:20:41 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/09/02 21:04:19 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,21 @@
 int	main(void)
 {
 	PhoneBook	phoneBook;
-
 	std::string command;
-	std::cout << "Welcome to your PhoneBook!" << std::endl;
-	std::cout << "Available commands: ADD, SEARCH, EXIT" << std::endl;
+	
+	phoneBook.displayWelcome();
+	
 	while (true)
 	{
-		std::cout << "Enter a command: ";
+		phoneBook.displayMainMenu();
 		std::getline(std::cin, command);
+		
 		if (std::cin.eof())
 		{
-			std::cout << std::endl << "EOF detected. Exiting..." << std::endl;
+			std::cout << std::endl << "EOF detecte. Fermeture..." << std::endl;
 			break ;
 		}
+		
 		if (command == "ADD")
 		{
 			phoneBook.addContact();
@@ -40,8 +42,17 @@ int	main(void)
 		}
 		else if (command == "EXIT")
 		{
-			std::cout << "Goodbye!" << std::endl;
+			phoneBook.displaySeparator();
+			std::cout << "Au revoir et a bientot!" << std::endl;
+			phoneBook.displaySeparator();
 			break ;
+		}
+		else if (!command.empty())
+		{
+			phoneBook.displaySeparator();
+			std::cout << "Commande inconnue: '" << command << "'" << std::endl;
+			std::cout << "Commandes disponibles: ADD, SEARCH, EXIT" << std::endl;
+			phoneBook.displaySeparator();
 		}
 	}
 	return (0);

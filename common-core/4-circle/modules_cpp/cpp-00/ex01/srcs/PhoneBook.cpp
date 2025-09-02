@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 11:10:00 by mivogel           #+#    #+#             */
-/*   Updated: 2025/09/02 21:04:19 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/09/02 22:37:58 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,7 +153,7 @@ void PhoneBook::displayContact(int index) const
 {
 	std::cout << std::endl;
 	std::cout << "+================================================================+" << std::endl;
-	std::cout << "|                        DETAILS DU CONTACT                     |" << std::endl;
+	std::cout << "|                        DETAILS DU CONTACT                      |" << std::endl;
 	std::cout << "+================================================================+" << std::endl;
 	std::cout << "| Prenom         : " << std::left << std::setw(44) << this->_contacts[index].getFirstName() << " |" << std::endl;
 	std::cout << "| Nom            : " << std::left << std::setw(44) << this->_contacts[index].getLastName() << " |" << std::endl;
@@ -174,10 +174,10 @@ void PhoneBook::displayWelcome() const
 {
 	std::cout << "+==================================================================+" << std::endl;
 	std::cout << "|                                                                  |" << std::endl;
-	std::cout << "|                     CARNET D'ADRESSES                           |" << std::endl;
+	std::cout << "|                     CARNET D'ADRESSES                            |" << std::endl;
 	std::cout << "|                                                                  |" << std::endl;
-	std::cout << "|                    Bienvenue dans votre                         |" << std::endl;
-	std::cout << "|                   PhoneBook personnel !                         |" << std::endl;
+	std::cout << "|                    Bienvenue dans votre                          |" << std::endl;
+	std::cout << "|                   PhoneBook personnel !                          |" << std::endl;
 	std::cout << "|                                                                  |" << std::endl;
 	std::cout << "+==================================================================+" << std::endl;
 }
@@ -186,11 +186,11 @@ void PhoneBook::displayMainMenu() const
 {
 	std::cout << std::endl;
 	std::cout << "+-----------------------------------------------------------------+" << std::endl;
-	std::cout << "|                        MENU PRINCIPAL                          |" << std::endl;
+	std::cout << "|                        MENU PRINCIPAL                           |" << std::endl;
 	std::cout << "+-----------------------------------------------------------------+" << std::endl;
-	std::cout << "|  ADD    - Ajouter un nouveau contact                           |" << std::endl;
-	std::cout << "|  SEARCH - Rechercher et afficher les contacts                  |" << std::endl;
-	std::cout << "|  EXIT   - Quitter l'application                                |" << std::endl;
+	std::cout << "|  ADD    - Ajouter un nouveau contact                            |" << std::endl;
+	std::cout << "|  SEARCH - Rechercher et afficher les contacts                   |" << std::endl;
+	std::cout << "|  EXIT   - Quitter l'application                                 |" << std::endl;
 	std::cout << "+-----------------------------------------------------------------+" << std::endl;
 	std::cout << std::endl;
 	std::cout << "Entrez votre commande: ";

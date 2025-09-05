@@ -1,0 +1,30 @@
+TO-DO:
+✅ orientation depart ++
+✅animation de sprites ++
+✅mur au-dessus des portes (stopper l'anim)
+✅ est-ce quon fait des sprites diff pour les murs d'en haut ?
+✅points de vie
+✅curseur + centrer impact
+✅ecran de demarrage, fin, mort
+✅ennemies: vie, dégats, attaque, déplacements
+✅gestion du combats
+✅improve enemies movement/player detection with a raycast to catch walls and a disctance detection (close and distant)
+
+MANDATORY:
+Check les cas d'erreurs + msg d'erreurs
++ Check leaks en cas d'erreurs
+
+BONUS:
+Ennemies stuck quand on est trop proche ? et on peut "rentrer" dans le squelette
+Comportement bizarre quand on est dans la case d'une porte ouverte des fois les enemies bug un peu
+NORME dans enemies/
+VALGRIND !
+
+CRAZY:
+-> peut etre standardiser render_health pour la barre de mana voir endu
+map design + textures specifiques ++
+charger nouvelle map ingame
+faire le tri des assets pour outdoor, church et crypt
+
+
+

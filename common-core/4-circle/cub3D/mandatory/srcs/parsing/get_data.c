@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_data.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gburtin <gburtin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 19:59:00 by gburtin           #+#    #+#             */
-/*   Updated: 2025/08/05 17:08:13 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/09/05 10:55:21 by gburtin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static bool	get_texture_2(t_data *data, char **texture, char *str)
 	{
 		*texture = ft_strdup(&str[i]);
 		gc_add_malloc(*texture, &data->gc_list);
-		if (access(*texture, F_OK | R_OK) == -1)
+		if (open(*texture, O_RDONLY) == -1)
 			exit_failure(data, *texture);
 		if (check_filename(*texture, ".xpm") == false)
 			exit_failure(data, *texture);

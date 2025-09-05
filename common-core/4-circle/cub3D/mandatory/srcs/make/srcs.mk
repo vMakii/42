@@ -36,7 +36,6 @@ SRCS += render.c
 
 SRCS_PATH += ./srcs/utils/
 SRCS += exit.c
-SRCS += fps_counter.c
 SRCS += free.c
 SRCS += print.c
 SRCS += utils.c

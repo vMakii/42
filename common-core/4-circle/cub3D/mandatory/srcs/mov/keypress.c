@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keypress.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gburtin <gburtin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 11:44:24 by gburtin           #+#    #+#             */
-/*   Updated: 2025/09/03 11:54:58 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/09/05 10:59:15 by gburtin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	player_move(t_data *data)
 	t_coord_float	move;
 	float			length;
 
-	unit = WALK_SPEED * data->time.frametime * 100.0f;
+	unit = WALK_SPEED;
 	move.x = 0.0f;
 	move.y = 0.0f;
 	calculate_move(data, &move, unit);
@@ -91,10 +91,9 @@ void	player_move(t_data *data)
 	if (move.x != 0.0f || move.y != 0.0f)
 		moving_position(data, move.x, move.y);
 	if (data->keys.key_left)
-		moving_angle(&data->player, -TURN_SPEED * data->time.frametime
-			* 100.0f);
+		moving_angle(&data->player, -TURN_SPEED);
 	if (data->keys.key_right)
-		moving_angle(&data->player, TURN_SPEED * data->time.frametime * 100.0f);
+		moving_angle(&data->player, TURN_SPEED);
 }
 
 int	handle_keypress(int keysym, t_data *data)

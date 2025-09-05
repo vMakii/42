@@ -6,7 +6,7 @@
 /*   By: gburtin <gburtin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 17:27:13 by gburtin           #+#    #+#             */
-/*   Updated: 2025/08/15 21:51:01 by gburtin          ###   ########.fr       */
+/*   Updated: 2025/09/05 11:05:33 by gburtin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,15 +77,6 @@ typedef struct s_key
 	int					key_right;
 }						t_key;
 
-typedef struct s_fps
-{
-	float				current_time;
-	float				total_time;
-	float				frame_times[60];
-	int					frame_index;
-	int					frames_counted;
-}						t_fps;
-
 typedef struct s_garbage
 {
 	void				*alloc;
@@ -145,14 +136,6 @@ typedef struct s_mlx
 	int					height;
 }						t_mlx;
 
-typedef struct s_time
-{
-	float				time;
-	float				oldtime;
-	float				frametime;
-	int					fps;
-}						t_time;
-
 typedef struct s_ray
 {
 	t_coord_float		ray_dir;
@@ -181,7 +164,6 @@ typedef struct s_data
 	char				**map;
 	t_file				file;
 	t_mlx				mlx;
-	t_time				time;
 	t_player			player;
 	t_garbage			*gc_list;
 	t_sprite			sprite;
@@ -226,7 +208,6 @@ void					parsing(int argc, char **argv, t_data *data);
 bool					read_file(char *filename, t_data *data);
 
 // raycasting
-void					textured_raycasting(t_data *data);
 void					draw_texture(t_data *data, int x);
 void					raycast(t_data *data);
 void					init_ray(t_data *data, int x);
@@ -237,9 +218,6 @@ int						render_frame(t_data *data);
 // utils
 int						exit_success(t_data *data);
 int						exit_failure(t_data *data, char *str);
-float					get_time(void);
-void					print_fps(t_data *data);
-void					fps_counter(t_data *data);
 void					free_all(t_data *data);
 void					print_data_map(t_data data);
 // useless ?

@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gburtin <gburtin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 17:27:13 by gburtin           #+#    #+#             */
-/*   Updated: 2025/09/03 14:34:27 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/09/05 11:04:28 by gburtin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_BONUS_H
 # define CUB3D_BONUS_H
 
+// Include all library headers
 # include "../libft/includes/libft.h"
 # include "mlx.h"
 # include "mlx_int.h"
@@ -25,8 +26,24 @@
 # include <sys/stat.h>
 # include <sys/time.h>
 # include <sys/types.h>
-# include <unistd.h>
 # include <time.h>
+# include <unistd.h>
+
+// Include all module headers
+# include "doors.h"
+# include "effects.h"
+# include "enemies.h"
+# include "hud.h"
+# include "img.h"
+# include "inputs.h"
+# include "loop.h"
+# include "move.h"
+# include "parsing.h"
+# include "player.h"
+# include "raycasting.h"
+# include "screens.h"
+# include "sprites.h"
+# include "utils.h"
 
 // Constants
 # define WIN_WIDTH 1333
@@ -92,80 +109,64 @@
 
 # define INTERACTION_DISTANCE 1.0f
 
-extern int	g_frame_count;
+extern int							g_frame_count;
 
 // Basic coordinate types
 typedef struct s_coord_int
 {
-	int					x;
-	int					y;
-}						t_coord_int;
+	int								x;
+	int								y;
+}									t_coord_int;
 
 typedef struct s_coord_float
 {
-	float				x;
-	float				y;
-}						t_coord_float;
+	float							x;
+	float							y;
+}									t_coord_float;
 
 typedef struct s_mlx
 {
-	void				*ptr;
-	void				*win;
-	int					width;
-	int					height;
-}						t_mlx;
+	void							*ptr;
+	void							*win;
+	int								width;
+	int								height;
+}									t_mlx;
 
 // Forward declarations for all main types
-typedef struct s_data t_data;
-typedef struct s_door t_door;
-typedef struct s_door_list t_door_list;
-typedef struct s_sprite t_sprite;
-typedef struct s_ray t_ray;
-typedef struct s_player t_player;
-typedef struct s_texture t_texture;
-typedef struct s_image t_image;
-typedef struct s_key t_key;
-typedef struct s_minimap t_minimap;
-typedef struct s_time t_time;
-typedef struct s_file t_file;
-typedef struct s_garbage t_garbage;
-typedef struct s_rect t_rect;
-typedef struct s_starting_screen t_starting_screen;
+typedef struct s_data				t_data;
+typedef struct s_door				t_door;
+typedef struct s_door_list			t_door_list;
+typedef struct s_sprite				t_sprite;
+typedef struct s_ray				t_ray;
+typedef struct s_player				t_player;
+typedef struct s_texture			t_texture;
+typedef struct s_image				t_image;
+typedef struct s_key				t_key;
+typedef struct s_minimap			t_minimap;
+typedef struct s_time				t_time;
+typedef struct s_file				t_file;
+typedef struct s_garbage			t_garbage;
+typedef struct s_rect				t_rect;
+typedef struct s_starting_screen	t_starting_screen;
 
-// Include all module headers (these should only contain function declarations)
-# include "utils.h"
-# include "doors.h"
-# include "effects.h"
-# include "enemies.h"
-# include "hud.h"
-# include "img.h"
-# include "inputs.h"
-# include "loop.h"
-# include "move.h"
-# include "parsing.h"
-# include "player.h"
-# include "raycasting.h"
-# include "screens.h"
-# include "sprites.h"
-
-// Define main data structure here (after all includes)
+// Define main data structure here
 typedef struct s_data
 {
-	char				**map;
-	t_file				file;
-	t_mlx				mlx;
-	t_starting_screen	starting_screen;
-	t_time				time;
-	t_player			player;
-	t_garbage			*gc_list;
-	t_texture			texture;
-	t_door_list			doors;
-	t_image				frame;
-	t_key				keys;
-	t_minimap			minimap;
-	t_sprite			*sprite;
-	t_enemy				*enemy;
-	float				z_buffer[WIN_WIDTH];
-}						t_data;
+	char							**map;
+	t_file							file;
+	t_mlx							mlx;
+	t_starting_screen				starting_screen;
+	t_time							time;
+	t_player						player;
+	t_garbage						*gc_list;
+	t_texture						texture;
+	t_door_list						doors;
+	t_image							frame;
+	t_key							keys;
+	t_minimap						minimap;
+	t_sprite						*sprite;
+	t_enemy							*enemy;
+	float							z_buffer[WIN_WIDTH];
+}									t_data;
 
 #endif

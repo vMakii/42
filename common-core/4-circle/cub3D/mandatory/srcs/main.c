@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gburtin <gburtin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 17:26:37 by gburtin           #+#    #+#             */
-/*   Updated: 2025/08/07 11:57:30 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/09/05 11:00:33 by gburtin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ int	g_frame_count = 0;
 
 int	loop(t_data *data)
 {
-	fps_counter(data);
 	player_move(data);
 	render_frame(data);
 	return (0);

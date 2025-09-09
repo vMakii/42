@@ -39,10 +39,10 @@ class Fixed
         bool operator==(const Fixed& other) const;
         bool operator!=(const Fixed& other) const;
         // Arithmetic operators
-        Fixed operator+(const Fixed& other) const;
-        Fixed operator-(const Fixed& other) const;
-        Fixed operator*(const Fixed& other) const;
-        Fixed operator/(const Fixed& other) const;
+        float operator+(const Fixed& other) const;
+        float operator-(const Fixed& other) const;
+        float operator*(const Fixed& other) const;
+        float operator/(const Fixed& other) const;
         // Increment / Decrement operators
         Fixed& operator++();       // Prefix increment
         Fixed operator++(int);     // Postfix increment

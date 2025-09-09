@@ -53,12 +53,83 @@ Fixed &Fixed::operator=(const Fixed& other)
 }
 
 // Comparison operators
+bool Fixed::operator>(const Fixed& other) const
+{
+    return _rawBits > other._rawBits;
+}
+
+bool Fixed::operator<(const Fixed& other) const
+{
+    return _rawBits < other._rawBits;
+}
+
+bool Fixed::operator>=(const Fixed& other) const
+{
+    return _rawBits >= other._rawBits;
+}
+
+bool Fixed::operator<=(const Fixed& other) const
+{
+    return _rawBits <= other._rawBits;
+}
+
+bool Fixed::operator==(const Fixed& other) const
+{
+    return _rawBits == other._rawBits;
+}
+
+bool Fixed::operator!=(const Fixed& other) const
+{
+    return _rawBits != other._rawBits;
+}
 
 // Arithmetic operators
+float Fixed::operator+(const Fixed& other) const
+{
+    return this->toFloat() + other.toFloat();
+}
+
+float Fixed::operator-(const Fixed& other) const
+{
+    return this->toFloat() - other.toFloat();
+}
+
+float Fixed::operator*(const Fixed& other) const
+{
+    return this->toFloat() * other.toFloat();
+}
+
+float Fixed::operator/(const Fixed& other) const
+{
+    return this->toFloat() / other.toFloat();
+}
 
 // Increment / Decrement operators
+Fixed& Fixed::operator++()
+{
+    _rawBits++;
+    return *this;
+}
 
+Fixed Fixed::operator++(int)
+{
+    Fixed temp = *this;
+    _rawBits++;
+    return temp;
+}
 
+Fixed& Fixed::operator--()
+{
+    _rawBits--;
+    return *this;
+}
+
+Fixed Fixed::operator--(int)
+{
+    Fixed temp = *this;
+    _rawBits--;
+    return temp;
+}
 
 // Getters and Setters
 int Fixed::getRawBits() const

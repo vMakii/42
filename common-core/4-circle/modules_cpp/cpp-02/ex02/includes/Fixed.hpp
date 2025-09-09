@@ -38,20 +38,23 @@ class Fixed
         bool operator<=(const Fixed& other) const;
         bool operator==(const Fixed& other) const;
         bool operator!=(const Fixed& other) const;
+
         // Arithmetic operators
         float operator+(const Fixed& other) const;
         float operator-(const Fixed& other) const;
         float operator*(const Fixed& other) const;
         float operator/(const Fixed& other) const;
+        
         // Increment / Decrement operators
-        Fixed& operator++();       // Prefix increment
-        Fixed operator++(int);     // Postfix increment
-        Fixed& operator--();       // Prefix decrement
-        Fixed operator--(int);     // Postfix decrement
+        Fixed& operator++();       
+        Fixed operator++(int);
+        Fixed& operator--();
+        Fixed operator--(int);
 
         // Getters and Setters
         int getRawBits() const;
         void setRawBits(int const raw);
+        
         // Member functions
         static Fixed& min(Fixed& a, Fixed& b);
         static const Fixed& min(const Fixed& a, const Fixed& b);

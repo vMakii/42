@@ -1,4 +1,4 @@
-SRCS = main.cpp
+SRCS = main.cpp Fixed.cpp
 SRCS_PATH = ./srcs/
 
 OBJS = ${patsubst %.cpp, ${OBJS_PATH}/%.o, ${SRCS}}
@@ -10,22 +10,22 @@ CFLAGS = -Wall -Wextra -Werror -std=c++98
 
 vpath %.cpp ${SRCS_PATH}
 
-NAME = 
+NAME = Fixed
 
 all: ${NAME}
 
 ${OBJS}: ${OBJS_PATH}/%.o: %.cpp Makefile
-        @       mkdir -p ${OBJS_PATH}
-        @       $(CC) $(CFLAGS) -c $< -o $@ $(INC)
+	@mkdir -p ${OBJS_PATH}
+	@$(CC) $(CFLAGS) -c $< -o $@ $(INC)
 
 ${NAME}: ${OBJS}
-        @       $(CC) $(CFLAGS) -o ${NAME} ${OBJS} $(INC)
+	@$(CC) $(CFLAGS) -o ${NAME} ${OBJS} $(INC)
 
 clean:
-        @       rm -rf ${OBJS_PATH}
+	@rm -rf ${OBJS_PATH}
 
 fclean: clean
-        @       rm -f ${NAME}
+	@rm -f ${NAME}
 
 re: fclean all
 

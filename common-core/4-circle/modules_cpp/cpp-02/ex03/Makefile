@@ -1,4 +1,4 @@
-SRCS = main.cpp Fixed.cpp
+SRCS = main.cpp Fixed.cpp Point.cpp bsp.cpp
 SRCS_PATH = ./srcs/
 
 OBJS = ${patsubst %.cpp, ${OBJS_PATH}/%.o, ${SRCS}}

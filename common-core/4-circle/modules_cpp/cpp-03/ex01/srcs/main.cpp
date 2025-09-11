@@ -6,67 +6,81 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 18:00:21 by mivogel           #+#    #+#             */
-/*   Updated: 2025/09/11 11:46:46 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/09/11 13:15:54 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ClapTrap.hpp"
+#include "ScavTrap.hpp"
 
 int main() 
 {
-    std::cout << "=== Test des constructeurs ===" << std::endl;
+    std::cout << "=== Test des constructeurs ClapTrap ===" << std::endl;
     ClapTrap clap1;
     ClapTrap clap2("Alice");
-    ClapTrap clap3("Bob");
     
-    std::cout << "\n=== Test du constructeur de copie ===" << std::endl;
-    ClapTrap clap4(clap2);
+    std::cout << "\n=== Test des constructeurs ScavTrap ===" << std::endl;
+    ScavTrap scav1;
+    ScavTrap scav2("Guardian");
+    ScavTrap scav3("Warrior");
     
-    std::cout << "\n=== Test de l'opérateur d'assignation ===" << std::endl;
-    ClapTrap clap5;
-    clap5 = clap3;
+    std::cout << "\n=== Test du constructeur de copie ScavTrap ===" << std::endl;
+    ScavTrap scav4(scav2);
+    
+    std::cout << "\n=== Test de l'opérateur d'assignation ScavTrap ===" << std::endl;
+    ScavTrap scav5;
+    scav5 = scav3;
 
-    std::cout << "\n=== Test des attaques de base ===" << std::endl;
-    clap2.setAttackDamage(3);
-    clap2.attack("Bob");
-    clap3.takeDamage(3);
-
-    clap3.setAttackDamage(5);
-    clap3.attack("Alice");
-    clap2.takeDamage(5);
+    std::cout << "\n=== Test des attaques ScavTrap vs ClapTrap ===" << std::endl;
+    scav2.attack("Alice");
+    clap2.takeDamage(20);
+    
+    clap2.attack("Guardian");
+    scav2.takeDamage(0); // ClapTrap fait 0 dégâts par défaut
 
     std::cout << "\n=== Test des réparations ===" << std::endl;
     clap2.beRepaired(4);
-    clap3.beRepaired(2);
+    scav2.beRepaired(10);
 
-    std::cout << "\n=== Test de l'épuisement d'énergie ===" << std::endl;
-    ClapTrap energyTest("EnergyTest");
-    energyTest.setAttackDamage(1);
+    std::cout << "\n=== Test de la fonction spéciale guardGate ===" << std::endl;
+    scav2.guardGate();
+    scav3.guardGate();
+
+    std::cout << "\n=== Test de l'épuisement d'énergie ScavTrap ===" << std::endl;
+    ScavTrap energyTest("EnergyTest");
     
-    // Épuiser l'énergie (10 points initiaux)
-    for (int i = 0; i < 12; i++) {
+    // ScavTrap a 50 points d'énergie, testons quelques actions
+    for (int i = 0; i < 5; i++) {
         std::cout << "Action " << (i+1) << ": ";
-        if (i % 2 == 0)
+        if (i % 3 == 0)
             energyTest.attack("Target");
+        else if (i % 3 == 1)
+            energyTest.beRepaired(5);
         else
-            energyTest.beRepaired(1);
+            energyTest.guardGate();
     }
 
-    std::cout << "\n=== Test de la mort d'un ClapTrap ===" << std::endl;
-    ClapTrap deathTest("DeathTest");
-    deathTest.setAttackDamage(15);
+    std::cout << "\n=== Test de la mort d'un ScavTrap ===" << std::endl;
+    ScavTrap deathTest("DeathTest");
+    deathTest.takeDamage(150); // Plus que les 100 HP max de ScavTrap
     
-    deathTest.attack("Alice");
-    clap2.takeDamage(15); // Alice devrait mourir
-    
-    // Tenter d'attaquer/réparer quand mort
-    clap2.attack("Bob");
-    clap2.beRepaired(5);
-    clap2.takeDamage(5); // Tenter de faire des dégâts à un mort
+    // Tenter d'attaquer/réparer/garder quand mort
+    deathTest.attack("Someone");
+    deathTest.beRepaired(5);
+    deathTest.guardGate();
 
-    std::cout << "\n=== Test de dégâts excessifs ===" << std::endl;
-    ClapTrap overDamage("OverDamage");
-    overDamage.takeDamage(50); // Plus que les HP max
+    std::cout << "\n=== Test des différences entre ClapTrap et ScavTrap ===" << std::endl;
+    std::cout << "ClapTrap: 10 HP, 10 Energy, 0 Attack Damage" << std::endl;
+    std::cout << "ScavTrap: 100 HP, 50 Energy, 20 Attack Damage" << std::endl;
+    
+    ClapTrap weakling("Weakling");
+    ScavTrap strong("Strong");
+    
+    weakling.attack("Strong");
+    strong.takeDamage(0);
+    
+    strong.attack("Weakling");
+    weakling.takeDamage(20);
 
     std::cout << "\n=== Fin des tests ===" << std::endl;
     return 0;

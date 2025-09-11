@@ -1,4 +1,4 @@
-SRCS = main.cpp ClapTrap.cpp ScavTrap.cpp
+SRCS = main.cpp ClapTrap.cpp ScavTrap.cpp FragTrap.cpp DiamondTrap.cpp
 SRCS_PATH = ./srcs/
 
 OBJS = ${patsubst %.cpp, ${OBJS_PATH}/%.o, ${SRCS}}
@@ -6,11 +6,11 @@ OBJS_PATH = ./objs/
 
 CC = c++
 INC = -I includes/
-CFLAGS = -Wall -Wextra -Werror -std=c++98
+CFLAGS = -Wall -Wextra -Werror -Wshadow -std=c++98
 
 vpath %.cpp ${SRCS_PATH}
 
-NAME = ScavTrap
+NAME = DiamondTrap
 
 all: ${NAME}
 

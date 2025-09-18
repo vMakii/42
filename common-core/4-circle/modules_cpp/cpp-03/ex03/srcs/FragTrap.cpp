@@ -6,14 +6,14 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 16:17:45 by mivogel           #+#    #+#             */
-/*   Updated: 2025/09/11 16:39:09 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/09/18 16:58:00 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "FragTrap.hpp"
 
 // Constructors and Destructor
-FragTrap::FragTrap() : ClapTrap("Default_Frag") 
+FragTrap::FragTrap() : ClapTrap() 
 {
     _hitPoints = 100;
     _energyPoints = 100;

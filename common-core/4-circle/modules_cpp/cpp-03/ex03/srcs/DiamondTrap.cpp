@@ -6,15 +6,16 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 16:58:11 by mivogel           #+#    #+#             */
-/*   Updated: 2025/09/11 17:30:29 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/09/18 16:58:00 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "DiamondTrap.hpp"
 
 // Constructors and Destructor
-DiamondTrap::DiamondTrap() : ClapTrap("Default_clap_name"), _name("Default") 
+DiamondTrap::DiamondTrap() : ClapTrap(), _name("Default") 
 {
+    ClapTrap::_name = _name + "_clap_name";
     _hitPoints = FragTrap::_hitPoints;       // 100
     _energyPoints = ScavTrap::_energyPoints; // 50
     _attackDamage = FragTrap::_attackDamage; // 30

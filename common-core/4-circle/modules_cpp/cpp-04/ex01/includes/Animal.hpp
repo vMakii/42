@@ -6,13 +6,14 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 11:19:18 by mivogel           #+#    #+#             */
-/*   Updated: 2025/09/16 11:33:30 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/09/18 19:55:16 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 #include <iostream>
 #include <string>
+#include <cstdlib>
 
 class Animal 
 {

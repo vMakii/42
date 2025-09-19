@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 18:00:21 by mivogel           #+#    #+#             */
-/*   Updated: 2025/09/19 18:13:51 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/09/19 21:53:24 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void testAnimalBrains()
     // Test polymorphism and proper destruction
     std::cout << "\n--- Testing polymorphic array ---" << std::endl;
     const int arraySize = 6;
-    Animal* animals[arraySize];
+    AAnimal* animals[arraySize];
     
     // Fill half with dogs, half with cats
     for (int i = 0; i < arraySize; i++)
@@ -138,7 +138,7 @@ void testMemoryLeaks()
     for (int i = 0; i < 5; i++)
     {
         std::cout << "\n--- Iteration " << i + 1 << " ---" << std::endl;
-        Animal* animal = (i % 2 == 0) ? static_cast<Animal*>(new Dog()) : static_cast<Animal*>(new Cat());
+        AAnimal* animal = (i % 2 == 0) ? static_cast<AAnimal*>(new Dog()) : static_cast<AAnimal*>(new Cat());
         std::cout << "Created " << animal->getType() << std::endl;
         delete animal;
     }

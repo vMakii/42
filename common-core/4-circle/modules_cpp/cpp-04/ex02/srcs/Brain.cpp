@@ -6,11 +6,11 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 12:23:03 by mivogel           #+#    #+#             */
-/*   Updated: 2025/09/19 18:13:51 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/09/19 21:56:57 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "AAnimal.hpp"
+#include "Brain.hpp"
 
 // Constructors and Destructor
 Brain::Brain()

@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 16:18:13 by mivogel           #+#    #+#             */
-/*   Updated: 2025/09/11 17:10:30 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/09/22 15:51:38 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,11 @@
 class FragTrap : virtual public ClapTrap 
 {
     public:
+        // Static constants for DiamondTrap
+        static const unsigned int FRAG_HIT_POINTS = 100;
+        static const unsigned int FRAG_ENERGY_POINTS = 100;
+        static const unsigned int FRAG_ATTACK_DAMAGE = 30;
+
         // Constructors and Destructor
         FragTrap();
         FragTrap(std::string name);

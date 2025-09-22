@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 12:11:59 by mivogel           #+#    #+#             */
-/*   Updated: 2025/09/22 13:24:34 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/09/22 15:02:39 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ MateriaSource::MateriaSource() : _materiaCount(0)
 {
     for (int i = 0; i < 4; i++)
         _materias[i] = NULL;
-    std::cout << "MateriaSource default constructor called" << std::endl;
 }
 
 MateriaSource::MateriaSource(const MateriaSource& other) : _materiaCount(0)
@@ -30,7 +29,6 @@ MateriaSource::MateriaSource(const MateriaSource& other) : _materiaCount(0)
             _materias[i] = NULL;
     }
     _materiaCount = other._materiaCount;
-    std::cout << "MateriaSource copy constructor called" << std::endl;
 }
 
 MateriaSource& MateriaSource::operator=(const MateriaSource& other)
@@ -47,7 +45,6 @@ MateriaSource& MateriaSource::operator=(const MateriaSource& other)
         }
         _materiaCount = other._materiaCount;
     }
-    std::cout << "MateriaSource assignment operator called" << std::endl;
     return *this;
 }
 
@@ -55,23 +52,19 @@ MateriaSource::~MateriaSource()
 {
     for (int i = 0; i < 4; i++)
         delete _materias[i];
-    std::cout << "MateriaSource destructor called" << std::endl;
 }
 
 // Member functions
 void MateriaSource::learnMateria(AMateria* m)
 {
-    if (_materiaCount < 4 && m)
+    if (!m)
+        return;
+    if (_materiaCount < 4)
     {
-        _materias[_materiaCount] = m;
+        _materias[_materiaCount] = m->clone();
         _materiaCount++;
-        std::cout << "Learned materia of type: " << m->getType() << std::endl;
     }
-    else
-    {
-        std::cout << "Cannot learn more materia or invalid materia" << std::endl;
-        delete m; // Prevent memory leak if materia cannot be learned
-    }
+    delete m;
 }
 
 AMateria* MateriaSource::createMateria(const std::string& type)
@@ -80,10 +73,8 @@ AMateria* MateriaSource::createMateria(const std::string& type)
     {
         if (_materias[i] && _materias[i]->getType() == type)
         {
-            std::cout << "Creating materia of type: " << type << std::endl;
             return _materias[i]->clone();
         }
     }
-    std::cout << "Materia of type: " << type << " not found" << std::endl;
     return NULL;
 }

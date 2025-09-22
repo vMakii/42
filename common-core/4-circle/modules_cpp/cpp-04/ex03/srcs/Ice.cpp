@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 11:58:30 by mivogel           #+#    #+#             */
-/*   Updated: 2025/09/22 12:01:05 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/09/22 15:02:39 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,12 @@
 #include "ICharacter.hpp"
 
 // Constructors and Destructor
-Ice::Ice() : AMateria("ice")
-{
-    std::cout << "Ice default constructor called" << std::endl;
-}
+Ice::Ice() : AMateria("ice") {}
 
-Ice::Ice(const Ice& other) : AMateria(other)
-{
-    std::cout << "Ice copy constructor called" << std::endl;
-}
+Ice::Ice(const Ice& other) : AMateria(other) {}
 
 Ice& Ice::operator=(const Ice& other)
 {
-    std::cout << "Ice assignment operator called" << std::endl;
     if (this != &other)
     {
         AMateria::operator=(other);
@@ -34,10 +27,7 @@ Ice& Ice::operator=(const Ice& other)
     return *this;
 }
 
-Ice::~Ice()
-{
-    std::cout << "Ice destructor called" << std::endl;
-}
+Ice::~Ice() {}
 
 // Member functions
 AMateria* Ice::clone() const

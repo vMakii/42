@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 10:43:43 by mivogel           #+#    #+#             */
-/*   Updated: 2025/09/11 13:04:06 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/09/22 15:27:41 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ class ClapTrap
         ~ClapTrap();
 
         // Getters and Setters
-        // int getHitPoints() const;
-        // int getEnergyPoints() const;
-        // int getAttackDamage() const;
+        int getHitPoints() const;
+        int getEnergyPoints() const;
+        int getAttackDamage() const;
         void setHitPoints(int hitPoints);
         void setEnergyPoints(int energyPoints);
         void setAttackDamage(int attackDamage);

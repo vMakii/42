@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 16:58:11 by mivogel           #+#    #+#             */
-/*   Updated: 2025/09/22 11:46:57 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/09/22 15:51:38 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,19 @@
 DiamondTrap::DiamondTrap() : ClapTrap(), _name("Default") 
 {
     ClapTrap::_name = _name + "_clap_name";
-    _hitPoints = FragTrap::_hitPoints;       // 100
-    _energyPoints = ScavTrap::_energyPoints; // 50
-    _attackDamage = FragTrap::_attackDamage; // 30
+    // Use static constants from parent classes
+    _hitPoints = FragTrap::FRAG_HIT_POINTS;        // FragTrap's hit points (100)
+    _energyPoints = ScavTrap::SCAV_ENERGY_POINTS;  // ScavTrap's energy points (50)
+    _attackDamage = FragTrap::FRAG_ATTACK_DAMAGE;  // FragTrap's attack damage (30)
     std::cout << "\033[35mDefault DiamondTrap constructor called\033[0m" << std::endl;
 }
 
 DiamondTrap::DiamondTrap(std::string name) : ClapTrap(name + "_clap_name"), _name(name) 
 {
-    _hitPoints = FragTrap::_hitPoints;       // 100
-    _energyPoints = ScavTrap::_energyPoints; // 50
-    _attackDamage = FragTrap::_attackDamage; // 30
+    // Use static constants from parent classes
+    _hitPoints = FragTrap::FRAG_HIT_POINTS;        // FragTrap's hit points (100)
+    _energyPoints = ScavTrap::SCAV_ENERGY_POINTS;  // ScavTrap's energy points (50)
+    _attackDamage = FragTrap::FRAG_ATTACK_DAMAGE;  // FragTrap's attack damage (30)
     std::cout << "\033[35mDiamondTrap " << _name << " constructor called\033[0m" << std::endl;
 }
 

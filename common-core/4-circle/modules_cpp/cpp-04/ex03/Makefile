@@ -1,31 +1,31 @@
-SRCS = main.cpp Character.cpp MateriaSource.cpp Ice.cpp Cure.cpp AMateria.cpp
-SRCS_PATH = ./srcs
+SRCS := main.cpp Character.cpp MateriaSource.cpp Ice.cpp Cure.cpp AMateria.cpp
+SRCS_PATH := ./srcs
 
-OBJS = ${patsubst %.cpp, ${OBJS_PATH}/%.o, ${SRCS}}
-OBJS_PATH = ./objs
+OBJS_PATH := ./objs
+OBJS := $(addprefix $(OBJS_PATH)/,$(SRCS:.cpp=.o))
 
-CC = c++
-INC = -I includes/
-CFLAGS = -Wall -Wextra -Werror -std=c++98
+CC := c++
+INC := -I includes/
+CFLAGS := -Wall -Wextra -Werror -std=c++98
 
-vpath %.cpp ${SRCS_PATH}
+vpath %.cpp $(SRCS_PATH)
 
-NAME = Abstract
+NAME := Abstract
 
-all: ${NAME}
+all: $(NAME)
 
-${OBJS}: ${OBJS_PATH}/%.o: %.cpp Makefile
-	@mkdir -p ${OBJS_PATH}
+$(OBJS_PATH)/%.o: %.cpp Makefile
+	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c $< -o $@ $(INC)
 
-${NAME}: ${OBJS}
-	$(CC) $(CFLAGS) -o ${NAME} ${OBJS} $(INC)
+$(NAME): $(OBJS)
+	$(CC) $(CFLAGS) -o $@ $^ $(INC)
 
 clean:
-	rm -rf ${OBJS_PATH}
+	rm -rf $(OBJS_PATH)
 
 fclean: clean
-	rm -f ${NAME}
+	rm -f $(NAME)
 
 re: fclean all
 

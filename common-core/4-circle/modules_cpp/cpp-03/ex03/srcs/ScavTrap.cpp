@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 12:35:34 by mivogel           #+#    #+#             */
-/*   Updated: 2025/09/18 16:58:00 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/09/22 15:51:38 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,17 @@
 // Constructors and Destructor
 ScavTrap::ScavTrap() : ClapTrap(), _guardMode(false) 
 {
-    _hitPoints = 100;
-    _energyPoints = 50;
-    _attackDamage = 20;
+    _hitPoints = SCAV_HIT_POINTS;
+    _energyPoints = SCAV_ENERGY_POINTS;
+    _attackDamage = SCAV_ATTACK_DAMAGE;
     std::cout << "\033[34mDefault ScavTrap constructor called\033[0m" << std::endl;
 }
 
 ScavTrap::ScavTrap(std::string name) : ClapTrap(name), _guardMode(false) 
 {
-    _hitPoints = 100;
-    _energyPoints = 50;
-    _attackDamage = 20;
+    _hitPoints = SCAV_HIT_POINTS;
+    _energyPoints = SCAV_ENERGY_POINTS;
+    _attackDamage = SCAV_ATTACK_DAMAGE;
     std::cout << "\033[34mScavTrap " << _name << " constructor called\033[0m" << std::endl;
 }
 

@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 10:53:20 by mivogel           #+#    #+#             */
-/*   Updated: 2025/09/11 16:31:04 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/09/22 15:27:33 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,21 @@ ClapTrap::~ClapTrap()
 }
 
 // Getters and Setters
+int ClapTrap::getHitPoints() const
+{
+    return _hitPoints;
+}
+
+int ClapTrap::getEnergyPoints() const
+{
+    return _energyPoints;
+}
+
+int ClapTrap::getAttackDamage() const
+{
+    return _attackDamage;
+}
+
 void ClapTrap::setHitPoints(int hitPoints)
 {
     _hitPoints = hitPoints;

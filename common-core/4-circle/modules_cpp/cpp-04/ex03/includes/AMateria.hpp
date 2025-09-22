@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 10:30:11 by mivogel           #+#    #+#             */
-/*   Updated: 2025/09/22 11:41:28 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/09/22 15:02:39 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ class ICharacter; // Forward declaration
 class AMateria
 {
     protected:
-        std::string _type; // The type of the materia
+        // Make type immutable to reflect that copying type on assignment is pointless
+        const std::string _type; // The type of the materia
 
     public:
         // Constructors and Destructor

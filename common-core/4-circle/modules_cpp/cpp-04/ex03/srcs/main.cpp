@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 10:19:05 by mivogel           #+#    #+#             */
-/*   Updated: 2025/09/22 12:13:12 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/09/22 15:02:39 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,3 @@ int main()
 
 // $> clang++ -W -Wall -Werror *.cpp
 // $> ./a.out | cat -e
-// * shoots an ice bolt at bob *$
-// * heals bob's wounds *$

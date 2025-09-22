@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 16:17:45 by mivogel           #+#    #+#             */
-/*   Updated: 2025/09/18 16:58:00 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/09/22 15:51:38 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,17 @@
 // Constructors and Destructor
 FragTrap::FragTrap() : ClapTrap() 
 {
-    _hitPoints = 100;
-    _energyPoints = 100;
-    _attackDamage = 30;
+    _hitPoints = FRAG_HIT_POINTS;
+    _energyPoints = FRAG_ENERGY_POINTS;
+    _attackDamage = FRAG_ATTACK_DAMAGE;
     std::cout << "\033[31mDefault FragTrap constructor called\033[0m" << std::endl;
 }
 
 FragTrap::FragTrap(std::string name) : ClapTrap(name) 
 {
-    _hitPoints = 100;
-    _energyPoints = 100;
-    _attackDamage = 30;
+    _hitPoints = FRAG_HIT_POINTS;
+    _energyPoints = FRAG_ENERGY_POINTS;
+    _attackDamage = FRAG_ATTACK_DAMAGE;
     std::cout << "\033[31mFragTrap " << _name << " constructor called\033[0m" << std::endl;
 }
 

@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 16:54:22 by mivogel           #+#    #+#             */
-/*   Updated: 2025/09/11 17:10:17 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/09/22 15:28:57 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "ScavTrap.hpp"
 #include "FragTrap.hpp"
 
-class DiamondTrap : public ScavTrap, public FragTrap 
+class DiamondTrap : public ScavTrap, public FragTrap
 {
     private:
         std::string _name;

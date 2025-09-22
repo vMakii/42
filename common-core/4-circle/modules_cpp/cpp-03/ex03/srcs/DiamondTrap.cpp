@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 16:58:11 by mivogel           #+#    #+#             */
-/*   Updated: 2025/09/18 16:58:00 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/09/22 11:46:57 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,3 @@ void DiamondTrap::whoAmI()
 {
     std::cout << "\033[35mDiamondTrap name: " << _name << ", ClapTrap name: " << ClapTrap::_name << "\033[0m" << std::endl;
 }
-
-// Note: Using ScavTrap's attack method as specified in the header file

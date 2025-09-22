@@ -6,14 +6,14 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 12:35:34 by mivogel           #+#    #+#             */
-/*   Updated: 2025/09/18 16:54:53 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/09/22 12:15:21 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ScavTrap.hpp"
 
 // Constructors and Destructor
-ScavTrap::ScavTrap() : ClapTrap(), _guardMode(false) 
+ScavTrap::ScavTrap() : ClapTrap(), _guardMode(false)
 {
     _hitPoints = 100;
     _energyPoints = 50;

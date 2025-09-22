@@ -1,4 +1,4 @@
-SRCS = main.cpp AAnimal.cpp Dog.cpp Cat.cpp Brain.cpp
+SRCS = main.cpp Character.cpp MateriaSource.cpp Ice.cpp Cure.cpp AMateria.cpp
 SRCS_PATH = ./srcs
 
 OBJS = ${patsubst %.cpp, ${OBJS_PATH}/%.o, ${SRCS}}
@@ -16,16 +16,16 @@ all: ${NAME}
 
 ${OBJS}: ${OBJS_PATH}/%.o: %.cpp Makefile
 	@mkdir -p ${OBJS_PATH}
-	@$(CC) $(CFLAGS) -c $< -o $@ $(INC)
+	$(CC) $(CFLAGS) -c $< -o $@ $(INC)
 
 ${NAME}: ${OBJS}
-	@$(CC) $(CFLAGS) -o ${NAME} ${OBJS} $(INC)
+	$(CC) $(CFLAGS) -o ${NAME} ${OBJS} $(INC)
 
 clean:
-	@rm -rf ${OBJS_PATH}
+	rm -rf ${OBJS_PATH}
 
 fclean: clean
-	@rm -f ${NAME}
+	rm -f ${NAME}
 
 re: fclean all
 

@@ -6,11 +6,14 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 18:00:21 by mivogel           #+#    #+#             */
-/*   Updated: 2025/09/11 10:25:46 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/10/17 13:28:07 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Point.hpp"
+
+//https://hackmd.io/@ChloeIsCoding/r19Mge-fll
+//https://planetcalc.com/8108/
 
 bool bsp(const Point a, const Point b, const Point c, const Point point);
 

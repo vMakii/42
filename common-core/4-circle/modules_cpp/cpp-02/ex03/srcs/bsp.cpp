@@ -6,11 +6,12 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 09:46:57 by mivogel           #+#    #+#             */
-/*   Updated: 2025/09/11 10:16:05 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/10/17 13:28:02 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Point.hpp"
+
 
 bool bsp(const Point a, const Point b, const Point c, const Point point)
 {

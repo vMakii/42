@@ -10,7 +10,7 @@ CFLAGS := -Wall -Wextra -Werror -std=c++98
 
 vpath %.cpp $(SRCS_PATH)
 
-NAME := Abstract
+NAME := Interface
 
 all: $(NAME)
 

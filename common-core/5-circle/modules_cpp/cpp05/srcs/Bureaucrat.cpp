@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Cat.hpp                                            :+:      :+:    :+:   */
+/*   Bureaucrat.cpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/16 11:31:25 by mivogel           #+#    #+#             */
-/*   Updated: 2025/09/16 11:31:30 by mivogel          ###   ########.fr       */
+/*   Created: 2025/10/21 11:03:39 by mivogel           #+#    #+#             */
+/*   Updated: 2025/10/21 14:06:13 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once
-#include "Animal.hpp"
+#include "Bureaucrat.hpp"
 
-class Cat : public Animal
+// Constructors and Destructor
+Bureaucrat::Bureaucrat() : name("Default"), grade(150) {}
+
+Bureaucrat::Bureaucrat(const std::string& name, int grade) : name(name)
 {
-    public:
-        // Constructors and Destructor
-        Cat();
-        Cat(const Cat& other);
-        Cat& operator=(const Cat& other);
-        virtual ~Cat();
-
-        // Member functions
-        virtual void makeSound() const;
-};
+    if (grade < 1)
+        throw GradeTooHighException();
+    if (grade > 150)
+        throw GradeTooLowException();
+    this->grade = grade;
+}

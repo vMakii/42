@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 10:41:04 by mivogel           #+#    #+#             */
-/*   Updated: 2025/10/24 15:32:36 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/10/24 15:47:53 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <string>
 #include <iostream>
 
-class Form;
+class AForm;
 
 class Bureaucrat
 {
@@ -39,7 +39,8 @@ class Bureaucrat
         // Member Functions
         void incrementGrade();
         void decrementGrade();
-        void signForm(class Form& form) const;
+        void signForm(class AForm& form) const;
+        void executeForm(const AForm& form) const;
 
         // Exception Classes
         class GradeTooHighException : public std::exception

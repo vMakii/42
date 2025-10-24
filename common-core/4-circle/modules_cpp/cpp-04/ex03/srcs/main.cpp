@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 10:19:05 by mivogel           #+#    #+#             */
-/*   Updated: 2025/10/20 12:49:33 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/10/24 13:37:00 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,18 +32,32 @@ int main()
     AMateria* iceMat = src->createMateria("ice");
     AMateria* cureMat = src->createMateria("cure");
 
-    // Equip the materias
+    // Equip the materias on original character FIRST
     me->equip(iceMat);
     me->equip(cureMat);
+    
+    // NOW create a deep copy of the equipped character
+    Character* tmp = new Character(*(static_cast<Character*>(me)));
 
-    // Use them
+    // Use them with original character
+    std::cout << "=== Using materias with original character 'me' ===" << std::endl;
     me->use(0, *bob);
     me->use(1, *bob);
-
-    // Unequip both materias. According to the modified Character::unequip,
-    // unequip does NOT delete the materia. Ownership remains with caller.
+    
+    // Use them with copied character (should work because of deep copy)
+    std::cout << "=== Using materias with copied character 'tmp' ===" << std::endl;
+    tmp->use(0, *bob);
+    tmp->use(1, *bob);
+    
+    // Unequip from original - tmp should still have its own copies
+    std::cout << "=== After unequipping from original 'me' ===" << std::endl;
     me->unequip(0);
     me->unequip(1);
+    
+    // tmp should still be able to use its materias (proof of deep copy)
+    std::cout << "=== tmp can still use its materias (deep copy proof) ===" << std::endl;
+    tmp->use(0, *bob);
+    tmp->use(1, *bob);
 
     // Manually delete the unequipped materias to avoid memory leaks
     delete iceMat;
@@ -52,6 +66,7 @@ int main()
     // Clean up
     delete bob;
     delete me;
+    delete tmp;  // Don't forget to delete the copied character
     delete src;
 
     return 0;

@@ -1,4 +1,4 @@
-SRCS = main.cpp Bureaucrat.cpp
+SRCS = main.cpp Bureaucrat.cpp Form.cpp
 SRCS_PATH = ./srcs/
 
 OBJS = ${patsubst %.cpp, ${OBJS_PATH}/%.o, ${SRCS}}
@@ -10,7 +10,7 @@ CFLAGS = -Wall -Wextra -Werror -std=c++98
 
 vpath %.cpp ${SRCS_PATH}
 
-NAME = Polymorphism
+NAME = Forms
 
 all: ${NAME}
 
@@ -19,7 +19,7 @@ ${OBJS}: ${OBJS_PATH}/%.o: %.cpp Makefile
 	@$(CC) $(CFLAGS) -c $< -o $@ $(INC)
 
 ${NAME}: ${OBJS}
-	@$(CC) $(CFLAGS) -o ${NAME} ${OBJS} $(INC)
+	$(CC) $(CFLAGS) -o ${NAME} ${OBJS} $(INC)
 
 clean:
 	@rm -rf ${OBJS_PATH}

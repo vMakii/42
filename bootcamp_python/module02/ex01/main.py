@@ -10,7 +10,7 @@ def what_are_the_vars(*args, **kwargs):
     
     # Set attributes from **kwargs
     for key, value in kwargs.items():
-        if getattr(obj, key, None) is not None:
+        if hasattr(obj, key):  # not getattr to avoid overwriting existing attributes
             return None
         setattr(obj, key, value)
     
@@ -46,6 +46,8 @@ if __name__ == "__main__":
     doom_printer(obj)
     obj = what_are_the_vars(42, "Yes", a=10, var_2="world")
     doom_printer(obj)
+    obj = what_are_the_vars(None, var_0="test")
+    doom_printer(obj)
 
 # $> python main.py
 # var_0: 7
@@ -69,4 +71,6 @@ if __name__ == "__main__":
 # var_0: 42
 # var_1: Yes
 # var_2: world
+# end
+# ERROR
 # end

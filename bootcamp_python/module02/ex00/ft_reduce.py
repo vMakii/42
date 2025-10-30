@@ -7,11 +7,17 @@ def ft_reduce(function_to_apply, iterable):
         A value, of same type of elements in the iterable parameter.
         None if the iterable can not be used by the function.
     """
-    iterator = iter(iterable)
+    if not callable(function_to_apply):
+        raise TypeError("argument must be a callable")
+    try:
+        iterator = iter(iterable)
+    except TypeError:
+        raise TypeError("argument must be an iterable")
     try:
         result = next(iterator)
     except StopIteration:
         return None
+    
     for item in iterator:
         result = function_to_apply(result, item)
     return result

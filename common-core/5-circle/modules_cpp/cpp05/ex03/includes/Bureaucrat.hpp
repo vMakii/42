@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   AForm.hpp                                          :+:      :+:    :+:   */
+/*   Bureaucrat.hpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/24 15:04:39 by mivogel           #+#    #+#             */
-/*   Updated: 2025/11/28 14:52:38 by mivogel          ###   ########.fr       */
+/*   Created: 2025/10/21 10:41:04 by mivogel           #+#    #+#             */
+/*   Updated: 2025/10/24 15:47:53 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,44 +14,35 @@
 #include <string>
 #include <iostream>
 
-class Bureaucrat;
+class AForm;
 
-class AForm 
+class Bureaucrat
 {
     private:
         const std::string   name;
-        bool                isSigned;
-        const int           gradeToSign;
-        const int           gradeToExecute;
-
-    protected:
-        // Pure virtual function for concrete classes to implement
-        virtual void doExecute() const = 0;
-
+        int                 grade;
+        
     public:
         // Constructors and Destructor
-        AForm();
-        AForm(const std::string& name, int gradeToSign, int gradeToExecute);
-        AForm(const AForm& other);
-        AForm& operator=(const AForm& other);
-        virtual ~AForm();
+        Bureaucrat();
+        Bureaucrat(int grade);
+        Bureaucrat(const std::string& name);
+        Bureaucrat(const std::string& name, int grade);
+        Bureaucrat(const Bureaucrat& other);
+        Bureaucrat& operator=(const Bureaucrat& other);
+        ~Bureaucrat();
 
-        // Getters
+        // Getters and Setters
         const std::string& getName() const;
-        bool getIsSigned() const;
-        int getGradeToSign() const;
-        int getGradeToExecute() const;
+        int getGrade() const;
 
         // Member Functions
-        void beSigned(const Bureaucrat& bureaucrat);
-        void execute(const Bureaucrat& executor) const;
+        void incrementGrade();
+        void decrementGrade();
+        void signForm(class AForm& form) const;
+        void executeForm(const AForm& form) const;
 
         // Exception Classes
-        class FormNotSignedException : public std::exception
-        {
-            public:
-                const char *what() const throw();
-        };
         class GradeTooHighException : public std::exception
         {
             public:
@@ -64,4 +55,4 @@ class AForm
         };
 };
 
-std::ostream& operator<<(std::ostream& os, const AForm& form);
+std::ostream& operator<<(std::ostream& os, const Bureaucrat& bureaucrat);

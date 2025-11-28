@@ -6,12 +6,12 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 11:03:39 by mivogel           #+#    #+#             */
-/*   Updated: 2025/10/24 15:32:36 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/11/28 16:31:31 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
+#include "AForm.hpp"
 
 // Constructors and Destructor
 Bureaucrat::Bureaucrat() : name("Default"), grade(150) {}
@@ -77,7 +77,7 @@ void Bureaucrat::decrementGrade()
     grade++;
 }
 
-void Bureaucrat::signForm(Form& form) const
+void Bureaucrat::signForm(AForm& form) const
 {
     try
     {
@@ -87,6 +87,19 @@ void Bureaucrat::signForm(Form& form) const
     catch (const std::exception& e)
     {
         std::cerr << name << " couldn't sign " << form.getName() << " because " << e.what() << std::endl;
+    }
+}
+
+void Bureaucrat::executeForm(const AForm& form) const
+{
+    try
+    {
+        form.execute(*this);
+        std::cout << name << " executed " << form.getName() << std::endl;
+    }
+    catch (const std::exception& e)
+    {
+        std::cerr << name << " couldn't execute " << form.getName() << " because " << e.what() << std::endl;
     }
 }
 

@@ -1,4 +1,4 @@
-SRCS = main.cpp Bureaucrat.cpp Form.cpp
+SRCS = main.cpp Bureaucrat.cpp AForm.cpp ShrubberyCreationForm.cpp RobotomyRequestForm.cpp PresidentialPardonForm.cpp
 SRCS_PATH = ./srcs/
 
 OBJS = ${patsubst %.cpp, ${OBJS_PATH}/%.o, ${SRCS}}
@@ -23,6 +23,7 @@ ${NAME}: ${OBJS}
 
 clean:
 	@rm -rf ${OBJS_PATH}
+	@rm -f *_shrubbery
 
 fclean: clean
 	@rm -f ${NAME}

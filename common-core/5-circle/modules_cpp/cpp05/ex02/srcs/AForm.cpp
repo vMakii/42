@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 15:17:04 by mivogel           #+#    #+#             */
-/*   Updated: 2025/10/24 15:55:30 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/11/28 14:52:38 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,20 @@ void AForm::beSigned(const Bureaucrat& bureaucrat)
     isSigned = true;
 }
 
+void AForm::execute(const Bureaucrat& executor) const
+{
+    if (!isSigned)
+        throw FormNotSignedException();
+    if (executor.getGrade() > gradeToExecute)
+        throw GradeTooLowException();
+    doExecute();
+}
+
 // Exception Classes
+const char* AForm::FormNotSignedException::what() const throw()
+{
+    return "Form: Form is not signed";
+}
 const char* AForm::GradeTooHighException::what() const throw()
 {
     return "Form: Grade too high";

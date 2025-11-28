@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 15:04:39 by mivogel           #+#    #+#             */
-/*   Updated: 2025/10/24 15:47:35 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/11/28 14:52:38 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,10 @@ class AForm
         const int           gradeToSign;
         const int           gradeToExecute;
 
+    protected:
+        // Pure virtual function for concrete classes to implement
+        virtual void doExecute() const = 0;
+
     public:
         // Constructors and Destructor
         AForm();
@@ -40,9 +44,14 @@ class AForm
 
         // Member Functions
         void beSigned(const Bureaucrat& bureaucrat);
-        virtual void execute(const Bureaucrat& executor) const = 0;
+        void execute(const Bureaucrat& executor) const;
 
         // Exception Classes
+        class FormNotSignedException : public std::exception
+        {
+            public:
+                const char *what() const throw();
+        };
         class GradeTooHighException : public std::exception
         {
             public:

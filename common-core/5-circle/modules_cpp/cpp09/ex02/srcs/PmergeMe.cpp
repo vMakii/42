@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 12:13:42 by mivogel           #+#    #+#             */
-/*   Updated: 2025/12/09 14:48:01 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/12/09 14:53:38 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -398,16 +398,14 @@ void PmergeMe::sortAndDisplay()
     // Sort vector with timing
     std::vector<int> vecCopy = this->vec;
     clock_t startVec = clock();
-    // mergeInsertVector(vecCopy, 0, vecCopy.size() - 1);  // Old implementation
-    fordJohnsonVector(vecCopy);  // Ford-Johnson implementation (FIXED)
+    fordJohnsonVector(vecCopy);
     clock_t endVec = clock();
     double timeVec = (double)(endVec - startVec) / CLOCKS_PER_SEC * 1000000;
     
     // Sort deque with timing
     std::deque<int> deqCopy = this->deq;
     clock_t startDeq = clock();
-    // mergeInsertDeque(deqCopy, 0, deqCopy.size() - 1);  // Old implementation
-    fordJohnsonDeque(deqCopy);  // Ford-Johnson implementation (FIXED)
+    fordJohnsonDeque(deqCopy);
     clock_t endDeq = clock();
     double timeDeq = (double)(endDeq - startDeq) / CLOCKS_PER_SEC * 1000000;
     

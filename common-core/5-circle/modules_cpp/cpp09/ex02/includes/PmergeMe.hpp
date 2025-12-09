@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 12:11:17 by mivogel           #+#    #+#             */
-/*   Updated: 2025/12/09 13:51:22 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/12/09 14:42:24 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,36 @@ class PmergeMe
     private:
         std::vector<int> vec;
         std::deque<int> deq;
-        void mergeInsertVector(std::vector<int>& arr, int left, int right);
-        void mergeInsertDeque(std::deque<int>& arr, int left, int right);
         
-        // Ford-Johnson alternative implementation
+        // ===== FORD-JOHNSON ALGORITHM - VECTOR =====
+        // Étape 1: Créer les paires et identifier les gagnants/perdants
+        void createPairsVector(std::vector<int>& arr, std::vector<std::pair<int, int> >& pairs, int& straggler);
+        
+        // Étape 2: Trier récursivement les gagnants
+        void sortWinnersVector(std::vector<int>& winners);
+        
+        // Étape 3: Générer la suite de Jacobsthal pour l'ordre d'insertion
+        std::vector<size_t> generateJacobsthalSequence(size_t n);
+        
+        // Étape 4: Insérer les perdants dans l'ordre optimal
+        void insertLosersVector(std::vector<int>& sorted, const std::vector<int>& losers);
+        
+        // Fonction principale Ford-Johnson pour vector
         void fordJohnsonVector(std::vector<int>& arr);
+        
+        // ===== FORD-JOHNSON ALGORITHM - DEQUE =====
+        void createPairsDeque(std::deque<int>& arr, std::vector<std::pair<int, int> >& pairs, int& straggler);
+        void sortWinnersDeque(std::deque<int>& winners);
+        void insertLosersDeque(std::deque<int>& sorted, const std::vector<int>& losers);
         void fordJohnsonDeque(std::deque<int>& arr);
-        size_t getJacobsthal(size_t n);
-        void generateJacobsthalSequence(std::vector<size_t>& seq, size_t maxSize);
+        
+        // Fonction utilitaire pour l'insertion binaire
         template<typename Container>
-        void binaryInsert(Container& sorted, int value);
+        typename Container::iterator binaryInsert(Container& container, 
+                                                  typename Container::iterator begin,
+                                                  typename Container::iterator end,
+                                                  int value);
+        
     public:
         // Constructors and Destructor
         PmergeMe();

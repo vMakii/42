@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 17:12:49 by mivogel           #+#    #+#             */
-/*   Updated: 2025/11/28 17:43:34 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/12/09 11:10:45 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,17 @@ Intern& Intern::operator=(const Intern& other)
 
 Intern::~Intern() {}
 
+// Helper function to convert string to lowercase
+static std::string toLowerString(const std::string& str)
+{
+    std::string result = str;
+    for (size_t i = 0; i < result.length(); ++i)
+    {
+        result[i] = std::tolower(result[i]);
+    }
+    return result;
+}
+
 // Member Functions
 AForm* Intern::makeForm(const std::string& formName, const std::string& target) const
 {
@@ -36,9 +47,10 @@ AForm* Intern::makeForm(const std::string& formName, const std::string& target) 
         "Robotomy Request",
         "Presidential Pardon"
     };
+    std::string normalizedFormName = toLowerString(formName);
     for (int i = 0; i < 3; ++i)
     {
-        if (formName == formNames[i])
+        if (normalizedFormName == formNames[i])
         {
             switch (i)
             {

@@ -6,13 +6,14 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 15:04:39 by mivogel           #+#    #+#             */
-/*   Updated: 2025/11/28 17:40:43 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/12/09 11:06:16 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 #include <string>
 #include <iostream>
+#include <string>
 
 class Bureaucrat;
 

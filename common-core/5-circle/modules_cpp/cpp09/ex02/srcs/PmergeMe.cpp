@@ -6,265 +6,379 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 12:13:42 by mivogel           #+#    #+#             */
-/*   Updated: 2025/12/09 14:53:38 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/12/10 14:04:33 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
 
-// ============= FORD-JOHNSON ALTERNATIVE IMPLEMENTATION =============
+// Ford-Johnson Algorithm Implementation
 
-// ===== IMPLÉMENTATION POUR VECTOR =====
-
-// Étape 1: Créer les paires et identifier gagnants/perdants
-void PmergeMe::createPairsVector(std::vector<int>& arr, std::vector<std::pair<int, int> >& pairs, int& straggler)
+// Step 1: Group elements into n/2 pairs (with potential straggler)
+std::vector<std::pair<int, int> > PmergeMe::groupIntoPairs(const std::vector<int>& arr, int& straggler)
 {
-    straggler = -1;
-    pairs.clear();
-    
-    // Si nombre impair d'éléments, garder le dernier comme straggler
-    size_t n = arr.size();
-    if (n % 2 != 0)
-    {
-        straggler = arr[n - 1];
-        n--;
-    }
-    
-    // Créer les paires et comparer
-    for (size_t i = 0; i < n; i += 2)
-    {
-        if (arr[i] > arr[i + 1])
-            pairs.push_back(std::make_pair(arr[i], arr[i + 1]));
-        else
-            pairs.push_back(std::make_pair(arr[i + 1], arr[i]));
-    }
-}
-
-// Étape 2: Trier récursivement les gagnants
-void PmergeMe::sortWinnersVector(std::vector<int>& winners)
-{
-    // Pour de petites tailles, utiliser std::sort
-    if (winners.size() <= 1)
-        return;
-    
-    if (winners.size() <= 10)
-    {
-        std::sort(winners.begin(), winners.end());
-        return;
-    }
-    
-    // Sinon, appliquer récursivement Ford-Johnson
-    fordJohnsonVector(winners);
-}
-
-// Étape 3: Générer la suite de Jacobsthal
-std::vector<size_t> PmergeMe::generateJacobsthalSequence(size_t n)
-{
-    std::vector<size_t> jacobsthal;
-    if (n == 0)
-        return jacobsthal;
-    
-    // Pour 1 élément, retourner simplement [0]
-    if (n == 1)
-    {
-        jacobsthal.push_back(0);
-        return jacobsthal;
-    }
-    
-    // Générer les nombres de Jacobsthal: J(n) = J(n-1) + 2*J(n-2)
-    // Avec J(0) = 0, J(1) = 1
-    std::vector<size_t> jNumbers;
-    jNumbers.push_back(0);
-    jNumbers.push_back(1);
-    
-    while (jNumbers.back() < n)
-    {
-        size_t next = jNumbers[jNumbers.size() - 1] + 2 * jNumbers[jNumbers.size() - 2];
-        jNumbers.push_back(next);
-    }
-    
-    // Créer la séquence d'insertion optimale
-    size_t lastIndex = 0;
-    for (size_t i = 2; i < jNumbers.size() && lastIndex < n; ++i)
-    {
-        size_t current = jNumbers[i];
-        if (current > n)
-            current = n;
-        
-        // Ajouter les indices de current jusqu'à lastIndex+1 (ordre décroissant)
-        for (size_t j = current; j > lastIndex && j > 0; --j)
-        {
-            jacobsthal.push_back(j - 1);
-        }
-        lastIndex = current;
-    }
-    
-    return jacobsthal;
-}
-
-// Fonction template pour l'insertion binaire
-template<typename Container>
-typename Container::iterator PmergeMe::binaryInsert(Container& /* container */,
-                                                     typename Container::iterator begin,
-                                                     typename Container::iterator end,
-                                                     int value)
-{
-    return std::lower_bound(begin, end, value);
-}
-
-// Étape 4: Insérer les perdants dans l'ordre optimal
-void PmergeMe::insertLosersVector(std::vector<int>& sorted, const std::vector<int>& losers)
-{
-    if (losers.empty())
-        return;
-    
-    // Générer la séquence de Jacobsthal
-    std::vector<size_t> insertOrder = generateJacobsthalSequence(losers.size());
-    
-    // Insérer les perdants dans l'ordre Jacobsthal
-    for (size_t i = 0; i < insertOrder.size(); ++i)
-    {
-        size_t idx = insertOrder[i];
-        if (idx < losers.size())
-        {
-            int valueToInsert = losers[idx];
-            std::vector<int>::iterator pos = binaryInsert(sorted, sorted.begin(), sorted.end(), valueToInsert);
-            sorted.insert(pos, valueToInsert);
-        }
-    }
-}
-
-// Fonction principale Ford-Johnson pour vector
-void PmergeMe::fordJohnsonVector(std::vector<int>& arr)
-{
-    // Cas de base
-    if (arr.size() <= 1)
-        return;
-    
-    // Pour très petites tailles, utiliser std::sort
-    if (arr.size() <= 2)
-    {
-        if (arr.size() == 2 && arr[0] > arr[1])
-            std::swap(arr[0], arr[1]);
-        return;
-    }
-    
-    // Étape 1: Créer les paires (gagnant > perdant)
     std::vector<std::pair<int, int> > pairs;
-    int straggler;
-    createPairsVector(arr, pairs, straggler);
+    size_t i = 0;
     
-    if (pairs.empty())
-        return;
+    straggler = -1;
     
-    // Étape 2: Extraire les gagnants et trier récursivement avec Ford-Johnson
-    std::vector<int> winners;
-    for (size_t i = 0; i < pairs.size(); ++i)
-        winners.push_back(pairs[i].first);
-    
-    // Trier récursivement les gagnants avec Ford-Johnson
-    fordJohnsonVector(winners);
-    
-    // Étape 3: Créer un mapping pour retrouver les perdants associés aux gagnants triés
-    // On doit retrouver quel perdant correspond à quel gagnant après le tri
-    std::vector<int> sortedLosers;
-    for (size_t i = 0; i < winners.size(); ++i)
+    // Create pairs
+    for (i = 0; i + 1 < arr.size(); i += 2)
     {
-        // Trouver le gagnant dans les paires originales
+        pairs.push_back(std::make_pair(arr[i], arr[i + 1]));
+    }
+    
+    // Handle straggler if odd number of elements
+    if (i < arr.size())
+        straggler = arr[i];
+    
+    return pairs;
+}
+
+// Step 2: Compare pairs to identify larger elements
+void PmergeMe::comparePairs(std::vector<std::pair<int, int> >& pairs)
+{
+    // For each pair, ensure first > second (larger element first)
+    for (size_t i = 0; i < pairs.size(); ++i)
+    {
+        if (pairs[i].first < pairs[i].second)
+            std::swap(pairs[i].first, pairs[i].second);
+    }
+}
+
+// Step 3: Recursively sort the larger elements to create sequence S
+std::vector<int> PmergeMe::sortLargerElements(std::vector<std::pair<int, int> >& pairs)
+{
+    std::vector<int> largerElements;
+    
+    // Extract larger elements (first element of each pair)
+    for (size_t i = 0; i < pairs.size(); ++i)
+    {
+        largerElements.push_back(pairs[i].first);
+    }
+    
+    // Recursively sort the larger elements
+    fordJohnsonVector(largerElements);
+    
+    // Reorder pairs based on sorted larger elements
+    // Create index mapping to preserve pair associations
+    std::vector<std::pair<int, int> > sortedPairs;
+    sortedPairs.reserve(pairs.size());
+    
+    for (size_t i = 0; i < largerElements.size(); ++i)
+    {
         for (size_t j = 0; j < pairs.size(); ++j)
         {
-            if (pairs[j].first == winners[i])
+            if (pairs[j].first == largerElements[i])
             {
-                sortedLosers.push_back(pairs[j].second);
-                // Marquer comme utilisé en mettant une valeur impossible
+                sortedPairs.push_back(pairs[j]);
+                // Mark this pair as used by setting first to -1
                 pairs[j].first = -1;
                 break;
             }
         }
     }
+    pairs = sortedPairs;
     
-    // Étape 4: Construire la chaîne principale (main chain)
-    std::vector<int> mainChain;
+    return largerElements;
+}
+
+// Step 4: Insert the partner of the smallest element at the start
+std::vector<int> PmergeMe::insertFirstPartner(const std::vector<std::pair<int, int> >& pairs,
+                                               const std::vector<int>& sortedLarger)
+{
+    std::vector<int> result;
     
-    // Le premier perdant va forcément au début (plus petit que son gagnant)
-    if (!sortedLosers.empty())
-        mainChain.push_back(sortedLosers[0]);
+    // Insert the smaller element of the first pair at the beginning
+    if (!pairs.empty())
+        result.push_back(pairs[0].second);
     
-    // Ajouter tous les gagnants triés à la chaîne principale
-    for (size_t i = 0; i < winners.size(); ++i)
-        mainChain.push_back(winners[i]);
+    // Add all larger elements (already sorted)
+    for (size_t i = 0; i < sortedLarger.size(); ++i)
+    {
+        result.push_back(sortedLarger[i]);
+    }
     
-    // Étape 5: Insérer les perdants restants selon l'ordre de Jacobsthal
-    std::vector<int> pendingElements;
-    for (size_t i = 1; i < sortedLosers.size(); ++i)
-        pendingElements.push_back(sortedLosers[i]);
+    return result;
+}
+
+// Generate Jacobsthal sequence for optimal insertion order
+std::vector<size_t> PmergeMe::generateJacobsthalSequence(size_t n)
+{
+    std::vector<size_t> jacobsthal;
     
-    insertLosersVector(mainChain, pendingElements);
+    if (n == 0)
+        return jacobsthal;
     
-    // Étape 6: Insérer le straggler (élément impair) s'il existe
+    // Generate Jacobsthal numbers: J(0)=0, J(1)=1, J(n)=J(n-1)+2*J(n-2)
+    std::vector<size_t> jacobsthalNumbers;
+    jacobsthalNumbers.push_back(0);
+    jacobsthalNumbers.push_back(1);
+    
+    while (jacobsthalNumbers.back() < n)
+    {
+        size_t next = jacobsthalNumbers[jacobsthalNumbers.size() - 1] + 
+                      2 * jacobsthalNumbers[jacobsthalNumbers.size() - 2];
+        jacobsthalNumbers.push_back(next);
+    }
+    
+    // Build insertion sequence based on Jacobsthal numbers
+    std::vector<bool> inserted(n + 1, false);
+    
+    for (size_t i = 2; i < jacobsthalNumbers.size(); ++i)
+    {
+        size_t current = jacobsthalNumbers[i];
+        if (current > n)
+            current = n;
+        
+        size_t prev = jacobsthalNumbers[i - 1];
+        
+        // Insert in decreasing order from current to prev+1
+        for (size_t j = current; j > prev && j > 0; --j)
+        {
+            if (!inserted[j])
+            {
+                jacobsthal.push_back(j);
+                inserted[j] = true;
+            }
+        }
+    }
+    
+    // Add any remaining indices not yet inserted
+    for (size_t i = 1; i <= n; ++i)
+    {
+        if (!inserted[i])
+            jacobsthal.push_back(i);
+    }
+    
+    return jacobsthal;
+}
+
+// Step 5: Insert remaining elements using Jacobsthal sequence with binary search
+void PmergeMe::insertRemainingElements(std::vector<int>& result,
+                                        const std::vector<std::pair<int, int> >& pairs,
+                                        int straggler)
+{
+    // Generate Jacobsthal sequence for optimal insertion order
+    std::vector<size_t> insertionOrder = generateJacobsthalSequence(pairs.size() - 1);
+    
+    // Insert remaining smaller elements (partners) using Jacobsthal sequence and binary search
+    for (size_t i = 0; i < insertionOrder.size(); ++i)
+    {
+        size_t idx = insertionOrder[i];
+        if (idx < pairs.size())
+        {
+            int toInsert = pairs[idx].second;
+            std::vector<int>::iterator pos = std::lower_bound(result.begin(), result.end(), toInsert);
+            result.insert(pos, toInsert);
+        }
+    }
+    
+    // Insert straggler if exists
     if (straggler != -1)
     {
-        std::vector<int>::iterator pos = binaryInsert(mainChain, mainChain.begin(), mainChain.end(), straggler);
-        mainChain.insert(pos, straggler);
+        std::vector<int>::iterator pos = std::lower_bound(result.begin(), result.end(), straggler);
+        result.insert(pos, straggler);
     }
-    
-    // Copier le résultat final
-    arr = mainChain;
 }
 
-// ===== IMPLÉMENTATION POUR DEQUE =====
-
-void PmergeMe::createPairsDeque(std::deque<int>& arr, std::vector<std::pair<int, int> >& pairs, int& straggler)
+void PmergeMe::fordJohnsonVector(std::vector<int>& arr)
 {
+    if (arr.size() <= 1)
+        return;
+    if (arr.size() == 2)
+    {
+        if (arr[0] > arr[1])
+            std::swap(arr[0], arr[1]);
+        return;
+    }
+    
+    int straggler;
+    
+    // Step 1: Group elements into n/2 pairs (with potential straggler)
+    std::vector<std::pair<int, int> > pairs = groupIntoPairs(arr, straggler);
+    
+    // Step 2: Compare pairs to identify larger elements
+    comparePairs(pairs);
+    
+    // Step 3: Recursively sort the larger elements to create sequence S
+    std::vector<int> sortedLarger = sortLargerElements(pairs);
+    
+    // Step 4: Insert the partner of the smallest element at the start
+    std::vector<int> result = insertFirstPartner(pairs, sortedLarger);
+    
+    // Step 5: Insert remaining elements using binary search
+    insertRemainingElements(result, pairs, straggler);
+    
+    arr = result;
+}
+
+// ==================== DEQUE IMPLEMENTATION ====================
+
+// Step 1: Group elements into n/2 pairs (with potential straggler)
+std::deque<std::pair<int, int> > PmergeMe::groupIntoPairsDeque(const std::deque<int>& arr, int& straggler)
+{
+    std::deque<std::pair<int, int> > pairs;
+    size_t i = 0;
+    
     straggler = -1;
-    pairs.clear();
     
-    size_t n = arr.size();
-    if (n % 2 != 0)
+    // Create pairs
+    for (i = 0; i + 1 < arr.size(); i += 2)
     {
-        straggler = arr[n - 1];
-        n--;
+        pairs.push_back(std::make_pair(arr[i], arr[i + 1]));
     }
     
-    for (size_t i = 0; i < n; i += 2)
+    // Handle straggler if odd number of elements
+    if (i < arr.size())
+        straggler = arr[i];
+    
+    return pairs;
+}
+
+// Step 2: Compare pairs to identify larger elements
+void PmergeMe::comparePairsDeque(std::deque<std::pair<int, int> >& pairs)
+{
+    // For each pair, ensure first > second (larger element first)
+    for (size_t i = 0; i < pairs.size(); ++i)
     {
-        if (arr[i] > arr[i + 1])
-            pairs.push_back(std::make_pair(arr[i], arr[i + 1]));
-        else
-            pairs.push_back(std::make_pair(arr[i + 1], arr[i]));
+        if (pairs[i].first < pairs[i].second)
+            std::swap(pairs[i].first, pairs[i].second);
     }
 }
 
-void PmergeMe::sortWinnersDeque(std::deque<int>& winners)
+// Step 3: Recursively sort the larger elements to create sequence S
+std::deque<int> PmergeMe::sortLargerElementsDeque(std::deque<std::pair<int, int> >& pairs)
 {
-    if (winners.size() <= 1)
-        return;
+    std::deque<int> largerElements;
     
-    if (winners.size() <= 10)
+    // Extract larger elements (first element of each pair)
+    for (size_t i = 0; i < pairs.size(); ++i)
     {
-        std::sort(winners.begin(), winners.end());
-        return;
+        largerElements.push_back(pairs[i].first);
     }
     
-    fordJohnsonDeque(winners);
-}
-
-void PmergeMe::insertLosersDeque(std::deque<int>& sorted, const std::vector<int>& losers)
-{
-    if (losers.empty())
-        return;
+    // Recursively sort the larger elements
+    fordJohnsonDeque(largerElements);
     
-    std::vector<size_t> insertOrder = generateJacobsthalSequence(losers.size());
+    // Reorder pairs based on sorted larger elements
+    // Create index mapping to preserve pair associations
+    std::deque<std::pair<int, int> > sortedPairs;
     
-    for (size_t i = 0; i < insertOrder.size(); ++i)
+    for (size_t i = 0; i < largerElements.size(); ++i)
     {
-        size_t idx = insertOrder[i];
-        if (idx < losers.size())
+        for (size_t j = 0; j < pairs.size(); ++j)
         {
-            int valueToInsert = losers[idx];
-            std::deque<int>::iterator pos = binaryInsert(sorted, sorted.begin(), sorted.end(), valueToInsert);
-            sorted.insert(pos, valueToInsert);
+            if (pairs[j].first == largerElements[i])
+            {
+                sortedPairs.push_back(pairs[j]);
+                // Mark this pair as used by setting first to -1
+                pairs[j].first = -1;
+                break;
+            }
         }
+    }
+    pairs = sortedPairs;
+    
+    return largerElements;
+}
+
+// Step 4: Insert the partner of the smallest element at the start
+std::deque<int> PmergeMe::insertFirstPartnerDeque(const std::deque<std::pair<int, int> >& pairs,
+                                                   const std::deque<int>& sortedLarger)
+{
+    std::deque<int> result;
+    
+    // Insert the smaller element of the first pair at the beginning
+    if (!pairs.empty())
+        result.push_back(pairs[0].second);
+    
+    // Add all larger elements (already sorted)
+    for (size_t i = 0; i < sortedLarger.size(); ++i)
+    {
+        result.push_back(sortedLarger[i]);
+    }
+    
+    return result;
+}
+
+// Generate Jacobsthal sequence for optimal insertion order (deque version)
+std::deque<size_t> PmergeMe::generateJacobsthalSequenceDeque(size_t n)
+{
+    std::deque<size_t> jacobsthal;
+    
+    if (n == 0)
+        return jacobsthal;
+    
+    // Generate Jacobsthal numbers: J(0)=0, J(1)=1, J(n)=J(n-1)+2*J(n-2)
+    std::deque<size_t> jacobsthalNumbers;
+    jacobsthalNumbers.push_back(0);
+    jacobsthalNumbers.push_back(1);
+    
+    while (jacobsthalNumbers.back() < n)
+    {
+        size_t next = jacobsthalNumbers[jacobsthalNumbers.size() - 1] + 
+                      2 * jacobsthalNumbers[jacobsthalNumbers.size() - 2];
+        jacobsthalNumbers.push_back(next);
+    }
+    
+    // Build insertion sequence based on Jacobsthal numbers
+    std::deque<bool> inserted(n + 1, false);
+    
+    for (size_t i = 2; i < jacobsthalNumbers.size(); ++i)
+    {
+        size_t current = jacobsthalNumbers[i];
+        if (current > n)
+            current = n;
+        
+        size_t prev = jacobsthalNumbers[i - 1];
+        
+        // Insert in decreasing order from current to prev+1
+        for (size_t j = current; j > prev && j > 0; --j)
+        {
+            if (!inserted[j])
+            {
+                jacobsthal.push_back(j);
+                inserted[j] = true;
+            }
+        }
+    }
+    
+    // Add any remaining indices not yet inserted
+    for (size_t i = 1; i <= n; ++i)
+    {
+        if (!inserted[i])
+            jacobsthal.push_back(i);
+    }
+    
+    return jacobsthal;
+}
+
+// Step 5: Insert remaining elements using Jacobsthal sequence with binary search
+void PmergeMe::insertRemainingElementsDeque(std::deque<int>& result,
+                                             const std::deque<std::pair<int, int> >& pairs,
+                                             int straggler)
+{
+    // Generate Jacobsthal sequence for optimal insertion order
+    std::deque<size_t> insertionOrder = generateJacobsthalSequenceDeque(pairs.size() - 1);
+    
+    // Insert remaining smaller elements (partners) using Jacobsthal sequence and binary search
+    for (size_t i = 0; i < insertionOrder.size(); ++i)
+    {
+        size_t idx = insertionOrder[i];
+        if (idx < pairs.size())
+        {
+            int toInsert = pairs[idx].second;
+            std::deque<int>::iterator pos = std::lower_bound(result.begin(), result.end(), toInsert);
+            result.insert(pos, toInsert);
+        }
+    }
+    
+    // Insert straggler if exists
+    if (straggler != -1)
+    {
+        std::deque<int>::iterator pos = std::lower_bound(result.begin(), result.end(), straggler);
+        result.insert(pos, straggler);
     }
 }
 
@@ -272,65 +386,33 @@ void PmergeMe::fordJohnsonDeque(std::deque<int>& arr)
 {
     if (arr.size() <= 1)
         return;
-    
-    if (arr.size() <= 2)
+    if (arr.size() == 2)
     {
-        if (arr.size() == 2 && arr[0] > arr[1])
+        if (arr[0] > arr[1])
             std::swap(arr[0], arr[1]);
         return;
     }
-    
-    std::vector<std::pair<int, int> > pairs;
+
     int straggler;
-    createPairsDeque(arr, pairs, straggler);
+
+    // Step 1: Group elements into n/2 pairs (with potential straggler)
+    std::deque<std::pair<int, int> > pairs = groupIntoPairsDeque(arr, straggler);
     
-    if (pairs.empty())
-        return;
+    // Step 2: Compare pairs to identify larger elements
+    comparePairsDeque(pairs);
     
-    std::deque<int> winners;
-    for (size_t i = 0; i < pairs.size(); ++i)
-        winners.push_back(pairs[i].first);
+    // Step 3: Recursively sort the larger elements to create sequence S
+    std::deque<int> sortedLarger = sortLargerElementsDeque(pairs);
     
-    // Trier récursivement les gagnants avec Ford-Johnson
-    fordJohnsonDeque(winners);
+    // Step 4: Insert the partner of the smallest element at the start
+    std::deque<int> result = insertFirstPartnerDeque(pairs, sortedLarger);
     
-    // Créer le mapping des perdants triés
-    std::vector<int> sortedLosers;
-    for (size_t i = 0; i < winners.size(); ++i)
-    {
-        for (size_t j = 0; j < pairs.size(); ++j)
-        {
-            if (pairs[j].first == winners[i])
-            {
-                sortedLosers.push_back(pairs[j].second);
-                pairs[j].first = -1;
-                break;
-            }
-        }
-    }
+    // Step 5: Insert remaining elements using Jacobsthal sequence with binary search
+    insertRemainingElementsDeque(result, pairs, straggler);
     
-    std::deque<int> mainChain;
-    
-    if (!sortedLosers.empty())
-        mainChain.push_back(sortedLosers[0]);
-    
-    for (size_t i = 0; i < winners.size(); ++i)
-        mainChain.push_back(winners[i]);
-    
-    std::vector<int> pendingElements;
-    for (size_t i = 1; i < sortedLosers.size(); ++i)
-        pendingElements.push_back(sortedLosers[i]);
-    
-    insertLosersDeque(mainChain, pendingElements);
-    
-    if (straggler != -1)
-    {
-        std::deque<int>::iterator pos = binaryInsert(mainChain, mainChain.begin(), mainChain.end(), straggler);
-        mainChain.insert(pos, straggler);
-    }
-    
-    arr = mainChain;
+    arr = result;
 }
+
 
 // Constructors and Destructor
 PmergeMe::PmergeMe() {}
@@ -356,27 +438,44 @@ PmergeMe::~PmergeMe() {}
 // Member Functions
 void PmergeMe::parseInput(int ac, char** av)
 {
+    std::set<int> seen;
+    
+    // Reserve capacity to avoid reallocations
+    this->vec.reserve(ac - 1);
+    
     for (int i = 1; i < ac; ++i)
     {
-        std::string str(av[i]);
+        const char* str = av[i];
         
-        // Check if string is empty or contains only spaces
-        if (str.empty())
+        // Check if string is empty
+        if (!str || str[0] == '\0')
             continue;
+        
+        // Check for sign (negative or positive sign not allowed)
+        if (str[0] == '-' || str[0] == '+')
+            throw std::invalid_argument("Error");
             
         // Check if all characters are digits
-        for (size_t j = 0; j < str.length(); ++j)
+        for (size_t j = 0; str[j] != '\0'; ++j)
         {
             if (!std::isdigit(str[j]))
                 throw std::invalid_argument("Error");
         }
         
-        int num = atoi(av[i]);
-        if (num < 0)
+        // Convert and check for overflow
+        char* end;
+        long num = std::strtol(str, &end, 10);
+        
+        // Verify entire string was converted and check range
+        if (*end != '\0' || num < 0 || num > 2147483647)
+            throw std::invalid_argument("Error");
+        
+        // Check for duplicates using set (O(log n) instead of O(n))
+        if (!seen.insert(static_cast<int>(num)).second)
             throw std::invalid_argument("Error");
             
-        this->vec.push_back(num);
-        this->deq.push_back(num);
+        this->vec.push_back(static_cast<int>(num));
+        this->deq.push_back(static_cast<int>(num));
     }
 }
 

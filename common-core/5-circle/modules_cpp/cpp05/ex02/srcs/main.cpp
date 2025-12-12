@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 18:00:21 by mivogel           #+#    #+#             */
-/*   Updated: 2025/11/28 16:31:29 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/12/12 13:51:21 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void printSeparator(const std::string& title)
 
 int main()
 {
+    srand(time(NULL));
     // ========== SHRUBBERY CREATION FORM ==========
     // Grade to sign: 145, Grade to execute: 137
     
@@ -230,6 +231,11 @@ int main()
         std::cout << "\n--- Executing all forms ---" << std::endl;
         supreme.executeForm(shrub);
         supreme.executeForm(robot);
+        supreme.executeForm(robot);
+        supreme.executeForm(robot);
+        supreme.executeForm(robot);
+        supreme.executeForm(robot);
+        supreme.executeForm(robot);        
         supreme.executeForm(pardon);
     }
     catch (const std::exception& e)

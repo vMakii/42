@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 15:44:10 by mivogel           #+#    #+#             */
-/*   Updated: 2025/11/28 15:49:38 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/12/12 13:54:22 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ RobotomyRequestForm& RobotomyRequestForm::operator=(const RobotomyRequestForm& o
     if (this != &other)
     {
         AForm::operator=(other);
-        this->target = other.target;
+        // target is const and cannot be reassigned
     }
     return *this;
 }
@@ -42,14 +42,15 @@ const std::string& RobotomyRequestForm::getTarget() const
 void RobotomyRequestForm::doExecute() const
 {
     std::cout << "Bzzzzzz... Vrrrrrr... *drilling noises*" << std::endl;
-    static int attempt = 0;
-    attempt++;
-    if (attempt % 2 == 1)
+    // 50% chance of success
+    int randomValue = std::rand();
+    // std::cout << "Random value: " << randomValue << std::endl; // Debug line to see the random value
+    if (randomValue % 2 == 0)
     {
         std::cout << target << " has been robotomized successfully!" << std::endl;
     }
     else
     {
-        std::cout << "The robotomy on " << target << " has failed." << std::endl;
+        std::cout << "Robotomy failed on " << target << "!" << std::endl;
     }
 }

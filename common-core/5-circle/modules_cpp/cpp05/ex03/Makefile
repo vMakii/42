@@ -1,4 +1,4 @@
-SRCS = main.cpp Bureaucrat.cpp Intern.cpp AForm.cpp ShrubberyCreationForm.cpp RobotomyRequestForm.cpp PresidentialPardonForm.cpp
+SRCS = main.cpp Bureaucrat.cpp AForm.cpp ShrubberyCreationForm.cpp RobotomyRequestForm.cpp PresidentialPardonForm.cpp Intern.cpp
 SRCS_PATH = ./srcs/
 
 OBJS = ${patsubst %.cpp, ${OBJS_PATH}/%.o, ${SRCS}}
@@ -11,6 +11,7 @@ CFLAGS = -Wall -Wextra -Werror -std=c++98
 vpath %.cpp ${SRCS_PATH}
 
 NAME = Interns
+
 all: ${NAME}
 
 ${OBJS}: ${OBJS_PATH}/%.o: %.cpp Makefile

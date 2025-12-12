@@ -6,18 +6,20 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 15:30:20 by mivogel           #+#    #+#             */
-/*   Updated: 2025/11/28 16:37:53 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/12/12 13:51:24 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 #include "AForm.hpp"
 #include "Bureaucrat.hpp"
+#include <cstdlib>
+#include <ctime>
 
 class RobotomyRequestForm : public AForm 
 {
     private:
-        std::string target;
+        const std::string target;
 
     protected:
         // Member Functions

@@ -6,7 +6,7 @@
 /*   By: mivogel <mivogel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 17:12:49 by mivogel           #+#    #+#             */
-/*   Updated: 2025/12/09 11:10:45 by mivogel          ###   ########.fr       */
+/*   Updated: 2025/12/12 14:12:56 by mivogel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,12 @@ static std::string toLowerString(const std::string& str)
 AForm* Intern::makeForm(const std::string& formName, const std::string& target) const
 {
     std::string formNames[3] = {
-        "Shrubbery Creation",
-        "Robotomy Request",
-        "Presidential Pardon"
+        "shrubbery creation",
+        "robotomy request",
+        "presidential pardon"
     };
     std::string normalizedFormName = toLowerString(formName);
+    std::cout << "Intern: normalized form name is \"" << normalizedFormName << "\"" << std::endl;
     for (int i = 0; i < 3; ++i)
     {
         if (normalizedFormName == formNames[i])
